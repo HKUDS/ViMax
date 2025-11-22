@@ -18,11 +18,13 @@ class Idea2VideoPipeline:
         image_generator: str,
         video_generator: str,
         working_dir: str,
+        custom_assets: Optional[Dict[str, List[Dict[str, str]]]] = None,
     ):
         self.chat_model = chat_model
         self.image_generator = image_generator
         self.video_generator = video_generator
         self.working_dir = working_dir
+        self.custom_assets = custom_assets or {"sample_images": [], "sample_videos": []}
         os.makedirs(self.working_dir, exist_ok=True)
 
         self.screenwriter = Screenwriter(chat_model=self.chat_model)
@@ -50,11 +52,15 @@ class Idea2VideoPipeline:
         video_generator_args = config["video_generator"]["init_args"]
         video_generator = video_generator_cls(**video_generator_args)
 
+        # Load custom assets if provided
+        custom_assets = config.get("assets", {"sample_images": [], "sample_videos": []})
+
         return cls(
             chat_model=chat_model,
             image_generator=image_generator,
             video_generator=video_generator,
             working_dir=config["working_dir"],
+            custom_assets=custom_assets,
         )
 
     async def extract_characters(
@@ -228,6 +234,7 @@ class Idea2VideoPipeline:
                 image_generator=self.image_generator,
                 video_generator=self.video_generator,
                 working_dir=scene_working_dir,
+                custom_assets=self.custom_assets,
             )
             final_video_path = await script2video_pipeline(
                 script=scene_script,

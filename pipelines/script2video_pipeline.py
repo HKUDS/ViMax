@@ -29,11 +29,13 @@ class Script2VideoPipeline:
         image_generator,
         video_generator,
         working_dir: str,
+        custom_assets: Optional[Dict[str, List[Dict[str, str]]]] = None,
     ):
 
         self.chat_model = chat_model
         self.image_generator = image_generator
         self.video_generator = video_generator
+        self.custom_assets = custom_assets or {"sample_images": [], "sample_videos": []}
 
         self.character_extractor = CharacterExtractor(chat_model=self.chat_model)
         self.character_portraits_generator = CharacterPortraitsGenerator(image_generator=self.image_generator)
@@ -44,7 +46,26 @@ class Script2VideoPipeline:
         self.working_dir = working_dir
         os.makedirs(self.working_dir, exist_ok=True)
 
+    def _get_custom_asset_pairs(self) -> List[Tuple[str, str]]:
+        """
+        Convert custom assets from config into (path, description) pairs.
+        Returns a list of tuples suitable for available_image_path_and_text_pairs.
+        """
+        asset_pairs = []
 
+        # Add sample images
+        for asset in self.custom_assets.get("sample_images", []):
+            if "path" in asset and "description" in asset:
+                # Verify the file exists
+                if os.path.exists(asset["path"]):
+                    asset_pairs.append((asset["path"], asset["description"]))
+                else:
+                    print(f"⚠️ Warning: Custom asset image not found: {asset['path']}")
+
+        # Note: sample_videos could be added here in the future if needed
+        # For now, we focus on sample_images as they're used as reference images
+
+        return asset_pairs
 
     @classmethod
     def init_from_config(
@@ -67,11 +88,15 @@ class Script2VideoPipeline:
         video_generator_args = config["video_generator"]["init_args"]
         video_generator = video_generator_cls(**video_generator_args)
 
+        # Load custom assets if provided
+        custom_assets = config.get("assets", {"sample_images": [], "sample_videos": []})
+
         return cls(
             chat_model=chat_model,
             image_generator=image_generator,
             video_generator=video_generator,
             working_dir=config["working_dir"],
+            custom_assets=custom_assets,
         )
 
     async def __call__(
@@ -191,6 +216,9 @@ class Script2VideoPipeline:
         else:
             print(f"🖼️ Starting first_frame generation for shot {first_shot_idx}...")
             available_image_path_and_text_pairs = []
+
+            # Add custom assets from config
+            available_image_path_and_text_pairs.extend(self._get_custom_asset_pairs())
 
             for character_idx in shot_descriptions[first_shot_idx].ff_vis_char_idxs:
                 identifier_in_scene = characters[character_idx].identifier_in_scene
@@ -363,6 +391,10 @@ class Script2VideoPipeline:
         else:
             print(f"🖼️ Starting {frame_type} generation for shot {shot_idx}...")
             available_image_path_and_text_pairs = []
+
+            # Add custom assets from config
+            available_image_path_and_text_pairs.extend(self._get_custom_asset_pairs())
+
             for visible_character in visible_characters:
                 identifier_in_scene = visible_character.identifier_in_scene
                 registry_item = character_portraits_registry[identifier_in_scene]

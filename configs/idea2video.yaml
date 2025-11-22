@@ -2,20 +2,37 @@ chat_model:
   init_args:
     model: google/gemini-2.5-flash-lite-preview-09-2025
     model_provider: openai
-    api_key: 
+    api_key:
     base_url: https://openrouter.ai/api/v1
 
 
 image_generator:
   class_path: tools.ImageGeneratorNanobananaGoogleAPI
   init_args:
-    api_key: 
+    api_key:
 
 
 video_generator:
   class_path: tools.VideoGeneratorVeoGoogleAPI
   init_args:
-    api_key: 
+    api_key:
 
 
 working_dir: .working_dir/idea2video
+
+
+# Optional: Custom assets to use as references during video generation
+# These images/videos will be available as reference materials for the AI
+# to use when generating scenes
+assets:
+  sample_images: []
+    # Example:
+    # - path: /path/to/sample_image1.png
+    #   description: "A cartoon-style forest scene with tall trees"
+    # - path: /path/to/sample_image2.png
+    #   description: "A close-up of a friendly dog character"
+
+  sample_videos: []
+    # Example:
+    # - path: /path/to/sample_video1.mp4
+    #   description: "Camera pan across a sunny park"
