@@ -29,7 +29,7 @@ Examples:
   python main_script2video.py -S "EXT. GYM - DAY..." -u "15 shots max" -s "Anime Style"
 
   # Using a YAML file:
-  python main_script2video.py -f script-example.yaml
+  python main_script2video.py -f configs/script-example.yaml
 
   # YAML file format:
   script: |

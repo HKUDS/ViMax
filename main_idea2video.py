@@ -29,7 +29,7 @@ Examples:
   python main_idea2video.py -i "A woman exercising" -u "3 scenes max" -s "Realistic"
 
   # Using a YAML file:
-  python main_idea2video.py -f idea-example.yaml -c configs/myidea2video.yaml
+  python main_idea2video.py -f configs/idea-example.yaml -c configs/myidea2video.yaml
 
   # YAML file format:
   idea: |
