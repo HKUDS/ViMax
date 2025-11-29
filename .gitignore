@@ -12,3 +12,7 @@ wheels/
 # working directory
 .working_dir/
 .test/
+
+# other 
+.DS_Store
+.tool-versions
