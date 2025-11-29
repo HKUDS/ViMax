@@ -61,6 +61,7 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 - [🔮 Demos](#Video-Demos-Generated-from-Scratch)
 - [🏗️ Architecture](#️-architecture)
 - [🚀 Quick Start](#quick-start)
+- [🎨 Custom Assets Configuration](#custom-assets-configuration)
 
 ---
 ## 💡Key Features
@@ -391,7 +392,7 @@ Parallel processing for sequential shots captured from the same camera enables h
 ### 🖥️ **Environment**
 
 ```
-OS: Linux, Windows
+OS: Linux, Windows, MacOS
 ```
 
 ### 📥 **Clone and Install**
@@ -459,6 +460,40 @@ Fast-paced with no more than 20 shots.
 style = "Animate Style"
 ```
 
+
+---
+
+## 🎨 Custom Assets Configuration
+
+Custom assets are configured in your `configs/idea2video.yaml` or `configs/script2video.yaml`
+(or another) files under the `assets` section. This allows you to provide custom sample
+images and videos that will be used as reference materials during the video generation process.
+
+When you add sample images to the configuration:
+
+1. The images are loaded at pipeline initialization
+2. They become available as reference materials for the `ReferenceImageSelector` agent
+3. The AI can choose to use these images when generating frames for scenes
+4. Your custom images are added alongside character portraits and generated scene images
+
+**Use cases for sample images:**
+- Specific art styles you want to reference
+- Background scenes or environments
+- Object references (vehicles, buildings, props)
+- Color palette references
+- Composition examples
+
+### Sample Videos
+
+Sample videos are currently loaded but not yet fully integrated into the generation
+pipeline. Future updates may enable using video frames as additional reference materials.
+
+### Tips for Best Results
+
+1. **Match Your Style**: Choose reference images that match the style parameter you're using (e.g., "Cartoon", "Realistic", etc.)
+2. **High Quality**: Use high-resolution images (the pipeline works with 1600x900 frames)
+3. **Relevant Descriptions**: Be specific in descriptions - mention colors, mood, composition, and key elements
+4. **Variety**: Include different types of references (environments, objects, compositions) for more flexibility
 
 ---
 
