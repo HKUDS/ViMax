@@ -55,7 +55,7 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 ---
 
 # 声明
-### 本项目是基于 https://github.com/HKUDS/ViMax 进行的改进，采用了deeepseek模型，Qwen3-VL-32B-Instruct，和sora2对项目进行了扩展，并采用flask框架搭建webui.
+### 项目是基于 https://github.com/HKUDS/ViMax 进行的改进，增加了deeepseek，Qwen3-VL-32B-Instruct，和sora2模型，并采用flask框架搭建webui.
 ### 1.webui效果图
 #### webui效果图1
 ![assets/img_1.png](assets/img_1.png)
