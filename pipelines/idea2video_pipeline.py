@@ -17,11 +17,13 @@ class Idea2VideoPipeline:
     def __init__(
         self,
         chat_model: str,
+        mllm_model: str ,
         image_generator: str,
         video_generator: str,
         working_dir: str,
     ):
         self.chat_model = chat_model
+        self.mllm_model = mllm_model
         self.image_generator = image_generator
         self.video_generator = video_generator
         self.working_dir = working_dir
@@ -37,9 +39,13 @@ class Idea2VideoPipeline:
     def init_from_config(
         cls,
         config_path: str,
+        working_dir: str,
     ):
         with open(config_path, "r") as f:
             config = yaml.safe_load(f)
+
+        mllm_model_args = config["mllm_model"]["init_args"]
+        mllm_model = init_chat_model(**mllm_model_args)
 
         chat_model_args = config["chat_model"]["init_args"]
         chat_model = init_chat_model(**chat_model_args)
@@ -47,6 +53,8 @@ class Idea2VideoPipeline:
         # Create separate rate limiters for each service
         chat_model_rpm = config.get("chat_model", {}).get("max_requests_per_minute", None)
         chat_model_rpd = config.get("chat_model", {}).get("max_requests_per_day", None)
+        mllm_model_rpm = config.get("mllm_model", {}).get("max_requests_per_minute", None)
+        mllm_model_rpd = config.get("mllm_model", {}).get("max_requests_per_day", None)
         image_generator_rpm = config.get("image_generator", {}).get("max_requests_per_minute", None)
         image_generator_rpd = config.get("image_generator", {}).get("max_requests_per_day", None)
         video_generator_rpm = config.get("video_generator", {}).get("max_requests_per_minute", None)
@@ -57,6 +65,11 @@ class Idea2VideoPipeline:
             max_requests_per_day=chat_model_rpd
         ) if (chat_model_rpm or chat_model_rpd) else None
 
+        mllm_model_rate_limiter = RateLimiter(
+            max_requests_per_minute=mllm_model_rpm,
+            max_requests_per_day=mllm_model_rpd
+        ) if (mllm_model_rpm or mllm_model_rpd) else None
+
         image_rate_limiter = RateLimiter(
             max_requests_per_minute=image_generator_rpm,
             max_requests_per_day=image_generator_rpd
@@ -66,6 +79,15 @@ class Idea2VideoPipeline:
             max_requests_per_minute=video_generator_rpm,
             max_requests_per_day=video_generator_rpd
         ) if (video_generator_rpm or video_generator_rpd) else None
+
+        # Display rate limiting configuration
+        if mllm_model_rate_limiter:
+            limits = []
+            if chat_model_rpm:
+                limits.append(f"{mllm_model_rpm} req/min")
+            if mllm_model_rpd:
+                limits.append(f"{mllm_model_rpd} req/day")
+            print(f"MLLM model rate limiting: {', '.join(limits)}")
 
         # Display rate limiting configuration
         if chat_model_rate_limiter:
@@ -94,10 +116,12 @@ class Idea2VideoPipeline:
 
         image_generator_cls_module, image_generator_cls_name = config["image_generator"]["class_path"].rsplit(
             ".", 1)
+        print(234,image_generator_cls_module,image_generator_cls_name)
         image_generator_cls = getattr(importlib.import_module(
             image_generator_cls_module), image_generator_cls_name)
         image_generator_args = config["image_generator"]["init_args"]
         image_generator_args["rate_limiter"] = image_rate_limiter
+        print(123423,image_generator_args)
         image_generator = image_generator_cls(**image_generator_args)
 
         video_generator_cls_module, video_generator_cls_name = config["video_generator"]["class_path"].rsplit(
@@ -109,10 +133,11 @@ class Idea2VideoPipeline:
         video_generator = video_generator_cls(**video_generator_args)
 
         return cls(
+            mllm_model=mllm_model,
             chat_model=chat_model,
             image_generator=image_generator,
             video_generator=video_generator,
-            working_dir=config["working_dir"],
+            working_dir=working_dir,
         )
 
     async def extract_characters(
@@ -284,6 +309,7 @@ class Idea2VideoPipeline:
             scene_working_dir = os.path.join(self.working_dir, f"scene_{idx}")
             os.makedirs(scene_working_dir, exist_ok=True)
             script2video_pipeline = Script2VideoPipeline(
+                mllm_model = self.mllm_model,
                 chat_model=self.chat_model,
                 image_generator=self.image_generator,
                 video_generator=self.video_generator,

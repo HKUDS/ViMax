@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idea2Video - AI视频生成平台</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <i class="fas fa-video"></i>
+                        <h1>Idea2Video</h1>
+                    </div>
+                    <p class="tagline">将创意转化为生动的视频故事</p>
+                </div>
+
+                <div class="header-actions">
+                    <div class="status-indicator">
+                        <div class="status-dot idle" id="statusDot"></div>
+                        <span id="statusText">就绪</span>
+                    </div>
+                    <button class="btn-help" title="帮助">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="app-main">
+            <!-- 左侧栏：导航和目录 -->
+            <aside class="sidebar-left">
+                <div class="sidebar-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-folder"></i> 工作目录</h3>
+                        <button class="btn-icon" id="refreshDirsBtn" title="刷新">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="work-dir-input">
+                            <label class="input-label">
+                                <i class="fas fa-folder-open"></i> 选择或创建目录
+                            </label>
+                            <div class="input-group">
+                                <input type="text" id="workDir"
+                                       placeholder="留空自动生成UUID目录"
+                                       class="dir-input">
+                                <button class="btn-new-dir" id="newDirBtn" title="新建目录">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <p class="input-hint">输入目录名继续生成，或留空创建新项目</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-history"></i> 历史项目</h3>
+                    </div>
+
+                    <div class="section-content scrollable">
+                        <div id="workDirsContainer" class="projects-list">
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <p>暂无历史项目</p>
+                                <small>开始创建第一个项目</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-folder-tree"></i> 文件结构</h3>
+                        <button class="btn-icon" id="refreshFilesBtn" title="刷新文件">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+
+                    <div class="section-content scrollable">
+                        <div id="fileTree" class="file-explorer">
+                            <div class="empty-state">
+                                <i class="fas fa-folder-open"></i>
+                                <p>选择项目查看文件</p>
+                                <small>文件将在这里显示</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 中间栏：创意输入和日志 -->
+            <main class="content-center">
+                <div class="content-tabs">
+                    <div class="tabs-header">
+                        <div class="tab-nav">
+                            <button class="tab-btn active" data-tab="creative">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>创意输入</span>
+                            </button>
+                            <button class="tab-btn" data-tab="logs">
+                                <i class="fas fa-terminal"></i>
+                                <span>生成日志</span>
+                                <span class="badge" id="logCount">0</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="tabs-content">
+                        <!-- 创意输入标签页 -->
+                        <div class="tab-pane active" id="creative-tab">
+                            <div class="creative-form">
+                                <div class="form-section">
+                                    <div class="form-header">
+                                        <h4>
+                                            <i class="fas fa-edit"></i>
+                                            创意描述
+                                        </h4>
+                                        <span class="char-count" id="ideaCount">0/2000</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea id="idea"
+                                                  class="creative-textarea"
+                                                  placeholder="请输入您的创意想法...（支持Markdown格式）"
+                                                  rows="8">胖橘（一只圆滚滚、性格憨厚的橘猫）和虎哥（一只勇敢机智的老虎玩偶/或小老虎）是一对好朋友。
+他们正在一片充满未知的森林、或是一个布满灰尘的阁楼、亦或是微观的后花园中进行探险。
+他们的目标可能是寻找传说中的"闪闪发光的宝藏"，或是护送一颗重要的橡果回家。
+在探险途中，他们会遇到一些可爱的小麻烦（比如胖橘被藤蔓缠住，虎哥研究一张古老的地图），
+但最终会通过合作与智慧克服困难。胖橘有时会看向镜头，露出"快跟上！"或"相信我！"的得意表情。</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-columns">
+                                    <div class="form-column">
+                                        <div class="form-section">
+                                            <div class="form-header">
+                                                <h4>
+                                                    <i class="fas fa-list-check"></i>
+                                                    用户要求
+                                                </h4>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="user_requirement"
+                                                          class="requirements-textarea"
+                                                          placeholder="请输入具体要求..."
+                                                          rows="4">面向全年龄段，场景不超过1个。每个场景的镜头数不超过1个。</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-column">
+                                        <div class="form-section">
+                                            <div class="form-header">
+                                                <h4>
+                                                    <i class="fas fa-palette"></i>
+                                                    风格设定
+                                                </h4>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text"
+                                                       id="style"
+                                                       class="style-input"
+                                                       value="生动、温暖、充满童趣的探险风格"
+                                                       placeholder="请输入视频风格...">
+
+                                                <div class="style-presets">
+                                                    <span class="preset-label">快速选择：</span>
+                                                    <button class="preset-btn" data-style="生动、温暖、充满童趣的探险风格">童趣探险</button>
+                                                    <button class="preset-btn" data-style="电影感、史诗级、宏伟壮观">电影史诗</button>
+                                                    <button class="preset-btn" data-style="简约、现代、科技感">现代科技</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <div class="form-header">
+                                        <h4>
+                                            <i class="fas fa-sliders-h"></i>
+                                            高级设置
+                                        </h4>
+                                    </div>
+                                    <div class="advanced-settings">
+                                        <div class="setting-item">
+                                            <label>
+                                                <input type="checkbox" id="enableEnhancement" checked>
+                                                <span>启用图像增强</span>
+                                            </label>
+                                        </div>
+                                        <div class="setting-item">
+                                            <label>
+                                                <input type="checkbox" id="enableVoice" checked>
+                                                <span>启用语音合成</span>
+                                            </label>
+                                        </div>
+                                        <div class="setting-item">
+                                            <label>
+                                                视频时长：
+                                                <input type="range" id="durationSlider" min="5" max="60" value="10">
+                                                <span id="durationValue">10秒</span>
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-actions">
+                                <button class="btn-action" id="clearBtn" title="清空输入">
+                                    <i class="fas fa-trash-alt"></i>
+                                    <span>清空</span>
+                                </button>
+                                <button class="btn-primary" id="generateBtn">
+                                    <i class="fas fa-play"></i>
+                                    <span>开始生成</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 生成日志标签页 -->
+                        <div class="tab-pane" id="logs-tab">
+                            <div class="logs-container">
+                                <div class="logs-header">
+                                    <div class="logs-controls">
+                                        <button class="btn-log-control" id="clearLogsBtn">
+                                            <i class="fas fa-broom"></i>
+                                            清空日志
+                                        </button>
+                                        <button class="btn-log-control" id="pauseLogsBtn">
+                                            <i class="fas fa-pause"></i>
+                                            暂停
+                                        </button>
+                                        <button class="btn-log-control" id="exportLogsBtn">
+                                            <i class="fas fa-download"></i>
+                                            导出日志
+                                        </button>
+                                        <button class="btn-log-control" id="copyLogsBtn">
+                                            <i class="fas fa-copy"></i>
+                                            复制
+                                        </button>
+                                    </div>
+
+                                    <div class="logs-filter">
+                                        <select id="logFilter" class="filter-select">
+                                            <option value="all">全部日志</option>
+                                            <option value="info">信息</option>
+                                            <option value="success">成功</option>
+                                            <option value="warning">警告</option>
+                                            <option value="error">错误</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div id="logContainer" class="logs-content">
+                                    <div class="logs-placeholder">
+                                        <div class="placeholder-icon">
+                                            <i class="fas fa-terminal"></i>
+                                        </div>
+                                        <h4>等待生成日志</h4>
+                                        <p>开始生成视频后，日志将在这里实时显示</p>
+                                    </div>
+                                </div>
+
+                                <div class="logs-footer">
+                                    <div class="log-stats">
+                                        <span id="logStats">总共 0 条日志</span>
+                                        <span id="logUpdateTime">最后更新：--</span>
+                                    </div>
+                                    <div class="auto-scroll">
+                                        <label>
+                                            <input type="checkbox" id="autoScroll" checked>
+                                            <span>自动滚动</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- 右侧栏：预览和统计 -->
+            <aside class="sidebar-right">
+                <div class="preview-container">
+                    <div class="preview-header">
+                        <h3><i class="fas fa-play-circle"></i> 视频预览</h3>
+                        <div class="preview-controls">
+                            <button class="btn-icon" id="refreshPreviewBtn" title="刷新预览">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <button class="btn-icon" id="fullscreenBtn" title="全屏">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="preview-content">
+                        <div id="previewPlayer" class="video-player-container">
+                            <div class="video-player-wrapper">
+                                <div class="player-placeholder">
+                                    <div class="placeholder-icon">
+                                        <i class="fas fa-video"></i>
+                                    </div>
+                                    <h4>等待视频生成</h4>
+                                    <p>视频生成后将在这里播放</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="player-controls">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <span class="time-display">00:00 / 00:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stats-header">
+                        <h3><i class="fas fa-chart-bar"></i> 项目统计</h3>
+                        <span class="stats-update" id="statsUpdateTime">--</span>
+                    </div>
+
+                    <div class="stats-content">
+                        <div id="statsDisplay" class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon success">
+                                    <i class="fas fa-file"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="fileCount">0</span>
+                                    <span class="stat-label">文件总数</span>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon info">
+                                    <i class="fas fa-hdd"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="totalSize">0 MB</span>
+                                    <span class="stat-label">占用空间</span>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon warning">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="genTime">0s</span>
+                                    <span class="stat-label">生成时间</span>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon primary">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="sceneCount">0</span>
+                                    <span class="stat-label">场景数量</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-stats">
+                            <h4>生成进度</h4>
+                            <div class="progress-timeline">
+                                <div class="timeline-item active">
+                                    <div class="timeline-dot"></div>
+                                    <span class="timeline-text">故事创作</span>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <span class="timeline-text">角色设计</span>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <span class="timeline-text">分镜规划</span>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <span class="timeline-text">视频生成</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- 底部状态栏 -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <div class="task-progress">
+                    <div class="progress-info">
+                        <span id="taskProgressText">等待任务开始...</span>
+                        <span id="taskElapsedTime">已用时：0s</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="taskProgressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="system-info">
+                    <span class="sys-item">
+                        <i class="fas fa-microchip"></i>
+                        CPU: <span id="cpuUsage">--%</span>
+                    </span>
+                    <span class="sys-item">
+                        <i class="fas fa-memory"></i>
+                        内存: <span id="memoryUsage">--%</span>
+                    </span>
+                    <span class="sys-item">
+                        <i class="fas fa-hdd"></i>
+                        磁盘: <span id="diskUsage">--%</span>
+                    </span>
+                    <span class="sys-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="currentTime">--:--:--</span>
+                    </span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 文件查看模态框 -->
+    <div id="fileModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3><i class="fas fa-file-alt"></i> 文件内容</h3>
+                <button class="btn-close close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="file-header">
+                    <span id="fileName" class="file-name">未选择文件</span>
+                    <span id="fileSize" class="file-size">--</span>
+                </div>
+                <pre id="fileContent" class="file-content"></pre>
+            </div>
+            <div class="modal-footer">
+                <button id="downloadFileBtn" class="btn-primary">
+                    <i class="fas fa-download"></i> 下载文件
+                </button>
+                <button class="btn-secondary close-btn">
+                    <i class="fas fa-times"></i> 关闭
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
