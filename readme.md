@@ -68,7 +68,7 @@ Qwen3-VL-32B-Instruct 硅基流动： https://cloud.siliconflow.cn/
 Nanobanana  速创API： https://api.wuyinkeji.com/  
 Sora2    速创API： https://api.wuyinkeji.com/  
 ### 3.generated_images_demo.py和generated_images_video.py是接入图像和视频生成的调用示例。
-### 4.运行app.py就可以启动webui,使用已有的项目目录，可以进行上一次的生成。修改点可以对比和ViMax-main.zip代码的差异。技术交流群：1029629549
+### 4.运行app.py就可以启动webui,使用已有的项目目录，可以进行上一次的生成。修改点可以对比和ViMax-main.zip代码的差异。
 ```python
 python app.py
 ```
