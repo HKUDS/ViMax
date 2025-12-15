@@ -180,7 +180,7 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
   <video src="https://github.com/user-attachments/assets/bb3ff0fd-9433-4806-886a-3f77b61d06ec" controls width="100%"></video>
 </td>
 <td align="center" width="33%">
-  <video src="https://github.com/user-attachments/assets/5bc0f395-4b3f-4b12-9387-1793d49cf78c" controls width="100%"></video>
+  <video src="https://github.com/user-attachments/assets/2624a3f0-9f66-4fa4-b527-45c0ea0353fc" controls width="100%"></video>
 </td>
 </tr>
 
