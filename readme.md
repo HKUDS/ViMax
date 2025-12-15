@@ -54,6 +54,24 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 
 ---
 
+# 声明
+### 项目是基于 https://github.com/HKUDS/ViMax 进行的改进，增加了deeepseek，Qwen3-VL-32B-Instruct，和sora2模型，并采用flask框架搭建webui.
+### 1.webui效果图
+#### webui效果图1
+![assets/img_1.png](assets/img_1.png)
+#### webui效果图2
+![assets/img_2.png](assets/img_2.png)
+### 2.本项目是采用国内的api，无需配置代理就可以访问。详情可见idea2video_deepseek.yaml。api-key需要到各自的网站进行获取。
+######
+deepseek  deepseek: https://www.deepseek.com/  
+Qwen3-VL-32B-Instruct 硅基流动： https://cloud.siliconflow.cn/  
+Nanobanana  速创API： https://api.wuyinkeji.com/  
+Sora2    速创API： https://api.wuyinkeji.com/  
+### 3.generated_images_demo.py和generated_images_video.py是接入图像和视频生成的调用示例。
+### 4.运行app.py就可以启动webui,使用已有的项目目录，可以进行上一次的生成。修改点可以对比和ViMax-main.zip代码的差异。
+```python
+python app.py
+```
 
 ## 📑 Table of Contents
 
