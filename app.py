@@ -152,27 +152,53 @@ def _build_production_accordion(prefix: str) -> tuple:
     return resolution, aspect_ratio, shot_duration, pacing, max_scenes, max_shots
 
 
+_EDGE_VOICES = [
+    "en-US-AriaNeural",
+    "en-US-GuyNeural",
+    "en-US-JennyNeural",
+    "en-US-EricNeural",
+    "en-GB-SoniaNeural",
+    "en-GB-RyanNeural",
+    "en-AU-NatashaNeural",
+    "en-CA-ClaraNeural",
+]
+_OPENAI_VOICES = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+
+
 def _build_narration_accordion(prefix: str) -> tuple:
     with gr.Accordion("🎙  Narration & Audio", open=False):
         with gr.Row():
             enable_narration = gr.Checkbox(label="Add AI narration", value=False)
             enable_subtitles = gr.Checkbox(label="Burn subtitles", value=False)
+        tts_engine = gr.Dropdown(
+            choices=["Edge TTS (free)", "OpenAI TTS"],
+            value="Edge TTS (free)",
+            label="TTS engine",
+        )
         voice = gr.Dropdown(
-            choices=["alloy", "echo", "fable", "onyx", "nova", "shimmer"],
-            value="alloy",
-            label="Narrator voice  (OpenAI TTS)",
+            choices=_EDGE_VOICES,
+            value=_EDGE_VOICES[0],
+            label="Narrator voice",
         )
         narration_key = gr.Textbox(
-            label="OpenAI API key for TTS/Whisper  (leave blank to reuse Chat key)",
+            label="OpenAI API key for TTS/Whisper  (Edge TTS doesn't need this)",
             type="password",
-            placeholder="sk-... (optional)",
+            placeholder="sk-... (only needed for OpenAI TTS or Whisper subtitles)",
         )
         music_file = gr.File(
             label="Background music  (MP3 / WAV, optional)",
             file_types=[".mp3", ".wav"],
         )
         music_volume = gr.Slider(minimum=0.0, maximum=1.0, value=0.25, step=0.05, label="Music volume")
-    return enable_narration, voice, enable_subtitles, music_file, music_volume, narration_key
+
+        def _swap_voices(engine: str):
+            if engine == "OpenAI TTS":
+                return gr.Dropdown(choices=_OPENAI_VOICES, value=_OPENAI_VOICES[0])
+            return gr.Dropdown(choices=_EDGE_VOICES, value=_EDGE_VOICES[0])
+
+        tts_engine.change(fn=_swap_voices, inputs=[tts_engine], outputs=[voice])
+
+    return enable_narration, tts_engine, voice, enable_subtitles, music_file, music_volume, narration_key
 
 
 async def _run_pipeline(
@@ -189,7 +215,8 @@ async def _run_pipeline(
     aspect_ratio: str = "16:9",
     shot_duration: int = 8,
     enable_narration: bool = False,
-    voice: str = "alloy",
+    tts_engine: str = "edge",
+    voice: str = "en-US-AriaNeural",
     enable_subtitles: bool = False,
     music_path: Optional[str] = None,
     music_volume: float = 0.25,
@@ -291,6 +318,7 @@ async def _run_pipeline(
         from tools.postprocessor import PostProcessor
         log_lines.append("[gui] Running post-processing (narration / subtitles / music)...")
         yield logs(), None, gr.Button(interactive=False, value="⏳ Post-processing...")
+        engine_key = "edge" if tts_engine.startswith("Edge") else "openai"
         pp = PostProcessor(openai_api_key=narration_api_key or chat_api_key)
         final_mp4 = await pp.process(
             video_path=raw_mp4,
@@ -298,6 +326,7 @@ async def _run_pipeline(
             style=style,
             enable_narration=enable_narration,
             voice=voice,
+            tts_engine=engine_key,
             enable_subtitles=enable_subtitles,
             music_path=music_path,
             music_volume=music_volume,
@@ -314,7 +343,7 @@ async def run_idea2video(
     cfg, idea, req, style,
     model, chat_key, img_key, vid_key,
     resolution, aspect_ratio, shot_duration, pacing, max_scenes, max_shots,
-    enable_narration, voice, enable_subtitles, music_file, music_volume, narration_key,
+    enable_narration, tts_engine, voice, enable_subtitles, music_file, music_volume, narration_key,
 ):
     resolution_val = resolution.split()[0]
     aspect_ratio_val = aspect_ratio.split()[0]
@@ -324,7 +353,7 @@ async def run_idea2video(
         "idea2video", cfg, idea, full_req, style,
         model, chat_key, img_key, vid_key,
         resolution_val, aspect_ratio_val, int(shot_duration),
-        enable_narration, voice, enable_subtitles,
+        enable_narration, tts_engine, voice, enable_subtitles,
         music_file.name if music_file else None,
         music_volume,
         narration_key or chat_key,
@@ -336,7 +365,7 @@ async def run_script2video(
     cfg, script, req, style,
     model, chat_key, img_key, vid_key,
     resolution, aspect_ratio, shot_duration, pacing, max_scenes, max_shots,
-    enable_narration, voice, enable_subtitles, music_file, music_volume, narration_key,
+    enable_narration, tts_engine, voice, enable_subtitles, music_file, music_volume, narration_key,
 ):
     resolution_val = resolution.split()[0]
     aspect_ratio_val = aspect_ratio.split()[0]
@@ -346,7 +375,7 @@ async def run_script2video(
         "script2video", cfg, script, full_req, style,
         model, chat_key, img_key, vid_key,
         resolution_val, aspect_ratio_val, int(shot_duration),
-        enable_narration, voice, enable_subtitles,
+        enable_narration, tts_engine, voice, enable_subtitles,
         music_file.name if music_file else None,
         music_volume,
         narration_key or chat_key,
@@ -554,7 +583,7 @@ def build_ui() -> gr.Blocks:
                     )
                     idea_res, idea_ar, idea_dur, idea_pacing, idea_max_scenes, idea_max_shots = \
                         _build_production_accordion("idea")
-                    idea_narr, idea_voice, idea_subs, idea_music, idea_mvol, idea_nkey = \
+                    idea_narr, idea_tts, idea_voice, idea_subs, idea_music, idea_mvol, idea_nkey = \
                         _build_narration_accordion("idea")
                     gr.HTML("<hr style='border-color:#1e1e35;margin:1rem 0'>")
                     (idea_cfg, idea_model, idea_chat_key,
@@ -597,7 +626,7 @@ def build_ui() -> gr.Blocks:
                     idea_cfg, idea_txt, idea_req, idea_style,
                     idea_model, idea_chat_key, idea_img_key, idea_vid_key,
                     idea_res, idea_ar, idea_dur, idea_pacing, idea_max_scenes, idea_max_shots,
-                    idea_narr, idea_voice, idea_subs, idea_music, idea_mvol, idea_nkey,
+                    idea_narr, idea_tts, idea_voice, idea_subs, idea_music, idea_mvol, idea_nkey,
                 ],
                 outputs=[idea_logs, idea_video, idea_btn],
             )
@@ -630,7 +659,7 @@ def build_ui() -> gr.Blocks:
                     )
                     script_res, script_ar, script_dur, script_pacing, script_max_scenes, script_max_shots = \
                         _build_production_accordion("script")
-                    script_narr, script_voice, script_subs, script_music, script_mvol, script_nkey = \
+                    script_narr, script_tts, script_voice, script_subs, script_music, script_mvol, script_nkey = \
                         _build_narration_accordion("script")
                     gr.HTML("<hr style='border-color:#1e1e35;margin:1rem 0'>")
                     (script_cfg, script_model, script_chat_key,
@@ -671,7 +700,7 @@ def build_ui() -> gr.Blocks:
                     script_cfg, script_txt, script_req, script_style,
                     script_model, script_chat_key, script_img_key, script_vid_key,
                     script_res, script_ar, script_dur, script_pacing, script_max_scenes, script_max_shots,
-                    script_narr, script_voice, script_subs, script_music, script_mvol, script_nkey,
+                    script_narr, script_tts, script_voice, script_subs, script_music, script_mvol, script_nkey,
                 ],
                 outputs=[script_logs, script_video, script_btn],
             )

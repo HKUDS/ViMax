@@ -17,6 +17,7 @@ dependencies = [
     "scenedetect[opencv]>=0.6.7.1",
     "gradio>=4",
     "ruamel.yaml>=0.18",
+    "edge-tts>=6.1.9",
 ]
 
 [tool.uv.sources]

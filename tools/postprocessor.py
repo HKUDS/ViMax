@@ -11,7 +11,19 @@ from openai import AsyncOpenAI
 
 logger = logging.getLogger(__name__)
 
-VOICES = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+OPENAI_VOICES = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+EDGE_TTS_VOICES = [
+    "en-US-AriaNeural",
+    "en-US-GuyNeural",
+    "en-US-JennyNeural",
+    "en-US-EricNeural",
+    "en-GB-SoniaNeural",
+    "en-GB-RyanNeural",
+    "en-AU-NatashaNeural",
+    "en-CA-ClaraNeural",
+]
+# Legacy alias kept for compatibility
+VOICES = OPENAI_VOICES
 
 
 class PostProcessor:
@@ -45,16 +57,27 @@ class PostProcessor:
         )
         return response.choices[0].message.content.strip()
 
-    async def text_to_speech(self, text: str, voice: str, output_path: str) -> None:
-        """Convert text to speech and save as MP3."""
-        response = await self.client.audio.speech.create(
-            model="tts-1",
-            voice=voice,
-            input=text,
-        )
-        with open(output_path, "wb") as f:
-            f.write(response.content)
-        logger.info(f"TTS audio saved to {output_path}")
+    async def text_to_speech(
+        self, text: str, voice: str, output_path: str, engine: str = "edge"
+    ) -> None:
+        """Convert text to speech and save as MP3/audio file.
+
+        engine="edge"  → Microsoft Edge TTS (free, no API key required)
+        engine="openai" → OpenAI TTS-1 (requires API key)
+        """
+        if engine == "edge":
+            import edge_tts
+            communicate = edge_tts.Communicate(text, voice)
+            await communicate.save(output_path)
+        else:
+            response = await self.client.audio.speech.create(
+                model="tts-1",
+                voice=voice,
+                input=text,
+            )
+            with open(output_path, "wb") as f:
+                f.write(response.content)
+        logger.info(f"TTS audio saved to {output_path} (engine={engine})")
 
     async def transcribe_for_subtitles(self, audio_path: str) -> list[dict]:
         """Transcribe audio with word-level timestamps for subtitle generation."""
@@ -162,7 +185,8 @@ class PostProcessor:
         idea_or_script: str,
         style: str,
         enable_narration: bool = False,
-        voice: str = "alloy",
+        voice: str = "en-US-AriaNeural",
+        tts_engine: str = "edge",
         enable_subtitles: bool = False,
         music_path: Optional[str] = None,
         music_volume: float = 0.3,
@@ -190,8 +214,8 @@ class PostProcessor:
             logger.info(f"Narration ({len(narration_text.split())} words): {narration_text[:80]}...")
 
             narration_audio = str(work_dir / "narration.mp3")
-            logger.info("Generating TTS audio...")
-            await self.text_to_speech(narration_text, voice, narration_audio)
+            logger.info(f"Generating TTS audio (engine={tts_engine})...")
+            await self.text_to_speech(narration_text, voice, narration_audio, engine=tts_engine)
 
         srt_path: Optional[str] = None
         if enable_subtitles and narration_audio:
