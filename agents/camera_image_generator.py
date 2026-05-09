@@ -172,9 +172,9 @@ class CameraImageGenerator:
         video_output = await self.video_generator.generate_single_video(
             prompt=prompt,
             reference_image_paths=reference_image_paths,
-            resolution=getattr(self, "_resolution", "1080p"),
-            aspect_ratio=getattr(self, "_aspect_ratio", "16:9"),
-            duration=getattr(self, "_shot_duration", 8),
+            resolution=self._resolution,
+            aspect_ratio=self._aspect_ratio,
+            duration=self._shot_duration,
         )
         return video_output
 
