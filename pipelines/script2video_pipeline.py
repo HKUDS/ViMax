@@ -68,7 +68,17 @@ class Script2VideoPipeline:
         style: str,
         characters: List[CharacterInScene] = None,
         character_portraits_registry: Optional[Dict[str, Dict[str, Dict[str, str]]]] = None,
+        resolution: str = "1080p",
+        aspect_ratio: str = "16:9",
+        shot_duration: int = 8,
     ):
+        self._resolution = resolution
+        self._aspect_ratio = aspect_ratio
+        self._shot_duration = shot_duration
+
+        if hasattr(self, 'camera_image_generator') and self.camera_image_generator is not None:
+            self.camera_image_generator.set_video_params(resolution, aspect_ratio, shot_duration)
+
         if characters is None:
             characters = await self.extract_characters(script=script)
 
@@ -328,6 +338,9 @@ class Script2VideoPipeline:
             video_output = await self.video_generator.generate_single_video(
                 prompt=shot_description.motion_desc + "\n" + shot_description.audio_desc,
                 reference_image_paths=frame_paths,
+                resolution=getattr(self, "_resolution", "1080p"),
+                aspect_ratio=getattr(self, "_aspect_ratio", "16:9"),
+                duration=getattr(self, "_shot_duration", 8),
             )
             video_output.save(video_path)
             print(f"☑️ Generated video for shot {shot_description.idx}, saved to {video_path}.")

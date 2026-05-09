@@ -116,6 +116,14 @@ class CameraImageGenerator:
         self.chat_model = chat_model
         self.image_generator = image_generator
         self.video_generator = video_generator
+        self._resolution = "1080p"
+        self._aspect_ratio = "16:9"
+        self._shot_duration = 8
+
+    def set_video_params(self, resolution: str, aspect_ratio: str, shot_duration: int) -> None:
+        self._resolution = resolution
+        self._aspect_ratio = aspect_ratio
+        self._shot_duration = shot_duration
 
 
     async def construct_camera_tree(
@@ -164,6 +172,9 @@ class CameraImageGenerator:
         video_output = await self.video_generator.generate_single_video(
             prompt=prompt,
             reference_image_paths=reference_image_paths,
+            resolution=getattr(self, "_resolution", "1080p"),
+            aspect_ratio=getattr(self, "_aspect_ratio", "16:9"),
+            duration=getattr(self, "_shot_duration", 8),
         )
         return video_output
 
