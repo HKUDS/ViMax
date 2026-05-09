@@ -578,11 +578,7 @@ def _config_accordion(prefix: str, configs: list[str]) -> tuple:
 
 
 def build_ui() -> gr.Blocks:
-    with gr.Blocks(
-        title="ViMax",
-        css=CSS,
-        head=FONTS,
-    ) as demo:
+    with gr.Blocks(title="ViMax") as demo:
         # Header
         with gr.Column(elem_id="vimax-header"):
             gr.HTML("<h1>VIMAX</h1><p>Agentic AI Video Generation</p>")
@@ -634,7 +630,6 @@ def build_ui() -> gr.Blocks:
                         lines=16,
                         elem_id="idea-logs",
                         interactive=False,
-                        show_copy_button=True,
                     )
 
             # Wire up config load on dropdown change
@@ -710,7 +705,6 @@ def build_ui() -> gr.Blocks:
                         lines=16,
                         elem_id="script-logs",
                         interactive=False,
-                        show_copy_button=True,
                     )
 
             script_cfg.change(
@@ -746,4 +740,4 @@ def build_ui() -> gr.Blocks:
 
 
 if __name__ == "__main__":
-    build_ui().queue().launch(server_name="127.0.0.1", inbrowser=True)
+    build_ui().queue().launch(server_name="127.0.0.1", inbrowser=True, css=CSS, head=FONTS)
