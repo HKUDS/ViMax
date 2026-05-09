@@ -168,6 +168,9 @@ class PostProcessor:
         music_volume: float = 0.3,
     ) -> str:
         """Run all enabled post-processing steps. Returns path to processed video."""
+        if not os.path.exists(video_path):
+            raise FileNotFoundError(f"Video file not found: {video_path}")
+
         if not enable_narration and not enable_subtitles and not music_path:
             logger.info("No post-processing requested, returning original video.")
             return video_path
@@ -196,6 +199,8 @@ class PostProcessor:
             words = await self.transcribe_for_subtitles(narration_audio)
             srt_path = str(work_dir / "subtitles.srt")
             self.write_srt(words, srt_path)
+            if not os.path.exists(srt_path):
+                srt_path = None  # write_srt was a no-op (empty word list)
 
         if enable_narration or music_path:
             mixed_path = str(work_dir / "with_audio.mp4")
