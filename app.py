@@ -359,7 +359,7 @@ async def run_script2video(
 FONTS = """
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Syne:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 """
 
 CSS = """
@@ -367,10 +367,9 @@ CSS = """
 *, *::before, *::after { box-sizing: border-box; }
 
 body, .gradio-container {
-    background: #07070f !important;
-    font-family: 'Syne', sans-serif !important;
-    color: #ddddf0 !important;
-    min-height: 100vh;
+    background: #f5f7fa !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    color: #111827 !important;
 }
 
 .gradio-container { max-width: 1400px !important; margin: 0 auto !important; padding: 0 1.5rem !important; }
@@ -378,176 +377,123 @@ body, .gradio-container {
 /* ── Header ── */
 #vimax-header {
     text-align: center;
-    padding: 2.5rem 0 1.5rem;
-    border-bottom: 1px solid #1e1e35;
-    margin-bottom: 2rem;
-    position: relative;
-}
-#vimax-header::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #d4890a, transparent);
+    padding: 2rem 0 1.25rem;
+    border-bottom: 2px solid #e5e7eb;
+    margin-bottom: 1.5rem;
 }
 #vimax-header h1 {
-    font-family: 'Cinzel', serif !important;
-    font-size: 3rem !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 2.2rem !important;
     font-weight: 700 !important;
-    letter-spacing: 0.15em !important;
-    background: linear-gradient(135deg, #f0a820 0%, #e06c18 50%, #c0440a 100%) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
+    letter-spacing: -0.02em !important;
+    color: #1e40af !important;
     margin: 0 !important;
     padding: 0 !important;
-    line-height: 1.1 !important;
 }
 #vimax-header p {
-    color: #6060a0 !important;
-    font-size: 0.75rem !important;
-    letter-spacing: 0.3em !important;
-    text-transform: uppercase !important;
-    margin-top: 0.6rem !important;
-}
-
-/* ── Tabs ── */
-.tab-nav { border-bottom: 1px solid #1e1e35 !important; background: transparent !important; }
-.tab-nav button {
-    font-family: 'Syne', sans-serif !important;
+    color: #6b7280 !important;
     font-size: 0.8rem !important;
-    letter-spacing: 0.12em !important;
+    letter-spacing: 0.15em !important;
     text-transform: uppercase !important;
-    color: #5555a0 !important;
-    background: transparent !important;
-    border: none !important;
-    padding: 0.75rem 1.5rem !important;
-    transition: color 0.2s !important;
-}
-.tab-nav button.selected, .tab-nav button:hover {
-    color: #d4890a !important;
-}
-.tab-nav button.selected {
-    border-bottom: 2px solid #d4890a !important;
+    margin-top: 0.35rem !important;
+    font-weight: 500 !important;
 }
 
-/* ── Panels (columns) ── */
+/* ── Panels ── */
 .left-panel, .right-panel {
-    background: #0d0d1c !important;
-    border: 1px solid #1e1e35 !important;
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
     border-radius: 12px !important;
     padding: 1.5rem !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
 }
-.right-panel { background: #08080f !important; }
 
 /* ── Labels ── */
 label span, .block label span {
-    font-family: 'Syne', sans-serif !important;
-    font-size: 0.72rem !important;
+    font-size: 0.78rem !important;
     font-weight: 600 !important;
-    letter-spacing: 0.12em !important;
-    text-transform: uppercase !important;
-    color: #8080c0 !important;
+    color: #374151 !important;
+    letter-spacing: 0.01em !important;
 }
 
-/* ── Textareas & inputs ── */
+/* ── Inputs & textareas ── */
 textarea, input[type="text"], input[type="password"] {
-    background: #05050e !important;
-    border: 1px solid #1e1e35 !important;
+    background: #ffffff !important;
+    border: 1px solid #d1d5db !important;
     border-radius: 8px !important;
-    color: #ddddf0 !important;
-    font-family: 'Syne', sans-serif !important;
+    color: #111827 !important;
     font-size: 0.9rem !important;
-    padding: 0.75rem 1rem !important;
-    transition: border-color 0.2s !important;
-    resize: vertical !important;
+    transition: border-color 0.15s, box-shadow 0.15s !important;
 }
 textarea:focus, input[type="text"]:focus, input[type="password"]:focus {
-    border-color: #d4890a !important;
+    border-color: #3b82f6 !important;
     outline: none !important;
-    box-shadow: 0 0 0 2px rgba(212, 137, 10, 0.15) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
 }
 
-/* ── Log output — monospace ── */
+/* ── Log output — monospace dark-on-light ── */
 #idea-logs textarea, #script-logs textarea {
     font-family: 'JetBrains Mono', monospace !important;
     font-size: 0.78rem !important;
-    line-height: 1.6 !important;
-    color: #90d0a0 !important;
-    background: #020208 !important;
-    border-color: #151525 !important;
+    line-height: 1.65 !important;
+    color: #1f2937 !important;
+    background: #f9fafb !important;
+    border-color: #e5e7eb !important;
 }
 
-/* ── Dropdowns ── */
-.wrap-inner, select, .multiselect {
-    background: #05050e !important;
-    border: 1px solid #1e1e35 !important;
-    border-radius: 8px !important;
-    color: #ddddf0 !important;
-    font-family: 'Syne', sans-serif !important;
-}
-
-/* ── Generate button ── */
+/* ── Generate button — blue, prominent ── */
 #idea-generate-btn, #script-generate-btn {
-    background: linear-gradient(135deg, #c07010, #903010) !important;
+    background: #1d4ed8 !important;
     border: none !important;
     border-radius: 8px !important;
-    color: #fff8ee !important;
-    font-family: 'Cinzel', serif !important;
+    color: #ffffff !important;
     font-size: 0.95rem !important;
-    letter-spacing: 0.1em !important;
-    padding: 0.9rem 2rem !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1.5rem !important;
     width: 100% !important;
     cursor: pointer !important;
-    transition: opacity 0.2s, transform 0.1s !important;
+    transition: background 0.15s, transform 0.1s, box-shadow 0.15s !important;
     margin-top: 0.5rem !important;
-    box-shadow: 0 4px 20px rgba(192, 112, 16, 0.3) !important;
+    box-shadow: 0 2px 8px rgba(29, 78, 216, 0.3) !important;
+    letter-spacing: 0.01em !important;
 }
 #idea-generate-btn:hover:not(:disabled), #script-generate-btn:hover:not(:disabled) {
-    opacity: 0.9 !important;
+    background: #1e40af !important;
     transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.4) !important;
 }
 #idea-generate-btn:disabled, #script-generate-btn:disabled {
-    opacity: 0.5 !important;
+    background: #93c5fd !important;
     cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
-/* ── Save config button ── */
+/* ── Save config button — subtle grey ── */
 #idea-save-btn, #script-save-btn {
-    background: transparent !important;
-    border: 1px solid #2a2a50 !important;
+    background: #f3f4f6 !important;
+    border: 1px solid #d1d5db !important;
     border-radius: 6px !important;
-    color: #8080c0 !important;
-    font-family: 'Syne', sans-serif !important;
-    font-size: 0.75rem !important;
-    letter-spacing: 0.08em !important;
-    text-transform: uppercase !important;
-    padding: 0.5rem 1rem !important;
+    color: #374151 !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    padding: 0.45rem 0.9rem !important;
     cursor: pointer !important;
-    transition: border-color 0.2s, color 0.2s !important;
+    transition: background 0.15s, border-color 0.15s !important;
 }
 #idea-save-btn:hover, #script-save-btn:hover {
-    border-color: #d4890a !important;
-    color: #d4890a !important;
+    background: #e5e7eb !important;
+    border-color: #9ca3af !important;
 }
 
-/* ── Accordion ── */
-.gr-accordion { border: 1px solid #1e1e35 !important; border-radius: 8px !important; background: #0a0a18 !important; }
-.gr-accordion .label-wrap { color: #8080c0 !important; font-size: 0.75rem !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; }
-
-/* ── Status text ── */
-#idea-status, #script-status { font-size: 0.8rem !important; color: #5555a0 !important; text-align: right !important; margin-bottom: 0.5rem !important; }
-
 /* ── Video player ── */
-video { border-radius: 8px !important; border: 1px solid #1e1e35 !important; }
+video { border-radius: 8px !important; border: 1px solid #e5e7eb !important; }
 
 /* ── Scrollbars ── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #05050e; }
-::-webkit-scrollbar-thumb { background: #2a2a50; border-radius: 2px; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 """
 
 
@@ -581,7 +527,7 @@ def build_ui() -> gr.Blocks:
     with gr.Blocks(title="ViMax") as demo:
         # Header
         with gr.Column(elem_id="vimax-header"):
-            gr.HTML("<h1>VIMAX</h1><p>Agentic AI Video Generation</p>")
+            gr.HTML("<h1>ViMax</h1><p>Agentic AI Video Generation</p>")
 
         # State for working_dir from config
         working_dir_state = gr.State("")
