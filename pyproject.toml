@@ -15,6 +15,8 @@ dependencies = [
     "openai>=1.95.0",
     "opencv-python",
     "scenedetect[opencv]>=0.6.7.1",
+    "gradio>=4",
+    "ruamel.yaml>=0.18",
 ]
 
 [tool.uv.sources]
