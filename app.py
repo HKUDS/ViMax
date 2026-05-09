@@ -587,6 +587,9 @@ def build_ui() -> gr.Blocks:
         with gr.Column(elem_id="vimax-header"):
             gr.HTML("<h1>VIMAX</h1><p>Agentic AI Video Generation</p>")
 
+        # State for working_dir from config
+        working_dir_state = gr.State("")
+
         # ── Tab: Idea → Video ─────────────────────────────────────────────
         with gr.Tab("🎬  Idea → Video"):
             with gr.Row(equal_height=False):
@@ -639,12 +642,12 @@ def build_ui() -> gr.Blocks:
                 fn=read_config_fields,
                 inputs=[idea_cfg],
                 outputs=[idea_model, idea_chat_key, idea_img_key, idea_vid_key,
-                         gr.Textbox(visible=False), idea_save_status],
+                         working_dir_state, idea_save_status],
             )
             idea_save_btn.click(
                 fn=write_config_fields,
                 inputs=[idea_cfg, idea_model, idea_chat_key, idea_img_key, idea_vid_key,
-                        gr.Textbox(value="", visible=False)],
+                        working_dir_state],
                 outputs=[idea_save_status],
             )
             idea_btn.click(
@@ -662,7 +665,7 @@ def build_ui() -> gr.Blocks:
                 fn=read_config_fields,
                 inputs=[idea_cfg],
                 outputs=[idea_model, idea_chat_key, idea_img_key, idea_vid_key,
-                         gr.Textbox(visible=False), idea_save_status],
+                         working_dir_state, idea_save_status],
             )
 
         # ── Tab: Script → Video ───────────────────────────────────────────
@@ -714,12 +717,12 @@ def build_ui() -> gr.Blocks:
                 fn=read_config_fields,
                 inputs=[script_cfg],
                 outputs=[script_model, script_chat_key, script_img_key, script_vid_key,
-                         gr.Textbox(visible=False), script_save_status],
+                         working_dir_state, script_save_status],
             )
             script_save_btn.click(
                 fn=write_config_fields,
                 inputs=[script_cfg, script_model, script_chat_key, script_img_key, script_vid_key,
-                        gr.Textbox(value="", visible=False)],
+                        working_dir_state],
                 outputs=[script_save_status],
             )
             script_btn.click(
@@ -736,7 +739,7 @@ def build_ui() -> gr.Blocks:
                 fn=read_config_fields,
                 inputs=[script_cfg],
                 outputs=[script_model, script_chat_key, script_img_key, script_vid_key,
-                         gr.Textbox(visible=False), script_save_status],
+                         working_dir_state, script_save_status],
             )
 
     return demo
