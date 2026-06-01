@@ -359,26 +359,30 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 
 
 
-## 🚀Quick Start
+## 🚀 快速开始
 
-### 🖥️ **Environment**
+### 🖥️ 环境要求
 
 ```
-OS: Linux, Windows
+操作系统: Linux, Windows
 ```
 
-### 📥 **Clone and Install**
-We use uv to manage the environment. For uv installation, please refer to the https://docs.astral.sh/uv/getting-started/installation/.
+### 📥 克隆与安装
+
+我们使用 [uv](https://docs.astral.sh/uv/) 管理环境。关于 uv 的安装方法，请参阅 [官方安装指南](https://docs.astral.sh/uv/getting-started/installation/)。
+
 ```bash
 git clone https://github.com/HKUDS/ViMax.git
 cd ViMax
 uv sync
 ```
 
+### 🎯 使用方法
 
-### 🎯 **Usage**
-main_idea2video.py is used to convert your ideas into videos.
-You need to configure the model and API key information in the configs/idea2video.yaml file, including three parts—the chat model, the image generator, and the video generator, as shown below
+`main_idea2video.py` 用于将你的创意转化为视频。
+
+你需要在 `configs/idea2video.yaml` 文件中配置模型和 API 密钥信息，包括三部分：聊天模型、图像生成器和视频生成器，如下所示：
+
 ```yaml
 chat_model:
   init_args:
@@ -400,7 +404,8 @@ video_generator:
 working_dir: .working_dir/idea2video
 ```
 
-Then, provide a simple yet thoughtful idea and the corresponding creative requirements in main_idea2video.py.
+然后，在 `main_idea2video.py` 中提供一个简洁但有深度的创意，以及对应的创作需求：
+
 ```bash
 idea = \
 """
@@ -413,8 +418,45 @@ For children, do not exceed 3 scenes.
 style = "Cartoon"
 ```
 
-main_script2video.py generates a video based on a specific script.
-You similarly need to set up the API configuration in configs/script2video.yaml file. Then, provide a scene script and the corresponding creative requirements in main_script2video.py, as shown below.
+---
+
+## ☄️ 使用 MiniMax 作为聊天模型提供商
+
+[MiniMax](https://www.minimaxi.com/) 模型可作为备选的聊天模型提供商。MiniMax 提供 OpenAI 兼容的 API 访问，支持 **MiniMax-M2.7**（1M 上下文窗口）和 **MiniMax-M2.5**（204K 上下文）等模型。
+
+只需在配置中设置 `model_provider: minimax`，基础 URL 会自动解析：
+
+```yaml
+chat_model:
+  init_args:
+    model: MiniMax-M2.7
+    model_provider: minimax
+    api_key: <YOUR_MINIMAX_API_KEY>
+```
+
+或通过环境变量导出 API 密钥，并留空 `api_key`：
+
+```bash
+export MINIMAX_API_KEY=<YOUR_KEY>
+```
+
+完整的配置示例请参考 `configs/idea2video_minimax.yaml` 和 `configs/script2video_minimax.yaml`。
+
+| 模型 | 上下文 | 说明 |
+|---|---|---|
+| MiniMax-M2.7 | 1M tokens | 最新版，推荐使用 |
+| MiniMax-M2.7-highspeed | 1M tokens | 高速变体 |
+| MiniMax-M2.5 | 204K tokens | 稳定版 |
+| MiniMax-M2.5-highspeed | 204K tokens | 高速变体 |
+
+---
+
+### 📜 使用剧本生成视频
+
+`main_script2video.py` 根据特定剧本生成视频。
+
+同样需要在 `configs/script2video.yaml` 中配置 API，然后在 `main_script2video.py` 中提供场景剧本和对应的创作需求：
+
 ```python
 script = \
 """
@@ -432,6 +474,10 @@ Fast-paced with no more than 20 shots.
 style = "Animate Style"
 ```
 
-
 ---
 
+**🌟 如果这个项目对您有帮助，请给我们一个 Star！**
+
+<p align="center">
+  <em> ❤️ 感谢访问 ✨ ViMax!</em><br><br>
+</p>
