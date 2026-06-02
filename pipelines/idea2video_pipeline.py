@@ -198,6 +198,9 @@ class Idea2VideoPipeline:
         idea: str,
         user_requirement: str,
         style: str,
+        resolution: str = "1080p",
+        aspect_ratio: str = "16:9",
+        shot_duration: int = 8,
     ):
 
         story = await self.develop_story(idea=idea, user_requirement=user_requirement)
@@ -229,6 +232,9 @@ class Idea2VideoPipeline:
                 style=style,
                 characters=characters,
                 character_portraits_registry=character_portraits_registry,
+                resolution=resolution,
+                aspect_ratio=aspect_ratio,
+                shot_duration=shot_duration,
             )
             all_video_paths.append(final_video_path)
 
