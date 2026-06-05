@@ -38,6 +38,14 @@
 
 ---
 
+<p align="center">
+  <a href="https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=vimax">
+    <img src="assets/atlas-cloud-logo.png" alt="Atlas Cloud" width="200">
+  </a>
+</p>
+
+> 🎁 **[Atlas Cloud](https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=vimax)** is a full-modal, OpenAI-compatible AI inference platform (DeepSeek, Qwen, GLM, Kimi, MiniMax, …). ViMax can use it as a chat-model provider — set `model_provider: atlas` (see [Using Atlas Cloud as Chat Model Provider](#using-atlas-cloud-as-chat-model-provider)).
+
 ### 🚨 Current Video Generation Limitations:
 - ❌ **Limited to Short Clips** - Most AI tools generate only seconds of footage. <br>
 - ❌ **Consistency Chaos** - Characters and scenes change unpredictably across frames. <br>
@@ -462,6 +470,43 @@ See `configs/idea2video_minimax.yaml` and `configs/script2video_minimax.yaml` fo
 | MiniMax-M3 | Latest, recommended |
 | MiniMax-M2.7 | Previous generation, 1M context |
 | MiniMax-M2.7-highspeed | Fast variant of M2.7 |
+
+#### Using Atlas Cloud as Chat Model Provider
+
+[Atlas Cloud](https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=vimax) is a full-modal, OpenAI-compatible inference platform offering DeepSeek, Qwen, GLM, Kimi, MiniMax and more behind one API.
+
+Set `model_provider: atlas` in your config — the base URL is resolved automatically:
+```yaml
+chat_model:
+  init_args:
+    model: deepseek-ai/deepseek-v4-pro
+    model_provider: atlas
+    api_key: <YOUR_ATLASCLOUD_API_KEY>
+```
+
+Or export the API key as an environment variable and leave `api_key` empty:
+```bash
+export ATLASCLOUD_API_KEY=<YOUR_KEY>
+```
+
+`deepseek-ai/deepseek-v4-pro` is a reasoning model (allow enough output tokens). Any Atlas chat model id works:
+
+<details>
+<summary>All Atlas Cloud chat models (59)</summary>
+
+- **Anthropic (Claude):** `anthropic/claude-haiku-4.5-20251001`, `anthropic/claude-opus-4.8`, `anthropic/claude-sonnet-4.6`
+- **OpenAI (GPT):** `openai/gpt-5.4`, `openai/gpt-5.5`
+- **Google (Gemini):** `google/gemini-3.1-flash-lite`, `google/gemini-3.1-pro-preview`, `google/gemini-3.5-flash`
+- **Qwen:** `qwen/qwen2.5-7b-instruct`, `Qwen/Qwen3-235B-A22B-Instruct-2507`, `qwen/qwen3-235b-a22b-thinking-2507`, `qwen/qwen3-30b-a3b`, `Qwen/Qwen3-30B-A3B-Instruct-2507`, `qwen/qwen3-30b-a3b-thinking-2507`, `qwen/qwen3-32b`, `qwen/qwen3-8b`, `Qwen/Qwen3-Coder`, `qwen/qwen3-coder-next`, `qwen/qwen3-max-2026-01-23`, `Qwen/Qwen3-Next-80B-A3B-Instruct`, `Qwen/Qwen3-Next-80B-A3B-Thinking`, `Qwen/Qwen3-VL-235B-A22B-Instruct`, `qwen/qwen3-vl-235b-a22b-thinking`, `qwen/qwen3-vl-30b-a3b-instruct`, `qwen/qwen3-vl-30b-a3b-thinking`, `qwen/qwen3-vl-8b-instruct`, `qwen/qwen3.5-122b-a10b`, `qwen/qwen3.5-27b`, `qwen/qwen3.5-35b-a3b`, `qwen/qwen3.5-397b-a17b`, `qwen/qwen3.6-35b-a3b`, `qwen/qwen3.6-plus`
+- **DeepSeek:** `deepseek-ai/deepseek-ocr`, `deepseek-ai/deepseek-r1-0528`, `deepseek-ai/DeepSeek-V3-0324`, `deepseek-ai/DeepSeek-V3.1`, `deepseek-ai/DeepSeek-V3.1-Terminus`, `deepseek-ai/deepseek-v3.2`, `deepseek-ai/DeepSeek-V3.2-Exp`, `deepseek-ai/deepseek-v4-flash`, `deepseek-ai/deepseek-v4-pro`
+- **Moonshot (Kimi):** `moonshotai/Kimi-K2-Instruct`, `moonshotai/Kimi-K2-Instruct-0905`, `moonshotai/Kimi-K2-Thinking`, `moonshotai/kimi-k2.5`, `moonshotai/kimi-k2.6`
+- **Zhipu (GLM):** `zai-org/GLM-4.6`, `zai-org/glm-4.7`, `zai-org/glm-5`, `zai-org/glm-5-turbo`, `zai-org/glm-5.1`, `zai-org/glm-5v-turbo`
+- **MiniMax:** `MiniMaxAI/MiniMax-M2`, `minimaxai/minimax-m2.1`, `minimaxai/minimax-m2.5`, `minimaxai/minimax-m2.7`
+- **xAI:** `xai/grok-4.3`
+- **Kwaipilot:** `kwaipilot/kat-coder-pro-v2`
+- **Other:** `owl`
+
+</details>
 
 ---
 
