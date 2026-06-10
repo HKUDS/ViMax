@@ -11,4 +11,12 @@ wheels/
 
 # working directory
 .working_dir/
+.vimax/
 .test/
+# Node dependencies
+node_modules/
+
+# Local agent secrets
+configs/*.local.json
+configs/*.local.yaml
+!configs/agent.local.yaml

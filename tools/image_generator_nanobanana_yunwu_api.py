@@ -15,11 +15,12 @@ class ImageGeneratorNanobananaYunwuAPI:
         self,
         api_key: str,
         model: str = "gemini-2.5-flash-image-preview",
+        base_url: str = "https://yunwu.ai",
     ):
         self.client = genai.Client(
             api_key=api_key,
             http_options=types.HttpOptions(
-                base_url="https://yunwu.ai",
+                base_url=base_url.rstrip("/"),
                 api_version="v1beta",
             ),
         )
@@ -46,7 +47,7 @@ class ImageGeneratorNanobananaYunwuAPI:
             model=self.model,
             contents=reference_images + [prompt],
             config=types.GenerateContentConfig(
-                response_modalities=["IMAGE"],
+                response_modalities=["TEXT", "IMAGE"],
                 image_config=types.ImageConfig(
                     aspect_ratio=aspect_ratio,
                 ),
@@ -66,4 +67,3 @@ class ImageGeneratorNanobananaYunwuAPI:
             raise ValueError(f"Error occurred while generating image.")
 
         return ImageOutput(fmt="pil", ext="png", data=image)
-

@@ -19,7 +19,8 @@
   </p>
 
   <p align="center">
-    <a href='https://www.youtube.com/@AI-Creator-is-here'><img src='https://badges.aleen42.com/src/youtube.svg' /></a>
+    <a href='https://www.youtube.com/@AI-Creator-is-here'><img src='https://img.shields.io/badge/YouTube-ff0000?style=for-the-badge&logo=youtube&logoColor=white&labelColor=1a1a2e' /></a>
+    <a href='https://arxiv.org/abs/2606.07649'><img src='https://img.shields.io/badge/arXiv-2606.07649-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white&labelColor=1a1a2e' /></a>
   </p>
 
 </div>
@@ -383,6 +384,19 @@ cd ViMax
 uv sync
 ```
 
+
+### 🧠 **Agent TUI / Agents Loop**
+ViMax also provides a minimal TUI for interactive agent-based video creation. Configure `configs/agent.local.yaml` for the LLM, image, and video providers, then start the TUI from the ViMax root directory.
+```bash
+vimax tui
+```
+
+Start a new session or resume an existing one:
+```bash
+vimax tui new
+vimax tui resume
+vimax tui resume <session_id>
+```
 
 ### 🎯 **Usage**
 main_idea2video.py is used to convert your ideas into videos.

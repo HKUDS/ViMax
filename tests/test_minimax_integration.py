@@ -1,8 +1,7 @@
 """Integration tests for MiniMax provider support.
 
-These tests verify end-to-end flow through the pipeline config loading
-and ``init_chat_model`` invocation.  They mock the LangChain factory so
-no real API calls are made.
+These tests verify provider preset resolution and default pipeline config
+loading. They mock the LangChain factory so no real API calls are made.
 
 Heavy multimedia dependencies (moviepy, scenedetect, cv2, google-genai,
 etc.) are stubbed at the module level so the pipeline modules can be
@@ -111,7 +110,7 @@ class TestPipelineConfigResolution(unittest.TestCase):
 
 
 class TestPipelineInitFromConfig(unittest.TestCase):
-    """Integration: full pipeline init_from_config with MiniMax config."""
+    """Integration: full pipeline init_from_config with provider configs."""
 
     @patch("pipelines.idea2video_pipeline.init_chat_model")
     @patch("pipelines.idea2video_pipeline.RenderBackend.from_config")
@@ -144,6 +143,7 @@ class TestPipelineInitFromConfig(unittest.TestCase):
         self.assertEqual(call_kwargs["model_provider"], "openai")
         self.assertEqual(call_kwargs["base_url"], "https://api.minimax.io/v1")
         self.assertEqual(call_kwargs["model"], "MiniMax-M3")
+    """Integration: full pipeline init_from_config with default configs."""
 
     @patch("pipelines.idea2video_pipeline.init_chat_model")
     @patch("pipelines.idea2video_pipeline.RenderBackend.from_config")

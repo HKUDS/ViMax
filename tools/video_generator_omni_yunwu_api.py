@@ -197,4 +197,3 @@ class VideoGeneratorOmniYunwuAPI:
 
 class VideoGeneratorOminiYunwuAPI(VideoGeneratorOmniYunwuAPI):
     """Backward-compatible alias for the common "omini" spelling."""
-

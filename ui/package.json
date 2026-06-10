@@ -1,0 +1,23 @@
+{
+  "name": "vimax-ui",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "tui": "tsx src/cli.tsx",
+    "test": "tsx src/lineMapping.test.ts && tsx src/slashCommands.test.ts && tsx src/workspaceMeta.test.ts"
+  },
+  "dependencies": {
+    "ink": "^4.4.1",
+    "ink-text-input": "^5.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.6.3"
+  }
+}

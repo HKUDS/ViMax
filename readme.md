@@ -20,7 +20,8 @@
   </p>
 
   <p align="center">
-    <a href='https://www.youtube.com/@AI-Creator-is-here'><img src='https://badges.aleen42.com/src/youtube.svg' /></a>
+    <a href='https://www.youtube.com/@AI-Creator-is-here'><img src='https://img.shields.io/badge/YouTube-ff0000?style=for-the-badge&logo=youtube&logoColor=white&labelColor=1a1a2e' /></a>
+    <a href='https://arxiv.org/abs/2606.07649'><img src='https://img.shields.io/badge/arXiv-2606.07649-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white&labelColor=1a1a2e' /></a>
   </p>
 
 </div>
@@ -266,6 +267,8 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 | One-Prompt to Finished Video | From Any Narrative to Reality | Synchronized Storytelling | Movie-Grade Output | Make Your Own Cameo Video
 | Skip the technical complexity—just describe your vision and let ViMax handle script generation, storyboarding, shot design, reference management, and consistency validation | No creative limits—whether it's a trailer, short story, novel chapter, or original concept, ViMax intelligently structures narratives and designs cinematography to bring any idea to life | Seamlessly integrate character voice, and sound effects with visual content to create immersive experiences where audio and video work in perfect harmony | Automated quality control ensures character consistency, proper scene composition, and professional visual standards across every frame of your video | Interact in your own short stories by uploading your photo—ViMax intelligently integrates you as a character with consistent appearance and natural interactions throughout the entire video
 
+ViMax now also includes an **Agents Loop + TUI** workflow for interactive planning, revision, rendering control, session reuse, and context compaction while preserving the original direct pipeline entrypoints.
+
 
 
 ---
@@ -273,8 +276,8 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 ### ☄️ **Coming Soon**
 
 - 👨‍💻 **Google AI Studio API config✅**
-- 🤖 **Agents Loop☑️**
-- 📄 **Technical Report☑️**
+- 🤖 **Agents Loop + TUI✅**
+- 📄 **Technical Report✅**
 
 ---
 
@@ -407,6 +410,40 @@ cd ViMax
 uv sync
 ```
 
+
+### 🧠 **Agent TUI**
+ViMax also provides a minimal TUI for interactive agent-based video creation. Configure the model and API key information in `configs/agent.local.yaml`, including the LLM, image generator, and video generator, as shown below.
+```yaml
+llm:
+  model_provider: openai
+  model: <YOUR_LLM_MODEL>
+  base_url: <YOUR_LLM_BASE_URL>
+  api_key: <YOUR_API_KEY>
+
+image:
+  model: <YOUR_IMAGE_MODEL>
+  base_url: <YOUR_IMAGE_BASE_URL>
+  api_key: <YOUR_API_KEY>
+
+video:
+  model: <YOUR_VIDEO_MODEL>
+  base_url: <YOUR_VIDEO_BASE_URL>
+  api_key: <YOUR_API_KEY>
+```
+
+Then, start the TUI from the ViMax root directory:
+```bash
+vimax tui
+```
+
+Start a new session or resume an existing one:
+```bash
+vimax tui new
+vimax tui resume
+vimax tui resume <session_id>
+```
+
+You can also keep `configs/agent.local.yaml` empty and provide the same values through environment variables, such as `VIMAX_LLM_API_KEY`, `VIMAX_IMAGE_API_KEY`, and `VIMAX_VIDEO_API_KEY`.
 
 ### 🎯 **Usage**
 main_idea2video.py is used to convert your ideas into videos.
