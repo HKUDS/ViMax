@@ -2,7 +2,7 @@
 name = "autolongvideogeneration"
 version = "1.1.0"
 description = "Add your description here"
-readme = "README.md"
+readme = "readme.md"
 requires-python = ">=3.12"
 dependencies = [
     "aiohttp>=3.12.14",
