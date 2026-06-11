@@ -184,7 +184,7 @@ class ContextCompactor:
         role = str(message.get("role", "") or "message")
         content = _clip(" ".join(str(message.get("content", "") or "").split()), limit)
         if message.get("tool_calls"):
-            return f"{role}: [tool calls] {_clip(json.dumps(message.get(tool_calls), ensure_ascii=False, default=str), limit)}"
+            return f"{role}: [tool calls] {_clip(json.dumps(message.get('tool_calls'), ensure_ascii=False, default=str), limit)}"
         return f"{role}: {content}" if content else f"{role}: <empty>"
 
     def _clip_summary(self, summary: str) -> str:
