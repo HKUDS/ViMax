@@ -83,12 +83,8 @@ class ShotBriefDescription(BaseModel):
         s = f"Shot {self.idx}:\n"
         s += f"Camera Index: {self.cam_idx}\n"
         s += f"Visual: {self.visual_desc}\n"
-        if self.sound_effect is not None or self.speaker is not None:
-            s += f"Audio:"
-            if self.sound_effect is not None:
-                s += f"[Sound Effect] {self.sound_effect}"
-            if self.speaker is not None:
-                s += f"[Speaker] {self.speaker} ({self.emotion}): {self.line}"
+        if self.audio_desc:
+            s += f"Audio: {self.audio_desc}"
         return s
 
 
