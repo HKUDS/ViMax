@@ -52,6 +52,14 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 ---
 
 
+<p align="center">
+  <a href="https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=vimax">
+    <img src="assets/atlas-cloud-logo.png" alt="Atlas Cloud" width="200">
+  </a>
+</p>
+
+> 🎁 **[Atlas Cloud](https://www.atlascloud.ai/?utm_source=github&utm_medium=link&utm_campaign=vimax)** 是全模态、OpenAI 兼容的 AI 推理平台（DeepSeek、Qwen、GLM、Kimi、MiniMax 等）。ViMax 可用它作为对话模型 provider —— 在 config 里设 `model_provider: atlas`（base_url 自动解析），`api_key` 留空时读环境变量 `ATLASCLOUD_API_KEY`。
+
 ## 📑 目录
 
 - [💡 核心特性](#核心特性)
