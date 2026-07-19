@@ -12,13 +12,3 @@ def safe_path_component(name) -> str:
     cleaned = re.sub(r"[^\w\-. ]", "_", str(name))
     cleaned = cleaned.strip().lstrip(".")
     return cleaned or "unnamed"
-
-
-def _iter_score_chunk_files(chunks_dir: str):
-    """Yield (path, score) for chunk_*-score_*.txt files in a resume cache dir."""
-    import os
-    for chunk_fname in os.listdir(chunks_dir):
-        if "-score_" not in chunk_fname or not chunk_fname.endswith(".txt"):
-            continue
-        score = float(chunk_fname.split("-score_")[1].split(".txt")[0])
-        yield os.path.join(chunks_dir, chunk_fname), score
