@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import pytest
-
 from utils.text import compression_ratio_label
 
 
@@ -15,6 +13,3 @@ def test_nonempty_novel_ratio_formats() -> None:
     assert compression_ratio_label("abcd", "ab") == "📌 Compression Ratio: 50.00%"
 
 
-def test_unfixed_formula_zerodivs_on_empty() -> None:
-    with pytest.raises(ZeroDivisionError):
-        _ = len("") / len("")
