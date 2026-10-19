@@ -33,7 +33,7 @@ class ToolExecutor:
         started_at = time()
         validated, validation_error = self.registry.validate_arguments(canonical_name, call.arguments)
         arguments = validated if validated is not None else call.arguments
-        runtime = ToolRuntimeContext(requested_name=requested_name, canonical_name=canonical_name, turn_id=control.turn_id, cancel_event=control.cancel_event, progress_callback=progress_callback, metadata={"cancel_reason": control.cancel_reason})
+        runtime = ToolRuntimeContext(requested_name=requested_name, canonical_name=canonical_name, turn_id=control.turn_id, cancel_event=control.cancel_event, progress_callback=progress_callback, metadata={"cancel_reason": control.cancel_reason, "search_session_id": control.search_session_id})
         if validation_error:
             result = ToolResult(canonical_name, False, validation_error, {"validation_error": True})
         elif control.cancel_event.is_set():

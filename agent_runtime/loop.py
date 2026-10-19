@@ -42,6 +42,9 @@ class AgentLoop:
 
     async def stream_events(self, user_input: str) -> AsyncIterator[dict[str, Any]]:
         control = TurnControl()
+        if self.tool_registry.get_spec("web_search") or self.tool_registry.get_spec("web_fetch"):
+            session = self.session_index.get_or_create_active()
+            control.search_session_id = self.session_index.search_conversation_id(session["session_id"])
         yield {"type": "turn", "turn_id": control.turn_id, "turn": {"id": control.turn_id}}
         tool_schemas = self.tool_registry.list_function_tools()
         parts = self.prompt_builder.build_parts(user_input)
@@ -103,14 +106,19 @@ class AgentLoop:
                     progress_queue.put_nowait(event)
 
                 task = asyncio.create_task(self.tool_executor.execute(call, control, progress_callback=on_progress))
-                while not task.done():
-                    try:
-                        yield await asyncio.wait_for(progress_queue.get(), timeout=0.1)
-                    except asyncio.TimeoutError:
-                        continue
-                while not progress_queue.empty():
-                    yield progress_queue.get_nowait()
-                record = await task
+                try:
+                    while not task.done():
+                        try:
+                            yield await asyncio.wait_for(progress_queue.get(), timeout=0.1)
+                        except asyncio.TimeoutError:
+                            continue
+                    while not progress_queue.empty():
+                        yield progress_queue.get_nowait()
+                    record = await task
+                finally:
+                    if not task.done():
+                        task.cancel()
+                    await asyncio.gather(task, return_exceptions=True)
                 result = record.result
                 round_results.append(result)
                 all_tool_results.append(result)
@@ -176,10 +184,12 @@ def _openai_tool_call(call: ToolCall) -> dict[str, Any]:
 
 
 def build_runtime(workspace_root: str | Path = ".", llm: Any | None = None, adapter_specs: list[Any] | None = None) -> AgentLoop:
-    from .vimax_adapters import build_vimax_adapter_specs
     root = Path(workspace_root).resolve()
     session_index = SessionIndex(root)
-    specs = adapter_specs if adapter_specs is not None else build_vimax_adapter_specs(root, session_index)
+    if adapter_specs is None:
+        from .vimax_adapters import build_vimax_adapter_specs
+        adapter_specs = build_vimax_adapter_specs(root, session_index)
+    specs = adapter_specs
     registry = build_builtin_registry(root, session_index, specs)
     executor = ToolExecutor(registry, session_index)
     prompt_builder = PromptBuilder(root / "prompts", session_index, registry)

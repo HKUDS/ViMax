@@ -47,6 +47,24 @@ def config_value(section: str, key: str, env_names: list[str], default: str = ""
     return default
 
 
+def search_settings(workspace_root: str | Path = ".") -> tuple[str, float]:
+    """Resolve the built-in anonymous web tools without using model credentials."""
+    section = load_agent_config(workspace_root).get("search", {})
+    if not isinstance(section, dict):
+        raise ValueError("search must be a YAML mapping")
+    provider = os.environ.get("VIMAX_SEARCH_PROVIDER", section.get("provider", "parallel"))
+    if not isinstance(provider, str) or provider not in {"parallel", "none"}:
+        raise ValueError("search.provider must be parallel or none")
+    raw_timeout = os.environ.get("VIMAX_SEARCH_TIMEOUT_SECONDS", section.get("timeout_seconds", 60))
+    try:
+        timeout = float(raw_timeout)
+    except (TypeError, ValueError):
+        raise ValueError("search.timeout_seconds must be between 1 and 120") from None
+    if isinstance(raw_timeout, bool) or not 1 <= timeout <= 120:
+        raise ValueError("search.timeout_seconds must be between 1 and 120")
+    return provider, timeout
+
+
 def llm_model(workspace_root: str | Path = ".") -> str:
     return config_value("llm", "model", ["VIMAX_LLM_MODEL"], DEFAULT_LLM_MODEL, workspace_root)
 

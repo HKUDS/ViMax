@@ -1,6 +1,12 @@
 # ViMax agent runtime local configuration template.
 # Keep real keys out of commits. Prefer environment variables for shared or CI usage.
 
+# Built-in web research uses anonymous Parallel Search MCP, without an API key.
+# Set provider to 'none' to remove web_search and web_fetch from the agent.
+search:
+  provider: parallel
+  timeout_seconds: 60
+
 llm:
   model_provider: openai
   model: <YOUR_LLM_MODEL>
