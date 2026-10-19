@@ -9,6 +9,7 @@ from datetime import datetime
 from functools import wraps
 from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
 try:
     import fcntl
@@ -147,6 +148,18 @@ class SessionIndex:
         if active is not None:
             return active
         return self.create(idea=idea, user_requirement=user_requirement, style=style)
+
+    @_synchronized
+    def search_conversation_id(self, session_id: str) -> str:
+        """Persist an opaque research ID, separate from the user-derived project slug."""
+        data = self.load()
+        record = data.get("sessions", {}).get(session_id)
+        if not isinstance(record, dict):
+            raise KeyError(f"Unknown session_id: {session_id}")
+        if not record.get("search_conversation_id"):
+            record["search_conversation_id"] = str(uuid4())
+            self.save(data)
+        return record["search_conversation_id"]
 
     @_synchronized
     def set_active(self, session_id: str) -> dict[str, Any]:

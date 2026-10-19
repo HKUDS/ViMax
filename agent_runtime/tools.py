@@ -402,6 +402,8 @@ def build_builtin_registry(workspace_root: str | Path, session_index: Any, adapt
         ToolSpec("sleep", "Wait for a bounded number of seconds.", sleep_tool, schema={"seconds": ToolArgumentSchema(int, False, 0)}, concurrency_safe=True),
         ToolSpec("run_shell", "Run a bounded shell command in the workspace. Disabled unless VIMAX_ENABLE_RUN_SHELL=1; rejects dangerous commands, enforces timeout, and truncates output.", run_shell, schema={"command": ToolArgumentSchema(str, True), "timeout_seconds": ToolArgumentSchema(int, False, 30), "output_limit": ToolArgumentSchema(int, False, 20000)}),
     ]
+    from .web_tools import build_web_tool_specs
+    specs.extend(build_web_tool_specs(root, session_index))
     for spec in adapter_specs or []:
         specs.append(spec)
     return ToolRegistry(specs)

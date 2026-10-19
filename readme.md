@@ -268,6 +268,17 @@ vimax tui resume <session_id>
 
 You can also keep `configs/agent.local.yaml` empty and provide the same values through environment variables, such as `VIMAX_LLM_API_KEY`, `VIMAX_IMAGE_API_KEY`, and `VIMAX_VIDEO_API_KEY`.
 
+The agent includes `web_search` and `web_fetch` for researching factual details, real locations, and source material before creating a video brief. They use [Parallel Search MCP](https://docs.parallel.ai/integrations/mcp/search-mcp) at `https://search.parallel.ai/mcp`, with free anonymous search in Fast mode and page fetching. No Parallel account or API key is needed; your model and generation settings still apply. For example, ask: "Research Lisbon's historic trams, cite your sources, and suggest details for a video brief."
+
+Web research is available by default in the agent runtime used by the TUI and Web UI. To disable both web tools, add the following to `configs/agent.local.yaml` and restart the agent:
+
+```yaml
+search:
+  provider: none
+```
+
+Use `provider: parallel` to enable them again. `VIMAX_SEARCH_PROVIDER=none` or `parallel` overrides the saved setting. Requests have a 60-second timeout; set `search.timeout_seconds` or `VIMAX_SEARCH_TIMEOUT_SECONDS` to a value from 1 to 120. Queries and fetched URLs go to Parallel; model API keys are never forwarded. The anonymous service has usage limits, and failures are returned to the agent without switching providers. Related research keeps one opaque ID per ViMax project across turns and resumes; a new project starts a new ID. Web results are reference material and do not bypass the workflow confirmation required before planning or rendering.
+
 </details>
 
 <details>

@@ -36,6 +36,7 @@ class TurnControl:
     turn_id: str = field(default_factory=lambda: f"turn-{uuid4().hex[:12]}")
     cancel_event: Event = field(default_factory=Event)
     cancel_reason: str = ""
+    search_session_id: str = ""
 
     def cancel(self, reason: str = "") -> None:
         self.cancel_reason = reason.strip()
