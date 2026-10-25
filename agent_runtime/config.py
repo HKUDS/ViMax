@@ -47,6 +47,35 @@ def config_value(section: str, key: str, env_names: list[str], default: str = ""
     return default
 
 
+def llm_provider(workspace_root: str | Path = ".") -> str:
+    for env_name in ["VIMAX_LLM_PROVIDER", "VIMAX_LLM_MODEL_PROVIDER"]:
+        env_val = os.environ.get(env_name)
+        if env_val:
+            p = env_val.strip().lower()
+            if p in ("google", "google_genai", "gemini"):
+                return "google"
+            return p
+    section_payload = load_agent_config(workspace_root).get("llm", {})
+    if isinstance(section_payload, dict):
+        provider = section_payload.get("provider")
+        if isinstance(provider, str) and provider:
+            p = provider.strip().lower()
+            if p in ("google", "google_genai", "gemini"):
+                return "google"
+            return p
+        model_provider = section_payload.get("model_provider")
+        if isinstance(model_provider, str) and model_provider:
+            p = model_provider.strip().lower()
+            if p in ("google", "google_genai", "gemini"):
+                return "google"
+    base = llm_base_url(workspace_root)
+    if base and ("googleapis.com" not in base or "openai" in base):
+        return "openai"
+    if "googleapis.com" in base:
+        return "google"
+    return "openai"
+
+
 def llm_model(workspace_root: str | Path = ".") -> str:
     return config_value("llm", "model", ["VIMAX_LLM_MODEL"], DEFAULT_LLM_MODEL, workspace_root)
 
@@ -56,6 +85,11 @@ def llm_model_provider(workspace_root: str | Path = ".") -> str:
 
 
 def llm_base_url(workspace_root: str | Path = ".") -> str:
+    section_payload = load_agent_config(workspace_root).get("llm", {})
+    if isinstance(section_payload, dict):
+        p = section_payload.get("provider") or section_payload.get("model_provider")
+        if p and p.strip().lower() in ("google", "google_genai", "gemini"):
+            return config_value("llm", "base_url", ["VIMAX_LLM_BASE_URL"], "", workspace_root)
     return config_value("llm", "base_url", ["VIMAX_LLM_BASE_URL"], DEFAULT_LLM_BASE_URL, workspace_root)
 
 
@@ -68,6 +102,11 @@ def image_model(workspace_root: str | Path = ".") -> str:
 
 
 def image_base_url(workspace_root: str | Path = ".") -> str:
+    section_payload = load_agent_config(workspace_root).get("image", {})
+    if isinstance(section_payload, dict):
+        p = section_payload.get("provider")
+        if p and p.strip().lower() in ("google", "google_genai", "gemini"):
+            return config_value("image", "base_url", ["VIMAX_IMAGE_BASE_URL"], "", workspace_root)
     return config_value("image", "base_url", ["VIMAX_IMAGE_BASE_URL"], DEFAULT_IMAGE_BASE_URL, workspace_root)
 
 
@@ -113,6 +152,11 @@ def video_model(workspace_root: str | Path = ".") -> str:
 
 
 def video_base_url(workspace_root: str | Path = ".") -> str:
+    section_payload = load_agent_config(workspace_root).get("video", {})
+    if isinstance(section_payload, dict):
+        p = section_payload.get("provider")
+        if p and p.strip().lower() in ("google", "google_genai", "gemini"):
+            return config_value("video", "base_url", ["VIMAX_VIDEO_BASE_URL"], "", workspace_root)
     return config_value("video", "base_url", ["VIMAX_VIDEO_BASE_URL"], DEFAULT_VIDEO_BASE_URL, workspace_root)
 
 
@@ -126,14 +170,26 @@ def api_provider_from_base_url(base_url: str) -> str:
         return "openrouter"
     if "yunwu.ai" in normalized:
         return "yunwu"
+    if "googleapis.com" in normalized or "google" in normalized:
+        return "google"
     return ""
 
 
-def video_provider(workspace_root: str | Path = ".") -> str:
-    """Infer the video API relay/provider from video.base_url.
+def image_provider(workspace_root: str | Path = ".") -> str:
+    section_payload = load_agent_config(workspace_root).get("image", {})
+    if isinstance(section_payload, dict):
+        provider = section_payload.get("provider")
+        if isinstance(provider, str) and provider:
+            return provider.strip().lower()
+    base = image_base_url(workspace_root)
+    return api_provider_from_base_url(base)
 
-    This is not a model provider setting. OpenRouter/Yunwu are transport/API
-    gateways here, so users should configure base_url and let the adapter pick
-    the matching implementation.
-    """
-    return api_provider_from_base_url(video_base_url(workspace_root))
+
+def video_provider(workspace_root: str | Path = ".") -> str:
+    section_payload = load_agent_config(workspace_root).get("video", {})
+    if isinstance(section_payload, dict):
+        provider = section_payload.get("provider")
+        if isinstance(provider, str) and provider:
+            return provider.strip().lower()
+    base = video_base_url(workspace_root)
+    return api_provider_from_base_url(base)

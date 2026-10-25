@@ -21,13 +21,15 @@ from agents.scene_extractor import SceneExtractor
 from pipelines.novel2movie_pipeline import Novel2MoviePipeline
 from pipelines.idea2video_pipeline import Idea2VideoPipeline
 from pipelines.script2video_pipeline import Script2VideoPipeline
+from tools.image_generator_nanobanana_google_api import ImageGeneratorNanobananaGoogleAPI
 from tools.image_generator_nanobanana_yunwu_api import ImageGeneratorNanobananaYunwuAPI
 from tools.image_generator_openrouter_api import ImageGeneratorOpenRouterAPI
 from tools.reranker_bge_silicon_api import RerankerBgeSiliconapi
 from tools.video_generator_openrouter_api import VideoGeneratorOpenRouterAPI
+from tools.video_generator_veo_google_api import VideoGeneratorVeoGoogleAPI
 from tools.video_generator_veo_yunwu_api import VideoGeneratorVeoYunwuAPI
 
-from .config import api_provider_from_base_url, embedding_api_key, embedding_base_url, embedding_model, embedding_model_provider, image_api_key, image_base_url, image_model, llm_api_key, llm_base_url, llm_model, llm_model_provider, reranker_api_key, reranker_base_url, reranker_model, video_api_key, video_base_url, video_model, video_provider
+from .config import api_provider_from_base_url, embedding_api_key, embedding_base_url, embedding_model, embedding_model_provider, image_api_key, image_base_url, image_model, image_provider, llm_api_key, llm_base_url, llm_model, llm_model_provider, llm_provider, reranker_api_key, reranker_base_url, reranker_model, video_api_key, video_base_url, video_model, video_provider
 from .models import ToolResult
 from .config import image_num_candidates
 from utils.image_selection import DEFAULT_IMAGE_CANDIDATES
@@ -563,38 +565,53 @@ def _build_chat_model() -> Any:
     api_key = llm_api_key()
     if not api_key:
         raise RuntimeError("VIMAX_LLM_API_KEY or configs/agent.local.yaml llm.api_key is required for narrative planning")
+    base_url = llm_base_url()
+    provider = llm_provider()
+    if provider == "google" and not base_url:
+        return init_chat_model(
+            model=llm_model(),
+            model_provider="google_genai",
+            api_key=api_key,
+            timeout=_llm_request_timeout_seconds(),
+            max_retries=0,
+        )
     return init_chat_model(
         model=llm_model(),
         model_provider=llm_model_provider(),
         api_key=api_key,
-        base_url=llm_base_url(),
+        base_url=base_url,
         timeout=_llm_request_timeout_seconds(),
         max_retries=0,
         max_completion_tokens=_narrative_max_tokens(),
     )
 
 
-def _build_image_generator() -> ImageGeneratorNanobananaYunwuAPI | ImageGeneratorOpenRouterAPI:
+def _build_image_generator() -> Any:
     api_key = image_api_key()
     if not api_key:
         raise RuntimeError("VIMAX_IMAGE_API_KEY, VIMAX_LLM_API_KEY, or configs/agent.local.yaml image/llm api_key is required for image generation")
     model = image_model()
     base_url = image_base_url()
-    if api_provider_from_base_url(base_url) == "openrouter":
+    provider = image_provider().strip().lower()
+    if "openrouter" in base_url or provider == "openrouter":
         return ImageGeneratorOpenRouterAPI(api_key=api_key, model=model, base_url=base_url)
+    if provider == "google" or "googleapis" in base_url or "google" in base_url:
+        return ImageGeneratorNanobananaGoogleAPI(api_key=api_key, model=model)
     return ImageGeneratorNanobananaYunwuAPI(api_key=api_key, model=model, base_url=base_url)
 
 
-def _build_video_generator() -> VideoGeneratorVeoYunwuAPI | VideoGeneratorOpenRouterAPI:
+def _build_video_generator() -> Any:
     api_key = video_api_key()
     if not api_key:
         raise RuntimeError("VIMAX_VIDEO_API_KEY, VIMAX_LLM_API_KEY, or configs/agent.local.yaml video/llm api_key is required for video generation")
     model = video_model()
     base_url = video_base_url()
     provider = video_provider().strip().lower()
-    if provider == "openrouter":
+    if "openrouter" in base_url or provider == "openrouter":
         return VideoGeneratorOpenRouterAPI(api_key=api_key, model=model, base_url=base_url)
-    if provider == "yunwu":
+    if provider == "google" or "googleapis" in base_url or "google" in base_url:
+        return VideoGeneratorVeoGoogleAPI(api_key=api_key, t2v_model=model, ff2v_model=model)
+    if provider == "yunwu" or "yunwu" in base_url:
         return VideoGeneratorVeoYunwuAPI(api_key=api_key, t2v_model=model, ff2v_model=model, base_url=base_url)
     raise RuntimeError(f"Unsupported video base_url for automatic provider matching: {base_url}")
 

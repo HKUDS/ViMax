@@ -5,8 +5,7 @@ import asyncio
 from PIL import Image
 from typing import List, Optional
 from google import genai
-from google.genai import types
-from google.genai.errors import ClientError
+from google.genai import errors, types
 from tenacity import retry, stop_after_attempt, wait_exponential
 from interfaces.image_output import ImageOutput
 from tools.image_orientation import ensure_not_portrait, landscape_guard_requested
@@ -20,8 +19,9 @@ class ImageGeneratorNanobananaGoogleAPI:
         self,
         api_key: str,
         rate_limiter: Optional[RateLimiter] = None,
+        model: str = "gemini-2.5-flash-image",
     ):
-        self.model = "gemini-2.5-flash-image"
+        self.model = model
         self.rate_limiter = rate_limiter
         self.client = genai.Client(
             api_key=api_key,
@@ -65,8 +65,9 @@ class ImageGeneratorNanobananaGoogleAPI:
                     ),
                 )
                 break
-            except ClientError as e:
-                if e.status_code == 429 and attempt < max_retries - 1:
+            except (errors.APIError, errors.ClientError) as e:
+                code = getattr(e, "code", None) or getattr(e, "status_code", None)
+                if code == 429 and attempt < max_retries - 1:
                     wait_time = retry_delay * (2 ** attempt)
                     logging.warning(f"Rate limit hit (429), retrying in {wait_time}s... (attempt {attempt + 1}/{max_retries})")
                     await asyncio.sleep(wait_time)

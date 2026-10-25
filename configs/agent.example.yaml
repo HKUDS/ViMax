@@ -1,12 +1,21 @@
 # ViMax agent runtime local configuration template.
 # Keep real keys out of commits. Prefer environment variables for shared or CI usage.
 
+# For OpenAI-compatible / OpenRouter / Yunwu:
+#   model_provider: openai
+#   base_url: <YOUR_LLM_BASE_URL>
+# For native Google Gemini:
+#   model_provider: google
+#   model: gemini-3.8-flash
 llm:
   model_provider: openai
   model: <YOUR_LLM_MODEL>
   base_url: <YOUR_LLM_BASE_URL>
   api_key: ''
 
+# For native Google:
+#   provider: google
+#   model: gemini-nano-banana-2.1
 image:
   model: <YOUR_IMAGE_MODEL>
   base_url: <YOUR_IMAGE_BASE_URL>
@@ -17,6 +26,9 @@ image:
 image_selection:
   num_candidates: 2
 
+# For native Google:
+#   provider: google
+#   model: gemini-omni-1.1-flash
 video:
   model: <YOUR_VIDEO_MODEL>
   base_url: <YOUR_VIDEO_BASE_URL>

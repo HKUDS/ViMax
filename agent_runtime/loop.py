@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any, AsyncIterator
 
 from .context_compactor import ContextCompactor, CompactionResult
-from .llm import OpenAICompatibleLLM
+from .llm import OpenAICompatibleLLM, build_llm
 from .models import ToolCall, ToolResult, TurnControl
 from .prompts import PromptBuilder
 from .session_index import SessionIndex
@@ -91,7 +91,12 @@ class AgentLoop:
                 break
             tool_round += 1
             yield {"type": "status", "turn_id": control.turn_id, "phase": "executing_tools", "message": f"Running tools (round {tool_round})"}
-            runtime_messages.append({"role": "assistant", "content": assistant.text or "", "tool_calls": [_openai_tool_call(call) for call in assistant.tool_calls]})
+            runtime_messages.append({
+                "role": "assistant",
+                "content": assistant.text or "",
+                "tool_calls": [_openai_tool_call(call) for call in assistant.tool_calls],
+                "_raw_message": assistant.raw_message,
+            })
             round_results: list[ToolResult] = []
             round_model_content: list[dict[str, Any]] = []
 
@@ -172,7 +177,14 @@ def _transition(src: str, dst: str, reason: str) -> dict[str, str]:
 
 
 def _openai_tool_call(call: ToolCall) -> dict[str, Any]:
-    return {"id": call.id, "type": "function", "function": {"name": call.name, "arguments": json.dumps(call.arguments, ensure_ascii=False)}}
+    tool_dict: dict[str, Any] = {
+        "id": call.id,
+        "type": "function",
+        "function": {"name": call.name, "arguments": json.dumps(call.arguments, ensure_ascii=False)},
+    }
+    if getattr(call, "extra_content", None):
+        tool_dict["extra_content"] = call.extra_content
+    return tool_dict
 
 
 def build_runtime(workspace_root: str | Path = ".", llm: Any | None = None, adapter_specs: list[Any] | None = None) -> AgentLoop:
@@ -183,5 +195,5 @@ def build_runtime(workspace_root: str | Path = ".", llm: Any | None = None, adap
     registry = build_builtin_registry(root, session_index, specs)
     executor = ToolExecutor(registry, session_index)
     prompt_builder = PromptBuilder(root / "prompts", session_index, registry)
-    resolved_llm = llm or OpenAICompatibleLLM()
+    resolved_llm = llm or build_llm(root)
     return AgentLoop(session_index, prompt_builder, registry, executor, resolved_llm, ContextCompactor(resolved_llm))

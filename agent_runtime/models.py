@@ -12,9 +12,13 @@ class ToolCall:
     name: str
     arguments: dict[str, Any] = field(default_factory=dict)
     id: str = field(default_factory=lambda: f"tool-{uuid4().hex[:12]}")
+    extra_content: dict[str, Any] | None = None
 
     def as_dict(self) -> dict[str, Any]:
-        return {"id": self.id, "name": self.name, "arguments": self.arguments}
+        data: dict[str, Any] = {"id": self.id, "name": self.name, "arguments": self.arguments}
+        if self.extra_content is not None:
+            data["extra_content"] = self.extra_content
+        return data
 
 
 @dataclass(slots=True)
