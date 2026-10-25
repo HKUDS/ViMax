@@ -126,7 +126,12 @@ class AgentLLMTests(unittest.IsolatedAsyncioTestCase):
         from google.genai import errors
         llm = GoogleGenAILLM(model="gemini-3.8-flash", api_key="test-key")
 
-        err = errors.ClientError(code=429, response_json={"error": "Quota exceeded"})
+        err = errors.ClientError(code=429, response_json={
+            "error": {
+                "message": "Quota exceeded on Tier 1. Please retry in 22.900385424s.",
+                "details": [{"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": "22s"}]
+            }
+        })
         fake_part = SimpleNamespace(text="Success after retry", function_call=None)
         fake_candidate = SimpleNamespace(content=SimpleNamespace(parts=[fake_part]))
         success_response = SimpleNamespace(candidates=[fake_candidate])
@@ -134,10 +139,14 @@ class AgentLLMTests(unittest.IsolatedAsyncioTestCase):
         create_mock = AsyncMock(side_effect=[err, success_response])
         llm.client = SimpleNamespace(aio=SimpleNamespace(models=SimpleNamespace(generate_content=create_mock)))
 
-        with patch("asyncio.sleep", AsyncMock()):
+        slept = []
+        with patch("asyncio.sleep", AsyncMock(side_effect=lambda s: slept.append(s))):
             message = await llm.complete([], [])
         self.assertEqual(message.text, "Success after retry")
         self.assertEqual(create_mock.await_count, 2)
+        # Verify it slept for the requested retryDelay + buffer (~23.9s) rather than 1.0s
+        self.assertTrue(len(slept) == 1)
+        self.assertAlmostEqual(slept[0], 23.900385424, places=1)
 
 
 if __name__ == "__main__":

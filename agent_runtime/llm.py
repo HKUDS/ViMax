@@ -6,6 +6,7 @@ import json
 import logging
 from dataclasses import dataclass, field
 from pathlib import Path
+import re
 from typing import Any
 from uuid import uuid4
 
@@ -20,6 +21,23 @@ from .models import ToolCall
 LLM_MAX_ATTEMPTS = 3
 LLM_RETRY_BACKOFF_SECONDS = (1.0, 4.0)
 LLM_REQUEST_TIMEOUT_SECONDS = 300.0
+
+
+def _extract_retry_delay(exc: BaseException) -> float | None:
+    msg = str(exc)
+    match = re.search(r'retry in ([0-9.]+)s', msg, re.IGNORECASE)
+    if match:
+        try:
+            return float(match.group(1))
+        except ValueError:
+            pass
+    match_delay = re.search(r'retryDelay[\'":\s]+([0-9.]+)s?', msg, re.IGNORECASE)
+    if match_delay:
+        try:
+            return float(match_delay.group(1))
+        except ValueError:
+            pass
+    return None
 
 
 def _is_retryable_llm_error(exc: BaseException) -> bool:
@@ -81,7 +99,11 @@ class OpenAICompatibleLLM:
             except Exception as exc:
                 if isinstance(exc, LLMResponseShapeError) or attempt == LLM_MAX_ATTEMPTS - 1 or not _is_retryable_llm_error(exc):
                     raise
-                delay = LLM_RETRY_BACKOFF_SECONDS[min(attempt, len(LLM_RETRY_BACKOFF_SECONDS) - 1)]
+                server_delay = _extract_retry_delay(exc)
+                if server_delay is not None:
+                    delay = max(1.0, server_delay + 1.0)
+                else:
+                    delay = LLM_RETRY_BACKOFF_SECONDS[min(attempt, len(LLM_RETRY_BACKOFF_SECONDS) - 1)]
                 logging.warning("LLM call failed (%s); retrying in %.1fs (attempt %d/%d)", exc, delay, attempt + 1, LLM_MAX_ATTEMPTS)
                 await asyncio.sleep(delay)
 
@@ -217,7 +239,11 @@ class GoogleGenAILLM:
             except Exception as exc:
                 if attempt == LLM_MAX_ATTEMPTS - 1 or not _is_retryable_llm_error(exc):
                     raise
-                delay = LLM_RETRY_BACKOFF_SECONDS[min(attempt, len(LLM_RETRY_BACKOFF_SECONDS) - 1)]
+                server_delay = _extract_retry_delay(exc)
+                if server_delay is not None:
+                    delay = max(1.0, server_delay + 1.0)
+                else:
+                    delay = LLM_RETRY_BACKOFF_SECONDS[min(attempt, len(LLM_RETRY_BACKOFF_SECONDS) - 1)]
                 logging.warning("Google LLM call failed (%s); retrying in %.1fs (attempt %d/%d)", exc, delay, attempt + 1, LLM_MAX_ATTEMPTS)
                 await asyncio.sleep(delay)
 
