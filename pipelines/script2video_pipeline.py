@@ -92,18 +92,26 @@ class Script2VideoPipeline:
         video_generator,
         working_dir: str,
         num_image_candidates: int = DEFAULT_IMAGE_CANDIDATES,
+        aspect_ratio: str = "16:9",
     ):
 
         self.chat_model = chat_model
         self.image_generator = image_generator
         self.video_generator = video_generator
         self.num_image_candidates = validate_image_candidate_count(num_image_candidates)
+        self.aspect_ratio = aspect_ratio
+        self.frame_size = "900x1600" if aspect_ratio == "9:16" else "1600x900"
         self.best_image_selector = BestImageSelector(chat_model=self.chat_model)
 
         self.character_extractor = CharacterExtractor(chat_model=self.chat_model)
         self.character_portraits_generator = CharacterPortraitsGenerator(image_generator=self.image_generator)
         self.storyboard_artist = StoryboardArtist(chat_model=self.chat_model)
-        self.camera_image_generator = CameraImageGenerator(chat_model=self.chat_model, image_generator=self.image_generator, video_generator=self.video_generator)
+        self.camera_image_generator = CameraImageGenerator(
+            chat_model=self.chat_model,
+            image_generator=self.image_generator,
+            video_generator=self.video_generator,
+            aspect_ratio=self.aspect_ratio,
+        )
         self.reference_image_selector = ReferenceImageSelector(chat_model=self.chat_model)
 
         self.working_dir = working_dir
@@ -435,7 +443,8 @@ class Script2VideoPipeline:
                     reference_image_paths=reference_image_paths,
                     reference_image_path_and_text_pairs=reference_image_path_and_text_pairs,
                     target_description=shot_descriptions[first_shot_idx].ff_desc,
-                    size="1600x900",
+                    size=self.frame_size,
+                    aspect_ratio=self.aspect_ratio,
                     candidates_save_dir=os.path.join(self.working_dir, "shots", str(first_shot_idx), "first_frame_candidates"),
                     progress=_scoped_progress(progress, camera_idx=camera.idx, shot_idx=first_shot_idx, frame_type="first_frame"),
                 )
@@ -526,6 +535,7 @@ class Script2VideoPipeline:
             video_output = await self.video_generator.generate_single_video(
                 prompt=shot_description.motion_desc + "\n" + shot_description.audio_desc,
                 reference_image_paths=frame_paths,
+                aspect_ratio=self.aspect_ratio,
                 progress=_scoped_progress(progress, shot_idx=shot_description.idx, artifact="video_clip"),
             )
             video_output.save(video_path)
@@ -538,15 +548,21 @@ class Script2VideoPipeline:
         reference_image_paths: List[str],
         reference_image_path_and_text_pairs: List[Tuple[str, str]],
         target_description: str,
-        size: str = "1600x900",
+        size: str | None = None,
+        aspect_ratio: str | None = None,
         num_candidates: int | None = None,
         candidates_save_dir: str | None = None,
         progress: Callable[[str, str, Dict[str, Any] | None], None] | None = None,
     ) -> ImageOutput:
+        actual_size = size or self.frame_size
+        actual_aspect_ratio = aspect_ratio or self.aspect_ratio
         count = validate_image_candidate_count(self.num_image_candidates if num_candidates is None else num_candidates)
         if count == 1:
             return await self.image_generator.generate_single_image(
-                prompt=prompt, reference_image_paths=reference_image_paths, size=size,
+                prompt=prompt,
+                reference_image_paths=reference_image_paths,
+                size=actual_size,
+                aspect_ratio=actual_aspect_ratio,
             )
 
         save_dir = Path(candidates_save_dir) if candidates_save_dir else Path(self.working_dir) / "image_candidates" / uuid4().hex
@@ -557,7 +573,7 @@ class Script2VideoPipeline:
             stat = os.stat(path)
             references.append((path, description, stat.st_size, stat.st_mtime_ns))
         fingerprint = hashlib.sha256(json.dumps({
-            "prompt": prompt, "size": size, "references": references,
+            "prompt": prompt, "size": actual_size, "aspect_ratio": actual_aspect_ratio, "references": references,
             "reference_image_paths": reference_image_paths, "target_description": target_description,
             "generator": type(self.image_generator).__name__,
             "model": str(getattr(self.image_generator, "model", "")),
@@ -592,7 +608,10 @@ class Script2VideoPipeline:
                     record["reused"] = True
                 else:
                     output = await self.image_generator.generate_single_image(
-                        prompt=prompt, reference_image_paths=reference_image_paths, size=size,
+                        prompt=prompt,
+                        reference_image_paths=reference_image_paths,
+                        size=actual_size,
+                        aspect_ratio=actual_aspect_ratio,
                     )
                     if output is None:
                         raise RuntimeError("Image provider returned no image")
@@ -601,8 +620,12 @@ class Script2VideoPipeline:
                     width, height = image.size
                     output = ImageOutput(fmt="pil", ext="png", data=image.copy())
                 record.update(width=width, height=height)
-                if width <= height:
-                    raise ValueError("Candidate is not landscape")
+                if actual_aspect_ratio == "9:16" or (isinstance(actual_size, str) and actual_size.startswith("900x1600")):
+                    if width > height:
+                        raise ValueError("Candidate is not portrait")
+                elif actual_aspect_ratio == "16:9" or (isinstance(actual_size, str) and actual_size.startswith("1600x900")):
+                    if width <= height:
+                        raise ValueError("Candidate is not landscape")
                 record["status"] = "ready"
                 save_selection()
                 _emit_render_progress(progress, "image_candidate_done", f"Image candidate {index + 1}/{count} ready", {"index": index, "count": count})
@@ -718,7 +741,8 @@ class Script2VideoPipeline:
                 reference_image_paths=reference_image_paths,
                 reference_image_path_and_text_pairs=reference_image_path_and_text_pairs,
                 target_description=frame_desc,
-                size="1600x900",
+                size=self.frame_size,
+                aspect_ratio=self.aspect_ratio,
                 candidates_save_dir=os.path.join(self.working_dir, "shots", str(shot_idx), f"{frame_type}_candidates"),
                 progress=_scoped_progress(progress, shot_idx=shot_idx, frame_type=frame_type),
             )

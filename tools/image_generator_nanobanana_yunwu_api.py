@@ -7,7 +7,7 @@ from google import genai
 from google.genai import types
 from tenacity import retry, stop_after_attempt, wait_exponential
 from interfaces.image_output import ImageOutput
-from tools.image_orientation import ensure_not_portrait, landscape_guard_requested
+from tools.image_orientation import ensure_not_landscape, ensure_not_portrait, landscape_guard_requested, portrait_guard_requested
 from tools.image_response import image_from_response_part
 from utils.retry import after_func
 
@@ -75,5 +75,10 @@ class ImageGeneratorNanobananaYunwuAPI:
             allow_portrait=kwargs.get("allow_portrait", False),
         ):
             ensure_not_portrait(image)
+        elif portrait_guard_requested(
+            size=kwargs.get("size"),
+            aspect_ratio=aspect_ratio,
+        ):
+            ensure_not_landscape(image)
 
         return ImageOutput(fmt="pil", ext="png", data=image)

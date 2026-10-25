@@ -9,13 +9,36 @@ from PIL import Image
 def landscape_guard_requested(*, size: Any = None, aspect_ratio: Any = None, enforce_landscape: Any = True, allow_portrait: Any = False) -> bool:
     if bool(allow_portrait):
         return False
+    parsed_ratio = _parse_size(aspect_ratio)
+    if parsed_ratio and parsed_ratio[0] < parsed_ratio[1]:
+        return False
+    parsed_size = _parse_size(size)
+    if parsed_size and parsed_size[0] < parsed_size[1]:
+        return False
     if bool(enforce_landscape):
         return True
-    parsed = _parse_size(size)
-    if parsed and parsed[0] > parsed[1]:
+    if parsed_size and parsed_size[0] > parsed_size[1]:
         return True
-    parsed_ratio = _parse_size(aspect_ratio)
     return bool(parsed_ratio and parsed_ratio[0] > parsed_ratio[1])
+
+
+def portrait_guard_requested(*, size: Any = None, aspect_ratio: Any = None) -> bool:
+    parsed_ratio = _parse_size(aspect_ratio)
+    if parsed_ratio and parsed_ratio[0] < parsed_ratio[1]:
+        return True
+    parsed_size = _parse_size(size)
+    if parsed_size and parsed_size[0] < parsed_size[1]:
+        return True
+    return False
+
+
+def ensure_not_landscape(image: Image.Image, *, tolerance: float | None = None) -> None:
+    width, height = image.size
+    if width <= 0 or height <= 0:
+        return
+    threshold = tolerance if tolerance is not None else _portrait_tolerance()
+    if width > height * threshold:
+        raise ValueError(f"Generated image is landscape-oriented ({width}x{height}); retrying for a portrait frame")
 
 
 def ensure_not_portrait(image: Image.Image, *, tolerance: float | None = None) -> None:

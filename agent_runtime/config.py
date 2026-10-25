@@ -193,3 +193,33 @@ def video_provider(workspace_root: str | Path = ".") -> str:
             return provider.strip().lower()
     base = video_base_url(workspace_root)
     return api_provider_from_base_url(base)
+
+
+def aspect_ratio(workspace_root: str | Path = ".") -> str:
+    env_ratio = os.environ.get("VIMAX_ASPECT_RATIO") or os.environ.get("VIMAX_VIDEO_ASPECT_RATIO")
+    if env_ratio:
+        return env_ratio.strip()
+    cfg = load_agent_config(workspace_root)
+    video_ratio = cfg.get("video", {}).get("aspect_ratio") if isinstance(cfg.get("video"), dict) else None
+    if video_ratio:
+        return str(video_ratio).strip()
+    render_ratio = cfg.get("render", {}).get("aspect_ratio") if isinstance(cfg.get("render"), dict) else None
+    if render_ratio:
+        return str(render_ratio).strip()
+    top_ratio = cfg.get("aspect_ratio")
+    if top_ratio:
+        return str(top_ratio).strip()
+    return "16:9"
+
+
+def image_dimensions_for_aspect_ratio(ratio: str) -> str:
+    ratio_clean = ratio.strip().lower()
+    if ratio_clean in ("9:16", "9/16", "portrait"):
+        return "900x1600"
+    if ratio_clean in ("1:1", "1/1", "square"):
+        return "1024x1024"
+    if ratio_clean in ("4:3", "4/3"):
+        return "1200x900"
+    if ratio_clean in ("3:4", "3/4"):
+        return "900x1200"
+    return "1600x900"

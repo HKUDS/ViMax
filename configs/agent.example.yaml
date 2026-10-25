@@ -29,10 +29,12 @@ image_selection:
 # For native Google:
 #   provider: google
 #   model: gemini-omni-1.1-flash
+# Optional: aspect_ratio: "16:9" (default) or "9:16" (vertical/reels/shorts)
 video:
   model: <YOUR_VIDEO_MODEL>
   base_url: <YOUR_VIDEO_BASE_URL>
   api_key: ''
+  # aspect_ratio: '16:9'
 
 # Optional. Fill these only when using novel2video planning.
 embedding:

@@ -8,12 +8,14 @@ import yaml
 
 from agent_runtime.config import (
     api_provider_from_base_url,
+    aspect_ratio,
     embedding_api_key,
     embedding_base_url,
     embedding_model,
     embedding_model_provider,
     image_api_key,
     image_base_url,
+    image_dimensions_for_aspect_ratio,
     image_model,
     image_num_candidates,
     llm_api_key,
@@ -122,6 +124,21 @@ class AgentConfigTests(unittest.TestCase):
                 with self.subTest(value=value), patch.dict(os.environ, {"VIMAX_IMAGE_NUM_CANDIDATES": value}, clear=True):
                     with self.assertRaisesRegex(ValueError, "positive integer"):
                         image_num_candidates(tmp)
+
+    def test_aspect_ratio_defaults_and_overrides(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(aspect_ratio(tmp), "16:9")
+            self.assertEqual(image_dimensions_for_aspect_ratio("16:9"), "1600x900")
+            self.assertEqual(image_dimensions_for_aspect_ratio("9:16"), "900x1600")
+
+            with patch.dict(os.environ, {"VIMAX_ASPECT_RATIO": "9:16"}):
+                self.assertEqual(aspect_ratio(tmp), "9:16")
+
+            config_dir = Path(tmp) / "configs"
+            config_dir.mkdir()
+            (config_dir / "agent.local.yaml").write_text("video:\n  aspect_ratio: '9:16'\n", encoding="utf-8")
+            load_agent_config.cache_clear()
+            self.assertEqual(aspect_ratio(tmp), "9:16")
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 from datetime import datetime
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
+import inspect
 import json
 import logging
 import os
@@ -29,7 +30,30 @@ from tools.video_generator_openrouter_api import VideoGeneratorOpenRouterAPI
 from tools.video_generator_veo_google_api import VideoGeneratorVeoGoogleAPI
 from tools.video_generator_veo_yunwu_api import VideoGeneratorVeoYunwuAPI
 
-from .config import api_provider_from_base_url, embedding_api_key, embedding_base_url, embedding_model, embedding_model_provider, image_api_key, image_base_url, image_model, image_provider, llm_api_key, llm_base_url, llm_model, llm_model_provider, llm_provider, reranker_api_key, reranker_base_url, reranker_model, video_api_key, video_base_url, video_model, video_provider
+from .config import (
+    api_provider_from_base_url,
+    aspect_ratio,
+    embedding_api_key,
+    embedding_base_url,
+    embedding_model,
+    embedding_model_provider,
+    image_api_key,
+    image_base_url,
+    image_model,
+    image_provider,
+    llm_api_key,
+    llm_base_url,
+    llm_model,
+    llm_model_provider,
+    llm_provider,
+    reranker_api_key,
+    reranker_base_url,
+    reranker_model,
+    video_api_key,
+    video_base_url,
+    video_model,
+    video_provider,
+)
 from .models import ToolResult
 from .config import image_num_candidates
 from utils.image_selection import DEFAULT_IMAGE_CANDIDATES
@@ -360,10 +384,19 @@ class ViMaxAdapters:
             image_generator = _build_image_generator()
             video_generator = _build_video_generator()
             num_image_candidates = image_num_candidates(self.workspace_root)
+            render_ratio = aspect_ratio(self.workspace_root)
             if runtime:
-                runtime.emit_progress("Starting video render", stage="rendering", metadata={"session_id": session_id})
+                runtime.emit_progress("Starting video render", stage="rendering", metadata={"session_id": session_id, "aspect_ratio": render_ratio})
             if _idea_mode_ready(checklist):
-                idea_pipeline = Idea2VideoPipeline(chat_model=chat_model, image_generator=image_generator, video_generator=video_generator, working_dir=str(working_dir / "idea2video"), num_image_candidates=num_image_candidates)
+                idea_pipeline = _instantiate_pipeline(
+                    Idea2VideoPipeline,
+                    chat_model=chat_model,
+                    image_generator=image_generator,
+                    video_generator=video_generator,
+                    working_dir=str(working_dir / "idea2video"),
+                    num_image_candidates=num_image_candidates,
+                    aspect_ratio=render_ratio,
+                )
                 with _suppress_pipeline_output():
                     final_video = await idea_pipeline(idea=str(session.get("idea", "")), user_requirement=str(session.get("user_requirement", "")), style=str(session.get("style", "")), quiet=True, progress=_pipeline_progress(runtime, session_id))
                 self.session_index.update_stage(session_id, "rendered", "Final video rendered")
@@ -374,7 +407,15 @@ class ViMaxAdapters:
                 script_dir = working_dir / "script2video"
                 script_text = _load_script_text(working_dir)
                 characters = _load_characters(script_dir / "characters.json")
-                pipeline = Script2VideoPipeline(chat_model=chat_model, image_generator=image_generator, video_generator=video_generator, working_dir=str(script_dir), num_image_candidates=num_image_candidates)
+                pipeline = _instantiate_pipeline(
+                    Script2VideoPipeline,
+                    chat_model=chat_model,
+                    image_generator=image_generator,
+                    video_generator=video_generator,
+                    working_dir=str(script_dir),
+                    num_image_candidates=num_image_candidates,
+                    aspect_ratio=render_ratio,
+                )
                 with _suppress_pipeline_output():
                     final_video = await pipeline(script=script_text, user_requirement=str(session.get("user_requirement", "")), style=str(session.get("style", "")), characters=characters, quiet=True, progress=_pipeline_progress(runtime, session_id))
                 self.session_index.update_stage(session_id, "rendered", "Final video rendered")
@@ -745,6 +786,15 @@ def _write_characters_if_missing(path: Path, characters: list[CharacterInScene])
 
 def _load_characters(path: Path) -> list[CharacterInScene]:
     return [CharacterInScene.model_validate(item) for item in json.loads(path.read_text(encoding="utf-8"))]
+
+
+def _instantiate_pipeline(pipeline_cls: Any, **kwargs: Any) -> Any:
+    sig = inspect.signature(pipeline_cls.__init__)
+    valid_args = {
+        k: v for k, v in kwargs.items()
+        if k in sig.parameters or any(p.kind == inspect.Parameter.VAR_KEYWORD for p in sig.parameters.values())
+    }
+    return pipeline_cls(**valid_args)
 
 
 def _load_script_text(working_dir: Path) -> str:

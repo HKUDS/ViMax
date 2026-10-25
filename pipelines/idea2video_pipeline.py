@@ -29,11 +29,13 @@ class Idea2VideoPipeline:
         video_generator: str,
         working_dir: str,
         num_image_candidates: int = DEFAULT_IMAGE_CANDIDATES,
+        aspect_ratio: str = "16:9",
     ):
         self.chat_model = chat_model
         self.image_generator = image_generator
         self.video_generator = video_generator
         self.num_image_candidates = validate_image_candidate_count(num_image_candidates)
+        self.aspect_ratio = aspect_ratio
         self.working_dir = working_dir
         os.makedirs(self.working_dir, exist_ok=True)
 
@@ -256,6 +258,7 @@ class Idea2VideoPipeline:
                 video_generator=self.video_generator,
                 working_dir=scene_working_dir,
                 num_image_candidates=self.num_image_candidates,
+                aspect_ratio=self.aspect_ratio,
             )
             final_video_path = await script2video_pipeline(
                 script=scene_script,

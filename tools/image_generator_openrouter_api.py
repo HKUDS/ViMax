@@ -12,7 +12,7 @@ from PIL import Image
 from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
 
 from interfaces.image_output import ImageOutput
-from tools.image_orientation import ensure_not_portrait, landscape_guard_requested
+from tools.image_orientation import ensure_not_landscape, ensure_not_portrait, landscape_guard_requested, portrait_guard_requested
 from utils.image import image_path_to_b64
 from utils.rate_limiter import RateLimiter
 from utils.retry import after_func
@@ -91,7 +91,16 @@ class ImageGeneratorOpenRouterAPI:
             enforce_landscape=kwargs.get("enforce_landscape", True),
             allow_portrait=kwargs.get("allow_portrait", False),
         )
-        request_prompt = _prompt_with_landscape_requirement(prompt, aspect_ratio) if enforce_landscape else prompt
+        enforce_portrait = portrait_guard_requested(
+            size=kwargs.get("size"),
+            aspect_ratio=aspect_ratio,
+        )
+        if enforce_landscape:
+            request_prompt = _prompt_with_landscape_requirement(prompt, aspect_ratio)
+        elif enforce_portrait:
+            request_prompt = _prompt_with_portrait_requirement(prompt, aspect_ratio)
+        else:
+            request_prompt = prompt
         payload: dict[str, Any] = {
             "model": self.model,
             "prompt": request_prompt,
@@ -128,6 +137,8 @@ class ImageGeneratorOpenRouterAPI:
         image, extension = _decode_image_response(response)
         if enforce_landscape:
             ensure_not_portrait(image)
+        elif enforce_portrait:
+            ensure_not_landscape(image)
         _emit_progress(
             progress,
             "image_completed",
@@ -151,6 +162,11 @@ class ImageGeneratorOpenRouterAPI:
 def _prompt_with_landscape_requirement(prompt: str, aspect_ratio: str | None) -> str:
     ratio = aspect_ratio or "16:9"
     return f"{prompt}\n\nComposition requirement: create a landscape image with an approximate {ratio} aspect ratio; the width must be greater than the height."
+
+
+def _prompt_with_portrait_requirement(prompt: str, aspect_ratio: str | None) -> str:
+    ratio = aspect_ratio or "9:16"
+    return f"{prompt}\n\nComposition requirement: create a vertical portrait image with an approximate {ratio} aspect ratio; the height must be greater than the width."
 
 
 def _decode_image_response(payload: Any) -> tuple[Image.Image, str]:

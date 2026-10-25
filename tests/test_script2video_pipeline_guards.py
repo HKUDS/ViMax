@@ -57,6 +57,46 @@ class Script2VideoPipelineGuardTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(result["camera_tree"][0].idx, 3)
             self.assertTrue((Path(tmp) / "camera_tree.json").exists())
 
+    async def test_aspect_ratio_nine_sixteen_configuration(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            captured_image_calls = []
+            captured_video_calls = []
+
+            class FakeImageGenerator:
+                async def generate_single_image(self, **kwargs):
+                    from interfaces.image_output import ImageOutput
+                    from PIL import Image
+                    captured_image_calls.append(kwargs)
+                    return ImageOutput(fmt="pil", ext="png", data=Image.new("RGB", (900, 1600), "blue"))
+
+            class FakeVideoGenerator:
+                async def generate_single_video(self, **kwargs):
+                    from interfaces.video_output import VideoOutput
+                    captured_video_calls.append(kwargs)
+                    return VideoOutput(fmt="bytes", ext="mp4", data=b"fake-video")
+
+            pipeline = Script2VideoPipeline(
+                chat_model=object(),
+                image_generator=FakeImageGenerator(),
+                video_generator=FakeVideoGenerator(),
+                working_dir=tmp,
+                aspect_ratio="9:16",
+            )
+            self.assertEqual(pipeline.aspect_ratio, "9:16")
+            self.assertEqual(pipeline.frame_size, "900x1600")
+
+            # Test generate_and_select_best_image with candidate validation
+            img = await pipeline.generate_and_select_best_image(
+                prompt="vertical shot",
+                reference_image_paths=[],
+                reference_image_path_and_text_pairs=[],
+                target_description="vertical shot",
+                num_candidates=1,
+            )
+            self.assertEqual(captured_image_calls[0]["aspect_ratio"], "9:16")
+            self.assertEqual(captured_image_calls[0]["size"], "900x1600")
+            self.assertEqual(img.data.size, (900, 1600))
+
 
 if __name__ == "__main__":
     unittest.main()
