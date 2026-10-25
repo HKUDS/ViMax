@@ -196,13 +196,16 @@ def video_provider(workspace_root: str | Path = ".") -> str:
 
 
 def aspect_ratio(workspace_root: str | Path = ".") -> str:
-    env_ratio = os.environ.get("VIMAX_ASPECT_RATIO") or os.environ.get("VIMAX_VIDEO_ASPECT_RATIO")
+    env_ratio = os.environ.get("VIMAX_ASPECT_RATIO") or os.environ.get("VIMAX_VIDEO_ASPECT_RATIO") or os.environ.get("VIMAX_IMAGE_ASPECT_RATIO")
     if env_ratio:
         return env_ratio.strip()
     cfg = load_agent_config(workspace_root)
     video_ratio = cfg.get("video", {}).get("aspect_ratio") if isinstance(cfg.get("video"), dict) else None
     if video_ratio:
         return str(video_ratio).strip()
+    image_ratio = cfg.get("image", {}).get("aspect_ratio") if isinstance(cfg.get("image"), dict) else None
+    if image_ratio:
+        return str(image_ratio).strip()
     render_ratio = cfg.get("render", {}).get("aspect_ratio") if isinstance(cfg.get("render"), dict) else None
     if render_ratio:
         return str(render_ratio).strip()
