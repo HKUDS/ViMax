@@ -367,3 +367,22 @@ style = "Animate Style"
 ```
 
 </details>
+
+## 🤝 Contributing
+
+We welcome contributions! ViMax is designed to be extensible:
+
+- 🎬 **New video generators** — Add support for more video generation providers
+- 🖼 **New image generators** — Add support for more image generation providers
+- 🤖 **New agent workflows** — Extend the director/screenwriter/producer loop
+- 📖 **Documentation** — Tutorials, integration guides, best practices
+
+### How to contribute
+
+1. Fork the repository and clone your fork.
+2. Create a topic branch from `main`: `git switch -c your-topic-branch`.
+3. Make your change and commit it with a clear message.
+4. Push the branch to your fork: `git push origin your-topic-branch`.
+5. Open a pull request against `HKUDS/ViMax:main` and describe what changed and why.
+
+Please keep changes small and focused so they are easy to review. Documentation improvements, typo fixes, and new provider integrations are great first contributions.
