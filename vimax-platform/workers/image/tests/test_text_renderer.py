@@ -22,7 +22,9 @@ def _layer(**overrides) -> dict:
 class ResolveFontTest(unittest.TestCase):
     def test_env_var_takes_priority(self):
         env = {"SUBTITLE_FONT": "C:/fonts/custom.ttf"}
-        with mock.patch.dict(os.environ, env, clear=True):
+        with mock.patch.dict(os.environ, env, clear=True), mock.patch(
+            "os.path.exists", return_value=True
+        ):
             self.assertEqual(resolve_font(None), "C:/fonts/custom.ttf")
             self.assertEqual(resolve_font("other.ttf"), "C:/fonts/custom.ttf")
 
