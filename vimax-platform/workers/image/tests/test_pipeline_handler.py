@@ -13,6 +13,7 @@ class _FakeReporter:
 
     def __init__(self):
         self.events = []
+        self.requeued = []
 
     async def started(self):
         self.events.append(("started", None))
@@ -26,8 +27,33 @@ class _FakeReporter:
     async def failed(self, *, error_code, error_message, retryable):
         self.events.append(("failed", error_code))
 
+    def requeue(self, queue_key, payload):
+        self.requeued.append((queue_key, payload))
+
 
 class PipelineDispatchTest(unittest.TestCase):
+    def test_transient_agent_error_is_requeued_with_bounded_attempt(self):
+        import asyncio
+
+        payload = {
+            "job_type": "pipeline.script2storyboard",
+            "job_id": "00000000-0000-0000-0000-000000000001",
+            "attempt": 0,
+        }
+        reporter = _FakeReporter()
+        with (
+            mock.patch.dict(
+                PIPELINE_JOB_HANDLERS,
+                {"pipeline.script2storyboard": mock.AsyncMock(side_effect=TimeoutError("provider timeout"))},
+            ),
+            mock.patch("vimax_image_worker.pipeline_handler.asyncio.sleep", new=mock.AsyncMock()),
+        ):
+            asyncio.run(handle_pipeline_job(payload, reporter))
+
+        self.assertEqual(reporter.requeued[0][0], "vimax:queue:q.pipeline.full")
+        self.assertEqual(reporter.requeued[0][1]["attempt"], 1)
+        self.assertEqual([event[0] for event in reporter.events], ["started"])
+
     def test_all_vimax_agents_have_job_types(self):
         expected = {
             "pipeline.script2storyboard",   # StoryboardArtist

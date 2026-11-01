@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 from vimax_image_worker.asset_downloader import download_objects
 from vimax_image_worker.asset_uploader import upload_file
 from vimax_image_worker.reporter import JobReporter
+from vimax_image_worker.worker_retry import retry_backoff_seconds, should_retry
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +41,7 @@ class ConcatJobPayload(BaseModel):
     callback: ConcatJobCallback
     cache_key: str
     timeout_ms: int = Field(default=120_000)
+    attempt: int = 0
 
 
 def _check_ffmpeg() -> bool:
@@ -192,10 +194,20 @@ async def _run_concat(payload: ConcatJobPayload, redis_client) -> None:
         )
     except Exception as exc:
         logger.exception("Concat job %s failed", payload.job_id)
+        message = str(exc).lower()
+        retryable = isinstance(exc, (TimeoutError, ConnectionError)) or any(
+            token in message for token in ("timeout", "temporarily", "connection reset", "503", "502", "504")
+        )
+        if should_retry(payload.attempt, retryable):
+            delay = retry_backoff_seconds(payload.attempt)
+            await asyncio.sleep(delay)
+            retry_payload = payload.model_copy(update={"attempt": payload.attempt + 1})
+            reporter.requeue("vimax:queue:q.concat.std", retry_payload.model_dump(mode="json"))
+            return
         await reporter.failed(
             error_code="concat.failed",
             error_message=str(exc),
-            retryable=False,
+            retryable=retryable,
         )
     finally:
         shutil.rmtree(workdir, ignore_errors=True)

@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 from vimax_image_worker.asset_downloader import download_objects
 from vimax_image_worker.asset_uploader import upload_file
 from vimax_image_worker.reporter import JobReporter
+from vimax_image_worker.worker_retry import retry_backoff_seconds, should_retry
 
 logger = logging.getLogger(__name__)
 
@@ -54,6 +55,7 @@ class VideoJobPayload(BaseModel):
     callback: VideoJobCallback
     cache_key: str
     timeout_ms: int = Field(default=300_000)
+    attempt: int = 0
 
 
 def _build_video_generator(credential: VideoJobCredential):
@@ -183,6 +185,13 @@ async def _run_video(payload: VideoJobPayload, redis_client) -> None:
     except Exception as exc:
         logger.exception("Video job %s failed", payload.job_id)
         code, message, retryable = _map_error(exc)
+        if should_retry(payload.attempt, retryable):
+            delay = retry_backoff_seconds(payload.attempt)
+            logger.warning("Video job %s failed (%s), retry %d in %.1fs", payload.job_id, code, payload.attempt + 1, delay)
+            await asyncio.sleep(delay)
+            retry_payload = payload.model_copy(update={"attempt": payload.attempt + 1})
+            reporter.requeue("vimax:queue:q.video.std", retry_payload.model_dump(mode="json"))
+            return
         await reporter.failed(
             error_code=code,
             error_message=message,

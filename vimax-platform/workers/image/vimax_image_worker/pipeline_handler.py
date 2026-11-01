@@ -8,6 +8,8 @@ from vimax_image_worker.asset_downloader import download_objects
 from vimax_image_worker.asset_uploader import upload_file
 from vimax_image_worker.reporter import JobReporter
 from vimax_image_worker import vimax_bridge
+from vimax_image_worker.worker_retry import retry_backoff_seconds, should_retry
+import asyncio
 
 
 async def handle_pipeline_job(payload: dict, reporter: JobReporter):
@@ -29,7 +31,13 @@ async def handle_pipeline_job(payload: dict, reporter: JobReporter):
         result = await handler(payload, reporter)
         await reporter.completed(_json_output(result))
     except Exception as e:
-        await reporter.failed(error_code="worker.internal", error_message=str(e), retryable=False)
+        attempt = int(payload.get("attempt", 0))
+        if should_retry(attempt, retryable=True):
+            await asyncio.sleep(retry_backoff_seconds(attempt))
+            retry_payload = {**payload, "attempt": attempt + 1}
+            reporter.requeue("vimax:queue:q.pipeline.full", retry_payload)
+            return
+        await reporter.failed(error_code="worker.internal", error_message=str(e), retryable=True)
 
 
 def _json_output(result: dict) -> dict:

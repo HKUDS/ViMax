@@ -53,22 +53,16 @@ def main():
         # Idle tick — brpop returned no job within the timeout.
         if item is None:
             continue
-        _, raw = item
-        payload = json.loads(raw)
-        job_id = payload["job_id"]
-        job_type = payload.get("job_type", "unknown")
-        log.info("Received %s job: %s", job_type, job_id)
-
-        reporter = JobReporter(
-            r,
-            payload["callback"]["event_channel"],
-            job_id,
-        )
-
         try:
+            _, raw = item
+            payload = json.loads(raw)
+            job_id = payload["job_id"]
+            job_type = payload.get("job_type", "unknown")
+            log.info("Received %s job: %s", job_type, job_id)
+            reporter = JobReporter(r, payload["callback"]["event_channel"], job_id)
             asyncio.run(handle_pipeline_job(payload, reporter))
         except Exception:
-            log.exception("Pipeline job %s failed", job_id)
+            log.exception("Failed to process pipeline queue item")
 
 
 if __name__ == "__main__":
