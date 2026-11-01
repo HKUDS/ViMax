@@ -1902,6 +1902,8 @@ export async function runCharacterView(
 export async function runScript2Storyboard(
   canvasId: string,
   nodeId: string,
+  targetDurationSec?: number,
+  userRequirement?: string,
 ): Promise<NodeRunOutput> {
   const db = getDb();
   const [node] = await db
@@ -1961,7 +1963,13 @@ export async function runScript2Storyboard(
     input: {
       content: data.content,
       characters,
-      user_requirement: buildStoryboardUserRequirement("script"),
+      user_requirement: [
+        buildStoryboardUserRequirement("script"),
+        userRequirement?.trim(),
+        targetDurationSec
+          ? `The finished video must be exactly ${targetDurationSec} seconds. Plan enough shots for the full duration; assign a sensible duration to each shot, with no individual generated clip longer than 10 seconds.`
+          : "",
+      ].filter(Boolean).join(" "),
     },
     callback: {
       event_channel: jobEventChannel(jobId),

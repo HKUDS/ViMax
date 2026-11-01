@@ -6,6 +6,8 @@ import { getDb } from "../../infrastructure/db/client.js";
 import { config } from "../../config/env.js";
 import { canvasEdges, canvasNodes, jobs } from "../../infrastructure/db/schema.js";
 import { broadcastToRoom } from "../../realtime/connection-manager.js";
+import { broadcastNodeStatus } from "./node-status.js";
+import { setNodeStatus } from "./canvas.service.js";
 import { inferAutoEdges, subtractEdges } from "./canvas-graph.js";
 import {
   runNode,
@@ -22,6 +24,36 @@ export interface AutoPipelineInput {
   concurrency?: number;
   /** Rebuild from scratch: delete every non-script node before running. */
   regenerate?: boolean;
+}
+
+function requestedDurationSec(scriptData: Record<string, unknown>): number | undefined {
+  const adBrief = scriptData.adBrief as { durationSec?: unknown } | undefined;
+  if (typeof adBrief?.durationSec === "number" && adBrief.durationSec > 0) {
+    return Math.round(adBrief.durationSec);
+  }
+  if (typeof scriptData.durationSec === "number" && scriptData.durationSec > 0) {
+    return Math.round(scriptData.durationSec);
+  }
+  const prompt = typeof scriptData.prompt === "string" ? scriptData.prompt : "";
+  const explicit = prompt.match(/(?:时长|duration)[^\d]{0,12}(\d{1,3})\s*(?:秒|s\b|seconds?\b)/i);
+  const requested = prompt.match(/(\d{1,3})\s*(?:秒|s\b|seconds?\b)/i);
+  const scriptDuration = typeof scriptData.content === "string"
+    ? scriptData.content.match(/(?:时长|duration)[^\d]{0,12}(\d{1,3})\s*(?:秒|s\b|seconds?\b)/i)
+    : null;
+  const match = explicit ?? requested ?? scriptDuration;
+  return match ? Number(match[1]) : undefined;
+}
+
+function allocateClipDurations(totalSec: number, count: number): number[] {
+  if (count === 0 || count * 10 < totalSec) {
+    throw new Error(`pipeline.duration_exceeds_clip_capacity:${totalSec}:${count}`);
+  }
+  const durations = Array.from({ length: count }, () => Math.floor(totalSec / count));
+  for (let i = 0; i < totalSec % count; i++) durations[i]!++;
+  if (durations.some((duration) => duration < 1 || duration > 10)) {
+    throw new Error(`pipeline.invalid_clip_duration:${totalSec}:${count}`);
+  }
+  return durations;
 }
 
 export interface AutoPipelineResult {
@@ -53,16 +85,37 @@ function sleep(ms: number, signal?: AbortSignal): Promise<void> {
       reject(new Error("pipeline.cancelled"));
       return;
     }
-    const timer = setTimeout(resolve, ms);
-    signal?.addEventListener(
-      "abort",
-      () => {
-        clearTimeout(timer);
-        reject(new Error("pipeline.cancelled"));
-      },
-      { once: true },
-    );
+    const onAbort = () => {
+      clearTimeout(timer);
+      reject(new Error("pipeline.cancelled"));
+    };
+    const timer = setTimeout(() => {
+      signal?.removeEventListener("abort", onAbort);
+      resolve();
+    }, ms);
+    signal?.addEventListener("abort", onAbort, { once: true });
   });
+}
+
+async function failTimedOutJob(jobId: string): Promise<"succeeded" | "failed" | undefined> {
+  const db = getDb();
+  const [job] = await db.select({ snapshot: jobs.inputSnapshot })
+    .from(jobs).where(eq(jobs.id, jobId)).limit(1);
+  if (!job) return undefined;
+  const [updated] = await db.update(jobs)
+    .set({ status: "failed", errorCode: "job.timeout", errorMessage: "任务等待超时，请重试", finishedAt: new Date() })
+    .where(and(eq(jobs.id, jobId), inArray(jobs.status, ["queued", "running"])))
+    .returning({ id: jobs.id });
+  if (!updated) {
+    const [latest] = await db.select({ status: jobs.status }).from(jobs).where(eq(jobs.id, jobId)).limit(1);
+    return latest?.status === "succeeded" ? "succeeded" : latest?.status === "failed" ? "failed" : undefined;
+  }
+  const meta = (job.snapshot as { _canvas?: { canvas_id?: string; node_id?: string } } | null)?._canvas;
+  if (meta?.canvas_id && meta.node_id) {
+    await setNodeStatus(meta.canvas_id, meta.node_id, "failed");
+    broadcastNodeStatus(meta.canvas_id, meta.node_id, "failed", null, jobId);
+  }
+  return "failed";
 }
 
 async function waitForJob(
@@ -79,10 +132,12 @@ async function waitForJob(
       .from(jobs)
       .where(eq(jobs.id, jobId))
       .limit(1);
+    if (!job) throw new Error(`pipeline.job_not_found:${jobId}`);
     if (job?.status === "succeeded") return "succeeded";
     if (job?.status === "failed") return "failed";
     await sleep(2000, signal);
   }
+  if (await failTimedOutJob(jobId) === "succeeded") return "succeeded";
   throw new Error("pipeline.timeout");
 }
 
@@ -110,7 +165,7 @@ async function loadEdges(canvasId: string) {
     .where(eq(canvasEdges.canvasId, canvasId));
 }
 
-async function ensureProductionChain(canvasId: string): Promise<void> {
+async function ensureProductionChain(canvasId: string, targetDurationSec?: number): Promise<void> {
   const db = getDb();
   const nodes = await loadNodes(canvasId);
   const edges = await loadEdges(canvasId);
@@ -292,6 +347,15 @@ async function ensureProductionChain(canvasId: string): Promise<void> {
   }
 
   const videos = allNodes.filter((n) => n.type === "video");
+  if (targetDurationSec !== undefined) {
+    const durations = allocateClipDurations(targetDurationSec, videos.length);
+    for (const [index, video] of videos.entries()) {
+      const data = video.data as Record<string, unknown>;
+      await db.update(canvasNodes)
+        .set({ data: { ...data, durationSec: durations[index] } })
+        .where(and(eq(canvasNodes.canvasId, canvasId), eq(canvasNodes.id, video.id)));
+    }
+  }
   const hasConcat = allNodes.some((n) => n.type === "concat");
   if (videos.length > 1 && !hasConcat) {
     const concatId = randomUUID();
@@ -427,6 +491,7 @@ async function runNodesInOrder(
       // 上游无产物（首帧图失败后的 video、片段缺失后的 concat）在入队前
       // 就同步抛 needs_upstream —— 归类为跳过，不当失败噪音。
       const msg = err instanceof Error ? err.message : "unknown";
+      if (msg === "pipeline.cancelled" || signal?.aborted) throw new Error("pipeline.cancelled");
       if (msg.includes("needs_upstream")) {
         skipped++;
         emit(canvasId, runId, {
@@ -544,7 +609,18 @@ export async function runAutoPipelineAsync(
       nodeIds: [scriptNodeId],
     });
 
-    const s2s = await runScript2Storyboard(canvasId, scriptNodeId);
+    const script = (await loadNodes(canvasId)).find((node) => node.id === scriptNodeId);
+    const targetDurationSec = script
+      ? requestedDurationSec(script.data as Record<string, unknown>)
+      : undefined;
+    const scriptData = (script?.data ?? {}) as Record<string, unknown>;
+    const adBrief = scriptData.adBrief as Record<string, unknown> | undefined;
+    const userRequirement = [
+      typeof scriptData.prompt === "string" ? scriptData.prompt : "",
+      typeof adBrief?.audience === "string" ? `Target audience: ${adBrief.audience}` : "",
+      typeof adBrief?.style === "string" ? `Visual style: ${adBrief.style}` : "",
+    ].filter(Boolean).join("\n");
+    const s2s = await runScript2Storyboard(canvasId, scriptNodeId, targetDurationSec, userRequirement);
     const s2sStatus = await waitForJob(s2s.job_id, signal);
     if (s2sStatus === "failed") {
       failed++;
@@ -604,7 +680,7 @@ export async function runAutoPipelineAsync(
     }
     emit(canvasId, runId, { type: "pipeline.stage_done", runId, canvasId, stage: "shot" });
 
-    await ensureProductionChain(canvasId);
+    await ensureProductionChain(canvasId, targetDurationSec);
 
     const allNodes = await loadNodes(canvasId);
     // Copy-driven mode: shots carry only copy (no first-frame jobs) and
@@ -629,7 +705,22 @@ export async function runAutoPipelineAsync(
       stages.push(["concat", concats, 600_000]);
     }
 
+    let videoFailures = false;
     for (const [stage, ids, jobTimeoutMs] of stages) {
+      if (stage === "concat" && videoFailures) {
+        skipped += ids.length;
+        for (const nodeId of ids) {
+          emit(canvasId, runId, {
+            type: "pipeline.node_skipped",
+            runId,
+            canvasId,
+            stage,
+            nodeId,
+            reason: "video_stage_incomplete",
+          });
+        }
+        continue;
+      }
       if (ids.length === 0) continue;
       const result = await runNodesInOrder(
         canvasId,
@@ -644,6 +735,7 @@ export async function runAutoPipelineAsync(
       failed += result.failed;
       skipped += result.skipped;
       errors.push(...result.errors);
+      if (stage === "video" && (result.failed > 0 || result.skipped > 0)) videoFailures = true;
     }
 
     const summary = {
