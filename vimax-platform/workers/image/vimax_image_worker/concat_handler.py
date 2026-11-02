@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -19,6 +20,16 @@ from vimax_image_worker.reporter import JobReporter
 from vimax_image_worker.worker_retry import retry_backoff_seconds, should_retry
 
 logger = logging.getLogger(__name__)
+
+# botocore 的 5xx/容量类错误（如 S3 SlowDown）只以文本出现在 ClientError
+# 消息里，无法按类型识别。
+_TRANSIENT_ERROR = re.compile(r"timeout|temporarily|connection reset|slowdown|50[234]", re.IGNORECASE)
+
+
+def _is_retryable(exc: Exception) -> bool:
+    # boto3 网络类异常（endpoint/read 错误）继承内置 ConnectionError；其余
+    # 失败（ffmpeg、片段不足）是确定性的，重试无意义。
+    return isinstance(exc, (TimeoutError, ConnectionError)) or bool(_TRANSIENT_ERROR.search(str(exc)))
 
 
 class ConcatJobInput(BaseModel):
@@ -194,10 +205,7 @@ async def _run_concat(payload: ConcatJobPayload, redis_client) -> None:
         )
     except Exception as exc:
         logger.exception("Concat job %s failed", payload.job_id)
-        message = str(exc).lower()
-        retryable = isinstance(exc, (TimeoutError, ConnectionError)) or any(
-            token in message for token in ("timeout", "temporarily", "connection reset", "503", "502", "504")
-        )
+        retryable = _is_retryable(exc)
         if should_retry(payload.attempt, retryable):
             delay = retry_backoff_seconds(payload.attempt)
             await asyncio.sleep(delay)

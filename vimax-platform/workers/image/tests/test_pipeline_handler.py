@@ -54,6 +54,26 @@ class PipelineDispatchTest(unittest.TestCase):
         self.assertEqual(reporter.requeued[0][1]["attempt"], 1)
         self.assertEqual([event[0] for event in reporter.events], ["started"])
 
+    def test_validation_error_fails_fast_without_requeue(self):
+        import asyncio
+
+        payload = {
+            "job_type": "pipeline.idea2script",
+            "job_id": "00000000-0000-0000-0000-000000000002",
+            "attempt": 0,
+        }
+        reporter = _FakeReporter()
+        with mock.patch.dict(
+            PIPELINE_JOB_HANDLERS,
+            {"pipeline.idea2script": mock.AsyncMock(side_effect=ValueError("Script content is empty"))},
+        ):
+            asyncio.run(handle_pipeline_job(payload, reporter))
+
+        self.assertEqual(reporter.requeued, [])
+        self.assertEqual(
+            [event[0] for event in reporter.events], ["started", "failed"]
+        )
+
     def test_all_vimax_agents_have_job_types(self):
         expected = {
             "pipeline.script2storyboard",   # StoryboardArtist
