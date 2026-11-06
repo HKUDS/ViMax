@@ -115,6 +115,7 @@ export const CanvasEdgeUpsertSchema = z.object({
 
 export const CanvasSaveInputSchema = z.object({
   canvas_id: z.string().uuid(),
+  snapshot_updated_at: z.string().datetime(),
   nodes: z.array(CanvasNodeUpsertSchema),
   edges: z.array(CanvasEdgeUpsertSchema),
   viewport: ViewportSchema.optional(),
@@ -124,6 +125,7 @@ export type CanvasSaveInput = z.infer<typeof CanvasSaveInputSchema>;
 
 export const CanvasSaveOutputSchema = z.object({
   ok: z.literal(true),
+  updated_at: z.string().datetime(),
 });
 
 // ── Node Run ───────────────────────────────────────────────────────

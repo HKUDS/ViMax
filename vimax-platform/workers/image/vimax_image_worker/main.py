@@ -14,6 +14,7 @@ import redis
 from dotenv import load_dotenv
 
 from vimax_image_worker.handler import IMAGE_QUEUE_NAME, IMAGE_QUEUE_REDIS_KEY, handle_image_job
+from vimax_image_worker.reliable_queue import acknowledge, claim, recover_inflight
 
 logging.basicConfig(
     level=logging.INFO,
@@ -42,6 +43,7 @@ def main() -> None:
     )
 
     logger.info("ViMax image worker started, queue=%s", IMAGE_QUEUE_NAME)
+    recover_inflight(client, IMAGE_QUEUE_REDIS_KEY)
 
     running = True
 
@@ -55,7 +57,7 @@ def main() -> None:
 
     while running:
         try:
-            item = client.brpop(IMAGE_QUEUE_REDIS_KEY, timeout=5)
+            raw = claim(client, IMAGE_QUEUE_REDIS_KEY)
         except redis.RedisError:
             # Idle blocking connections get dropped by the server/NAT —
             # rebuild the client instead of taking the worker down.
@@ -67,15 +69,16 @@ def main() -> None:
                 socket_connect_timeout=5,
             )
             continue
-        if not item:
+        if raw is None:
             continue
 
-        _, raw = item
         try:
             payload = json.loads(raw)
             handle_image_job(payload, client)
         except Exception:
             logger.exception("Failed to process job")
+        finally:
+            acknowledge(client, IMAGE_QUEUE_REDIS_KEY, raw)
 
 
 if __name__ == "__main__":

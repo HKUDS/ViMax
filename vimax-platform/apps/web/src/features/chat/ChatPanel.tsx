@@ -16,6 +16,7 @@ import {
   Square,
 } from "lucide-react";
 import { markPromptSent, wasPromptSent } from "@/lib/prompt-dedup";
+import { changedScriptIds } from "./chat-state";
 import { useSandboxRunner } from "@/features/sandbox/useSandboxRunner";
 import { useChatMessages } from "./hooks/useChatMessages";
 import { Markdown } from "./Markdown";
@@ -77,9 +78,7 @@ export function ChatPanel({
   const [modelId, setModelId] = useState(defaultTextModelId ?? "");
   const [autoMode, setAutoMode] = useState(() => {
     if (typeof window === "undefined") return false;
-    // Auto mode is the product default (灵感模式 = 一句话全自动出片);
-    // an explicit opt-out ("0") is the only way to turn it off.
-    return localStorage.getItem("vimax:auto-mode") !== "0";
+    return localStorage.getItem("vimax:auto-mode") === "1";
   });
 
   const {
@@ -129,11 +128,17 @@ export function ChatPanel({
   }, [canvasId, conversationId, initialPrompt, initialMode, sendMessage]);
 
   const prevStreamingRef = useRef(false);
+  const scriptsBeforeChatRef = useRef<Map<string, string>>(new Map());
   useEffect(() => {
+    if (!prevStreamingRef.current && isStreaming) {
+      scriptsBeforeChatRef.current = new Map(
+        nodes.filter((n) => n.type === "script").map((n) => [n.id, JSON.stringify(n.data)]),
+      );
+    }
     if (prevStreamingRef.current && !isStreaming && autoMode && startAutoPipeline) {
-      const script = nodes.find((n) => n.type === "script");
-      if (script) {
-        startAutoPipeline(script.id).catch((err: unknown) => {
+      const changedScripts = changedScriptIds(nodes, scriptsBeforeChatRef.current);
+      if (changedScripts.length === 1) {
+        startAutoPipeline(changedScripts[0]!).catch((err: unknown) => {
           const msg = (err as Error).message || "启动失败";
           toast.error(
             msg.includes("already_running") ? "该画布已有出片任务在运行，请等待完成" : msg.slice(0, 80),

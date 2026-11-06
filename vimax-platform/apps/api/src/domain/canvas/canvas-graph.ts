@@ -89,6 +89,23 @@ export function collectDownstreamNodeIds(
   return result;
 }
 
+export function collectScriptChainNodeIds(
+  nodes: Array<{ id: string; type: string; data?: unknown }>,
+  edges: EdgeLike[],
+  scriptNodeId: string,
+): Set<string> {
+  const ids = new Set([scriptNodeId, ...collectDownstreamNodeIds(edges, scriptNodeId)]);
+  for (const edge of edges) {
+    const source = nodes.find((node) => node.id === edge.sourceNodeId);
+    const data = source?.data as Record<string, unknown> | undefined;
+    if (ids.has(edge.targetNodeId) && source?.type === "image" &&
+      Array.isArray(data?.referenceAssetIds) && data.referenceAssetIds.length > 0) {
+      ids.add(source.id);
+    }
+  }
+  return ids;
+}
+
 // ── Upstream resolution ────────────────────────────────────────────
 
 /**

@@ -3,8 +3,24 @@ import test from "node:test";
 import type { AgentMessage, ServerWsMessage } from "@vimax/contracts";
 import {
   applyServerChatEvent,
+  changedScriptIds,
   createInitialChatStreamState,
 } from "./chat-state.js";
+
+test("changedScriptIds selects only scripts created or edited during chat", () => {
+  const before = new Map([["old", JSON.stringify({ content: "old" })]]);
+  assert.deepEqual(changedScriptIds([
+    { id: "old", type: "script", data: { content: "updated" } },
+    { id: "new", type: "script", data: { content: "new" } },
+    { id: "image", type: "image", data: { prompt: "new" } },
+  ], before), ["old", "new"]);
+});
+
+test("changedScriptIds returns no target for an unrelated chat", () => {
+  const data = { content: "unchanged" };
+  const before = new Map([["script", JSON.stringify(data)]]);
+  assert.deepEqual(changedScriptIds([{ id: "script", type: "script", data }], before), []);
+});
 
 function createMessage(
   overrides: Partial<AgentMessage> = {},

@@ -1,0 +1,108 @@
+# 生产环境 override：与 docker-compose.yml 合并使用。
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# - 应用镜像来自 ACR（ACR_REGISTRY / ACR_NAMESPACE / IMAGE_TAG 从同目录 .env 插值），
+#   build 配置仅在本地开发时生效，服务器上不做构建。
+# - 基础服务口令必须显式设置；数据服务不公开暴露，HTTP 服务仅绑定 loopback，供 TLS 反向代理转发。
+# - migrate 为一次性 schema 同步服务（drizzle-kit push），经 --profile migrate 手动触发。
+# - 需要 docker compose >= 2.24（ports: !override）。
+
+services:
+  postgres:
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?set POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+    ports: !override []
+
+  redis:
+    command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
+    ports: !override []
+    volumes:
+      - redis_data:/data
+
+  minio:
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:?set MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?set MINIO_ROOT_PASSWORD}
+    ports: !override
+      - "127.0.0.1:9000:9000"
+
+  minio-init:
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:?set MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?set MINIO_ROOT_PASSWORD}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:?set S3_ACCESS_KEY}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:?set S3_SECRET_KEY}
+    entrypoint: ["/bin/sh", "-ec"]
+    command: >
+      attempt=0;
+      until mc alias set local http://minio:9000 "$${MINIO_ROOT_USER}" "$${MINIO_ROOT_PASSWORD}"; do
+        attempt=$$((attempt + 1));
+        [ "$$attempt" -lt 30 ] || exit 1;
+        sleep 2;
+      done;
+      mc mb --ignore-existing local/vimax-assets;
+      (mc admin user info local "$${S3_ACCESS_KEY}" >/dev/null 2>&1 || mc admin user add local "$${S3_ACCESS_KEY}" "$${S3_SECRET_KEY}");
+      mc admin policy attach local readwrite --user "$${S3_ACCESS_KEY}"
+
+  api:
+    image: ${ACR_REGISTRY:?set ACR_REGISTRY}/${ACR_NAMESPACE:?set ACR_NAMESPACE}/vimax-api:${IMAGE_TAG:?set IMAGE_TAG}
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:?set POSTGRES_USER}:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}@postgres:5432/vimax
+      API_PORT: 3005
+      REDIS_URL: redis://redis:6379
+      CORS_ORIGINS: ${CORS_ORIGINS:?set CORS_ORIGINS}
+      REGISTRATION_INVITE_CODE: ${REGISTRATION_INVITE_CODE:?set REGISTRATION_INVITE_CODE}
+      S3_ENDPOINT: ${S3_ENDPOINT:?set HTTPS S3_ENDPOINT reachable by browsers}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:?set S3_ACCESS_KEY}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:?set S3_SECRET_KEY}
+    ports: !override
+      - "127.0.0.1:3005:3005"
+
+  web:
+    image: ${ACR_REGISTRY:?set ACR_REGISTRY}/${ACR_NAMESPACE:?set ACR_NAMESPACE}/vimax-web:${IMAGE_TAG:?set IMAGE_TAG}
+    ports: !override
+      - "127.0.0.1:3010:3010"
+
+  worker-image:
+    image: ${ACR_REGISTRY:?set ACR_REGISTRY}/${ACR_NAMESPACE:?set ACR_NAMESPACE}/vimax-worker:${IMAGE_TAG:?set IMAGE_TAG}
+
+  worker-video:
+    image: ${ACR_REGISTRY:?set ACR_REGISTRY}/${ACR_NAMESPACE:?set ACR_NAMESPACE}/vimax-worker-ffmpeg:${IMAGE_TAG:?set IMAGE_TAG}
+
+  worker-concat:
+    image: ${ACR_REGISTRY:?set ACR_REGISTRY}/${ACR_NAMESPACE:?set ACR_NAMESPACE}/vimax-worker-ffmpeg:${IMAGE_TAG:?set IMAGE_TAG}
+
+  worker-pipeline:
+    image: ${ACR_REGISTRY:?set ACR_REGISTRY}/${ACR_NAMESPACE:?set ACR_NAMESPACE}/vimax-worker-agents:${IMAGE_TAG:?set IMAGE_TAG}
+
+  worker-audio:
+    image: ${ACR_REGISTRY:?set ACR_REGISTRY}/${ACR_NAMESPACE:?set ACR_NAMESPACE}/vimax-worker:${IMAGE_TAG:?set IMAGE_TAG}
+
+  migrate:
+    image: node:22-alpine
+    profiles: ["migrate"]
+    working_dir: /src/vimax-platform
+    volumes:
+      - ..:/src
+      - pnpm_store:/root/.local/share/pnpm/store
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:?set POSTGRES_USER}:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}@postgres:5432/vimax
+      COREPACK_ENABLE_DOWNLOAD_PROMPT: "0"
+      # ECS 在国内，corepack/pnpm 走 npmmirror
+      COREPACK_NPM_REGISTRY: https://registry.npmmirror.com
+      npm_config_registry: https://registry.npmmirror.com
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      /bin/sh -c "
+      corepack enable &&
+      corepack prepare pnpm@9.15.0 --activate &&
+      pnpm install --filter @vimax/api... --frozen-lockfile &&
+      pnpm --filter @vimax/api db:push
+      "
+
+volumes:
+  pnpm_store:
+  redis_data:

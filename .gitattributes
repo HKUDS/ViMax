@@ -1,0 +1,2 @@
+# shell 脚本必须以 LF 入库，CRLF 会让 Linux 服务器上的 bash 直接报错
+*.sh text eol=lf

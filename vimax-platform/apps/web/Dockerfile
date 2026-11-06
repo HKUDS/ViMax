@@ -8,7 +8,7 @@ COPY packages/contracts/package.json ./packages/contracts/
 COPY packages/ui/package.json ./packages/ui/
 COPY apps/api/package.json ./apps/api/
 COPY apps/web/package.json ./apps/web/
-RUN pnpm install --frozen-lockfile || pnpm install
+RUN pnpm install --frozen-lockfile
 
 FROM base AS build
 # NEXT_PUBLIC_* 在构建期内联进客户端 bundle，必须作为 build args 传入。

@@ -6,7 +6,7 @@
 
 | 文档 | 状态 | 说明 |
 |------|------|------|
-| [INTERNAL-V1.md](./INTERNAL-V1.md) | ✅ 已确认 | 内部交付 v1 总规格（产品 + 技术边界） |
+| [INTERNAL-V1.md](./INTERNAL-V1.md) | 待评审 | 内部交付 v1 总规格（产品 + 技术边界） |
 | [PHASE0.md](./PHASE0.md) | ✅ 已实现 | Phase 0 基础修复规格与验收记录 |
 | [PHASE1-FRONTEND.md](./PHASE1-FRONTEND.md) | ✅ 已确认 | Phase 1 前端架构重构规格 |
 | [BACKEND-PIPELINE.md](./BACKEND-PIPELINE.md) | ✅ 已确认 | 后端管线修复规格 |

@@ -3,6 +3,7 @@ import test from "node:test";
 import type { CanvasNodeType } from "@vimax/contracts";
 import {
   collectDownstreamNodeIds,
+  collectScriptChainNodeIds,
   diffIds,
   inferAutoEdges,
   isReadyToRun,
@@ -71,6 +72,26 @@ test("collectDownstreamNodeIds excludes the start node", () => {
 test("collectDownstreamNodeIds returns empty for a leaf node", () => {
   const edges = [E("a", "b"), E("b", "c")];
   assert.deepEqual(collectDownstreamNodeIds(edges, "c"), []);
+});
+
+test("collectScriptChainNodeIds isolates scripts and includes their inbound reference images", () => {
+  const nodes = [
+    { id: "script-a", type: "script" },
+    { id: "cell-a", type: "storyboard_cell" },
+    { id: "shot-a", type: "shot" },
+    { id: "ref-a", type: "image", data: { referenceAssetIds: ["asset-a"] } },
+    { id: "video-a", type: "video" },
+    { id: "script-b", type: "script" },
+    { id: "cell-b", type: "storyboard_cell" },
+  ];
+  const ids = collectScriptChainNodeIds(nodes, [
+    E("script-a", "cell-a"),
+    E("cell-a", "shot-a"),
+    E("shot-a", "video-a"),
+    E("ref-a", "video-a"),
+    E("script-b", "cell-b"),
+  ], "script-a");
+  assert.deepEqual([...ids], ["script-a", "cell-a", "shot-a", "video-a", "ref-a"]);
 });
 
 test("collectDownstreamNodeIds ignores edges that do not touch the subgraph", () => {

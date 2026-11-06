@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 
 from vimax_image_worker.reporter import JobReporter
 from vimax_image_worker.pipeline_handler import handle_pipeline_job
+from vimax_image_worker.reliable_queue import acknowledge, claim, recover_inflight
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("pipeline-worker")
@@ -39,22 +40,21 @@ def main():
         return redis.Redis.from_url(REDIS_URL, socket_timeout=10, socket_connect_timeout=5)
 
     r = connect()
+    recover_inflight(r, QUEUE_KEY)
     log.info("Pipeline worker started, waiting on %s", QUEUE_KEY)
 
     while True:
         try:
-            item = r.brpop(QUEUE_KEY, timeout=5)
+            raw = claim(r, QUEUE_KEY)
         except redis.exceptions.RedisError:
             # A blocking BRPOP can die on a transient socket error; rebuild
             # the connection instead of taking the worker down.
             log.warning("Redis connection error on %s, reconnecting", QUEUE_KEY, exc_info=True)
             r = connect()
             continue
-        # Idle tick — brpop returned no job within the timeout.
-        if item is None:
+        if raw is None:
             continue
         try:
-            _, raw = item
             payload = json.loads(raw)
             job_id = payload["job_id"]
             job_type = payload.get("job_type", "unknown")
@@ -63,6 +63,8 @@ def main():
             asyncio.run(handle_pipeline_job(payload, reporter))
         except Exception:
             log.exception("Failed to process pipeline queue item")
+        finally:
+            acknowledge(r, QUEUE_KEY, raw)
 
 
 if __name__ == "__main__":

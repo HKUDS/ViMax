@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   bigint,
   index,
@@ -7,6 +8,7 @@ import {
   pgTable,
   text,
   timestamp,
+  uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
 
@@ -261,6 +263,9 @@ export const models = pgTable(
   (table) => ({
     tenantTypeIdx: index("models_tenant_type_idx").on(table.tenantId, table.type),
     typeIsEnabledIdx: index("models_type_enabled_idx").on(table.type, table.isEnabled),
+    oneDefaultPerTenantType: uniqueIndex("models_one_default_per_tenant_type_idx")
+      .on(table.tenantId, table.type)
+      .where(sql`${table.isDefault} = 1`),
   }),
 );
 

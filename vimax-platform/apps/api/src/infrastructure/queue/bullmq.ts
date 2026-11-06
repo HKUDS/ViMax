@@ -93,10 +93,9 @@ export function startBridgeWorker(name: string): Worker {
 }
 
 /** Start bridge workers for every physical queue. */
-export function startAllBridgeWorkers(): void {
-  for (const name of Object.keys(QUEUE_OPTIONS) as QueueName[]) {
-    startBridgeWorker(name);
-  }
+export async function startAllBridgeWorkers(): Promise<void> {
+  const workers = (Object.keys(QUEUE_OPTIONS) as QueueName[]).map(startBridgeWorker);
+  await Promise.all(workers.map((worker) => worker.waitUntilReady()));
 }
 
 // ── Teardown ───────────────────────────────────────────────────────

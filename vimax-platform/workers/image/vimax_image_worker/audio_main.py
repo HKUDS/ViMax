@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 
 from vimax_image_worker.audio_handler import handle_audio_job
 from vimax_image_worker.reporter import JobReporter
+from vimax_image_worker.reliable_queue import acknowledge, claim, recover_inflight
 
 QUEUE_KEY = "vimax:queue:q.audio.std"
 
@@ -46,6 +47,7 @@ def main() -> None:
     )
 
     logger.info("ViMax audio worker started, queue=%s", QUEUE_KEY)
+    recover_inflight(client, QUEUE_KEY)
 
     running = True
 
@@ -59,7 +61,7 @@ def main() -> None:
 
     while running:
         try:
-            item = client.brpop(QUEUE_KEY, timeout=5)
+            raw = claim(client, QUEUE_KEY)
         except redis.RedisError:
             logger.warning("Redis connection error on %s, reconnecting", QUEUE_KEY, exc_info=True)
             client = redis.from_url(
@@ -69,10 +71,9 @@ def main() -> None:
                 socket_connect_timeout=5,
             )
             continue
-        if not item:
+        if raw is None:
             continue
 
-        _, raw = item
         try:
             payload = json.loads(raw)
             reporter = JobReporter(client, payload["callback"]["event_channel"], payload["job_id"])
@@ -81,6 +82,8 @@ def main() -> None:
             asyncio.run(handle_audio_job(payload, reporter))
         except Exception:
             logger.exception("Failed to process audio job")
+        finally:
+            acknowledge(client, QUEUE_KEY, raw)
 
 
 if __name__ == "__main__":
