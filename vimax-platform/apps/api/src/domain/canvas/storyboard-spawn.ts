@@ -2,7 +2,7 @@ import { randomUUID } from "crypto";
 import { and, eq, inArray } from "drizzle-orm";
 import type { Script2StoryboardCell } from "@vimax/contracts";
 import { getDb } from "../../infrastructure/db/client.js";
-import { canvasEdges, canvasNodes } from "../../infrastructure/db/schema.js";
+import { canvasEdges, canvasNodes, canvases } from "../../infrastructure/db/schema.js";
 import { broadcastToRoom } from "../../realtime/connection-manager.js";
 import { collectDownstreamNodeIds } from "./canvas-graph.js";
 
@@ -104,6 +104,7 @@ export async function clearScriptStoryboardChain(
   await db
     .delete(canvasNodes)
     .where(and(eq(canvasNodes.canvasId, canvasId), inArray(canvasNodes.id, ids)));
+  await db.update(canvases).set({ updatedAt: new Date() }).where(eq(canvases.id, canvasId));
   broadcastToRoom(canvasId, { type: "canvas.nodes_removed", canvasId, nodeIds: ids });
   return ids;
 }

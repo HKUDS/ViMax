@@ -4,11 +4,11 @@ import type { PipelineStage } from "@vimax/contracts";
 import { DEFAULT_NEGATIVE_PROMPT } from "@vimax/contracts";
 import { getDb } from "../../infrastructure/db/client.js";
 import { config } from "../../config/env.js";
-import { canvasEdges, canvasNodes, jobs } from "../../infrastructure/db/schema.js";
+import { canvasEdges, canvasNodes, canvases, jobs } from "../../infrastructure/db/schema.js";
 import { broadcastToRoom } from "../../realtime/connection-manager.js";
 import { broadcastNodeStatus } from "./node-status.js";
 import { setNodeStatus } from "./canvas.service.js";
-import { inferAutoEdges, subtractEdges } from "./canvas-graph.js";
+import { collectDownstreamNodeIds, collectScriptChainNodeIds, inferAutoEdges, subtractEdges } from "./canvas-graph.js";
 import {
   runNode,
   runScript2Storyboard,
@@ -165,10 +165,13 @@ async function loadEdges(canvasId: string) {
     .where(eq(canvasEdges.canvasId, canvasId));
 }
 
-async function ensureProductionChain(canvasId: string, targetDurationSec?: number): Promise<void> {
+async function ensureProductionChain(canvasId: string, scriptNodeId: string, targetDurationSec?: number): Promise<void> {
   const db = getDb();
-  const nodes = await loadNodes(canvasId);
-  const edges = await loadEdges(canvasId);
+  const nodeRows = await loadNodes(canvasId);
+  const productionEdgeRows = await loadEdges(canvasId);
+  const chainIds = collectScriptChainNodeIds(nodeRows, productionEdgeRows, scriptNodeId);
+  const nodes = nodeRows.filter((node) => chainIds.has(node.id));
+  const edges = productionEdgeRows.filter((edge) => chainIds.has(edge.sourceNodeId) && chainIds.has(edge.targetNodeId));
   const edgeTargets = new Set(edges.map((e) => e.targetNodeId));
 
   let imageModelId: string | undefined;
@@ -322,7 +325,10 @@ async function ensureProductionChain(canvasId: string, targetDurationSec?: numbe
   }
 
   const allNodes = await loadNodes(canvasId);
-  const allEdges = await loadEdges(canvasId);
+  const edgeRows = await loadEdges(canvasId);
+  const scopedIds = collectScriptChainNodeIds(allNodes, edgeRows, scriptNodeId);
+  const scopedNodes = allNodes.filter((node) => scopedIds.has(node.id));
+  const allEdges = edgeRows.filter((edge) => scopedIds.has(edge.sourceNodeId) && scopedIds.has(edge.targetNodeId));
   const existingEdgeKeys = allEdges.map((e) => ({
     sourceNodeId: e.sourceNodeId,
     targetNodeId: e.targetNodeId,
@@ -330,7 +336,7 @@ async function ensureProductionChain(canvasId: string, targetDurationSec?: numbe
     targetHandle: e.targetHandle,
   }));
   const inferred = inferAutoEdges(
-    allNodes.map((n) => ({ id: n.id, type: n.type as never })),
+    scopedNodes.map((n) => ({ id: n.id, type: n.type as never })),
     randomUUID,
     existingEdgeKeys,
   );
@@ -346,7 +352,7 @@ async function ensureProductionChain(canvasId: string, targetDurationSec?: numbe
     });
   }
 
-  const videos = allNodes.filter((n) => n.type === "video");
+  const videos = scopedNodes.filter((n) => n.type === "video");
   if (targetDurationSec !== undefined) {
     const durations = allocateClipDurations(targetDurationSec, videos.length);
     for (const [index, video] of videos.entries()) {
@@ -356,7 +362,7 @@ async function ensureProductionChain(canvasId: string, targetDurationSec?: numbe
         .where(and(eq(canvasNodes.canvasId, canvasId), eq(canvasNodes.id, video.id)));
     }
   }
-  const hasConcat = allNodes.some((n) => n.type === "concat");
+  const hasConcat = scopedNodes.some((n) => n.type === "concat");
   if (videos.length > 1 && !hasConcat) {
     const concatId = randomUUID();
     const lastVideo = videos[videos.length - 1]!;
@@ -408,13 +414,19 @@ async function ensureCharacters(
   });
 
   try {
-    let characters = (await loadNodes(canvasId)).filter((n) => n.type === "character");
+    const chainNodes = await loadNodes(canvasId);
+    const chainEdges = await loadEdges(canvasId);
+    const chainIds = collectScriptChainNodeIds(chainNodes, chainEdges, scriptNodeId);
+    let characters = chainNodes.filter((node) => node.type === "character" && chainIds.has(node.id));
 
     if (characters.length === 0) {
       const job = await runScript2Characters(canvasId, scriptNodeId);
       const status = await waitForJob(job.job_id, signal, 300_000);
       if (status === "failed") throw new Error("script2characters failed");
-      characters = (await loadNodes(canvasId)).filter((n) => n.type === "character");
+      const updatedNodes = await loadNodes(canvasId);
+      const updatedEdges = await loadEdges(canvasId);
+      for (const id of collectScriptChainNodeIds(updatedNodes, updatedEdges, scriptNodeId)) chainIds.add(id);
+      characters = updatedNodes.filter((node) => node.type === "character" && chainIds.has(node.id));
     }
 
     for (const character of characters) {
@@ -428,9 +440,9 @@ async function ensureCharacters(
     }
 
     const characterIds = (await loadNodes(canvasId))
-      .filter((n) => n.type === "character")
+      .filter((node) => node.type === "character" && chainIds.has(node.id))
       .map((n) => n.id);
-    for (const shot of (await loadNodes(canvasId)).filter((n) => n.type === "shot")) {
+    for (const shot of (await loadNodes(canvasId)).filter((node) => node.type === "shot" && chainIds.has(node.id))) {
       const data = shot.data as { visibleCharIds?: string[] };
       if (data.visibleCharIds?.length) continue;
       await db
@@ -552,15 +564,22 @@ async function runNodesInOrder(
  * new storyboard cells (persistStoryboardSpawn), so re-running without
  * deleting the old chain would duplicate every node.
  */
-async function clearGeneratedNodes(canvasId: string): Promise<void> {
+async function clearGeneratedNodes(canvasId: string, scriptNodeId: string): Promise<void> {
   const db = getDb();
   const nodes = await loadNodes(canvasId);
+  const edges = await loadEdges(canvasId);
+  const descendants = new Set(collectDownstreamNodeIds(edges, scriptNodeId));
   const removedIds = nodes
-    .filter((n) => n.type !== "script")
+    .filter((node) => {
+      if (!descendants.has(node.id)) return false;
+      const data = node.data as Record<string, unknown>;
+      return !(node.type === "image" && Array.isArray(data.referenceAssetIds) && data.referenceAssetIds.length > 0);
+    })
     .map((n) => n.id);
   if (removedIds.length === 0) return;
   // canvas_edges rows cascade-delete with their endpoints.
   await db.delete(canvasNodes).where(inArray(canvasNodes.id, removedIds));
+  await db.update(canvases).set({ updatedAt: new Date() }).where(eq(canvases.id, canvasId));
   broadcastToRoom(canvasId, {
     type: "canvas.nodes_removed",
     canvasId,
@@ -586,10 +605,6 @@ export async function runAutoPipelineAsync(
     const db = getDb();
     const { canvas_id: canvasId } = input;
 
-    if (input.regenerate) {
-      await clearGeneratedNodes(canvasId);
-    }
-
     let scriptNodeId = input.script_node_id;
     if (!scriptNodeId) {
       const scripts = await db
@@ -600,6 +615,9 @@ export async function runAutoPipelineAsync(
       scriptNodeId = scripts[0]?.id;
     }
     if (!scriptNodeId) throw new Error("canvas.script_not_found");
+    const script = (await loadNodes(canvasId)).find((node) => node.id === scriptNodeId && node.type === "script");
+    if (!script) throw new Error("canvas.script_not_found");
+    if (input.regenerate) await clearGeneratedNodes(canvasId, scriptNodeId);
 
     emit(canvasId, runId, {
       type: "pipeline.stage_start",
@@ -609,11 +627,8 @@ export async function runAutoPipelineAsync(
       nodeIds: [scriptNodeId],
     });
 
-    const script = (await loadNodes(canvasId)).find((node) => node.id === scriptNodeId);
-    const targetDurationSec = script
-      ? requestedDurationSec(script.data as Record<string, unknown>)
-      : undefined;
-    const scriptData = (script?.data ?? {}) as Record<string, unknown>;
+    const targetDurationSec = requestedDurationSec(script.data as Record<string, unknown>);
+    const scriptData = script.data as Record<string, unknown>;
     const adBrief = scriptData.adBrief as Record<string, unknown> | undefined;
     const userRequirement = [
       typeof scriptData.prompt === "string" ? scriptData.prompt : "",
@@ -637,7 +652,10 @@ export async function runAutoPipelineAsync(
 
     await ensureCharacters(canvasId, scriptNodeId, runId, signal, errors);
 
-    const cells = (await loadNodes(canvasId)).filter((n) => n.type === "storyboard_cell");
+    const storyboardNodes = await loadNodes(canvasId);
+    const storyboardEdges = await loadEdges(canvasId);
+    const scriptChainIds = new Set(collectDownstreamNodeIds(storyboardEdges, scriptNodeId));
+    const cells = storyboardNodes.filter((node) => node.type === "storyboard_cell" && scriptChainIds.has(node.id));
     emit(canvasId, runId, {
       type: "pipeline.stage_start",
       runId,
@@ -680,9 +698,12 @@ export async function runAutoPipelineAsync(
     }
     emit(canvasId, runId, { type: "pipeline.stage_done", runId, canvasId, stage: "shot" });
 
-    await ensureProductionChain(canvasId, targetDurationSec);
+    await ensureProductionChain(canvasId, scriptNodeId, targetDurationSec);
 
-    const allNodes = await loadNodes(canvasId);
+    const productionNodes = await loadNodes(canvasId);
+    const productionEdges = await loadEdges(canvasId);
+    const productionIds = collectScriptChainNodeIds(productionNodes, productionEdges, scriptNodeId);
+    const allNodes = productionNodes.filter((node) => productionIds.has(node.id));
     // Copy-driven mode: shots carry only copy (no first-frame jobs) and
     // reference images are already-done asset containers — neither runs.
     const isReferenceImage = (n: (typeof allNodes)[number]) =>

@@ -89,6 +89,7 @@ export function CanvasProvider({
     setEdges,
     onEdgesChange,
     canvasName,
+    updatedAt: canvasUpdatedAt,
     viewport: initialViewport,
     isLoading,
     isError,
@@ -96,7 +97,7 @@ export function CanvasProvider({
     refetch,
   } = useCanvasSnapshot(canvasId);
 
-  const { save } = useCanvasSave(canvasId);
+  const { save } = useCanvasSave(canvasId, canvasUpdatedAt);
   const { state: autoPipelineState, start: startAutoPipeline, cancel: cancelAutoPipeline, retryFailed: retryFailedPipeline, isStarting: autoPipelineStarting } =
     useAutoPipeline(canvasId);
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);

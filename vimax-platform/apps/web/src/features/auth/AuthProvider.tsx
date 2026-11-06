@@ -23,7 +23,7 @@ export interface AuthState {
   user: AuthUser | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string, name: string) => Promise<void>;
+  signup: (email: string, password: string, name: string, inviteCode: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -120,8 +120,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setTokens(result.tokens.accessToken, result.tokens.refreshToken);
   }, [loginMut]);
 
-  const signup = useCallback(async (email: string, password: string, name: string) => {
-    const result = await registerMut.mutateAsync({ email, password, name });
+  const signup = useCallback(async (email: string, password: string, name: string, inviteCode: string) => {
+    const result = await registerMut.mutateAsync({ email, password, name, inviteCode });
     setAccessToken(result.tokens.accessToken);
     setUser(result.user);
     setTokens(result.tokens.accessToken, result.tokens.refreshToken);

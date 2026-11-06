@@ -10,7 +10,47 @@ export function getEnvOptional(name: string, fallback: string): string {
   return process.env[name] ?? fallback;
 }
 
+const LOCAL_CORS_ORIGINS = [
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "http://localhost:3010",
+  "http://127.0.0.1:3010",
+];
+
+export function validateProductionConfig(): void {
+  if (process.env.NODE_ENV !== "production") return;
+
+  for (const name of ["DATABASE_URL", "REDIS_URL", "JWT_SECRET", "S3_ENDPOINT", "S3_ACCESS_KEY", "S3_SECRET_KEY", "CORS_ORIGINS"]) {
+    if (!process.env[name]?.trim()) throw new Error(`${name} is required in production`);
+  }
+  if (!process.env.REGISTRATION_INVITE_CODE?.trim()) {
+    throw new Error("REGISTRATION_INVITE_CODE is required in production");
+  }
+  if ((process.env.JWT_SECRET?.length ?? 0) < 32) {
+    throw new Error("JWT_SECRET must contain at least 32 characters in production");
+  }
+  if (!process.env.S3_ENDPOINT?.startsWith("https://")) {
+    throw new Error("S3_ENDPOINT must use HTTPS in production");
+  }
+  const origins = config.corsOrigins();
+  if (origins.some((origin) => {
+    if (origin === "*" || /localhost|127\.0\.0\.1/i.test(origin)) return true;
+    try {
+      const parsed = new URL(origin);
+      return parsed.protocol !== "https:" || parsed.origin !== origin;
+    } catch {
+      return true;
+    }
+  })) {
+    throw new Error("CORS_ORIGINS must contain only explicit HTTPS origins in production");
+  }
+}
+
 export const config = {
+  corsOrigins: () => (process.env.CORS_ORIGINS ?? LOCAL_CORS_ORIGINS.join(","))
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
   databaseUrl: () => getEnvOptional("DATABASE_URL", "postgres://vimax:vimax@localhost:5432/vimax"),
   redisUrl: () => getEnvOptional("REDIS_URL", "redis://localhost:6379"),
   s3: {
@@ -50,6 +90,7 @@ export const config = {
   },
   apiPort: () => Number(getEnvOptional("API_PORT", "3001")),
   apiHost: () => getEnvOptional("API_HOST", "0.0.0.0"),
+  registrationInviteCode: () => process.env.REGISTRATION_INVITE_CODE ?? "",
   // 本地化存储策略：未认领 generated 资产的远端二进制保留时长（小时），
   // 0 = 关闭清扫。默认 24h：给客户端足够的认领窗口。
   assetSweepTtlHours: () => Number(getEnvOptional("ASSET_SWEEP_TTL_HOURS", "24")),

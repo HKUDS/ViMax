@@ -24,6 +24,7 @@ export function AuthCard({ initialMode = "login", onDone }: { initialMode?: Auth
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [inviteCode, setInviteCode] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -52,7 +53,7 @@ export function AuthCard({ initialMode = "login", onDone }: { initialMode?: Auth
         await login(email.trim(), password);
         finish("登录成功");
       } else {
-        await signup(email.trim(), password, name.trim() || email.trim().split("@")[0]);
+        await signup(email.trim(), password, name.trim() || email.trim().split("@")[0], inviteCode.trim());
         finish("注册成功，已自动登录");
       }
     } catch (err) {
@@ -93,6 +94,9 @@ export function AuthCard({ initialMode = "login", onDone }: { initialMode?: Auth
             <User className="absolute left-3.5 top-1/2 size-3.5 -translate-y-1/2 text-[var(--color-ink-tertiary)]" />
             <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="请输入昵称" className="pl-9" />
           </div>
+        )}
+        {mode === "signup" && (
+          <Input value={inviteCode} onChange={(e) => setInviteCode(e.target.value)} placeholder="团队邀请码（生产环境必填）" />
         )}
         <div className="relative">
           <Mail className="absolute left-3.5 top-1/2 size-3.5 -translate-y-1/2 text-[var(--color-ink-tertiary)]" />

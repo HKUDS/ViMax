@@ -20,6 +20,7 @@ export interface UseCanvasSnapshotReturn {
   setEdges: ReturnType<typeof useEdgesState>[1];
   onEdgesChange: OnEdgesChange<Edge>;
   canvasName: string;
+  updatedAt: string;
   viewport: { x: number; y: number; zoom: number };
   isLoading: boolean;
   isError: boolean;
@@ -31,6 +32,7 @@ export function useCanvasSnapshot(canvasId: string): UseCanvasSnapshotReturn {
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [canvasName, setCanvasName] = useState("");
+  const [updatedAt, setUpdatedAt] = useState("");
   const [viewport, setViewport] = useState({ x: 0, y: 0, zoom: 1 });
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -85,6 +87,7 @@ export function useCanvasSnapshot(canvasId: string): UseCanvasSnapshotReturn {
         });
       });
       setEdges(rfEdges);
+      setUpdatedAt(canvas.updated_at);
       initialLoadDone.current = true;
       forceSyncRef.current = false;
     }
@@ -110,6 +113,7 @@ export function useCanvasSnapshot(canvasId: string): UseCanvasSnapshotReturn {
     setEdges,
     onEdgesChange,
     canvasName,
+    updatedAt,
     viewport,
     isLoading,
     isError,
@@ -120,10 +124,17 @@ export function useCanvasSnapshot(canvasId: string): UseCanvasSnapshotReturn {
 
 // ── Debounced Canvas Save ─────────────────────────────────────────
 
-export function useCanvasSave(canvasId: string) {
+export function useCanvasSave(canvasId: string, snapshotUpdatedAt: string) {
   const saveMutation = trpc.canvas.save.useMutation();
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pendingRef = useRef<{ nodes: Node[]; edges: Edge[] } | null>(null);
+  const snapshotUpdatedAtRef = useRef(snapshotUpdatedAt);
+
+  useEffect(() => {
+    if (snapshotUpdatedAt && snapshotUpdatedAt > snapshotUpdatedAtRef.current) {
+      snapshotUpdatedAtRef.current = snapshotUpdatedAt;
+    }
+  }, [snapshotUpdatedAt]);
 
   const save = useCallback(
     (
@@ -140,8 +151,9 @@ export function useCanvasSave(canvasId: string) {
         if (!pending) return;
 
         try {
-          await saveMutation.mutateAsync({
+          const result = await saveMutation.mutateAsync({
             canvas_id: canvasId,
+            snapshot_updated_at: snapshotUpdatedAtRef.current,
             nodes: pending.nodes.map((n) => ({
               id: n.id,
               type: (n.type ?? "image") as CanvasNodeType,
@@ -157,6 +169,9 @@ export function useCanvasSave(canvasId: string) {
             })),
             viewport,
           });
+          if (result.updated_at > snapshotUpdatedAtRef.current) {
+            snapshotUpdatedAtRef.current = result.updated_at;
+          }
         } catch (err) {
           console.error("[canvas save] failed:", err);
         }

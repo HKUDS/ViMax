@@ -25,7 +25,8 @@ function rowToDescriptor(row: ModelRow): ModelDescriptor {
     vendorModelId: row.vendorModelId ?? null,
     classPath: row.classPath ?? null,
     baseUrl: row.baseUrl ?? null,
-    apiKey: (row as any).apiKey ?? null,
+    // Credentials are used server-side and must never be returned by model APIs.
+    apiKey: null,
     config: (row.config as Record<string, unknown>) ?? {},
     isDefault: row.isDefault === 1,
     isEnabled: row.isEnabled === 1,
@@ -166,23 +167,15 @@ export async function createModel(
 ): Promise<ModelDescriptor> {
   const db = getDb();
 
-  // If setting as default, unset any existing default for this type
-  if (input.isDefault) {
-    await db
-      .update(schema.models)
-      .set({ isDefault: 0 })
-      .where(
-        and(
-          eq(schema.models.tenantId, tenantId),
-          eq(schema.models.type, input.type as ModelTypeEnum),
-          eq(schema.models.isDefault, 1),
-        ),
-      );
-  }
-
-  const rows = await db
-    .insert(schema.models)
-    .values({
+  const rows = await db.transaction(async (tx) => {
+    if (input.isDefault) {
+      await tx.update(schema.models).set({ isDefault: 0 }).where(and(
+        eq(schema.models.tenantId, tenantId),
+        eq(schema.models.type, input.type as ModelTypeEnum),
+        eq(schema.models.isDefault, 1),
+      ));
+    }
+    return tx.insert(schema.models).values({
       name: input.name,
       type: input.type as ModelTypeEnum,
       provider: input.provider,
@@ -195,8 +188,8 @@ export async function createModel(
       isDefault: input.isDefault ? 1 : 0,
       isEnabled: input.isEnabled !== false ? 1 : 0,
       priority: input.priority ?? 0,
-    })
-    .returning();
+    }).returning();
+  });
   return rowToDescriptor(rows[0]!);
 }
 
@@ -209,22 +202,6 @@ export async function updateModel(
   // Get existing model first
   const existing = await getModelById(id);
   if (!existing) return null;
-
-  // If setting as default, unset any existing default for this type
-  if (input.isDefault) {
-    const targetType = input.type ?? existing.type;
-    await db
-      .update(schema.models)
-      .set({ isDefault: 0 })
-      .where(
-        and(
-          eq(schema.models.tenantId, existing.tenantId),
-          eq(schema.models.type, targetType as ModelTypeEnum),
-          eq(schema.models.isDefault, 1),
-          sql`${schema.models.id} != ${id}`,
-        ),
-      );
-  }
 
   const updateData: Record<string, unknown> = {};
   if (input.name !== undefined) updateData.name = input.name;
@@ -240,11 +217,18 @@ export async function updateModel(
   if (input.isEnabled !== undefined) updateData.isEnabled = input.isEnabled ? 1 : 0;
   if (input.priority !== undefined) updateData.priority = input.priority;
 
-  const rows = await db
-    .update(schema.models)
-    .set(updateData)
-    .where(eq(schema.models.id, id))
-    .returning();
+  const rows = await db.transaction(async (tx) => {
+    if (input.isDefault) {
+      const targetType = input.type ?? existing.type;
+      await tx.update(schema.models).set({ isDefault: 0 }).where(and(
+        eq(schema.models.tenantId, existing.tenantId),
+        eq(schema.models.type, targetType as ModelTypeEnum),
+        eq(schema.models.isDefault, 1),
+        sql`${schema.models.id} != ${id}`,
+      ));
+    }
+    return tx.update(schema.models).set(updateData).where(eq(schema.models.id, id)).returning();
+  });
   if (rows.length === 0) return null;
   return rowToDescriptor(rows[0]!);
 }

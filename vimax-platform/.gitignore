@@ -12,3 +12,6 @@ apps/web/next-env.d.ts
 
 # Drizzle
 apps/api/drizzle/
+!apps/api/drizzle/
+apps/api/drizzle/*
+!apps/api/drizzle/0003_model_default_unique.sql

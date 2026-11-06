@@ -148,10 +148,24 @@ export async function handleJobEvent(raw: string): Promise<void> {
           parsed.job_id,
         );
       } catch (err) {
-        console.error(
-          `[canvas hook] Failed to apply agent result for node ${canvasMeta.node_id}:`,
-          (err as Error).message,
-        );
+        const errorMessage = err instanceof Error ? err.message : "Failed to apply agent result";
+        await db.update(jobs).set({
+          status: "failed",
+          errorCode: "canvas.agent_result_persist_failed",
+          errorMessage,
+          finishedAt: new Date(),
+        }).where(eq(jobs.id, parsed.job_id));
+        await setNodeStatus(canvasMeta.canvas_id, canvasMeta.node_id, "failed");
+        broadcastNodeStatus(canvasMeta.canvas_id, canvasMeta.node_id, "failed", null, parsed.job_id);
+        broadcastJobEvent(parsed.job_id, {
+          type: "failed",
+          ts: parsed.ts,
+          job_id: parsed.job_id,
+          error_code: "canvas.agent_result_persist_failed",
+          error_message: errorMessage,
+          retryable: true,
+        });
+        return;
       }
 
       await db

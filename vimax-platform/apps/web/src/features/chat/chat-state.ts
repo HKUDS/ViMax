@@ -18,6 +18,15 @@ export function createInitialChatStreamState(): ChatStreamState {
   };
 }
 
+export function changedScriptIds(
+  nodes: Array<{ id: string; type?: string; data?: unknown }>,
+  before: ReadonlyMap<string, string>,
+): string[] {
+  return nodes
+    .filter((node) => node.type === "script" && before.get(node.id) !== JSON.stringify(node.data))
+    .map((node) => node.id);
+}
+
 function upsertMessage(
   messages: AgentMessage[],
   message: AgentMessage,

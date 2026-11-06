@@ -13,6 +13,7 @@ import redis
 from dotenv import load_dotenv
 
 from vimax_image_worker.concat_handler import handle_concat_job
+from vimax_image_worker.reliable_queue import acknowledge, claim, recover_inflight
 
 logging.basicConfig(
     level=logging.INFO,
@@ -44,6 +45,7 @@ def main() -> None:
     )
 
     logger.info("ViMax concat worker started, queue=%s", QUEUE_NAME)
+    recover_inflight(client, QUEUE_KEY)
 
     running = True
 
@@ -57,7 +59,7 @@ def main() -> None:
 
     while running:
         try:
-            item = client.brpop(QUEUE_KEY, timeout=5)
+            raw = claim(client, QUEUE_KEY)
         except redis.RedisError:
             # Idle blocking connections get dropped by the server/NAT —
             # rebuild the client instead of taking the worker down.
@@ -69,15 +71,16 @@ def main() -> None:
                 socket_connect_timeout=5,
             )
             continue
-        if not item:
+        if raw is None:
             continue
 
-        _, raw = item
         try:
             payload = json.loads(raw)
             handle_concat_job(payload, client)
         except Exception:
             logger.exception("Failed to process concat job")
+        finally:
+            acknowledge(client, QUEUE_KEY, raw)
 
 
 if __name__ == "__main__":

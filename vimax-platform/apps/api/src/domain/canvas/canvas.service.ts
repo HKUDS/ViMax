@@ -121,6 +121,11 @@ export async function getCanvasSnapshot(
     .select()
     .from(canvasEdges)
     .where(eq(canvasEdges.canvasId, canvasId));
+  const snapshotUpdatedAt = Math.max(
+    canvas.updatedAt.getTime(),
+    ...nodes.map((node) => node.updatedAt.getTime()),
+    ...edges.map((edge) => edge.createdAt.getTime()),
+  );
 
   return {
     canvas: {
@@ -129,7 +134,7 @@ export async function getCanvasSnapshot(
       name: canvas.name,
       viewport: canvas.viewport as { x: number; y: number; zoom: number },
       created_at: canvas.createdAt.toISOString(),
-      updated_at: canvas.updatedAt.toISOString(),
+      updated_at: new Date(snapshotUpdatedAt).toISOString(),
     },
     nodes: nodes.map((n) => ({
       id: n.id,
@@ -161,7 +166,7 @@ export async function getCanvasSnapshot(
 // conflict. A full replace here would wipe every generated result the
 // moment a user drags a node — which is why this is an upsert.
 
-export async function saveCanvas(input: CanvasSaveInput): Promise<{ ok: true }> {
+export async function saveCanvas(input: CanvasSaveInput): Promise<{ ok: true; updated_at: string }> {
   const db = getDb();
 
   // Postgres rejects ON CONFLICT DO UPDATE when one command carries the same
@@ -172,25 +177,51 @@ export async function saveCanvas(input: CanvasSaveInput): Promise<{ ok: true }> 
   const nodes = [...nodesById.values()];
   const edges = [...edgesById.values()];
 
-  await db.transaction(async (tx) => {
+  const updatedAt = await db.transaction(async (tx) => {
+    const incomingNodeIdList = nodes.map((node) => node.id);
+    const incomingEdgeIdList = edges.map((edge) => edge.id);
+    const [nodeCollision, edgeCollision] = await Promise.all([
+      incomingNodeIdList.length
+        ? tx.select({ id: canvasNodes.id }).from(canvasNodes)
+            .where(and(inArray(canvasNodes.id, incomingNodeIdList), sql`${canvasNodes.canvasId} != ${input.canvas_id}`)).limit(1)
+        : Promise.resolve([]),
+      incomingEdgeIdList.length
+        ? tx.select({ id: canvasEdges.id }).from(canvasEdges)
+            .where(and(inArray(canvasEdges.id, incomingEdgeIdList), sql`${canvasEdges.canvasId} != ${input.canvas_id}`)).limit(1)
+        : Promise.resolve([]),
+    ]);
+    if (nodeCollision.length || edgeCollision.length) {
+      throw new Error("canvas.snapshot_contains_foreign_ids");
+    }
     // 1. Snapshot current ids so we can compute what to delete.
     const existingNodes = await tx
-      .select({ id: canvasNodes.id })
+      .select({ id: canvasNodes.id, updatedAt: canvasNodes.updatedAt })
       .from(canvasNodes)
       .where(eq(canvasNodes.canvasId, input.canvas_id));
     const existingEdges = await tx
-      .select({ id: canvasEdges.id })
+      .select({ id: canvasEdges.id, createdAt: canvasEdges.createdAt })
       .from(canvasEdges)
       .where(eq(canvasEdges.canvasId, input.canvas_id));
 
-    const deleteNodeIds = diffIds(
-      existingNodes.map((n) => n.id),
-      nodes.map((n) => n.id),
-    );
-    const deleteEdgeIds = diffIds(
-      existingEdges.map((e) => e.id),
-      edges.map((e) => e.id),
-    );
+    const snapshotTime = new Date(input.snapshot_updated_at);
+    const incomingNodeIds = new Set(nodes.map((node) => node.id));
+    const incomingEdgeIds = new Set(edges.map((edge) => edge.id));
+    const deleteNodeIds = existingNodes
+      .filter((node) => !incomingNodeIds.has(node.id) && node.updatedAt <= snapshotTime)
+      .map((node) => node.id);
+    const deleteEdgeIds = existingEdges
+      .filter((edge) => !incomingEdgeIds.has(edge.id) && edge.createdAt <= snapshotTime)
+      .map((edge) => edge.id);
+    const deletedNodeIds = new Set(deleteNodeIds);
+    const retainedNodeIds = new Set(existingNodes.map((node) => node.id).filter((id) => !deletedNodeIds.has(id)));
+    for (const id of incomingNodeIds) retainedNodeIds.add(id);
+    if (edges.some((edge) => !retainedNodeIds.has(edge.source_node_id) || !retainedNodeIds.has(edge.target_node_id))) {
+      throw new Error("canvas.snapshot_contains_dangling_edges");
+    }
+    const newerNodeIds = new Set(existingNodes.filter((node) => node.updatedAt > snapshotTime).map((node) => node.id));
+    const newerEdgeIds = new Set(existingEdges.filter((edge) => edge.createdAt > snapshotTime).map((edge) => edge.id));
+    const nodesToUpsert = nodes.filter((node) => !newerNodeIds.has(node.id));
+    const edgesToUpsert = edges.filter((edge) => !newerEdgeIds.has(edge.id));
 
     // 2. Remove dropped nodes (their edges cascade) and dropped edges.
     if (deleteNodeIds.length > 0) {
@@ -206,11 +237,11 @@ export async function saveCanvas(input: CanvasSaveInput): Promise<{ ok: true }> 
 
     // 3. Upsert nodes — status & outputAssetId are intentionally NOT in
     //    the conflict set so existing results survive every save.
-    if (nodes.length > 0) {
+    if (nodesToUpsert.length > 0) {
       await tx
         .insert(canvasNodes)
         .values(
-          nodes.map((n) => ({
+          nodesToUpsert.map((n) => ({
             id: n.id,
             canvasId: input.canvas_id,
             type: n.type,
@@ -230,11 +261,11 @@ export async function saveCanvas(input: CanvasSaveInput): Promise<{ ok: true }> 
     }
 
     // 4. Upsert edges (after nodes, to satisfy the FK on insert).
-    if (edges.length > 0) {
+    if (edgesToUpsert.length > 0) {
       await tx
         .insert(canvasEdges)
         .values(
-          edges.map((e) => ({
+          edgesToUpsert.map((e) => ({
             id: e.id,
             canvasId: input.canvas_id,
             sourceNodeId: e.source_node_id,
@@ -255,16 +286,20 @@ export async function saveCanvas(input: CanvasSaveInput): Promise<{ ok: true }> 
     }
 
     // 5. Bump canvas updatedAt (and viewport if provided).
-    await tx
+    const [updatedCanvas] = await tx
       .update(canvases)
       .set({
         ...(input.viewport ? { viewport: input.viewport } : {}),
         updatedAt: new Date(),
       })
-      .where(eq(canvases.id, input.canvas_id));
+      .where(eq(canvases.id, input.canvas_id))
+      .returning({ updatedAt: canvases.updatedAt });
+
+    if (!updatedCanvas) throw new Error("canvas.not_found");
+    return updatedCanvas.updatedAt.toISOString();
   });
 
-  return { ok: true };
+  return { ok: true, updated_at: updatedAt };
 }
 
 // ── Auto-wire (persist missing type-dependency edges) ─────────────
