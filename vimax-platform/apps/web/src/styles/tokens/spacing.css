@@ -1,0 +1,69 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ViMax Design Tokens — Spacing (4px base grid)
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0_5: 2px;
+  --space-1: 4px;
+  --space-1_5: 6px;
+  --space-2: 8px;
+  --space-2_5: 10px;
+  --space-3: 12px;
+  --space-3_5: 14px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-11: 44px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Layout */
+  --page-padding-x: var(--space-6);
+  --page-padding-y: var(--space-8);
+  --section-gap: var(--space-10);
+  --content-max-width: 1200px;
+  --content-max-width-narrow: 720px;
+
+  /* Component */
+  --card-padding: var(--space-5);
+  --card-padding-sm: var(--space-3);
+  --card-gap: var(--space-4);
+
+  --input-padding-x: var(--space-3);
+  --input-padding-y: var(--space-2);
+  --input-height-sm: 32px;
+  --input-height: 40px;
+  --input-height-lg: 48px;
+
+  --button-padding-x: var(--space-4);
+  --button-padding-x-sm: var(--space-3);
+  --button-padding-x-lg: var(--space-6);
+  --button-height-sm: 32px;
+  --button-height: 40px;
+  --button-height-lg: 48px;
+
+  --nav-height: 48px;
+  --nav-item-padding-x: var(--space-3);
+  --nav-item-padding-y: var(--space-1_5);
+
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 56px;
+
+  --panel-width: 320px;
+  --chat-width: 380px;
+  --toolbar-height: 44px;
+
+  --modal-width-sm: 400px;
+  --modal-width-md: 520px;
+  --modal-width-lg: 640px;
+  --modal-padding: var(--space-6);
+}

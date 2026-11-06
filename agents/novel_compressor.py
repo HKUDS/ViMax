@@ -4,7 +4,7 @@ import asyncio
 from typing import List, Tuple
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain.chat_models import init_chat_model
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 

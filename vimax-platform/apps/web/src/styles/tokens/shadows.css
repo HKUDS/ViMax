@@ -1,0 +1,54 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ViMax Design Tokens — Shadows / Elevation
+   Theme: Cybernetic Industrial / HUD Console (Neon Glows & Flat Panels)
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* === Elevation Scale (Flat Industrial Panels — No Drop Shadows) === */
+  --shadow-none: none;
+
+  /* Subtle — card resting state, flat technical look */
+  --shadow-xs: none;
+  --shadow-sm: none;
+
+  /* Medium — dropdowns, menus (using thin border instead of heavy shadow) */
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.75);
+
+  /* Large — modals, dialogs */
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.85);
+
+  /* X-Large — highest elevation */
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.95);
+
+  /* === Brand Neon Glow (Cyber Cyan & Magenta Glows) === */
+  --shadow-accent-xs: 0 0 6px rgba(0, 240, 255, 0.15);
+  --shadow-accent-sm: 0 0 12px rgba(0, 240, 255, 0.25);
+  --shadow-accent-md: 0 0 20px rgba(0, 240, 255, 0.35);
+  --shadow-accent-lg: 0 0 32px rgba(0, 240, 255, 0.45), 0 0 12px rgba(255, 0, 85, 0.25);
+
+  /* === Interactive === */
+  --shadow-button-primary: 0 2px 8px rgba(0, 240, 255, 0.25);
+  --shadow-button-primary-hover: 0 4px 16px rgba(0, 240, 255, 0.45);
+  --shadow-card-hover: 0 0 0 1px rgba(0, 240, 255, 0.25), 0 0 12px rgba(0, 240, 255, 0.10);
+}
+
+[data-theme="light"] {
+  --shadow-none: none;
+
+  /* Light mode — clinical clean room shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.10);
+
+  --shadow-accent-xs: 0 0 6px rgba(0, 163, 196, 0.10);
+  --shadow-accent-sm: 0 0 10px rgba(0, 163, 196, 0.15);
+  --shadow-accent-md: 0 0 16px rgba(0, 163, 196, 0.20);
+  --shadow-accent-lg: 0 0 24px rgba(0, 163, 196, 0.25);
+
+  --shadow-button-primary: 0 2px 6px rgba(0, 163, 196, 0.15);
+  --shadow-button-primary-hover: 0 4px 12px rgba(0, 163, 196, 0.25);
+  --shadow-card-hover: 0 0 0 1px rgba(0, 163, 196, 0.15);
+}

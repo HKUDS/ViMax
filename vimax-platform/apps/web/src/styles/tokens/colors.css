@@ -1,0 +1,270 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ViMax Unified Design Tokens — Colors
+   Theme: Tech-Vibrant AI Video Studio
+   Deep cosmic dark surfaces + electric violet accent, hyper-cyan
+   secondary and sunset-coral highlights (Stitch design system).
+   Node-type categorical colors are harmonized (same saturation/lightness
+   band) and used only for small-area semantic coding: icon chips, edges,
+   zone headers, minimap. Status colors are independent of type colors.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ═══ DARK THEME (default — Cosmic Studio) ═══ */
+
+:root {
+  /* ── Canvas & Surfaces (cosmic blue-violet ladder) ── */
+  --color-canvas: #0f131d;               /* App background */
+  --color-surface-1: #171b26;            /* Cards, panels */
+  --color-surface-2: #1c1f2a;            /* Elevated, hover */
+  --color-surface-3: #262a35;            /* Dropdowns, menus */
+  --color-surface-4: #313540;            /* Highest lift */
+
+  /* Pure black workspace for cinematic content focus */
+  --color-canvas-cinema: #000000;
+
+  /* ── Hairlines ── */
+  --color-hairline: #262b38;             /* Default borders */
+  --color-hairline-strong: #353b4b;      /* Hovered / active borders */
+  --color-hairline-tertiary: #4a5064;    /* Focus rings, nested borders */
+
+  /* ── Ink / Text ── */
+  --color-ink: #dfe2f1;                  /* Primary text */
+  --color-ink-muted: #cbc3d7;            /* Secondary text */
+  --color-ink-subtle: #958ea0;           /* Tertiary text */
+  --color-ink-tertiary: #6d687f;         /* Disabled / quaternary */
+  --color-ink-inverse: #170736;          /* Text on violet surfaces */
+
+  /* ── Brand Accent (Electric Violet — CTAs, selection, focus) ── */
+  --color-accent: #a078ff;
+  --color-accent-hover: #b493ff;
+  --color-accent-focus: #a078ff;
+  --color-accent-subtle: rgba(160, 120, 255, 0.06);
+  --color-accent-muted: rgba(160, 120, 255, 0.14);
+  --color-accent-emphasis: rgba(160, 120, 255, 0.24);
+  --color-accent-on: #170736;            /* Deep violet ink on violet */
+
+  /* ── Secondary Accent (Hyper Cyan — processing, telemetry) ── */
+  --color-secondary: #4cd7f6;
+  --color-secondary-hover: #71e1ff;
+  --color-secondary-subtle: rgba(76, 215, 246, 0.06);
+  --color-secondary-muted: rgba(76, 215, 246, 0.12);
+  --color-secondary-emphasis: rgba(76, 215, 246, 0.2);
+  --color-secondary-on: #003640;
+
+  /* ── Tertiary Accent (Sunset Coral — kinetic highlights) ── */
+  --color-tertiary: #ffb690;
+  --color-tertiary-container: rgba(236, 106, 6, 0.15);
+
+  /* ── AI Timeline Status Palette ── */
+  --color-ai-thinking: #6ea3f0;          /* Blue — reasoning */
+  --color-ai-reading: #a078ff;           /* Violet — reading context */
+  --color-ai-editing: #c47f92;           /* Rose — modifying */
+  --color-ai-generating: #35c6e8;        /* Cyan — generating */
+  --color-ai-done: #ffb690;              /* Coral — complete */
+  --color-ai-error: #e5484d;             /* Red — error */
+
+  /* Node status tokens (independent of type colors) */
+  --color-node-idle: #6e7280;
+  --color-node-queued: #8b8fa0;
+  --color-node-running: #35c6e8;
+  --color-node-done: #58ab84;
+  --color-node-error: #e5484d;
+  --color-node-dirty: #ec6a06;
+
+  /* ── Semantic ── */
+  --color-success: #58ab84;
+  --color-success-subtle: rgba(88, 171, 132, 0.08);
+  --color-warning: #ec6a06;
+  --color-warning-subtle: rgba(236, 106, 6, 0.08);
+  --color-danger: #ff7a76;
+  --color-danger-subtle: rgba(255, 122, 118, 0.08);
+  --color-info: #4cd7f6;
+  --color-info-subtle: rgba(76, 215, 246, 0.08);
+
+  /* ── Canvas Node Type Colors (harmonized categorical ramp) ── */
+  --color-node-script: #b98e57;          /* Script: bronze */
+  --color-node-character: #c47f92;       /* Character: rose */
+  --color-node-storyboard: #58a8b5;      /* Storyboard: teal */
+  --color-node-shot: #5f8fd0;            /* Shot: azure */
+  --color-node-image: #9182cc;           /* Image: violet */
+  --color-node-video: #58ab84;           /* Video: green */
+  --color-node-concat: #7d95ad;          /* Concat: steel slate */
+  --color-node-audio: #a3a86b;           /* Audio: olive */
+
+  /* ── Gradients (violet → cyan, energetic) ── */
+  --gradient-brand: linear-gradient(135deg, #a078ff 0%, #35c6e8 100%);
+  --gradient-brand-subtle: linear-gradient(135deg, rgba(160, 120, 255, 0.06) 0%, rgba(53, 198, 232, 0.06) 100%);
+}
+
+/* ═══ LIGHT THEME (Studio Daylight) ═══ */
+
+[data-theme="light"] {
+  /* ── Canvas & Surfaces ── */
+  --color-canvas: #f2f2f9;
+  --color-surface-1: #ffffff;
+  --color-surface-2: #edeff7;
+  --color-surface-3: #e2e5f0;
+  --color-surface-4: #d4d8e5;
+
+  --color-canvas-cinema: #ffffff;
+
+  /* ── Hairlines ── */
+  --color-hairline: #e3e5ef;
+  --color-hairline-strong: #c6cade;
+  --color-hairline-tertiary: #a6abc4;
+
+  /* ── Ink / Text ── */
+  --color-ink: #191c2b;
+  --color-ink-muted: #4b5069;
+  --color-ink-subtle: #7d8299;
+  --color-ink-tertiary: #a7abbe;
+  --color-ink-inverse: #ffffff;
+
+  /* ── Brand Accent (deep violet, light ink on top) ── */
+  --color-accent: #6d3bd7;
+  --color-accent-hover: #5b2cc6;
+  --color-accent-focus: #6d3bd7;
+  --color-accent-subtle: rgba(109, 59, 215, 0.06);
+  --color-accent-muted: rgba(109, 59, 215, 0.12);
+  --color-accent-emphasis: rgba(109, 59, 215, 0.2);
+  --color-accent-on: #ffffff;
+
+  /* ── Secondary Accent ── */
+  --color-secondary: #0e7f9e;
+  --color-secondary-hover: #0a6a85;
+  --color-secondary-subtle: rgba(14, 127, 158, 0.06);
+  --color-secondary-muted: rgba(14, 127, 158, 0.12);
+  --color-secondary-emphasis: rgba(14, 127, 158, 0.2);
+  --color-secondary-on: #ffffff;
+
+  /* ── Tertiary Accent (Sunset Coral) ── */
+  --color-tertiary: #c05a10;
+  --color-tertiary-container: rgba(192, 90, 16, 0.12);
+
+  /* ── AI Timeline Status Palette ── */
+  --color-ai-thinking: #3a6fb5;
+  --color-ai-reading: #6d3bd7;
+  --color-ai-editing: #b04a5e;
+  --color-ai-generating: #0e90b0;
+  --color-ai-done: #c05a10;
+  --color-ai-error: #d93a3f;
+
+  --color-node-idle: #82828c;
+  --color-node-queued: #6e6e78;
+  --color-node-running: #0e90b0;
+  --color-node-done: #2e8f68;
+  --color-node-error: #d93a3f;
+  --color-node-dirty: #b37417;
+
+  /* ── Semantic ── */
+  --color-success: #2e8f68;
+  --color-success-subtle: rgba(46, 143, 104, 0.08);
+  --color-warning: #b37417;
+  --color-warning-subtle: rgba(179, 116, 23, 0.08);
+  --color-danger: #d93a3f;
+  --color-danger-subtle: rgba(217, 58, 63, 0.08);
+  --color-info: #0e7f9e;
+  --color-info-subtle: rgba(14, 127, 158, 0.08);
+
+  /* ── Canvas Node Type Colors (darkened ramp for white surfaces) ── */
+  --color-node-script: #8f6b34;
+  --color-node-character: #a85b70;
+  --color-node-storyboard: #2e7f8c;
+  --color-node-shot: #3a6ea8;
+  --color-node-image: #6f5fb0;
+  --color-node-video: #2e8f68;
+  --color-node-concat: #56738c;
+  --color-node-audio: #6f744a;
+}
+
+/* ═══ Backward-compatible aliases ═══ */
+
+:root {
+  --color-bg: var(--color-canvas);
+  --color-bg-base: #0a0e18;
+  --color-bg-raised: var(--color-surface-1);
+  --color-bg-overlay: var(--color-surface-2);
+  --color-bg-inset: #0a0e18;
+
+  --color-surface: var(--color-surface-1);
+  --color-surface-hover: var(--color-surface-2);
+  --color-surface-elevated: var(--color-surface-3);
+  --color-surface-overlay: var(--color-surface-4);
+
+  --color-border-default: var(--color-hairline);
+  --color-border: var(--color-hairline);
+  --color-border-hover: var(--color-hairline-strong);
+  --color-border-strong: var(--color-hairline-tertiary);
+  --color-border-subtle: var(--color-hairline);
+  --color-border-accent: rgba(160, 120, 255, 0.35);
+
+  --color-text-primary: var(--color-ink);
+  --color-text: var(--color-ink);
+  --color-text-secondary: var(--color-ink-muted);
+  --color-text-muted: var(--color-ink-subtle);
+  --color-text-tertiary: var(--color-ink-subtle);
+  --color-text-dim: var(--color-ink-tertiary);
+  --color-text-quaternary: var(--color-ink-tertiary);
+  --color-text-inverse: var(--color-ink-inverse);
+
+  --color-accent-active: var(--color-accent-focus);
+  --color-accent-glow: rgba(160, 120, 255, 0.24);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.55);
+  --shadow-accent-sm: 0 0 0 1px rgba(160, 120, 255, 0.2);
+  --shadow-accent-md: 0 0 0 1px rgba(160, 120, 255, 0.3);
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--color-hairline-strong);
+
+  --gradient-brand: linear-gradient(135deg, #a078ff 0%, #35c6e8 100%);
+  --gradient-brand-subtle: linear-gradient(135deg, rgba(160, 120, 255, 0.05) 0%, rgba(53, 198, 232, 0.05) 100%);
+  --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(160, 120, 255, 0.09) 0%, transparent 100%);
+  --gradient-accent: var(--gradient-brand);
+  --gradient-accent-subtle: var(--gradient-brand-subtle);
+  --gradient-card-accent: linear-gradient(180deg, rgba(160, 120, 255, 0.04) 0%, transparent 100%);
+}
+
+[data-theme="light"] {
+  --color-bg: var(--color-canvas);
+  --color-bg-base: #e8eaf3;
+  --color-bg-raised: var(--color-surface-1);
+  --color-bg-overlay: var(--color-surface-2);
+  --color-bg-inset: #e2e5f0;
+
+  --color-surface: var(--color-surface-1);
+  --color-surface-hover: var(--color-surface-2);
+  --color-surface-elevated: var(--color-surface-3);
+  --color-surface-overlay: var(--color-surface-4);
+
+  --color-border-default: var(--color-hairline);
+  --color-border: var(--color-hairline);
+  --color-border-hover: var(--color-hairline-strong);
+  --color-border-strong: var(--color-hairline-tertiary);
+  --color-border-subtle: var(--color-hairline);
+  --color-border-accent: rgba(109, 59, 215, 0.3);
+
+  --color-text-primary: var(--color-ink);
+  --color-text: var(--color-ink);
+  --color-text-secondary: var(--color-ink-muted);
+  --color-text-muted: var(--color-ink-subtle);
+  --color-text-tertiary: var(--color-ink-subtle);
+  --color-text-dim: var(--color-ink-tertiary);
+  --color-text-quaternary: var(--color-ink-tertiary);
+  --color-text-inverse: var(--color-ink-inverse);
+
+  --color-accent-active: var(--color-accent-focus);
+  --color-accent-glow: rgba(109, 59, 215, 0.2);
+
+  --shadow-sm: 0 1px 2px rgba(20, 18, 40, 0.06);
+  --shadow-md: 0 4px 12px rgba(20, 18, 40, 0.08);
+  --shadow-lg: 0 8px 28px rgba(20, 18, 40, 0.1);
+  --shadow-accent-sm: 0 0 0 1px rgba(109, 59, 215, 0.15);
+  --shadow-accent-md: 0 0 0 1px rgba(109, 59, 215, 0.25);
+  --shadow-card-hover: 0 4px 16px rgba(20, 18, 40, 0.08), 0 0 0 1px var(--color-hairline-strong);
+
+  --gradient-brand: linear-gradient(135deg, #6d3bd7 0%, #0e7f9e 100%);
+  --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(109, 59, 215, 0.07) 0%, transparent 100%);
+  --gradient-accent: var(--gradient-brand);
+  --gradient-accent-subtle: var(--gradient-brand-subtle);
+  --gradient-card-accent: linear-gradient(180deg, rgba(109, 59, 215, 0.03) 0%, transparent 100%);
+}

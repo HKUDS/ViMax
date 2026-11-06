@@ -1,0 +1,92 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ViMax Typography — Sans display for headlines, mono only for data
+   (ids, timers, kbd, code)
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Font Families ── */
+  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans-cn: "Plus Jakarta Sans", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", "Cascadia Code", "Consolas", monospace;
+  /* Display titles use Sora with a CJK fallback for mixed-language headings */
+  --font-display: "Sora", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  /* ── Tactical Display Scale ── */
+  --text-display-xl: 3.5rem;     /* 56px — compressed hero mega */
+  --text-display-lg: 2.5rem;     /* 40px — section opener */
+  --text-display-md: 1.875rem;   /* 30px — sub-section */
+  --text-headline: 1.375rem;     /* 22px — card group titles */
+  --text-card-title: 1.125rem;    /* 18px — feature titles */
+  --text-subhead: 1rem;          /* 16px — lead paragraphs */
+  --text-body-lg: 0.9375rem;     /* 15px — body (large) */
+  --text-body: 0.875rem;         /* 14px — default body */
+  --text-body-sm: 0.8125rem;     /* 13px — secondary body */
+  --text-caption: 0.75rem;       /* 12px — captions, meta */
+  --text-micro: 0.6875rem;       /* 11px — eyebrow, micro labels */
+  --text-code: 0.8125rem;        /* 13px — code blocks */
+
+  /* ── Weights ── */
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* ── Line Heights ── */
+  --leading-tight: 1.05;         /* Display XL */
+  --leading-snug: 1.15;          /* Display LG-MD */
+  --leading-normal: 1.35;        /* Headlines */
+  --leading-relaxed: 1.55;       /* Subheads */
+  --leading-loose: 1.65;         /* Body */
+
+  /* ── Letter Spacing ── */
+  --tracking-display-xl: -0.03em;   /* Tight display headings */
+  --tracking-display-lg: -0.02em;
+  --tracking-display-md: -0.015em;
+  --tracking-headline: -0.01em;
+  --tracking-normal: 0;
+  --tracking-eyebrow: 0.08em;       /* Wide-spaced uppercase eyebrow */
+  --tracking-wide: 0.12em;          /* All-caps technical labels */
+
+  /* ── Presets ── */
+  --hero-title-size: var(--text-display-xl);
+  --hero-title-weight: var(--font-semibold);
+  --hero-title-leading: var(--leading-tight);
+  --hero-title-tracking: var(--tracking-display-xl);
+
+  /* Hero 与 display 标题在窄屏降档，避免移动端溢出 */
+  @media (max-width: 640px) {
+    --hero-title-size: 2.25rem;      /* 36px */
+    --text-display-lg: 1.875rem;     /* 30px */
+  }
+
+  --h1-size: var(--text-display-lg);
+  --h1-weight: var(--font-bold);
+  --h1-leading: var(--leading-snug);
+
+  --h2-size: var(--text-display-md);
+  --h2-weight: var(--font-bold);
+  --h2-leading: var(--leading-snug);
+
+  --h3-size: var(--text-headline);
+  --h3-weight: var(--font-semibold);
+  --h3-leading: var(--leading-normal);
+
+  --h4-size: var(--text-card-title);
+  --h4-weight: var(--font-semibold);
+  --h4-leading: var(--leading-normal);
+
+  --body-size: var(--text-body);
+  --body-weight: var(--font-normal);
+  --body-leading: var(--leading-loose);
+
+  --caption-size: var(--text-caption);
+  --caption-weight: var(--font-normal);
+  --caption-leading: var(--leading-relaxed);
+
+  --label-size: var(--text-micro);
+  --label-weight: var(--font-medium);
+  --label-leading: var(--leading-normal);
+  --label-tracking: var(--tracking-wide);
+}

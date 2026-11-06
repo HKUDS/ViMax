@@ -1,0 +1,15 @@
+# 宿主机产物/依赖不得进入镜像（Windows 二进制与容器不兼容）
+**/node_modules
+**/.next
+**/dist
+**/.turbo
+.git
+**/__pycache__
+**/.venv
+**/*.pyc
+
+# 密钥走 compose env_file 注入，不进镜像层
+.env
+.env.local
+apps/api/.env
+apps/web/.env.local

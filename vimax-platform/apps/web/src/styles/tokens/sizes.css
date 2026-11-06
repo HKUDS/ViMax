@@ -1,0 +1,50 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ViMax Design Tokens — Sizes & Transitions
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* === Component Heights === */
+  --button-height-sm: 32px;
+  --button-height-md: 40px;
+  --button-height-lg: 48px;
+
+  --input-height-sm: 32px;
+  --input-height-md: 40px;
+  --input-height-lg: 48px;
+
+  /* === Layout === */
+  --header-height: 48px;
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 56px;
+  --panel-width: 320px;
+  --chat-width: 380px;
+  --toolbar-height: 44px;
+
+  /* === Z-Index Scale === */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+
+  /* === Motion / Transitions === */
+  --transition-instant: 50ms ease-out;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Duration-only tokens (for JS use) */
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-spring: 350ms;
+
+  /* Easing curves */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}

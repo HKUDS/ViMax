@@ -11,6 +11,14 @@ from utils.retry import download_retry
 @download_retry
 def download_image(url, save_path):
     try:
+        # Providers may inline the result as a data URL instead of hosting it.
+        if url.startswith("data:"):
+            _, _, b64_data = url.partition(",")
+            with open(save_path, 'wb') as file:
+                file.write(base64.b64decode(b64_data))
+            logging.info(f"Decoded data-URL image to {save_path}")
+            return
+
         logging.info(f"Downloading image from {url} to {save_path}")
 
         response = requests.get(url, stream=True, timeout=(10, 300))

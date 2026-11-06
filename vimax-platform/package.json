@@ -1,0 +1,17 @@
+{
+  "name": "vimax-platform",
+  "private": true,
+  "scripts": {
+    "db:generate": "pnpm --filter @vimax/api db:generate",
+    "db:push": "pnpm --filter @vimax/api db:push",
+    "db:studio": "pnpm --filter @vimax/api db:studio",
+    "dev:api": "pnpm --filter @vimax/api dev",
+    "dev:web": "pnpm --filter @vimax/web dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

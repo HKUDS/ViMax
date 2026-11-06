@@ -1,0 +1,165 @@
+name: Deploy Aliyun ECS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      migrate:
+        description: 部署前执行数据库结构同步（drizzle-kit push）
+        type: boolean
+        default: false
+
+# 同一时刻只允许一个部署任务排队执行，避免新旧版本交叉
+concurrency:
+  group: deploy-aliyun
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: vimax-platform/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+        working-directory: vimax-platform
+      - run: pnpm --filter @vimax/contracts build
+        working-directory: vimax-platform
+      - run: pnpm --filter @vimax/api typecheck && pnpm --filter @vimax/web typecheck
+        working-directory: vimax-platform
+      - run: pnpm --filter @vimax/api test && pnpm --filter @vimax/web test
+        working-directory: vimax-platform
+
+  build:
+    runs-on: ubuntu-latest
+    needs: verify
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: api
+            image: vimax-api
+            dockerfile: apps/api/Dockerfile
+          - name: worker
+            image: vimax-worker
+            dockerfile: workers/image/Dockerfile
+          - name: worker-ffmpeg
+            image: vimax-worker-ffmpeg
+            dockerfile: workers/image/Dockerfile
+            build_args: "INSTALL_FFMPEG=true"
+          - name: worker-agents
+            image: vimax-worker-agents
+            dockerfile: workers/image/Dockerfile
+            build_args: "INSTALL_VIMAX_AGENTS=true"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.ACR_REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: vimax-platform
+          file: vimax-platform/${{ matrix.dockerfile }}
+          push: true
+          tags: |
+            ${{ secrets.ACR_REGISTRY }}/${{ secrets.ACR_NAMESPACE }}/${{ matrix.image }}:${{ github.sha }}
+            ${{ secrets.ACR_REGISTRY }}/${{ secrets.ACR_NAMESPACE }}/${{ matrix.image }}:latest
+          build-args: ${{ matrix.build_args }}
+          cache-from: type=gha,scope=${{ matrix.image }}
+          cache-to: type=gha,scope=${{ matrix.image }},mode=max
+
+  # web 单独构建：NEXT_PUBLIC_* 在构建期内联进客户端 bundle，取值来自仓库 vars
+  build-web:
+    runs-on: ubuntu-latest
+    needs: verify
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate public API URL
+        env:
+          PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
+        run: test -n "$PUBLIC_API_URL" && case "$PUBLIC_API_URL" in https://*) ;; *) echo 'NEXT_PUBLIC_API_URL must use HTTPS'; exit 1 ;; esac
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.ACR_REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: vimax-platform
+          file: vimax-platform/apps/web/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.ACR_REGISTRY }}/${{ secrets.ACR_NAMESPACE }}/vimax-web:${{ github.sha }}
+            ${{ secrets.ACR_REGISTRY }}/${{ secrets.ACR_NAMESPACE }}/vimax-web:latest
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_DEFAULT_IMAGE_MODEL=${{ vars.NEXT_PUBLIC_DEFAULT_IMAGE_MODEL || 'cogview-3-flash' }}
+            NEXT_PUBLIC_DEFAULT_VIDEO_MODEL=${{ vars.NEXT_PUBLIC_DEFAULT_VIDEO_MODEL || 'cogvideox-flash' }}
+          cache-from: type=gha,scope=vimax-web
+          cache-to: type=gha,scope=vimax-web,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build, build-web]
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.ALIYUN_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p "${{ secrets.ALIYUN_SSH_PORT || '22' }}" "${{ secrets.ALIYUN_SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      # worker 容器挂载仓库根（VIMAX_ROOT），服务器必须持有完整源码；
+      # 排除 Windows 本地产物与 .env（服务器密钥不被覆盖/删除）
+      - name: Sync source to ECS
+        run: |
+          rsync -az --delete \
+            --exclude '.git' \
+            --exclude 'node_modules' \
+            --exclude '.venv' \
+            --exclude '__pycache__' \
+            --exclude '*.pyc' \
+            --exclude '.next' \
+            --exclude 'dist' \
+            --exclude '.turbo' \
+            --exclude '.env' \
+            --exclude '.env.local' \
+            --exclude '.logs' \
+            --exclude 'vimax-platform/data' \
+            -e "ssh -p ${{ secrets.ALIYUN_SSH_PORT || '22' }} -i ~/.ssh/id_ed25519" \
+            ./ "${{ secrets.ALIYUN_SSH_USER }}@${{ secrets.ALIYUN_SSH_HOST }}:${{ vars.DEPLOY_PATH || '/opt/vimax' }}/"
+
+      - name: Deploy
+        run: |
+          ssh -p "${{ secrets.ALIYUN_SSH_PORT || '22' }}" -i ~/.ssh/id_ed25519 \
+            "${{ secrets.ALIYUN_SSH_USER }}@${{ secrets.ALIYUN_SSH_HOST }}" \
+            "bash '${{ vars.DEPLOY_PATH || '/opt/vimax' }}/vimax-platform/scripts/deploy.sh' '${{ github.sha }}' ${{ (github.event_name == 'workflow_dispatch' && inputs.migrate) && '--migrate' || '' }}"

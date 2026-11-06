@@ -7,9 +7,13 @@ from utils.image import image_path_to_b64
 
 
 class VideoGeneratorDoubaoSeedanceYunwuAPI:
+    DEFAULT_BASE_URL = "https://yunwu.ai/volc/v1/contents/generations/tasks"
+
     def __init__(
         self,
         api_key: str,
+        base_url: str = "",
+        model: str = "",
         t2v_model: str = "doubao-seedance-1-0-lite-t2v-250428",
         ff2v_model: str = "doubao-seedance-1-0-lite-i2v-250428",
         flf2v_model: str = "doubao-seedance-1-0-lite-i2v-250428",
@@ -56,8 +60,7 @@ class VideoGeneratorDoubaoSeedanceYunwuAPI:
 
         logging.info(f"Calling {model} to generate video...")
 
-        url = "https://yunwu.ai/volc/v1/contents/generations/tasks"
-
+        url = self.base_url
 
         content = [
             {
@@ -142,7 +145,7 @@ class VideoGeneratorDoubaoSeedanceYunwuAPI:
         Returns:
             Video URL string
         """
-        url = f"https://yunwu.ai/volc/v1/contents/generations/tasks/{task_id}"
+        url = f"{self.base_url}/{task_id}"
         headers = {
             'Authorization': f'Bearer {self.api_key}',
         }

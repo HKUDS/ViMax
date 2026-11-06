@@ -1,0 +1,31 @@
+/* ── ViMax Base: Typography Defaults ──────────────────────────── */
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: var(--font-semibold);
+    line-height: var(--leading-tight);
+    color: var(--color-text);
+  }
+
+  h1 { font-size: var(--text-2xl); }
+  h2 { font-size: var(--text-xl); }
+  h3 { font-size: var(--text-lg); }
+  h4 { font-size: var(--text-md); }
+
+  p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  small {
+    font-size: var(--text-xs);
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+}

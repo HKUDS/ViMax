@@ -1,0 +1,205 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vimax
+      POSTGRES_PASSWORD: vimax
+      POSTGRES_DB: vimax
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vimax -d vimax"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_started
+    entrypoint: >
+      /bin/sh -c "
+      sleep 3;
+      mc alias set local http://minio:9000 minioadmin minioadmin;
+      mc mb --ignore-existing local/vimax-assets;
+      exit 0;
+      "
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "3005:3005"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgres://vimax:vimax@postgres:5432/vimax
+      REDIS_URL: redis://redis:6379
+      # presigned URL 要发给宿主浏览器——host.docker.internal 容器内外都可达；
+      # 容器内部地址 minio:9000 只对 worker 有效（它们不签发 URL）。
+      S3_ENDPOINT: http://host.docker.internal:9000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:3005/trpc
+        NEXT_PUBLIC_DEFAULT_IMAGE_MODEL: cogview-3-flash
+        NEXT_PUBLIC_DEFAULT_VIDEO_MODEL: agnes-video-2.5-flash
+    ports:
+      - "3010:3010"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  worker-image:
+    build:
+      context: .
+      dockerfile: workers/image/Dockerfile
+    env_file:
+      - .env
+    environment:
+      REDIS_URL: redis://redis:6379
+      S3_ENDPOINT: http://minio:9000
+      VIMAX_ROOT: /app/vimax
+    volumes:
+      - ..:/app/vimax:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  worker-video:
+    build:
+      context: .
+      dockerfile: workers/image/Dockerfile
+      args:
+        INSTALL_FFMPEG: "true"
+    command: ["python", "-m", "vimax_image_worker.video_main"]
+    env_file:
+      - .env
+    environment:
+      REDIS_URL: redis://redis:6379
+      S3_ENDPOINT: http://minio:9000
+      VIMAX_ROOT: /app/vimax
+    volumes:
+      - ..:/app/vimax:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  worker-concat:
+    build:
+      context: .
+      dockerfile: workers/image/Dockerfile
+      args:
+        INSTALL_FFMPEG: "true"
+    command: ["python", "-m", "vimax_image_worker.concat_main"]
+    env_file:
+      - .env
+    environment:
+      REDIS_URL: redis://redis:6379
+      S3_ENDPOINT: http://minio:9000
+      VIMAX_ROOT: /app/vimax
+    volumes:
+      - ..:/app/vimax:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  worker-pipeline:
+    build:
+      context: .
+      dockerfile: workers/image/Dockerfile
+      args:
+        INSTALL_VIMAX_AGENTS: "true"
+    command: ["python", "-m", "vimax_image_worker.pipeline_main"]
+    env_file:
+      - .env
+    environment:
+      REDIS_URL: redis://redis:6379
+      S3_ENDPOINT: http://minio:9000
+      VIMAX_ROOT: /app/vimax
+    volumes:
+      - ..:/app/vimax:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  worker-audio:
+    build:
+      context: .
+      dockerfile: workers/image/Dockerfile
+    command: ["python", "-m", "vimax_image_worker.audio_main"]
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      REDIS_URL: redis://redis:6379
+      S3_ENDPOINT: http://minio:9000
+      VIMAX_ROOT: /app/vimax
+    volumes:
+      - ..:/app/vimax:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+
+volumes:
+  postgres_data:
+  minio_data:

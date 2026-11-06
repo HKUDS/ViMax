@@ -1,0 +1,418 @@
+/* ── ViMax Design System ──────────────────────────────────────── */
+/* Layered CSS architecture: tokens → base → components → overrides */
+
+@import "tailwindcss";
+/* Workspace UI package resolves through node_modules (pnpm symlink), which
+   Tailwind v4 auto content detection skips — scan its sources explicitly. */
+@source "../../../../packages/ui/src";
+
+/* ── Design Tokens ────────────────────────────────────────────── */
+@import "../styles/tokens/colors.css";
+@import "../styles/tokens/typography.css";
+@import "../styles/tokens/spacing.css";
+@import "../styles/tokens/shadows.css";
+@import "../styles/tokens/radii.css";
+@import "../styles/tokens/sizes.css";
+
+/* ── Base Styles ──────────────────────────────────────────────── */
+@import "../styles/base/reset.css";
+@import "../styles/base/typography.css";
+
+/* ── Component Styles ─────────────────────────────────────────── */
+
+@layer components {
+  /* ── Refined Card ── */
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-sm);
+  }
+  .card-glow:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-glow-sm);
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    background: linear-gradient(90deg, var(--color-surface-elevated) 25%, var(--color-border) 50%, var(--color-surface-elevated) 75%);
+    background-size: 200% 100%;
+    border-radius: var(--radius-md);
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-surface-elevated);
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--gradient-accent);
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ── Glass panel ── */
+  .glass {
+    background: rgba(15, 19, 29, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+  }
+  [data-theme="light"] .glass {
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  /* ── Gradient text ── */
+  .gradient-text {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Gradient border ── */
+  .gradient-border {
+    position: relative;
+  }
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-accent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* ── Animations ───────────────────────────────────────────────── */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes nodePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 1px var(--glow-color, rgba(95, 159, 216, 0.45)),
+                0 0 14px rgba(95, 159, 216, 0.12);
+  }
+  50% {
+    box-shadow: 0 0 0 1px var(--glow-color, rgba(95, 159, 216, 0.7)),
+                0 0 22px rgba(95, 159, 216, 0.2);
+  }
+}
+
+@keyframes nodeDirtyPulse {
+  0%, 100% { border-color: var(--color-node-dirty); }
+  50% { border-color: rgba(217, 142, 63, 0.45); }
+}
+
+@keyframes beamSlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-4px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-in { animation: fadeIn 0.3s ease-out; }
+.animate-blink { animation: blink 1s infinite; }
+.animate-slide-up { animation: slideUp 0.3s ease-out; }
+.animate-slide-down { animation: slideDown 0.3s ease-out; }
+.animate-slide-in-right { animation: slideInRight 0.3s ease-out; }
+.animate-scale-in { animation: scaleIn 0.2s ease-out; }
+.animate-shimmer {
+  background: linear-gradient(90deg, var(--color-surface-elevated) 25%, var(--color-border) 50%, var(--color-surface-elevated) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ── React Flow Overrides (Toonflow-style) ──────────────────── */
+
+/* Cursor visibility fix for dark backgrounds on Windows */
+.react-flow__pane,
+.react-flow__pane.draggable {
+  cursor: default !important;
+}
+
+.react-flow__pane.dragging {
+  cursor: grabbing !important;
+}
+
+.react-flow__node,
+.react-flow__node.draggable {
+  cursor: pointer !important;
+}
+
+.react-flow__node.dragging {
+  cursor: grabbing !important;
+}
+
+.node-shell,
+.node-header {
+  cursor: inherit !important;
+}
+
+/* Drag handle */
+.dragHandle {
+  cursor: grab !important;
+}
+
+.dragHandle:active {
+  cursor: grabbing !important;
+}
+
+/* Edge connections — color/width/flow are derived per edge from node
+ * relations (edge-relations.ts sets them inline); CSS only adds emphasis
+ * on hover/selection so it never clobbers the relation colors. */
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke-width: 4 !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke-width: 4 !important;
+}
+
+/* Connection handles */
+.react-flow__handle {
+  transition: transform 0.15s, background-color 0.15s;
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.35);
+}
+
+.react-flow__handle-connecting {
+  animation: nodePulse 1.2s ease-in-out infinite;
+}
+
+/* Selection box */
+.react-flow__selection {
+  background-color: rgba(232, 165, 75, 0.06) !important;
+  border: 1px solid rgba(232, 165, 75, 0.35) !important;
+}
+
+/* Space+drag panning cursor */
+.space-dragging .react-flow__node,
+.space-dragging .react-flow__pane,
+.space-dragging .dragHandle {
+  cursor: grab !important;
+}
+
+/* Interaction performance optimization */
+.is-interacting .react-flow__node {
+  will-change: transform;
+  contain: layout style paint;
+}
+
+.is-interacting .react-flow__transformationpane {
+  will-change: transform;
+}
+
+/* ── Chat Animations ─────────────────────────────────────────── */
+
+.chat-typing-dots {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.chat-typing-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+}
+
+.chat-typing-dots span:nth-child(1) {
+  animation: typingDot 1.2s infinite 0s;
+}
+
+.chat-typing-dots span:nth-child(2) {
+  animation: typingDot 1.2s infinite 0.2s;
+}
+
+.chat-typing-dots span:nth-child(3) {
+  animation: typingDot 1.2s infinite 0.4s;
+}
+
+/* ── Responsive Utilities ──────────────────────────────────────── */
+
+/* Mobile-first responsive breakpoints */
+/* sm: 640px | md: 768px | lg: 1024px | xl: 1280px */
+
+/* Hide/show helpers */
+@media (max-width: 767px) {
+  .hide-on-mobile { display: none !important; }
+}
+
+@media (min-width: 768px) {
+  .show-on-mobile { display: none !important; }
+}
+
+/* Responsive container */
+.responsive-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+/* Responsive sidebar behavior */
+@media (max-width: 767px) {
+  .app-sidebar {
+    position: fixed;
+    left: 0;
+    top: 48px;
+    bottom: 0;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+  .app-sidebar.open {
+    transform: translateX(0);
+  }
+  .sidebar-overlay {
+    display: block !important;
+  }
+}
+
+/* Mobile bottom navigation */
+@media (max-width: 767px) {
+  .top-nav-links {
+    gap: 0.25rem;
+  }
+  .top-nav-links a {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 12px;
+  }
+}
+
+/* Responsive grid helpers */
+.responsive-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 640px) {
+  .responsive-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1280px) {
+  .responsive-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Responsive text */
+@media (max-width: 767px) {
+  .responsive-heading { font-size: 24px; }
+  .responsive-text { font-size: 13px; }
+}
+
+/* Canvas edge flow — dash cycle is 14px (7 dash + 7 gap), so the offset
+   loop of -14 makes the movement seamless. Duration is set inline per
+   edge (see edge-relations.ts): slow for idle links, fast while running. */
+@keyframes vimax-edge-flow {
+  to { stroke-dashoffset: -14; }
+}
+
+/* ── Cinematic backdrop（首页 hero 光影）──
+   仅 transform 位移动画；被下方全局 reduce 开关接管。 */
+@keyframes fxBeamDrift {
+  from { translate: -2.5% -6px; }
+  to { translate: 2.5% 10px; }
+}
+@keyframes fxAuroraDrift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-60px, 36px) scale(1.12); }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── React Flow theme hooks (colors that must follow the theme) ── */
+.react-flow__background pattern circle {
+  fill: var(--color-hairline-strong);
+}
+
+.react-flow__minimap-mask {
+  fill: rgba(12, 12, 14, 0.55);
+}
+
+[data-theme="light"] .react-flow__minimap-mask {
+  fill: rgba(245, 245, 246, 0.65);
+}

@@ -11,14 +11,20 @@ from interfaces.image_output import ImageOutput
 
 
 class ImageGeneratorDoubaoSeedreamYunwuAPI:
+    DEFAULT_BASE_URL = "https://yunwu.ai/v1/images/generations"
+
     def __init__(
         self,
         api_key: str,
+        base_url: str = "",
         model: str = "doubao-seedream-4-0-250828",
 
     ):
         self.api_key = api_key
-        self.base_url = "https://yunwu.ai/v1/images/generations"
+        # Platform/UI may store the vendor root (e.g. "https://host/v1/") —
+        # this generator always posts to the images/generations path.
+        root = (base_url or self.DEFAULT_BASE_URL).rstrip("/")
+        self.base_url = root if root.endswith("/images/generations") else root + "/images/generations"
         self.model = model
 
 
@@ -64,11 +70,27 @@ class ImageGeneratorDoubaoSeedreamYunwuAPI:
             "Content-Type": "application/json",
         }
 
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.post(self.base_url, json=payload, headers=headers) as response:
+                    response_json = await response.json()
+                    if response.status >= 400 or 'data' not in response_json:
+                        err = response_json.get('error') if isinstance(response_json, dict) else None
+                        detail = err.get('message', '') if isinstance(err, dict) else str(response_json)[:200]
+                        logging.error(f"image API failure — url={self.base_url} payload={ {k: (v if k != 'image' else f'[{len(v)} refs]') for k, v in payload.items()} }")
+                        raise RuntimeError(f"image API {response.status}: {detail}")
+        except Exception as e:
+            logging.error(f"Error occurred while generating image: {e}")
+            raise e
         async with aiohttp.ClientSession() as session:
             async with session.post(self.base_url, json=payload, headers=headers) as response:
                 response_json = await response.json()
                 if response.status >= 400:
                     raise RuntimeError(f"Image generation failed with HTTP {response.status}: {response_json}")
 
-        data = response_json['data'][0]['url']
-        return ImageOutput(fmt="url", ext="png", data=data)
+        # OpenAI-compatible endpoints return either a URL or inline b64_json
+        # (gpt-image-* always returns b64_json).
+        data0 = response_json['data'][0]
+        if data0.get('url'):
+            return ImageOutput(fmt="url", ext="png", data=data0['url'])
+        return ImageOutput(fmt="b64", ext="png", data=data0['b64_json'])
