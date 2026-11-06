@@ -37,7 +37,18 @@
     "studioVideo": "视频工作室",
     "groupCreative": "创作引擎",
     "groupEcosystem": "生态与资源",
-    "newCanvas": "新建画布"
+    "newCanvas": "新建画布",
+    "projects": "项目"
+  },
+  "projects": {
+    "title": "项目",
+    "xProjects": "{count} 个项目",
+    "noProjects": "还没有项目",
+    "noProjectsDesc": "输入你的创意或剧本，开始第一个 AI 视频项目",
+    "confirmDelete": "确认删除",
+    "confirmDeleteDesc": "确定要删除项目「{name}」吗？此操作不可撤销。",
+    "deleteSuccess": "已删除项目「{name}」",
+    "deleteFailed": "删除失败"
   },
   "home": {
     "title": "用 AI 将创意变成视频",
@@ -54,14 +65,6 @@
     "submitIdea": "开始生成",
     "submitScript": "开始生成",
     "ctrlEnterHint": "Ctrl+Enter 快速提交",
-    "recentProjects": "最近项目",
-    "xProjects": "{count} 个项目",
-    "noProjects": "还没有项目",
-    "noProjectsDesc": "输入你的创意或剧本，开始第一个 AI 视频项目",
-    "confirmDelete": "确认删除",
-    "confirmDeleteDesc": "确定要删除项目「{name}」吗？此操作不可撤销。",
-    "deleteSuccess": "已删除项目「{name}」",
-    "deleteFailed": "删除失败",
     "createFailed": "创建项目失败，请检查服务是否正常运行",
     "ideaPlaceholder": "例如：一个孤独的宇航员在火星上发现了一扇通往异世界的门…\n\n尽量描述清楚：人物、场景、风格、情绪、时长等",
     "scriptPlaceholder": "例如：\n第1场 - 咖啡厅 日内\n\n角色A推门走进咖啡厅，环顾四周，在角落找到了角色B。\n\n角色A：你终于来了。\n角色B：（低头搅动咖啡）抱歉让你久等了。",

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { CanvasMutation, AgentMessage } from "@vimax/contracts";
 import type { Node } from "@xyflow/react";
 import { cn } from "@vimax/ui";
+import { toast } from "sonner";
 import {
   Brain,
   ChevronDown,
@@ -131,7 +132,14 @@ export function ChatPanel({
   useEffect(() => {
     if (prevStreamingRef.current && !isStreaming && autoMode && startAutoPipeline) {
       const script = nodes.find((n) => n.type === "script");
-      if (script) void startAutoPipeline(script.id);
+      if (script) {
+        startAutoPipeline(script.id).catch((err: unknown) => {
+          const msg = (err as Error).message || "启动失败";
+          toast.error(
+            msg.includes("already_running") ? "该画布已有出片任务在运行，请等待完成" : msg.slice(0, 80),
+          );
+        });
+      }
     }
     prevStreamingRef.current = isStreaming;
   }, [isStreaming, autoMode, startAutoPipeline, nodes]);

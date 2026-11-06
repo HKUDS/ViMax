@@ -1,4 +1,7 @@
 import unittest
+import sys
+from types import SimpleNamespace
+from unittest import mock
 
 from vimax_image_worker.vimax_bridge import (
     credential_chat_model_args,
@@ -62,6 +65,18 @@ class CredentialArgsTest(unittest.TestCase):
 
 
 class MapCanvasCharactersTest(unittest.TestCase):
+    def setUp(self):
+        class CharacterInScene:
+            def __init__(self, **kwargs):
+                self.__dict__.update(kwargs)
+
+        patcher = mock.patch.dict(
+            sys.modules,
+            {"interfaces": SimpleNamespace(CharacterInScene=CharacterInScene)},
+        )
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def test_maps_name_and_description(self):
         characters = map_canvas_characters(
             [{"name": "Alice", "description": "Long blonde hair."}]

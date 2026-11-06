@@ -21,6 +21,9 @@ class JobReporter:
     def _publish(self, event: dict) -> None:
         self._client.publish(self._channel, json.dumps(event))
 
+    def requeue(self, queue_key: str, payload: dict) -> None:
+        self._client.lpush(queue_key, json.dumps(payload))
+
     async def started(self) -> None:
         self._publish({"type": "started", "ts": _now(), "job_id": self._job_id})
 

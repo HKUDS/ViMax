@@ -13,6 +13,7 @@ import { SkeletonList, cn } from "@vimax/ui";
 import { toast } from "sonner";
 import { AlertTriangle, Download, Film, Loader2, PencilRuler, RotateCcw } from "lucide-react";
 import { useAssetSource } from "@/features/assets/useAssetSource";
+import { runNodeWithLocalRestore } from "@/features/assets/restore-from-local";
 import { downloadLocalAsset } from "@/lib/local-assets";
 
 function AssetVideo({ assetId, className }: { assetId: string; className?: string }) {
@@ -73,6 +74,15 @@ export default function ProjectPage() {
   );
 
   const runNode = trpc.canvas.runNode.useMutation();
+  const trpcUtils = trpc.useUtils();
+  // 已本地化的输入资产（如参考图）会被服务端入队预检拦下，先从本地
+  // 金库恢复再重试；本地也没有副本时抛出用户可读的提示。
+  const runNodeRestored = (nodeId: string) =>
+    runNodeWithLocalRestore(
+      trpcUtils.client,
+      { canvas_id: canvasId, node_id: nodeId },
+      (input) => runNode.mutateAsync(input),
+    );
 
   const model = useMemo(() => {
     const nodes = snapshot.data?.nodes ?? [];
@@ -183,8 +193,7 @@ export default function ProjectPage() {
             type="button"
             disabled={runNode.isPending}
             onClick={() =>
-              runNode
-                .mutateAsync({ canvas_id: canvasId, node_id: model.concat!.id })
+              runNodeRestored(model.concat!.id)
                 .catch((err: unknown) => toast.error((err as Error).message.slice(0, 80)))
             }
             className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--color-accent-on)] transition-colors hover:bg-[var(--color-accent-hover)] disabled:opacity-60"
@@ -225,8 +234,7 @@ export default function ProjectPage() {
                             type="button"
                             title="重跑这一段"
                             onClick={() =>
-                              runNode
-                                .mutateAsync({ canvas_id: canvasId, node_id: node.id })
+                              runNodeRestored(node.id)
                                 .catch((err: unknown) => toast.error((err as Error).message.slice(0, 60)))
                             }
                             className="flex items-center gap-1.5 rounded-md border border-[var(--color-danger)] px-3 py-1.5 text-xs text-[var(--color-danger)] transition-colors hover:bg-[var(--color-danger-subtle)]"

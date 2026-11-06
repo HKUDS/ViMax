@@ -40,8 +40,11 @@ class VideoGeneratorCogVideoXZhipuAPI:
         with_audio: bool = False,
         poll_interval: int = 5,
         max_poll_attempts: Optional[int] = 96,
-        submit_max_attempts: int = 30,
-        generate_max_attempts: int = 3,
+        # 拥堵退避 = poll_interval*6：10 次×30 秒×2 轮 ≈ 单模型 10 分钟上限。
+        # 串行 worker 里一个 job 霸占队列数小时会把后面全部任务堵死，
+        # 宁可尽早失败让用户稍后重试。
+        submit_max_attempts: int = 10,
+        generate_max_attempts: int = 2,
     ):
         self.api_key = api_key
         self.base_url = (base_url or self.DEFAULT_BASE_URL).rstrip("/")

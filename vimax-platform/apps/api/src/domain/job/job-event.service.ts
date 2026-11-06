@@ -38,6 +38,13 @@ export async function handleJobEvent(raw: string): Promise<void> {
   }
 
   const db = getDb();
+  const [currentJob] = await db
+    .select({ status: jobs.status })
+    .from(jobs)
+    .where(eq(jobs.id, parsed.job_id))
+    .limit(1);
+  if (!currentJob || currentJob.status === "succeeded" || currentJob.status === "failed") return;
+
   await db.insert(jobEvents).values({
     jobId: parsed.job_id,
     eventType: mapEventType(parsed.type),
@@ -92,6 +99,24 @@ export async function handleJobEvent(raw: string): Promise<void> {
           `[canvas hook] Failed to spawn storyboard cells for node ${canvasMeta.node_id}:`,
           (err as Error).message,
         );
+        const errorMessage = `Failed to create storyboard nodes: ${err instanceof Error ? err.message : "unknown error"}`;
+        await db.update(jobs).set({
+          status: "failed",
+          errorCode: "canvas.storyboard_persist_failed",
+          errorMessage,
+          finishedAt: new Date(),
+        }).where(eq(jobs.id, parsed.job_id));
+        await setNodeStatus(canvasMeta.canvas_id, canvasMeta.node_id, "failed");
+        broadcastNodeStatus(canvasMeta.canvas_id, canvasMeta.node_id, "failed", null, parsed.job_id);
+        broadcastJobEvent(parsed.job_id, {
+          type: "failed",
+          ts: parsed.ts,
+          job_id: parsed.job_id,
+          error_code: "canvas.storyboard_persist_failed",
+          error_message: errorMessage,
+          retryable: true,
+        });
+        return;
       }
 
       await db

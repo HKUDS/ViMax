@@ -6,6 +6,7 @@ import {
   Clapperboard,
   Compass,
   Cpu,
+  Film,
   FolderOpen,
   Home,
   Image as ImageIcon,
@@ -48,6 +49,7 @@ export function StudioSidebar() {
       label: t("groupCreative"),
       items: [
         { label: t("home"), href: "/", icon: Home, active: is("/") },
+        { label: t("projects"), href: "/projects", icon: Film, active: is("/projects") },
         { label: t("studioVideo"), href: "/studio/video", icon: Clapperboard, active: is("/studio/video") },
         { label: t("studio"), href: "/studio/image", icon: ImageIcon, active: is("/studio/image") },
         { label: tc("assets"), href: "/assets", icon: FolderOpen, active: is("/assets") },

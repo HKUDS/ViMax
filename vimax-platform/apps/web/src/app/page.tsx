@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { trpc } from "@/lib/trpc/client";
-import { Button, Input, Textarea, ConfirmDialog, SkeletonList, EmptyState, useToast, cn } from "@vimax/ui";
+import { Button, Input, Textarea, useToast, cn } from "@vimax/ui";
 import { useTranslations } from "next-intl";
 import { WelcomeOverlay } from "@/features/onboarding/WelcomeOverlay";
 import { GenerationOverlay } from "@/features/generation/GenerationOverlay";
@@ -16,10 +16,7 @@ import { useAuth } from "@/features/auth/AuthProvider";
 import { ThesaurusChips } from "@/features/prompt-words/PromptWordChips";
 import {
   Sparkles,
-  Film,
   ChevronRight,
-  Clock,
-  Trash2,
   Lightbulb,
   ScrollText,
   Type,
@@ -72,12 +69,10 @@ export default function HomePage() {
   const { toast } = useToast();
   const { user } = useAuth();
   const t = useTranslations("home");
-  const tc = useTranslations("common");
 
   const [mode, setMode] = useState<CreateMode>("idea");
   const [input, setInput] = useState("");
   const [canvasName, setCanvasName] = useState("");
-  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
   // Generation overlay state — shows AI generation process on home page
   const [generationState, setGenerationState] = useState<{
@@ -113,8 +108,6 @@ export default function HomePage() {
 
   const createCanvas = trpc.canvas.create.useMutation();
   const createConversation = trpc.chat.createConversation.useMutation();
-  const deleteCanvas = trpc.canvas.delete.useMutation();
-  const listCanvases = trpc.canvas.list.useQuery({ limit: 20 });
   const templates = trpc.canvas.listTemplates.useQuery();
   const instantiateTemplate = trpc.canvas.instantiateTemplate.useMutation();
   const requestUpload = trpc.asset.requestUpload.useMutation();
@@ -122,7 +115,6 @@ export default function HomePage() {
   const utils = trpc.useUtils();
 
   const config = MODES[mode];
-  const projects = listCanvases.data?.items ?? [];
 
   const rootRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
@@ -246,7 +238,7 @@ export default function HomePage() {
       scroller?.removeEventListener("scroll", reveal);
       window.removeEventListener("resize", reveal);
     };
-  }, [projects.length, listCanvases.isLoading, templates.data]);
+  }, [templates.data]);
 
   // ── Hover lift: feature cards and project rows ease up under the cursor ──
   useIsoLayoutEffect(() => {
@@ -270,7 +262,7 @@ export default function HomePage() {
       cleanups.forEach((fn) => fn());
       gsap.killTweensOf(cards);
     };
-  }, [projects.length]);
+  }, [templates.data]);
 
   const handleCreate = async () => {
     if (!input.trim()) return;
@@ -322,17 +314,6 @@ export default function HomePage() {
       if (trpcErr.shape?.data?.code === "UNAUTHORIZED") return;
       toast.error(t("createFailed"));
     }
-  };
-
-  const handleConfirmDelete = async () => {
-    if (!deleteTarget) return;
-    try { await deleteCanvas.mutateAsync({ canvas_id: deleteTarget.id }); utils.canvas.list.invalidate(); toast.success(t("deleteSuccess", { name: deleteTarget.name })); }
-    catch (err) {
-      const trpcErr = err as { shape?: { data?: { code?: string } } };
-      if (trpcErr.shape?.data?.code === "UNAUTHORIZED") return;
-      toast.error(t("deleteFailed"));
-    }
-    setDeleteTarget(null);
   };
 
   return (
@@ -546,7 +527,7 @@ export default function HomePage() {
 
         {/* ═══ 灵感模板 ═══ */}
         {!templates.isLoading && (templates.data?.length ?? 0) > 0 && (
-          <section className="px-6 pb-4 pt-8 max-w-[900px] mx-auto w-full">
+          <section className="px-6 pb-16 pt-8 max-w-[900px] mx-auto w-full">
             <div data-reveal className="mb-5 flex items-end justify-between">
               <div>
                 <h2 className="text-xl font-semibold text-[var(--color-ink)] tracking-tight">灵感模板</h2>
@@ -580,45 +561,6 @@ export default function HomePage() {
           </section>
         )}
 
-        {/* ═══ Projects — Linear card grid ═══ */}
-        <section className="flex flex-col items-center px-6 pb-24 max-w-[900px] mx-auto w-full">
-          {listCanvases.isLoading ? (
-            <div className="w-full max-w-[680px]"><SkeletonList count={3} /></div>
-          ) : projects.length > 0 ? (
-            <div className="w-full max-w-[680px]">
-              <div data-reveal className="flex items-end justify-between mb-6">
-                <div>
-                  <h2 className="text-xl font-semibold text-[var(--color-ink)] tracking-tight">{t("recentProjects")}</h2>
-                  <p className="text-xs text-[var(--color-ink-subtle)] mt-1">{t("xProjects", { count: projects.length })}</p>
-                </div>
-                <a href="/explore" className="flex items-center gap-1 text-xs font-medium text-[var(--color-accent)] hover:opacity-80 transition-opacity no-underline">查看全部 <ChevronRight className="size-3" /></a>
-              </div>
-              <div className="grid gap-2">
-                {projects.map((p) => (
-                  <div key={p.canvas_id} data-reveal data-lift className="group flex items-center gap-4 px-5 py-3.5 rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-1)] hover:border-[var(--color-hairline-strong)] hover:bg-[var(--color-surface-2)] transition-colors duration-200">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--color-accent-subtle)] shrink-0 group-hover:bg-[var(--color-accent-muted)] transition-colors">
-                      <Film className="size-4 text-[var(--color-accent)]" />
-                    </div>
-                    <a href={`/project/${p.canvas_id}`} className="flex-1 flex items-center justify-between no-underline text-inherit min-w-0">
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-[var(--color-ink)] truncate group-hover:text-[var(--color-accent)] transition-colors">{p.name}</div>
-                        <div className="flex items-center gap-2 text-[11px] text-[var(--color-ink-subtle)] mt-0.5">
-                          <span>{p.node_count} 节点</span>
-                          <span className="flex items-center gap-1"><Clock className="size-2.5" />{new Date(p.updated_at).toLocaleDateString("zh-CN", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
-                        </div>
-                      </div>
-                      <ChevronRight className="size-4 text-[var(--color-ink-tertiary)] opacity-0 group-hover:opacity-100 transition-all" />
-                    </a>
-                    <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setDeleteTarget({ id: p.canvas_id, name: p.name }); }} title={t("confirmDelete")} className="flex items-center justify-center w-8 h-8 rounded-lg text-[var(--color-ink-tertiary)] hover:text-[var(--color-danger)] hover:bg-[var(--color-danger-subtle)] transition-colors shrink-0 opacity-0 group-hover:opacity-100">
-                      <Trash2 className="size-3.5" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : <EmptyState title={t("noProjects")} description={t("noProjectsDesc")} />}
-        </section>
-
         <footer className="flex items-center justify-center gap-6 py-6 border-t border-[var(--color-hairline)] bg-[var(--color-surface-1)] shrink-0 mt-auto">
           <span className="text-[11px] text-[var(--color-ink-subtle)]">{t("footer")}</span>
           <span className="text-[11px] text-[var(--color-ink-tertiary)]">{t("footerPowered")}</span>
@@ -626,7 +568,6 @@ export default function HomePage() {
       </div>
 
       <WelcomeOverlay />
-      <ConfirmDialog open={deleteTarget !== null} onClose={() => setDeleteTarget(null)} onConfirm={handleConfirmDelete} title={t("confirmDelete")} description={t("confirmDeleteDesc", { name: deleteTarget?.name ?? "" })} confirmLabel={tc("delete")} cancelLabel={tc("cancel")} variant="danger" />
 
       {/* Generation overlay — shows AI streaming response after clicking generate */}
       {generationState && (

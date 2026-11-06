@@ -1,7 +1,11 @@
 import { and, eq, inArray, isNull, lt, sql } from "drizzle-orm";
 import { getDb } from "../../infrastructure/db/client.js";
 import { assets, canvasEdges, canvasNodes } from "../../infrastructure/db/schema.js";
-import { deleteObject } from "../../infrastructure/storage/s3.js";
+import {
+  createPresignedUploadUrl,
+  deleteObject,
+  headObject,
+} from "../../infrastructure/storage/s3.js";
 
 // ── 本地化存储策略 ────────────────────────────────────────────────
 // 云端对象存储只做瞬时中转：worker 产物先上传（传输通道），客户端把
@@ -70,6 +74,64 @@ export async function offloadAsset(assetId: string) {
   await deleteObject(asset.storageKey);
   await db.update(assets).set({ offloadedAt: new Date() }).where(eq(assets.id, assetId));
   return { asset_id: assetId, offloaded: true };
+}
+
+/** 找出已本地化（二进制不在云端）的资产 id。 */
+export async function findOffloadedAssetIds(assetIds: string[]): Promise<string[]> {
+  if (assetIds.length === 0) return [];
+  const db = getDb();
+  const rows = await db
+    .select({ id: assets.id, offloadedAt: assets.offloadedAt })
+    .from(assets)
+    .where(inArray(assets.id, assetIds));
+  return rows.filter((r) => r.offloadedAt !== null).map((r) => r.id);
+}
+
+/**
+ * 入队前防线：worker 从对象存储读输入二进制，已本地化的资产必须先由
+ * 客户端恢复，否则必然 404。抛出 `asset.input_offloaded:<id,...>`，
+ * 客户端据此从本地金库回传后重试。
+ */
+export async function assertAssetsNotOffloaded(assetIds: string[]): Promise<void> {
+  const offloaded = await findOffloadedAssetIds(assetIds);
+  if (offloaded.length > 0) {
+    throw new Error(`asset.input_offloaded:${offloaded.join(",")}`);
+  }
+}
+
+/**
+ * 恢复通行证：签发指向原 storage_key 的直传地址，客户端把本地金库里
+ * 的二进制写回原位。返回 upload_url 为 null 表示二进制仍在云端，无需恢复。
+ */
+export async function requestAssetRestore(assetId: string) {
+  const db = getDb();
+  const [asset] = await db
+    .select({ storageKey: assets.storageKey, mimeType: assets.mimeType, offloadedAt: assets.offloadedAt })
+    .from(assets)
+    .where(eq(assets.id, assetId))
+    .limit(1);
+  if (!asset) throw new Error("input.asset_not_found");
+  if (asset.offloadedAt === null) {
+    return { asset_id: assetId, upload_url: null, mime_type: asset.mimeType };
+  }
+  const uploadUrl = await createPresignedUploadUrl(asset.storageKey, asset.mimeType);
+  return { asset_id: assetId, upload_url: uploadUrl, mime_type: asset.mimeType };
+}
+
+/** 回传完成：确认对象已就位并清除 offloaded 标记。幂等。 */
+export async function confirmAssetRestore(assetId: string) {
+  const db = getDb();
+  const [asset] = await db
+    .select({ storageKey: assets.storageKey, offloadedAt: assets.offloadedAt })
+    .from(assets)
+    .where(eq(assets.id, assetId))
+    .limit(1);
+  if (!asset) throw new Error("input.asset_not_found");
+  await headObject(asset.storageKey);
+  if (asset.offloadedAt !== null) {
+    await db.update(assets).set({ offloadedAt: null }).where(eq(assets.id, assetId));
+  }
+  return { asset_id: assetId, restored: true };
 }
 
 /** TTL 兜底清扫：删除超时未认领的 generated 二进制。返回清除数量。 */

@@ -88,7 +88,7 @@ services:
       args:
         NEXT_PUBLIC_API_URL: http://localhost:3005/trpc
         NEXT_PUBLIC_DEFAULT_IMAGE_MODEL: cogview-3-flash
-        NEXT_PUBLIC_DEFAULT_VIDEO_MODEL: cogvideox-flash
+        NEXT_PUBLIC_DEFAULT_VIDEO_MODEL: agnes-video-2.5-flash
     ports:
       - "3010:3010"
     depends_on:

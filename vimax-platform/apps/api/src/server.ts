@@ -14,6 +14,7 @@ import { initVendorRegistry } from "./domain/vendor/vendor-registry.js";
 import { initSkillRegistry } from "./domain/skill/skill-registry.js";
 import { seedModels } from "./domain/model/model.service.js";
 import { sweepGeneratedAssets } from "./domain/asset/asset-offload.js";
+import { sweepStalledJobs } from "./domain/job/job-stall.js";
 import { appRouter } from "./trpc/router.js";
 import { createContext } from "./trpc/trpc.js";
 
@@ -99,6 +100,22 @@ async function bootstrap() {
     const firstRun = setTimeout(() => void runSweep(), 2 * 60 * 1000);
     firstRun.unref();
   }
+
+  // ── 僵尸任务清扫 ─────────────────────────────────────────────
+  // worker/宿主崩溃遗留的 queued/running 任务超过阈值后标记失败并同步
+  // 节点状态，释放节点的在途锁让重试可行。每 15 分钟跑一轮。
+  const runStallSweep = async () => {
+    try {
+      const { swept } = await sweepStalledJobs();
+      if (swept > 0) console.log(`[job-stall] marked ${swept} stalled jobs as failed`);
+    } catch (err) {
+      console.warn("[job-stall] failed:", (err as Error).message);
+    }
+  };
+  const stallTimer = setInterval(() => void runStallSweep(), 15 * 60 * 1000);
+  stallTimer.unref();
+  const stallFirst = setTimeout(() => void runStallSweep(), 60 * 1000);
+  stallFirst.unref();
 
   // Start Hono HTTP server — serve() returns the underlying http.Server
   const httpServer = serve({ fetch: app.fetch, port, hostname: host }, (info) => {

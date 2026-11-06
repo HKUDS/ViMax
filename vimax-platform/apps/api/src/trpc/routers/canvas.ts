@@ -91,10 +91,15 @@ function mapError(err: unknown): never {
     "input.unsupported_model": "BAD_REQUEST",
     // prefix match for "canvas.job_in_flight:<job_type>"
     "canvas.job_in_flight": "BAD_REQUEST",
+    // prefix match for "pipeline.already_running:<run_id>"
+    "pipeline.already_running": "CONFLICT",
+    // prefix match for "asset.input_offloaded:<asset_id,...>"
+    "asset.input_offloaded": "PRECONDITION_FAILED",
     "provider.invalid_key": "PRECONDITION_FAILED",
   };
-  const guarded = Object.keys(codeMap).find((key) =>
-    message.startsWith(key) && key === "canvas.job_in_flight",
+  const PREFIXED_KEYS = ["canvas.job_in_flight", "pipeline.already_running", "asset.input_offloaded"];
+  const guarded = Object.keys(codeMap).find(
+    (key) => message.startsWith(key) && PREFIXED_KEYS.includes(key),
   );
   throw new TRPCError({
     code: (guarded && codeMap[guarded]) || codeMap[message] || "INTERNAL_SERVER_ERROR",
@@ -399,13 +404,17 @@ export const canvasRouter = router({
   runAutoPipeline: protectedProcedure
     .input(AutoPipelineInputSchema)
     .mutation(async ({ input }) => {
-      const run_id = startAutoPipeline({
-        canvas_id: input.canvas_id,
-        script_node_id: input.script_node_id,
-        concurrency: input.concurrency,
-        regenerate: input.regenerate,
-      });
-      return { run_id };
+      try {
+        const run_id = startAutoPipeline({
+          canvas_id: input.canvas_id,
+          script_node_id: input.script_node_id,
+          concurrency: input.concurrency,
+          regenerate: input.regenerate,
+        });
+        return { run_id };
+      } catch (err) {
+        mapError(err);
+      }
     }),
 
   // ── ViMax agent bridges (全量 Agent 接入) ────────────────────────

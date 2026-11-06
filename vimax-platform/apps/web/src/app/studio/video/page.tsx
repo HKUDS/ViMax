@@ -327,7 +327,7 @@ export default function StudioVideoPage() {
       es.addEventListener("started", () => setJobStatus("running"));
       es.addEventListener("progress", (e) => {
         const d = safeJsonParse<Record<string, unknown>>(e.data, {});
-        setJobProgress(d.percent ?? 0);
+        setJobProgress(typeof d.percent === "number" ? d.percent : 0);
       });
       es.addEventListener("completed", () => {
         setJobStatus("succeeded");

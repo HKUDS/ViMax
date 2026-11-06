@@ -139,14 +139,20 @@ export function useAutoPipeline(canvasId: string) {
         stages: initialStages(),
         summary: null,
       });
-      const result = await runMutation.mutateAsync({
-        canvas_id: canvasId,
-        script_node_id: scriptNodeId,
-        concurrency: 2,
-        regenerate: opts?.regenerate,
-      });
-      setState((prev) => ({ ...prev, runId: result.run_id }));
-      return result.run_id;
+      try {
+        const result = await runMutation.mutateAsync({
+          canvas_id: canvasId,
+          script_node_id: scriptNodeId,
+          concurrency: 2,
+          regenerate: opts?.regenerate,
+        });
+        setState((prev) => ({ ...prev, runId: result.run_id }));
+        return result.run_id;
+      } catch (err) {
+        // 入队失败（如已有管线在运行）：回滚状态，别让按钮永远转圈
+        setState({ runId: null, status: "failed", stages: initialStages(), summary: null });
+        throw err;
+      }
     },
     [canvasId, runMutation],
   );

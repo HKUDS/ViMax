@@ -13,6 +13,26 @@ import { NodeInspector } from "./panels/NodeInspector";
 import { ChatPanel } from "../chat/ChatPanel";
 import { useCanvas } from "./canvas-context";
 
+const PIPELINE_STAGE_LABELS: Record<string, string> = {
+  storyboard: "分镜",
+  characters: "角色",
+  shot: "镜头",
+  image: "图片",
+  video: "视频",
+  concat: "合成",
+};
+
+// 页面刷新后 WS 管线事件丢失（状态归零），从节点状态推导最深的生产
+// 阶段，保证"出片中"始终可见。script 不参与：后续阶段复用该节点，
+// 其 running 状态不代表分镜阶段仍在执行。
+const PRODUCTION_STAGES: Array<{ label: string; types: string[] }> = [
+  { label: "分镜", types: ["storyboard_cell"] },
+  { label: "镜头", types: ["shot"] },
+  { label: "图片", types: ["image"] },
+  { label: "视频", types: ["video"] },
+  { label: "合成", types: ["concat"] },
+];
+
 function TabButton({
   label,
   icon,
@@ -91,6 +111,34 @@ export function CanvasShell() {
 
   // 重新生成确认（替代原生 window.confirm，走统一 ConfirmDialog）
   const [confirmRegenerate, setConfirmRegenerate] = useState(false);
+
+  // 全自动出片进行中时，工具栏展示当前阶段与进度：优先取 WS 管线事件
+  // （本会话点击后精确）；页面刷新后事件丢失，从节点状态推导兜底。
+  const runningStage = autoPipelineState.stages.find((s) => s.status === "running");
+  const derivedStage = [...PRODUCTION_STAGES]
+    .reverse()
+    .find(({ types }) =>
+      nodes.some(
+        (n) =>
+          types.includes(n.type ?? "") &&
+          (((n.data as Record<string, unknown> | undefined)?.status as string) ?? "idle") === "running",
+      ),
+    );
+  let derivedStageText: string | null = null;
+  if (derivedStage) {
+    const group = nodes.filter((n) => derivedStage.types.includes(n.type ?? ""));
+    const done = group.filter(
+      (n) => (((n.data as Record<string, unknown> | undefined)?.status as string) ?? "idle") === "done",
+    ).length;
+    derivedStageText = `${derivedStage.label} ${done}/${group.length}`;
+  }
+  const autoPipelineStageText =
+    autoPipelineState.status === "running"
+      ? runningStage
+        ? `${PIPELINE_STAGE_LABELS[runningStage.stage] ?? runningStage.stage}` +
+          (runningStage.total > 0 ? ` ${runningStage.done}/${runningStage.total}` : "")
+        : (derivedStageText ?? "运行中")
+      : derivedStageText;
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -186,7 +234,12 @@ export function CanvasShell() {
             toast.error("请先创建剧本节点");
             return;
           }
-          void startAutoPipeline(script.id);
+          startAutoPipeline(script.id).catch((err: unknown) => {
+            const msg = (err as Error).message || "启动失败";
+            toast.error(
+              msg.includes("already_running") ? "该画布已有出片任务在运行，请等待完成" : msg.slice(0, 80),
+            );
+          });
         }}
         onRegenerate={() => {
           const script = nodes.find((n) => n.type === "script");
@@ -197,6 +250,7 @@ export function CanvasShell() {
           setConfirmRegenerate(true);
         }}
         autoPipelineRunning={autoPipelineState.status === "running" || autoPipelineStarting}
+        pipelineStageText={autoPipelineStageText}
       />
 
       <ConfirmDialog

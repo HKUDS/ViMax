@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Edge, Node } from "@xyflow/react";
 import { trpc } from "@/lib/trpc/client";
+import { runNodeWithLocalRestore } from "@/features/assets/restore-from-local";
 
 const API_BASE =
   (typeof window !== "undefined" &&
@@ -30,6 +31,7 @@ const MAX_AUTO_RETRIES = 1;
 
 export function useNodeRun({ canvasId, setNodes, edges }: UseNodeRunOptions) {
   const runMutation = trpc.canvas.runNode.useMutation();
+  const trpcUtils = trpc.useUtils();
   const [runStates, setRunStates] = useState<Record<string, NodeRunState>>({});
   const sseConnections = useRef(new Map<string, EventSource>());
   const autoRetried = useRef(new Set<string>());
@@ -137,10 +139,11 @@ export function useNodeRun({ canvasId, setNodes, edges }: UseNodeRunOptions) {
       patchNode(nodeId, { status: "running", errorMsg: null });
 
       try {
-        const result = await runMutation.mutateAsync({
-          canvas_id: canvasId,
-          node_id: nodeId,
-        });
+        const result = await runNodeWithLocalRestore(
+          trpcUtils.client,
+          { canvas_id: canvasId, node_id: nodeId },
+          (input) => runMutation.mutateAsync(input),
+        );
         subscribeSSE(nodeId, result.job_id);
         return result;
       } catch (err) {
@@ -151,7 +154,7 @@ export function useNodeRun({ canvasId, setNodes, edges }: UseNodeRunOptions) {
         throw err;
       }
     },
-    [canvasId, runMutation, subscribeSSE, patchNode, setRunState],
+    [canvasId, runMutation, trpcUtils, subscribeSSE, patchNode, setRunState],
   );
 
   useEffect(() => {

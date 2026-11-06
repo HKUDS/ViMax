@@ -12,7 +12,7 @@ import {
   getAssetDownloadUrl,
   requestAssetUpload,
 } from "../../domain/asset/asset.service.js";
-import { offloadAsset } from "../../domain/asset/asset-offload.js";
+import { offloadAsset, requestAssetRestore, confirmAssetRestore } from "../../domain/asset/asset-offload.js";
 import { generateImage, getImageJob } from "../../domain/image/generate.service.js";
 import { editImage } from "../../domain/image/edit.service.js";
 import { getJobWithOutputUrl } from "../../domain/job/job-event.service.js";
@@ -186,6 +186,27 @@ export const assetRouter = router({
     .mutation(async ({ input }) => {
       try {
         return await offloadAsset(input.asset_id);
+      } catch (err) {
+        mapError(err);
+      }
+    }),
+
+  // ── 本地化恢复：下游 job 需要二进制时，客户端从本地金库回传 ──
+  restoreRequest: protectedProcedure
+    .input(z.object({ asset_id: z.string().uuid() }))
+    .mutation(async ({ input }) => {
+      try {
+        return await requestAssetRestore(input.asset_id);
+      } catch (err) {
+        mapError(err);
+      }
+    }),
+
+  restoreConfirm: protectedProcedure
+    .input(z.object({ asset_id: z.string().uuid() }))
+    .mutation(async ({ input }) => {
+      try {
+        return await confirmAssetRestore(input.asset_id);
       } catch (err) {
         mapError(err);
       }

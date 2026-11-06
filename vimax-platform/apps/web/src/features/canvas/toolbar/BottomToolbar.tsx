@@ -54,6 +54,8 @@ export interface BottomToolbarProps {
   onAutoPipeline?: () => void;
   onRegenerate?: () => void;
   autoPipelineRunning?: boolean;
+  /** 出片进行中的当前阶段与进度（如「视频 2/8」），驱动按钮文案。 */
+  pipelineStageText?: string | null;
 }
 
 const ghostBtn =
@@ -84,6 +86,7 @@ export function BottomToolbar({
   onAutoPipeline,
   onRegenerate,
   autoPipelineRunning,
+  pipelineStageText,
 }: BottomToolbarProps) {
   const doneCount = stats.byStatus["done"] ?? 0;
   const runningCount = stats.byStatus["running"] ?? 0;
@@ -219,8 +222,14 @@ export function BottomToolbar({
           title="从剧本节点开始，自动完成分镜→镜头→图片→视频→合成"
           className="inline-flex items-center gap-1 rounded-md bg-[var(--color-accent)] px-2.5 py-1 text-[11px] font-semibold text-[var(--color-accent-on)] transition-opacity hover:bg-[var(--color-accent-hover)] disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {autoPipelineRunning ? <Loader2 className="size-3 animate-spin" /> : <Play className="size-3" />}
-          全自动出片
+          {autoPipelineRunning || pipelineStageText ? (
+            <Loader2 className="size-3 animate-spin" />
+          ) : (
+            <Play className="size-3" />
+          )}
+          {autoPipelineRunning || pipelineStageText
+            ? `出片中${pipelineStageText ? ` · ${pipelineStageText}` : "…"}`
+            : "全自动出片"}
         </button>
       )}
 

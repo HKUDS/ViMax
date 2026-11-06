@@ -7,6 +7,10 @@ from vimax_image_worker.handler import (
     should_retry,
 )
 from vimax_image_worker.tracing import parse_traceparent
+from vimax_image_worker.worker_retry import (
+    retry_backoff_seconds as worker_retry_backoff,
+    should_retry as worker_should_retry,
+)
 
 
 def _payload(**overrides) -> ImageJobPayload:
@@ -28,6 +32,24 @@ def _payload(**overrides) -> ImageJobPayload:
 
 
 class RetryPolicyTest(unittest.TestCase):
+    def test_video_and_pipeline_retry_policy_is_bounded(self):
+        self.assertTrue(worker_should_retry(0, retryable=True))
+        self.assertTrue(worker_should_retry(1, retryable=True))
+        self.assertFalse(worker_should_retry(2, retryable=True))
+        self.assertFalse(worker_should_retry(0, retryable=False))
+        self.assertEqual(worker_retry_backoff(0), 3.0)
+
+
+class ConcatRetryClassificationTest(unittest.TestCase):
+    def test_infrastructure_errors_retry_and_local_errors_fail_fast(self):
+        from vimax_image_worker.concat_handler import _is_retryable
+
+        self.assertTrue(_is_retryable(TimeoutError("read timed out")))
+        self.assertTrue(_is_retryable(ConnectionError("connection reset by peer")))
+        self.assertTrue(_is_retryable(Exception("An error occurred (SlowDown) when calling the PutObject operation")))
+        self.assertFalse(_is_retryable(ValueError("Need at least 2 video clips to concatenate")))
+        self.assertFalse(_is_retryable(RuntimeError("ffmpeg subtitle burn failed: exit 1")))
+
     def test_transient_failures_retry_within_budget(self):
         self.assertTrue(should_retry(0, retryable=True))
         self.assertTrue(should_retry(1, retryable=True))

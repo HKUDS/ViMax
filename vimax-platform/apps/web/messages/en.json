@@ -37,7 +37,18 @@
     "studioVideo": "Video Studio",
     "groupCreative": "Creative Engine",
     "groupEcosystem": "Ecosystem",
-    "newCanvas": "New Canvas"
+    "newCanvas": "New Canvas",
+    "projects": "Projects"
+  },
+  "projects": {
+    "title": "Projects",
+    "xProjects": "{count} projects",
+    "noProjects": "No projects yet",
+    "noProjectsDesc": "Enter your creative idea or script to start your first AI video project",
+    "confirmDelete": "Delete Project",
+    "confirmDeleteDesc": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
+    "deleteSuccess": "Deleted project \"{name}\"",
+    "deleteFailed": "Failed to delete project"
   },
   "home": {
     "title": "Turn Ideas into Videos with AI",
@@ -54,14 +65,6 @@
     "submitIdea": "Start Generating",
     "submitScript": "Start Generating",
     "ctrlEnterHint": "Ctrl+Enter to submit",
-    "recentProjects": "Recent Projects",
-    "xProjects": "{count} projects",
-    "noProjects": "No projects yet",
-    "noProjectsDesc": "Enter your creative idea or script to start your first AI video project",
-    "confirmDelete": "Confirm Deletion",
-    "confirmDeleteDesc": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
-    "deleteSuccess": "Deleted project \"{name}\"",
-    "deleteFailed": "Deletion failed",
     "createFailed": "Failed to create project. Please check if the service is running.",
     "ideaPlaceholder": "e.g., A lonely astronaut discovers a mysterious door to another world on Mars…\n\nBe specific: characters, setting, style, mood, duration…",
     "scriptPlaceholder": "e.g.,\nScene 1 - Coffee Shop · Day · INT\n\nCharacter A walks in, looks around, spots Character B in the corner.\n\nA: You finally made it.\nB: (stirring coffee) Sorry to keep you waiting.",

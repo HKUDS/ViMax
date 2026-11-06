@@ -17,7 +17,7 @@ import type {
 import { composeImagePrompt, getImageModel, getMotionPreset, getVideoModel, getVideoAspectRatio, getVideoStylePreset, DEFAULT_TTS_MODEL } from "@vimax/contracts";
 import { KEY_LIGHT_POSITIONS, RIM_LIGHT_PRESETS, AMBIENT_LIGHT_OPTIONS } from "@vimax/contracts";
 import { getDefaultModel, getModelById, getModels } from "../model/model.service.js";
-import { and, eq, gt, inArray, sql } from "drizzle-orm";
+import { and, eq, inArray, sql } from "drizzle-orm";
 import { config } from "../../config/env.js";
 import { getDb } from "../../infrastructure/db/client.js";
 import { assets, canvasEdges, canvasNodes, canvases, jobEvents, jobs } from "../../infrastructure/db/schema.js";
@@ -30,6 +30,7 @@ import {
   enqueueVideoJob,
 } from "../../infrastructure/queue/producer.js";
 import { buildStorageKey, getBucket } from "../../infrastructure/storage/s3.js";
+import { assertAssetsNotOffloaded } from "../asset/asset-offload.js";
 import { currentTrace, currentTraceparent } from "../../infrastructure/observability/trace.js";
 import {
   buildImageCacheKey,
@@ -81,25 +82,32 @@ async function assertNoInFlightNodeJob(
   canvasId: string,
   nodeId: string,
 ): Promise<void> {
+  const [inFlight] = await findInFlightNodeJobs(canvasId, nodeId);
+  if (inFlight) {
+    throw new Error(`canvas.job_in_flight:${inFlight.jobType}`);
+  }
+}
+
+/**
+ * 节点当前排队/运行中的任务（不含变体任务）。无时间上限——排队数小时
+ * 仍是"待执行"，重试应当挂载到它而不是再插一份（否则旧任务稍后执行，
+ * 同节点双跑双计费）。worker 崩溃遗留的僵尸行由超时清扫统一收敛。
+ */
+async function findInFlightNodeJobs(canvasId: string, nodeId: string) {
   const db = getDb();
-  // 只认近期 job：worker/宿主崩溃会留下永远 running 的僵尸行，不能让
-  // 它永久堵死节点重跑。45 分钟覆盖最长的合法 video job（30 分钟上限）。
-  const [inFlight] = await db
-    .select({ id: jobs.id, jobType: jobs.jobType })
+  return db
+    .select({ id: jobs.id, jobType: jobs.jobType, queueName: jobs.queueName })
     .from(jobs)
     .where(
       and(
         inArray(jobs.status, ["queued", "running"]),
-        gt(jobs.queuedAt, new Date(Date.now() - 45 * 60 * 1000)),
         sql`input_snapshot->'_variant' IS NULL`,
         sql`input_snapshot->'_canvas'->>'canvas_id' = ${canvasId}`,
         sql`input_snapshot->'_canvas'->>'node_id' = ${nodeId}`,
       ),
     )
+    .orderBy(sql`queued_at desc`)
     .limit(1);
-  if (inFlight) {
-    throw new Error(`canvas.job_in_flight:${inFlight.jobType}`);
-  }
 }
 
 async function applyCacheHit(
@@ -134,6 +142,20 @@ export async function runNode(input: NodeRunInput): Promise<NodeRunOutput> {
     .limit(1);
 
   if (!node) throw new Error("canvas.node_not_found");
+
+  // 1.5 已有排队/运行中的任务：重试直接挂载到它（前端订阅既有进度），
+  // 不报 job_in_flight、不再插一份重复任务。
+  const [inFlight] = await findInFlightNodeJobs(input.canvas_id, input.node_id);
+  if (inFlight) {
+    await setNodeStatus(input.canvas_id, input.node_id, "running");
+    broadcastNodeStatus(input.canvas_id, input.node_id, "running");
+    return {
+      job_id: inFlight.id,
+      node_id: input.node_id,
+      job_type: inFlight.jobType,
+      queue_name: inFlight.queueName,
+    };
+  }
 
   // 2. Collect upstream references from incoming edges (handle-aware).
   const upstream = await collectUpstreamAssets(input.canvas_id, input.node_id);
@@ -897,6 +919,9 @@ async function runImageNode(
   const cached = await findCachedJob(cacheKey);
   if (cached?.outputAssetId) return applyCacheHit(node, cached);
 
+  // 真正派发才需要输入二进制（缓存命中不用），已本地化的先让客户端恢复
+  await assertAssetsNotOffloaded(refAssetIds);
+
   const apiKey = model.api_key ?? config.apiKeyFor(model.provider);
   if (!apiKey) throw new Error("provider.invalid_key");
 
@@ -995,6 +1020,12 @@ async function runImageEditJob(
   const cached = await findCachedJob(cacheKey);
   if (cached?.outputAssetId) return applyCacheHit(node, cached);
 
+  await assertAssetsNotOffloaded([
+    sourceId,
+    ...(data.maskAssetId ? [data.maskAssetId] : []),
+    ...(data.referenceAssetIds ?? []),
+  ]);
+
   const apiKey = model.api_key ?? config.apiKeyFor(model.provider);
   if (!apiKey) throw new Error("provider.invalid_key");
 
@@ -1060,6 +1091,8 @@ async function runImageTextJob(
   const cached = await findCachedJob(cacheKey);
   if (cached?.outputAssetId) return applyCacheHit(node, cached);
 
+  await assertAssetsNotOffloaded([sourceId]);
+
   const inputSnapshot = {
     mode: "post.text",
     size,
@@ -1109,6 +1142,8 @@ async function runImageComplianceJob(
 
   const cached = await findCachedJob(cacheKey);
   if (cached?.outputAssetId) return applyCacheHit(node, cached);
+
+  await assertAssetsNotOffloaded([sourceId]);
 
   const inputSnapshot = {
     mode: "post.compliance",
@@ -1552,6 +1587,9 @@ async function runVideoNode(
   const cached = await findCachedJob(cacheKey);
   if (cached?.outputAssetId) return applyCacheHit(node, cached);
 
+  // 真正派发才需要首帧/尾帧二进制（缓存命中不用），已本地化的先让客户端恢复
+  await assertAssetsNotOffloaded(frameIds);
+
   const jobId = randomUUID();
   const jobType = "shot.video" as const;
   const queueName = "q.video.std";
@@ -1706,6 +1744,8 @@ async function runConcatNode(
   const cacheKey = buildConcatCacheKey({ clip_sha256s: clipSha256s, transition, subtitles });
   const cached = await findCachedJob(cacheKey);
   if (cached?.outputAssetId) return applyCacheHit(node, cached);
+
+  await assertAssetsNotOffloaded(upstreamAssetIds);
 
   const jobId = randomUUID();
   const jobType = "concat.videos";
@@ -1862,6 +1902,8 @@ export async function runCharacterView(
 export async function runScript2Storyboard(
   canvasId: string,
   nodeId: string,
+  targetDurationSec?: number,
+  userRequirement?: string,
 ): Promise<NodeRunOutput> {
   const db = getDb();
   const [node] = await db
@@ -1921,7 +1963,13 @@ export async function runScript2Storyboard(
     input: {
       content: data.content,
       characters,
-      user_requirement: buildStoryboardUserRequirement("script"),
+      user_requirement: [
+        buildStoryboardUserRequirement("script"),
+        userRequirement?.trim(),
+        targetDurationSec
+          ? `The finished video must be exactly ${targetDurationSec} seconds. Plan enough shots for the full duration; assign a sensible duration to each shot, with no individual generated clip longer than 10 seconds.`
+          : "",
+      ].filter(Boolean).join(" "),
     },
     callback: {
       event_channel: jobEventChannel(jobId),
