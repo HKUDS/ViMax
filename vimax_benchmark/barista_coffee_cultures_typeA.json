@@ -1,0 +1,63 @@
+{
+  "story_overview": "A single barista travels through dramatically different coffee cultures in quick vignettes, learning distinct preparation methods before culminating in a warm, inclusive community tasting where the barista blends techniques into one signature cup.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Interior, modern coffee shop at sunrise. A 28-year-old adult woman barista with warm brown skin, almond-shaped dark eyes, and a small star-shaped freckle just under her left eye stands behind a light-oak counter. She has short, tightly-curled dark hair tucked under a matte charcoal beanie. She wears a forest-green button-up shirt, a tan canvas apron with a stitched name tag reading \"MARA,\" dark straight-leg trousers, and black lace-up shoes. On the counter: a clean espresso machine, a scale, a metal pitcher, and a ceramic cup. Soft golden window light, calm mood, crisp textures on wood and brushed steel.",
+          "video_prompt": "Eye-level medium-wide shot with a 35mm lens from behind the counter. Mara wipes the counter, checks the scale, and gently places a ceramic cup center-frame; she pauses, takes a focused breath, and looks toward the shop window as the morning light brightens slightly, signaling the start of her learning journey."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "High-contrast, close-up countertop view in a compact urban cafe. The same Mara (star freckle under left eye, charcoal beanie, forest-green shirt, tan apron labeled \"MARA\") is seen from chest to hands. A V60-style dripper sits atop a glass server; a gooseneck kettle steams nearby; a timer and scale are aligned neatly. Cool daylight from a side window; textures: wet paper filter, glossy glass, matte plastic timer.",
+          "video_prompt": "Top-down close-up with a 50mm lens. Mara rinses the paper filter, then pours in a controlled spiral from the gooseneck kettle; steam rises and the coffee bed blooms, expanding and settling as she adjusts her wrist angle precisely while the timer ticks."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Outdoor open-air market stall under bright midday sun. The same Mara (charcoal beanie, forest-green shirt, tan apron with \"MARA\") stands at a rustic wooden table covered with a patterned cloth. A traditional hand grinder and a small clay coffee pot sit beside a tray of cups. Background: colorful fabric canopy and blurred market movement. Light is harsh and warm; dust motes visible; lively but family-friendly atmosphere.",
+          "video_prompt": "Low-angle medium shot with a 28mm lens from table height, slightly tilted upward. Mara turns the hand grinder steadily, then lifts the small clay pot carefully, wafting the aroma toward herself; she smiles with concentration as sunlight glints off the grinder handle and the canopy fabric ripples in a breeze."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Dim, intimate interior with warm tungsten lanterns: a traditional coffee room with a low table and patterned cushions. The same Mara (star freckle under left eye, charcoal beanie, forest-green shirt, tan apron labeled \"MARA\") kneels comfortably beside a small brass pot on a sand-heated tray. A long-handled spoon and a small cup are placed neatly. Mood is serene; textures: gleaming brass, fine sand, embroidered textiles.",
+          "video_prompt": "Side-profile close shot with an 85mm lens at seated eye level. Mara stirs slowly, watching tiny bubbles form at the rim; she lifts the brass pot briefly, sets it back into the hot sand, and repeats with patience, her face reflecting soft lantern light as the surface foam rises and settles."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Snowy mountain lodge interior with large frosted windows and a stone fireplace glowing softly. The same Mara (charcoal beanie, forest-green shirt, tan apron with \"MARA,\" dark trousers) stands at a sturdy wooden bar. In front: an AeroPress-style brewer, a kettle, and a mug. Cool blue window light mixes with warm firelight; cozy mood; visible condensation on window panes.",
+          "video_prompt": "Eye-level medium shot with a 35mm lens from the bar’s front edge. Mara assembles the brewer with brisk, practiced movements, pours hot water carefully, and presses smoothly; steam curls upward as she warms her hands near the mug, the mixed lighting shifting across her face and apron as the fire flickers."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Bright, minimalist kitchen studio with white tile and softbox lighting. The same Mara (star freckle under left eye, charcoal beanie, forest-green shirt, tan apron labeled \"MARA\") stands at a stainless counter. A siphon vacuum brewer (glass globes, metal stand) is centered; a small burner below; a thermometer and spoon nearby. Clean, clinical mood; crisp reflections on glass and steel.",
+          "video_prompt": "Locked-off wide shot with a 24mm lens, straight-on. Mara ignites the small burner, watches water rise into the upper globe, then stirs gently; as the brew finishes, she removes the heat and observes the brewed coffee draw down, her posture attentive while the glass apparatus shimmers under studio lights."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Evening city rooftop under string lights with a panoramic skyline in soft bokeh. The same Mara (charcoal beanie, forest-green shirt, tan apron with \"MARA\") stands at a small table set with a moka pot, a milk frother, and three ceramic cups. Wind lightly lifts the apron fabric; warm string-light glow against cool night tones; friendly, anticipatory mood.",
+          "video_prompt": "Over-the-shoulder medium shot with a 50mm lens from behind Mara’s right shoulder. She sets the moka pot down, listens for the final sputter, then froths milk with careful, modest movements; she pours a small, neat topping into one cup, glances at the other cups as if planning a shared tasting, and nods with growing confidence."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Community tasting table in the original modern coffee shop, now in late afternoon with warm, amber sunlight. The same Mara (star freckle under left eye, charcoal beanie, forest-green shirt, tan apron labeled \"MARA\") stands centered behind a long light-oak table. On the table: a neat lineup of brewed samples labeled with small handwritten cards (e.g., \"Pour-over,\" \"Sand-heated pot,\" \"Press,\" \"Siphon\"), a kettle, and a single final cup in the middle. Several adult customers (faces softly out of focus, modest casual clothing) stand at a respectful distance, attentive and smiling. Mood: uplifting, inclusive; textures: paper labels, ceramic glaze, sunlit wood grain.",
+          "video_prompt": "Slow push-in medium-wide shot with a 35mm lens at eye level from the customer side of the table. Mara combines a careful technique—brief bloom pour, gentle stir, and a final measured pour—then slides the signature cup forward; she invites the group with an open-handed gesture, and the customers lean in slightly to smell the aroma as the sunlight flares softly, marking the climax: her confident, culture-spanning craft."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "barista_coffee_cultures",
+    "theme_description": "A barista experiencing coffee preparation methods across cultures",
+    "consistency_type": "Type A",
+    "requested_scenes": 2,
+    "requested_shots": 8
+  }
+}

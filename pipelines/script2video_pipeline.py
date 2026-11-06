@@ -4,23 +4,86 @@ import json
 import logging
 import asyncio
 import time
-from typing import Optional, Dict, List, Tuple, Literal
+import hashlib
+from pathlib import Path
+from uuid import uuid4
+from typing import Any, Callable, Optional, Dict, List, Tuple, Literal, Type, TypeVar
 from moviepy import VideoFileClip, concatenate_videoclips
 from PIL import Image
 from agents import *
+from agents.best_image_selector import BestImageSelector
 import yaml
 from interfaces import *
 from langchain.chat_models import init_chat_model
 from tools.render_backend import RenderBackend
 from utils.provider_presets import resolve_chat_model_config
+from utils.image_selection import DEFAULT_IMAGE_CANDIDATES, image_candidate_count_from_config, validate_image_candidate_count
+
+
+
+
+TModel = TypeVar("TModel")
+
+
+def _normalize_model_list(items: Any, model_cls: Type[TModel], field_name: str) -> List[TModel]:
+    if items is None:
+        return []
+    if not isinstance(items, list):
+        raise TypeError(f"{field_name} must be a list, got {type(items).__name__}")
+    normalized: List[TModel] = []
+    for idx, item in enumerate(items):
+        if isinstance(item, model_cls):
+            normalized.append(item)
+        elif isinstance(item, dict):
+            normalized.append(model_cls.model_validate(item))
+        else:
+            raise TypeError(f"{field_name}[{idx}] must be {model_cls.__name__} or dict, got {type(item).__name__}")
+    return normalized
+
+
+def _group_shots_into_cameras(shot_descriptions: List[ShotDescription]) -> List[Camera]:
+    cameras_by_idx: Dict[int, Camera] = {}
+    for shot_description in shot_descriptions:
+        camera = cameras_by_idx.get(shot_description.cam_idx)
+        if camera is None:
+            camera = Camera(idx=shot_description.cam_idx, active_shot_idxs=[])
+            cameras_by_idx[shot_description.cam_idx] = camera
+        camera.active_shot_idxs.append(shot_description.idx)
+    return list(cameras_by_idx.values())
+
+def _collect_priority_shot_idxs(camera_tree: List[Camera]) -> List[int]:
+    """Shot indices that other cameras depend on."""
+    return [camera.parent_shot_idx for camera in camera_tree if camera.parent_shot_idx is not None]
+
+
+def _pipeline_print(quiet: bool, message: str) -> None:
+    if not quiet:
+        print(message)
+
+
+def _emit_text_plan_progress(progress, stage: str, message: str, metadata: Dict[str, Any] | None = None) -> None:
+    if progress is not None:
+        progress(stage, message, metadata or {})
+
+
+def _emit_render_progress(progress, stage: str, message: str, metadata: Dict[str, Any] | None = None) -> None:
+    if progress is not None:
+        progress(stage, message, metadata or {})
+
+
+def _scoped_progress(progress, **scope):
+    if progress is None:
+        return None
+
+    def emit(stage: str, message: str, metadata: Dict[str, Any] | None = None) -> None:
+        payload = dict(scope)
+        payload.update(metadata or {})
+        _emit_render_progress(progress, stage, message, payload)
+
+    return emit
+
 
 class Script2VideoPipeline:
-
-    # events
-    character_portrait_events = {}
-    shot_desc_events = {}
-    frame_events = {}
-
 
     def __init__(
         self,
@@ -28,11 +91,14 @@ class Script2VideoPipeline:
         image_generator,
         video_generator,
         working_dir: str,
+        num_image_candidates: int = DEFAULT_IMAGE_CANDIDATES,
     ):
 
         self.chat_model = chat_model
         self.image_generator = image_generator
         self.video_generator = video_generator
+        self.num_image_candidates = validate_image_candidate_count(num_image_candidates)
+        self.best_image_selector = BestImageSelector(chat_model=self.chat_model)
 
         self.character_extractor = CharacterExtractor(chat_model=self.chat_model)
         self.character_portraits_generator = CharacterPortraitsGenerator(image_generator=self.image_generator)
@@ -42,7 +108,80 @@ class Script2VideoPipeline:
 
         self.working_dir = working_dir
         os.makedirs(self.working_dir, exist_ok=True)
+        self.character_portrait_events = {}
+        self.shot_desc_events = {}
+        self.frame_events = {}
 
+
+    async def plan_text_artifacts(
+        self,
+        script: str,
+        user_requirement: str,
+        style: str,
+        characters: List[CharacterInScene] = None,
+        progress: Callable[[str, str, Dict[str, Any] | None], None] | None = None,
+        quiet: bool = False,
+    ):
+        """Generate only structured text artifacts required before rendering.
+
+        This helper intentionally stops before character portraits, frame generation,
+        video generation, and final concatenation so an agent loop can pause for
+        user review after narrative planning.
+        """
+        self.character_portrait_events = {}
+        self.shot_desc_events = {}
+        self.frame_events = {}
+
+        if characters is None:
+            _emit_text_plan_progress(progress, "extract_characters", "Extracting characters from script")
+            characters = await self.extract_characters(script=script, quiet=quiet)
+        else:
+            characters = _normalize_model_list(characters, CharacterInScene, "characters")
+            _emit_text_plan_progress(progress, "extract_characters", "Using provided characters", {"provided": True, "count": len(characters)})
+            characters_path = os.path.join(self.working_dir, "characters.json")
+            if not os.path.exists(characters_path):
+                with open(characters_path, "w", encoding="utf-8") as f:
+                    json.dump([character.model_dump() for character in characters], f, ensure_ascii=False, indent=4)
+            for character in characters:
+                self.character_portrait_events[character.idx] = asyncio.Event()
+
+        _emit_text_plan_progress(progress, "design_storyboard", "Designing storyboard")
+        storyboard = await self.design_storyboard(
+            script=script,
+            characters=characters,
+            user_requirement=user_requirement,
+            quiet=quiet,
+        )
+        _emit_text_plan_progress(progress, "decompose_shots", "Decomposing shot visual descriptions", {"shot_count": len(storyboard)})
+        shot_descriptions = await self.decompose_visual_descriptions(
+            shot_brief_descriptions=storyboard,
+            characters=characters,
+            quiet=quiet,
+        )
+        camera_tree = None
+        for attempt in range(2):
+            try:
+                stage = "construct_camera_tree" if attempt == 0 else "construct_camera_tree_retry"
+                message = "Constructing camera tree" if attempt == 0 else "Retrying camera tree construction after schema/type failure"
+                _emit_text_plan_progress(progress, stage, message, {"shot_count": len(shot_descriptions), "attempt": attempt + 1})
+                camera_tree = await self.construct_camera_tree(
+                    shot_descriptions=shot_descriptions,
+                    quiet=quiet,
+                )
+                break
+            except Exception:
+                camera_tree_path = os.path.join(self.working_dir, "camera_tree.json")
+                if os.path.exists(camera_tree_path):
+                    os.remove(camera_tree_path)
+                if attempt == 1:
+                    raise
+        assert camera_tree is not None
+        return {
+            "characters": characters,
+            "storyboard": storyboard,
+            "shot_descriptions": shot_descriptions,
+            "camera_tree": camera_tree,
+        }
 
 
     @classmethod
@@ -59,6 +198,7 @@ class Script2VideoPipeline:
             image_generator=backend.image_generator,
             video_generator=backend.video_generator,
             working_dir=config["working_dir"],
+            num_image_candidates=image_candidate_count_from_config(config),
         )
 
     async def __call__(
@@ -68,9 +208,13 @@ class Script2VideoPipeline:
         style: str,
         characters: List[CharacterInScene] = None,
         character_portraits_registry: Optional[Dict[str, Dict[str, Dict[str, str]]]] = None,
+        quiet: bool = False,
+        progress: Callable[[str, str, Dict[str, Any] | None], None] | None = None,
     ):
+        _emit_render_progress(progress, "render_start", "Starting script2video render")
         if characters is None:
-            characters = await self.extract_characters(script=script)
+            _emit_render_progress(progress, "extract_characters", "Extracting characters before render")
+            characters = await self.extract_characters(script=script, quiet=quiet)
 
             # characters_path = os.path.join(self.working_dir, "characters.json")
             # if os.path.exists(characters_path):
@@ -83,6 +227,11 @@ class Script2VideoPipeline:
             #     with open(characters_path, "w", encoding="utf-8") as f:
             #         json.dump([c.model_dump() for c in characters], f, ensure_ascii=False, indent=4)
             #     print(f"☑️ Extracted {len(characters)} characters from script and saved to {characters_path}.")
+        else:
+            characters = _normalize_model_list(characters, CharacterInScene, "characters")
+            _emit_render_progress(progress, "extract_characters", "Using provided characters for render", {"provided": True, "count": len(characters)})
+            for character in characters:
+                self.character_portrait_events[character.idx] = asyncio.Event()
 
         if character_portraits_registry is None:
             character_portraits_registry_path = os.path.join(self.working_dir, "character_portraits_registry.json")
@@ -90,39 +239,53 @@ class Script2VideoPipeline:
                 with open(character_portraits_registry_path, "r", encoding="utf-8") as f:
                     character_portraits_registry = json.load(f)
                 print(f"🚀 Loaded {len(character_portraits_registry)} character portraits from existing file.")
+                _emit_render_progress(progress, "character_portraits_loaded", "Loaded existing character portraits", {"count": len(character_portraits_registry)})
             else:
                 print(f"🔍 Generating character portraits...")
+                _emit_render_progress(progress, "character_portraits_start", "Generating character portraits", {"character_count": len(characters)})
                 character_portraits_registry = await self.generate_character_portraits(
                     characters=characters,
                     character_portraits_registry=None,
                     style=style,
+                    progress=progress,
                 )
 
                 with open(character_portraits_registry_path, "w", encoding="utf-8") as f:
                     json.dump(character_portraits_registry, f, ensure_ascii=False, indent=4)
                 print(f"☑️ Generated {len(character_portraits_registry)} character portraits and saved to {character_portraits_registry_path}.")
+                _emit_render_progress(progress, "character_portraits_done", "Character portraits ready", {"count": len(character_portraits_registry)})
 
 
 
         # design shots
+        _emit_render_progress(progress, "load_storyboard", "Loading or designing storyboard")
         storyboard = await self.design_storyboard(
             script=script,
             characters=characters,
             user_requirement=user_requirement,
+            quiet=quiet,
         )
+        _emit_render_progress(progress, "storyboard_ready", "Storyboard ready", {"shot_count": len(storyboard)})
 
         # decompose visual descriptions of shots
+        _emit_render_progress(progress, "load_shot_descriptions", "Loading or decomposing shot descriptions", {"shot_count": len(storyboard)})
         shot_descriptions = await self.decompose_visual_descriptions(
             shot_brief_descriptions=storyboard,
             characters=characters,
+            quiet=quiet,
         )
+        _emit_render_progress(progress, "shot_descriptions_ready", "Shot descriptions ready", {"shot_count": len(shot_descriptions)})
 
         # construct camera tree
+        _emit_render_progress(progress, "load_camera_tree", "Loading or constructing camera tree", {"shot_count": len(shot_descriptions)})
         camera_tree = await self.construct_camera_tree(
             shot_descriptions=shot_descriptions,
+            quiet=quiet,
         )
+        _emit_render_progress(progress, "camera_tree_ready", "Camera tree ready", {"camera_count": len(camera_tree)})
 
         priority_shot_idxs = [camera.parent_cam_idx for camera in camera_tree if camera.parent_cam_idx is not None]
+        _emit_render_progress(progress, "frames_start", "Generating frames for cameras", {"camera_count": len(camera_tree), "shot_count": len(shot_descriptions)})
         tasks = [
             self.generate_frames_for_single_camera(
                 camera=camera,
@@ -130,13 +293,16 @@ class Script2VideoPipeline:
                 characters=characters,
                 character_portraits_registry=character_portraits_registry,
                 priority_shot_idxs=priority_shot_idxs,
+                progress=progress,
             )
             for camera in camera_tree
         ]
 
+        _emit_render_progress(progress, "video_clips_start", "Generating video clips for shots", {"shot_count": len(shot_descriptions)})
         video_tasks = [
             self.generate_video_for_single_shot(
                 shot_description=shot_description,
+                progress=progress,
             )
             for shot_description in shot_descriptions
         ]
@@ -146,8 +312,10 @@ class Script2VideoPipeline:
         final_video_path = os.path.join(self.working_dir, "final_video.mp4")
         if os.path.exists(final_video_path):
             print(f"🚀 Skipped concatenating videos, already exists.")
+            _emit_render_progress(progress, "final_video_exists", "Final video already exists", {"path": final_video_path})
         else:
             print(f"🎬 Starting concatenating videos...")
+            _emit_render_progress(progress, "concat_start", "Concatenating video clips", {"shot_count": len(shot_descriptions)})
             video_clips = [
                 VideoFileClip(os.path.join(self.working_dir, "shots", f"{shot_description.idx}", "video.mp4"))
                 for shot_description in shot_descriptions
@@ -155,7 +323,9 @@ class Script2VideoPipeline:
             final_video = concatenate_videoclips(video_clips)
             final_video.write_videofile(final_video_path, codec="libx264", preset="medium")
             print(f"☑️ Concatenated videos, saved to {final_video_path}.")
+            _emit_render_progress(progress, "concat_done", "Final video concatenated", {"path": final_video_path})
 
+        _emit_render_progress(progress, "render_done", "Script2video render complete", {"final_video_path": final_video_path})
         return final_video_path
 
 
@@ -166,17 +336,21 @@ class Script2VideoPipeline:
         characters: List[CharacterInScene],
         character_portraits_registry: Dict[str, Dict[str, Dict[str, str]]],
         priority_shot_idxs: List[int],
+        progress: Callable[[str, str, Dict[str, Any] | None], None] | None = None,
     ):
         # 1. generate the first_frame of the first shot of the camera
         first_shot_idx = camera.active_shot_idxs[0]
         first_shot_ff_path = os.path.join(self.working_dir, "shots", f"{first_shot_idx}", "first_frame.png")
+        _emit_render_progress(progress, "camera_frames_start", f"Generating frames for camera {camera.idx}", {"camera_idx": camera.idx, "active_shot_idxs": camera.active_shot_idxs})
 
         if os.path.exists(first_shot_ff_path):
             print(f"🚀 Skipped generating first_frame for shot {first_shot_idx}, already exists.")
             self.frame_events[first_shot_idx]["first_frame"].set()
+            _emit_render_progress(progress, "frame_exists", f"First frame for shot {first_shot_idx} already exists", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "frame_type": "first_frame", "path": first_shot_ff_path})
 
         else:
             print(f"🖼️ Starting first_frame generation for shot {first_shot_idx}...")
+            _emit_render_progress(progress, "frame_start", f"Generating first frame for shot {first_shot_idx}", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "frame_type": "first_frame"})
             available_image_path_and_text_pairs = []
 
             for character_idx in shot_descriptions[first_shot_idx].ff_vis_char_idxs:
@@ -195,31 +369,38 @@ class Script2VideoPipeline:
 
                 if os.path.exists(transition_video_path):
                     print(f"🚀 Skipped generating transition video for shot {first_shot_idx} from shot {parent_shot_idx}, already exists.")
+                    _emit_render_progress(progress, "transition_video_exists", f"Transition video for shot {first_shot_idx} already exists", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "parent_shot_idx": parent_shot_idx, "path": transition_video_path})
                 else:
                     print(f"🖼️ Starting transition video generation for shot {first_shot_idx} from shot {parent_shot_idx}...")
+                    _emit_render_progress(progress, "transition_video_start", f"Generating transition video for shot {first_shot_idx}", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "parent_shot_idx": parent_shot_idx})
                     transition_video_output = await self.camera_image_generator.generate_transition_video(
                         first_shot_visual_desc=shot_descriptions[parent_shot_idx].visual_desc,
                         second_shot_visual_desc=shot_descriptions[first_shot_idx].visual_desc,
                         first_shot_ff_path=parent_shot_ff_path,
+                        progress=_scoped_progress(progress, camera_idx=camera.idx, shot_idx=first_shot_idx, parent_shot_idx=parent_shot_idx, artifact="transition_video"),
                     )
                     transition_video_output.save(transition_video_path)
                     print(f"☑️ Generated transition video for shot {first_shot_idx} from shot {parent_shot_idx}, saved to {transition_video_path}.")
+                    _emit_render_progress(progress, "transition_video_done", f"Transition video for shot {first_shot_idx} generated", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "parent_shot_idx": parent_shot_idx, "path": transition_video_path})
 
                 new_camera_image_path = os.path.join(self.working_dir, "shots", f"{first_shot_idx}", f"new_camera_{camera.idx}.png")
                 if os.path.exists(new_camera_image_path):
                     print(f"🚀 Skipped generating new camera image for shot {first_shot_idx}, already exists.")
+                    _emit_render_progress(progress, "new_camera_image_exists", f"New camera image for shot {first_shot_idx} already exists", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "path": new_camera_image_path})
                 else:
                     print(f"🖼️ Starting new camera image generation for shot {first_shot_idx}...")
+                    _emit_render_progress(progress, "new_camera_image_start", f"Extracting new camera image for shot {first_shot_idx}", {"camera_idx": camera.idx, "shot_idx": first_shot_idx})
                     new_camera_image = self.camera_image_generator.get_new_camera_image(transition_video_path)
                     new_camera_image.save(new_camera_image_path)
                     print(f"☑️ Generated new camera image for shot {first_shot_idx} (not completed), saved to {new_camera_image_path}.")
+                    _emit_render_progress(progress, "new_camera_image_done", f"New camera image for shot {first_shot_idx} extracted", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "path": new_camera_image_path})
 
-                    available_image_path_and_text_pairs.append(
-                        (
-                            new_camera_image_path,
-                            f"The composition and background are correct but some elements may be wrong. The wrong elements should be replaced.\nWrong elements: {camera.missing_info}.\nYou must select this image as the main reference and replace the characters in the image with the provided character portraits. Don't change the background."
-                        )
+                available_image_path_and_text_pairs.append(
+                    (
+                        new_camera_image_path,
+                        f"The composition and background are correct but some elements may be wrong. The wrong elements should be replaced.\nWrong elements: {camera.missing_info}.\nYou must select this image as the main reference and replace the characters in the image with the provided character portraits. Don't change the background."
                     )
+                )
 
 
             # 如果子镜头缺少信息，则需要选择参考图像生成
@@ -229,8 +410,10 @@ class Script2VideoPipeline:
                     with open(ff_selector_output_path, 'r', encoding='utf-8') as f:
                         ff_selector_output = json.load(f)
                     print(f"🚀 Loaded existing reference image selection and prompt for first_frame of shot {first_shot_idx} from {ff_selector_output_path}.")
+                    _emit_render_progress(progress, "frame_prompt_exists", f"First frame prompt for shot {first_shot_idx} already exists", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "frame_type": "first_frame", "path": ff_selector_output_path})
                 else:
                     print(f"🔍 Selecting reference images and generating prompt for first_frame of shot {first_shot_idx}...")
+                    _emit_render_progress(progress, "frame_prompt_start", f"Selecting references for first frame of shot {first_shot_idx}", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "frame_type": "first_frame"})
                     ff_selector_output = await self.reference_image_selector.select_reference_images_and_generate_prompt(
                         available_image_path_and_text_pairs=available_image_path_and_text_pairs,
                         frame_description=shot_descriptions[first_shot_idx].ff_desc
@@ -239,6 +422,7 @@ class Script2VideoPipeline:
                         json.dump(ff_selector_output, f, ensure_ascii=False, indent=4)
 
                     print(f"☑️ Selected reference images and generated prompt for first_frame of shot {first_shot_idx}, saved to {ff_selector_output_path}.")
+                    _emit_render_progress(progress, "frame_prompt_done", f"Selected references for first frame of shot {first_shot_idx}", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "frame_type": "first_frame", "path": ff_selector_output_path})
 
                 reference_image_path_and_text_pairs, prompt = ff_selector_output["reference_image_path_and_text_pairs"], ff_selector_output["text_prompt"]
                 prefix_prompt = ""
@@ -246,18 +430,24 @@ class Script2VideoPipeline:
                     prefix_prompt += f"Image {i}: {text}\n"
                 prompt = f"{prefix_prompt}\n{prompt}"
                 reference_image_paths = [item[0] for item in reference_image_path_and_text_pairs]
-                ff_image: ImageOutput = await self.image_generator.generate_single_image(
+                ff_image: ImageOutput = await self.generate_and_select_best_image(
                     prompt=prompt,
                     reference_image_paths=reference_image_paths,
+                    reference_image_path_and_text_pairs=reference_image_path_and_text_pairs,
+                    target_description=shot_descriptions[first_shot_idx].ff_desc,
                     size="1600x900",
+                    candidates_save_dir=os.path.join(self.working_dir, "shots", str(first_shot_idx), "first_frame_candidates"),
+                    progress=_scoped_progress(progress, camera_idx=camera.idx, shot_idx=first_shot_idx, frame_type="first_frame"),
                 )
                 ff_image.save(first_shot_ff_path)
                 self.frame_events[first_shot_idx]["first_frame"].set()
                 print(f"☑️ Generated first_frame for shot {first_shot_idx}, saved to {first_shot_ff_path}.")
+                _emit_render_progress(progress, "frame_done", f"Generated first frame for shot {first_shot_idx}", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "frame_type": "first_frame", "path": first_shot_ff_path})
             else:
                 shutil.copy(new_camera_image_path, first_shot_ff_path)
                 self.frame_events[first_shot_idx]["first_frame"].set()
                 print(f"☑️ Generated first_frame for shot {first_shot_idx}, saved to {first_shot_ff_path}.")
+                _emit_render_progress(progress, "frame_done", f"Generated first frame for shot {first_shot_idx}", {"camera_idx": camera.idx, "shot_idx": first_shot_idx, "frame_type": "first_frame", "path": first_shot_ff_path})
 
 
         # 2. generate the following frames of the camera
@@ -272,6 +462,7 @@ class Script2VideoPipeline:
                 frame_desc=shot_descriptions[first_shot_idx].lf_desc,
                 visible_characters=[characters[idx] for idx in shot_descriptions[first_shot_idx].lf_vis_char_idxs],
                 character_portraits_registry=character_portraits_registry,
+                progress=progress,
             )
             normal_tasks.append(task)
 
@@ -283,6 +474,7 @@ class Script2VideoPipeline:
                     frame_desc=shot_descriptions[shot_idx].ff_desc,
                     visible_characters=[characters[idx] for idx in shot_descriptions[shot_idx].ff_vis_char_idxs],
                     character_portraits_registry=character_portraits_registry,
+                    progress=progress,
                 )
             if shot_idx in priority_shot_idxs:
                 priority_tasks.append(first_frame_task)
@@ -298,23 +490,28 @@ class Script2VideoPipeline:
                     frame_desc=shot_descriptions[shot_idx].lf_desc,
                     visible_characters=[characters[idx] for idx in shot_descriptions[shot_idx].lf_vis_char_idxs],
                     character_portraits_registry=character_portraits_registry,
+                    progress=progress,
                 )
                 normal_tasks.append(last_frame_task)
 
 
         await asyncio.gather(*priority_tasks)
         await asyncio.gather(*normal_tasks)
+        _emit_render_progress(progress, "camera_frames_done", f"Frames for camera {camera.idx} ready", {"camera_idx": camera.idx, "active_shot_idxs": camera.active_shot_idxs})
 
 
 
     async def generate_video_for_single_shot(
         self,
         shot_description: ShotDescription,
+        progress: Callable[[str, str, Dict[str, Any] | None], None] | None = None,
     ):
         video_path = os.path.join(self.working_dir, "shots", f"{shot_description.idx}", "video.mp4")
         if os.path.exists(video_path):
             print(f"🚀 Skipped generating video for shot {shot_description.idx}, already exists.")
+            _emit_render_progress(progress, "video_clip_exists", f"Video clip for shot {shot_description.idx} already exists", {"shot_idx": shot_description.idx, "path": video_path})
         else:
+            _emit_render_progress(progress, "video_clip_waiting_for_frames", f"Waiting for frames before video clip {shot_description.idx}", {"shot_idx": shot_description.idx})
             await self.frame_events[shot_description.idx]["first_frame"].wait()
             if shot_description.variation_type in ["medium", "large"]:
                 await self.frame_events[shot_description.idx]["last_frame"].wait()
@@ -325,12 +522,142 @@ class Script2VideoPipeline:
                 frame_paths.append(os.path.join(self.working_dir, "shots", f"{shot_description.idx}", "last_frame.png"))
 
             print(f"🎬 Starting video generation for shot {shot_description.idx}...")
+            _emit_render_progress(progress, "video_clip_start", f"Generating video clip for shot {shot_description.idx}", {"shot_idx": shot_description.idx, "frame_count": len(frame_paths)})
             video_output = await self.video_generator.generate_single_video(
                 prompt=shot_description.motion_desc + "\n" + shot_description.audio_desc,
                 reference_image_paths=frame_paths,
+                progress=_scoped_progress(progress, shot_idx=shot_description.idx, artifact="video_clip"),
             )
             video_output.save(video_path)
             print(f"☑️ Generated video for shot {shot_description.idx}, saved to {video_path}.")
+            _emit_render_progress(progress, "video_clip_done", f"Generated video clip for shot {shot_description.idx}", {"shot_idx": shot_description.idx, "path": video_path})
+
+    async def generate_and_select_best_image(
+        self,
+        prompt: str,
+        reference_image_paths: List[str],
+        reference_image_path_and_text_pairs: List[Tuple[str, str]],
+        target_description: str,
+        size: str = "1600x900",
+        num_candidates: int | None = None,
+        candidates_save_dir: str | None = None,
+        progress: Callable[[str, str, Dict[str, Any] | None], None] | None = None,
+    ) -> ImageOutput:
+        count = validate_image_candidate_count(self.num_image_candidates if num_candidates is None else num_candidates)
+        if count == 1:
+            return await self.image_generator.generate_single_image(
+                prompt=prompt, reference_image_paths=reference_image_paths, size=size,
+            )
+
+        save_dir = Path(candidates_save_dir) if candidates_save_dir else Path(self.working_dir) / "image_candidates" / uuid4().hex
+        save_dir.mkdir(parents=True, exist_ok=True)
+        selection_path = save_dir / "selection.json"
+        references = []
+        for path, description in reference_image_path_and_text_pairs:
+            stat = os.stat(path)
+            references.append((path, description, stat.st_size, stat.st_mtime_ns))
+        fingerprint = hashlib.sha256(json.dumps({
+            "prompt": prompt, "size": size, "references": references,
+            "reference_image_paths": reference_image_paths, "target_description": target_description,
+            "generator": type(self.image_generator).__name__,
+            "model": str(getattr(self.image_generator, "model", "")),
+        }, sort_keys=True).encode()).hexdigest()
+        previous = {}
+        if selection_path.exists():
+            try:
+                previous = json.loads(selection_path.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                pass
+        reuse = isinstance(previous, dict) and previous.get("request_fingerprint") == fingerprint
+        reusable_indices = {
+            item["index"] for item in previous.get("candidates", [])
+            if isinstance(item, dict) and item.get("status") == "ready" and "index" in item
+        } if reuse else set()
+        selection = {"request_fingerprint": fingerprint, "requested_candidates": count, "status": "generating", "candidates": []}
+
+        def save_selection():
+            temporary = selection_path.with_suffix(".json.tmp")
+            temporary.write_text(json.dumps(selection, ensure_ascii=False, indent=2), encoding="utf-8")
+            temporary.replace(selection_path)
+
+        save_selection()
+        _emit_render_progress(progress, "image_candidates_start", f"Generating {count} image candidates", {"count": count})
+
+        async def generate_candidate(index):
+            path = save_dir / f"candidate_{index}.png"
+            record = {"index": index, "path": path.name, "status": "generating"}
+            selection["candidates"].append(record)
+            try:
+                if index in reusable_indices and path.is_file():
+                    record["reused"] = True
+                else:
+                    output = await self.image_generator.generate_single_image(
+                        prompt=prompt, reference_image_paths=reference_image_paths, size=size,
+                    )
+                    if output is None:
+                        raise RuntimeError("Image provider returned no image")
+                    await asyncio.to_thread(output.save, str(path))
+                with Image.open(path) as image:
+                    width, height = image.size
+                    output = ImageOutput(fmt="pil", ext="png", data=image.copy())
+                record.update(width=width, height=height)
+                if width <= height:
+                    raise ValueError("Candidate is not landscape")
+                record["status"] = "ready"
+                save_selection()
+                _emit_render_progress(progress, "image_candidate_done", f"Image candidate {index + 1}/{count} ready", {"index": index, "count": count})
+                return index, output, str(path)
+            except Exception as exc:
+                record.update(status="error", error_type=type(exc).__name__)
+                save_selection()
+                _emit_render_progress(progress, "image_candidate_failed", f"Image candidate {index + 1}/{count} failed", {"index": index, "error_type": type(exc).__name__})
+                raise
+
+        tasks = [asyncio.create_task(generate_candidate(index)) for index in range(count)]
+        try:
+            results = await asyncio.gather(*tasks, return_exceptions=True)
+            cancelled = next((result for result in results if isinstance(result, asyncio.CancelledError)), None)
+            if cancelled is not None:
+                raise cancelled
+            valid = [result for result in results if not isinstance(result, Exception)]
+            if not valid:
+                selection["status"] = "generation_failed"
+                save_selection()
+                raise RuntimeError(f"All {count} image candidates failed: {results[0]}") from results[0]
+
+            if len(valid) == 1:
+                selected = valid[0]
+                reason = "Only one valid landscape candidate; VLM comparison skipped."
+                selection["selection_method"] = "single_valid_candidate"
+            else:
+                selection["status"] = "selecting"
+                save_selection()
+                _emit_render_progress(progress, "image_selection_start", f"VLM selecting from {len(valid)} candidates", {"count": len(valid)})
+                try:
+                    response = await self.best_image_selector.select(
+                        reference_image_path_and_text_pairs=reference_image_path_and_text_pairs,
+                        target_description=target_description,
+                        candidate_image_paths=[item[2] for item in valid],
+                    )
+                except Exception as exc:
+                    selection.update(status="selection_failed", error_type=type(exc).__name__)
+                    save_selection()
+                    raise
+                selected = valid[response.best_image_index]
+                reason = response.reason
+                selection["selection_method"] = "vlm"
+            selection.update(status="selected", selected_candidate_index=selected[0], reason=reason)
+            save_selection()
+            _emit_render_progress(progress, "image_selection_done", f"Selected image candidate {selected[0] + 1}", {"index": selected[0], "count": len(valid), "selection_method": selection["selection_method"]})
+            return selected[1]
+        except asyncio.CancelledError:
+            for task in tasks:
+                task.cancel()
+            await asyncio.gather(*tasks, return_exceptions=True)
+            selection["status"] = "cancelled"
+            save_selection()
+            raise
+
 
     async def generate_frame_for_single_shot(
         self,
@@ -340,15 +667,18 @@ class Script2VideoPipeline:
         frame_desc: str,
         visible_characters: List[CharacterInScene],
         character_portraits_registry: Dict[str, Dict[str, Dict[str, str]]],
+        progress: Callable[[str, str, Dict[str, Any] | None], None] | None = None,
     ) -> ImageOutput:
 
         frame_image_path = os.path.join(self.working_dir, "shots", f"{shot_idx}", f"{frame_type}.png")
 
         if os.path.exists(frame_image_path):
             print(f"🚀 Skipped generating {frame_type} for shot {shot_idx}, already exists.")
+            _emit_render_progress(progress, "frame_exists", f"{frame_type} for shot {shot_idx} already exists", {"shot_idx": shot_idx, "frame_type": frame_type, "path": frame_image_path})
 
         else:
             print(f"🖼️ Starting {frame_type} generation for shot {shot_idx}...")
+            _emit_render_progress(progress, "frame_start", f"Generating {frame_type} for shot {shot_idx}", {"shot_idx": shot_idx, "frame_type": frame_type})
             available_image_path_and_text_pairs = []
             for visible_character in visible_characters:
                 identifier_in_scene = visible_character.identifier_in_scene
@@ -363,8 +693,10 @@ class Script2VideoPipeline:
                 with open(selector_output_path, 'r', encoding='utf-8') as f:
                     selector_output = json.load(f)
                 print(f"🚀 Loaded existing reference image selection and prompt for {frame_type} frame of shot {shot_idx} from {selector_output_path}.")
+                _emit_render_progress(progress, "frame_prompt_exists", f"Prompt for {frame_type} of shot {shot_idx} already exists", {"shot_idx": shot_idx, "frame_type": frame_type, "path": selector_output_path})
             else:
                 print(f"🔍 Selecting reference images and generating prompt for {frame_type} frame of shot {shot_idx}...")
+                _emit_render_progress(progress, "frame_prompt_start", f"Selecting references for {frame_type} of shot {shot_idx}", {"shot_idx": shot_idx, "frame_type": frame_type})
                 selector_output = await self.reference_image_selector.select_reference_images_and_generate_prompt(
                     available_image_path_and_text_pairs=available_image_path_and_text_pairs,
                     frame_description=frame_desc
@@ -372,6 +704,7 @@ class Script2VideoPipeline:
                 with open(selector_output_path, 'w', encoding='utf-8') as f:
                     json.dump(selector_output, f, ensure_ascii=False, indent=4)
                 print(f"☑️ Selected reference images and generated prompt for {frame_type} frame of shot {shot_idx}, saved to {selector_output_path}.")
+                _emit_render_progress(progress, "frame_prompt_done", f"Selected references for {frame_type} of shot {shot_idx}", {"shot_idx": shot_idx, "frame_type": frame_type, "path": selector_output_path})
 
             reference_image_path_and_text_pairs, prompt = selector_output["reference_image_path_and_text_pairs"], selector_output["text_prompt"]
             prefix_prompt = ""
@@ -380,13 +713,18 @@ class Script2VideoPipeline:
             prompt = f"{prefix_prompt}\n{prompt}"
             reference_image_paths = [item[0] for item in reference_image_path_and_text_pairs]
 
-            frame_image: ImageOutput = await self.image_generator.generate_single_image(
+            frame_image: ImageOutput = await self.generate_and_select_best_image(
                 prompt=prompt,
                 reference_image_paths=reference_image_paths,
+                reference_image_path_and_text_pairs=reference_image_path_and_text_pairs,
+                target_description=frame_desc,
                 size="1600x900",
+                candidates_save_dir=os.path.join(self.working_dir, "shots", str(shot_idx), f"{frame_type}_candidates"),
+                progress=_scoped_progress(progress, shot_idx=shot_idx, frame_type=frame_type),
             )
             frame_image.save(frame_image_path)
             print(f"☑️ Generated {frame_type} frame for shot {shot_idx}, saved to {frame_image_path}.")
+            _emit_render_progress(progress, "frame_done", f"Generated {frame_type} for shot {shot_idx}", {"shot_idx": shot_idx, "frame_type": frame_type, "path": frame_image_path})
 
 
         self.frame_events[shot_idx][frame_type].set()
@@ -396,6 +734,7 @@ class Script2VideoPipeline:
     async def construct_camera_tree(
         self,
         shot_descriptions: List[ShotDescription],
+        quiet: bool = False,
     ):
         camera_tree_path = os.path.join(self.working_dir, "camera_tree.json")
 
@@ -403,20 +742,17 @@ class Script2VideoPipeline:
             with open(camera_tree_path, "r", encoding="utf-8") as f:
                 camera_tree = json.load(f)
             camera_tree = [Camera.model_validate(camera) for camera in camera_tree]
-            print(f"🚀 Loaded {len(camera_tree)} cameras from existing file.")
+            _pipeline_print(quiet, f"🚀 Loaded {len(camera_tree)} cameras from existing file.")
             return camera_tree
 
-        cameras: List[Camera] = []
-        for shot_description in shot_descriptions:
-            if shot_description.cam_idx not in [camera.idx for camera in cameras]:
-                cameras.append(Camera(idx=shot_description.cam_idx, active_shot_idxs=[shot_description.idx]))
-            else:
-                cameras[shot_description.cam_idx].active_shot_idxs.append(shot_description.idx)
+        shot_descriptions = _normalize_model_list(shot_descriptions, ShotDescription, "shot_descriptions")
+        cameras = _group_shots_into_cameras(shot_descriptions)
 
         camera_tree = await self.camera_image_generator.construct_camera_tree(cameras=cameras, shot_descs=shot_descriptions)
+        camera_tree = _normalize_model_list(camera_tree, Camera, "camera_tree")
         with open(camera_tree_path, "w", encoding="utf-8") as f:
             json.dump([camera.model_dump() for camera in camera_tree], f, ensure_ascii=False, indent=4)
-        print(f"✅ Constructed camera tree and saved to {camera_tree_path}.")
+        _pipeline_print(quiet, f"✅ Constructed camera tree and saved to {camera_tree_path}.")
         return camera_tree
 
 
@@ -425,6 +761,7 @@ class Script2VideoPipeline:
     async def extract_characters(
         self,
         script: str,
+        quiet: bool = False,
     ):
         save_path = os.path.join(self.working_dir, "characters.json")
 
@@ -432,12 +769,12 @@ class Script2VideoPipeline:
             with open(save_path, "r", encoding="utf-8") as f:
                 characters = json.load(f)
             characters = [CharacterInScene.model_validate(character) for character in characters]
-            print(f"🚀 Loaded {len(characters)} characters from existing file.")
+            _pipeline_print(quiet, f"🚀 Loaded {len(characters)} characters from existing file.")
         else:
             characters = await self.character_extractor.extract_characters(script)
             with open(save_path, "w", encoding="utf-8") as f:
                 json.dump([character.model_dump() for character in characters], f, ensure_ascii=False, indent=4)
-            print(f"✅ Extracted {len(characters)} characters from script and saved to {save_path}.")
+            _pipeline_print(quiet, f"✅ Extracted {len(characters)} characters from script and saved to {save_path}.")
 
         for character in characters:
             self.character_portrait_events[character.idx] = asyncio.Event()
@@ -450,6 +787,7 @@ class Script2VideoPipeline:
         characters: List[CharacterInScene],
         character_portraits_registry: Optional[Dict[str, Dict[str, Dict[str, str]]]],
         style: str,
+        progress: Callable[[str, str, Dict[str, Any] | None], None] | None = None,
     ):
         character_portraits_registry_path = os.path.join(self.working_dir, "character_portraits_registry.json")
         if character_portraits_registry is None:
@@ -461,7 +799,7 @@ class Script2VideoPipeline:
 
 
         tasks = [
-            self.generate_portraits_for_single_character(character, style)
+            self.generate_portraits_for_single_character(character, style, progress=progress)
             for character in characters
             if character.identifier_in_scene not in character_portraits_registry
         ]
@@ -472,8 +810,10 @@ class Script2VideoPipeline:
                     json.dump(character_portraits_registry, f, ensure_ascii=False, indent=4)
 
             print(f"✅ Completed character portrait generation for {len(characters)} characters.")
+            _emit_render_progress(progress, "character_portraits_done", "Completed character portrait generation", {"character_count": len(characters)})
         else:
             print("🚀 All characters already have portraits, skipping portrait generation.")
+            _emit_render_progress(progress, "character_portraits_exist", "All character portraits already exist", {"character_count": len(characters)})
         return character_portraits_registry
 
 
@@ -481,35 +821,44 @@ class Script2VideoPipeline:
         self,
         character: CharacterInScene,
         style: str,
+        progress: Callable[[str, str, Dict[str, Any] | None], None] | None = None,
     ):
         character_dir = os.path.join(self.working_dir, "character_portraits", f"{character.idx}_{character.identifier_in_scene}")
         os.makedirs(character_dir, exist_ok=True)
+        _emit_render_progress(progress, "character_portrait_start", f"Generating portraits for {character.identifier_in_scene}", {"character_idx": character.idx, "identifier": character.identifier_in_scene})
 
         front_portrait_path = os.path.join(character_dir, "front.png")
         if os.path.exists(front_portrait_path):
             pass
         else:
+            _emit_render_progress(progress, "character_portrait_front_start", f"Generating front portrait for {character.identifier_in_scene}", {"character_idx": character.idx, "identifier": character.identifier_in_scene})
             front_portrait_output = await self.character_portraits_generator.generate_front_portrait(character, style)
             front_portrait_output.save(front_portrait_path)
+            _emit_render_progress(progress, "character_portrait_front_done", f"Generated front portrait for {character.identifier_in_scene}", {"character_idx": character.idx, "identifier": character.identifier_in_scene, "path": front_portrait_path})
 
 
         side_portrait_path = os.path.join(character_dir, "side.png")
         if os.path.exists(side_portrait_path):
             pass
         else:
+            _emit_render_progress(progress, "character_portrait_side_start", f"Generating side portrait for {character.identifier_in_scene}", {"character_idx": character.idx, "identifier": character.identifier_in_scene})
             side_portrait_output = await self.character_portraits_generator.generate_side_portrait(character, front_portrait_path)
             side_portrait_output.save(side_portrait_path)
+            _emit_render_progress(progress, "character_portrait_side_done", f"Generated side portrait for {character.identifier_in_scene}", {"character_idx": character.idx, "identifier": character.identifier_in_scene, "path": side_portrait_path})
 
         back_portrait_path = os.path.join(character_dir, "back.png")
         if os.path.exists(back_portrait_path):
             pass
         else:
+            _emit_render_progress(progress, "character_portrait_back_start", f"Generating back portrait for {character.identifier_in_scene}", {"character_idx": character.idx, "identifier": character.identifier_in_scene})
             back_portrait_output = await self.character_portraits_generator.generate_back_portrait(character, front_portrait_path)
             back_portrait_output.save(back_portrait_path)
+            _emit_render_progress(progress, "character_portrait_back_done", f"Generated back portrait for {character.identifier_in_scene}", {"character_idx": character.idx, "identifier": character.identifier_in_scene, "path": back_portrait_path})
 
         self.character_portrait_events[character.idx].set()
 
         print(f"☑️ Completed character portrait generation for {character.identifier_in_scene}.")
+        _emit_render_progress(progress, "character_portrait_done", f"Portraits for {character.identifier_in_scene} ready", {"character_idx": character.idx, "identifier": character.identifier_in_scene})
 
         return {
             character.identifier_in_scene: {
@@ -535,24 +884,26 @@ class Script2VideoPipeline:
         script: str,
         characters: List[CharacterInScene],
         user_requirement: str,
+        quiet: bool = False,
     ):
         storyboard_path = os.path.join(self.working_dir, "storyboard.json")
         if os.path.exists(storyboard_path):
             with open(storyboard_path, 'r', encoding='utf-8') as f:
                 storyboard = json.load(f)
             storyboard = [ShotBriefDescription.model_validate(shot) for shot in storyboard]
-            print(f"🚀 Loaded {len(storyboard)} shot brief descriptions from existing file.")
+            _pipeline_print(quiet, f"🚀 Loaded {len(storyboard)} shot brief descriptions from existing file.")
         else:
-            print(f"🔍 Designing storyboard...")
+            _pipeline_print(quiet, f"🔍 Designing storyboard...")
             storyboard = await self.storyboard_artist.design_storyboard(
                 script=script,
                 characters=characters,
                 user_requirement=user_requirement,
                 retry_timeout=150,
             )
+            storyboard = _normalize_model_list(storyboard, ShotBriefDescription, "storyboard")
             with open(storyboard_path, 'w', encoding='utf-8') as f:
                 json.dump([shot.model_dump() for shot in storyboard], f, ensure_ascii=False, indent=4)
-            print(f"✅ Designed storyboard and saved to {storyboard_path}.")
+            _pipeline_print(quiet, f"✅ Designed storyboard and saved to {storyboard_path}.")
 
         for shot_brief_description in storyboard:
             self.shot_desc_events[shot_brief_description.idx] = asyncio.Event()
@@ -565,9 +916,10 @@ class Script2VideoPipeline:
         self,
         shot_brief_descriptions: List[ShotBriefDescription],
         characters: List[CharacterInScene],
+        quiet: bool = False,
     ):
         tasks = [
-            self.decompose_visual_description_for_single_shot_brief_description(shot_brief_description, characters)
+            self.decompose_visual_description_for_single_shot_brief_description(shot_brief_description, characters, quiet=quiet)
             for shot_brief_description in shot_brief_descriptions
         ]
 
@@ -579,6 +931,7 @@ class Script2VideoPipeline:
         self,
         shot_brief_description: ShotBriefDescription,
         characters: List[CharacterInScene],
+        quiet: bool = False,
     ):
         shot_description_path = os.path.join(self.working_dir, "shots", f"{shot_brief_description.idx}", "shot_description.json")
         os.makedirs(os.path.dirname(shot_description_path), exist_ok=True)
@@ -586,16 +939,17 @@ class Script2VideoPipeline:
         if os.path.exists(shot_description_path):
             with open(shot_description_path, 'r', encoding='utf-8') as f:
                 shot_description = ShotDescription.model_validate(json.load(f))
-            print(f"🚀 Loaded shot {shot_brief_description.idx} description from existing file.")
+            _pipeline_print(quiet, f"🚀 Loaded shot {shot_brief_description.idx} description from existing file.")
         else:
             shot_description = await self.storyboard_artist.decompose_visual_description(
                 shot_brief_desc=shot_brief_description,
                 characters=characters,
                 retry_timeout=120,
             )
+            shot_description = _normalize_model_list([shot_description], ShotDescription, "shot_description")[0]
             with open(shot_description_path, 'w', encoding='utf-8') as f:
                 json.dump(shot_description.model_dump(), f, ensure_ascii=False, indent=4)
-            print(f"✅ Decomposed visual description for shot {shot_brief_description.idx} and saved to {shot_description_path}.")
+            _pipeline_print(quiet, f"✅ Decomposed visual description for shot {shot_brief_description.idx} and saved to {shot_description_path}.")
 
         self.shot_desc_events[shot_brief_description.idx].set()
 

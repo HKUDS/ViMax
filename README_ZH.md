@@ -3,35 +3,30 @@
   <br>
   <br>
   <h1 align="center">ViMax: Agentic Video Generation</h1>
+  <p align="center">
+    <a href="https://trendshift.io/repositories/15299" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/15299" alt="HKUDS%2FViMax | Trendshift" width="250" height="55"/></a>
+    <a href="https://trendshift.io/repositories/15299?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-15299" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/15299/weekly?language=Python" alt="HKUDS%2FViMax | Trendshift" width="250" height="55"/></a>
+  </p>
 
   <div align="center">
   </div>
 
   <p align="center">
-    <img src="https://img.shields.io/badge/🐍Python-3.12-00d9ff?style=for-the-badge&logo=python&logoColor=white&labelColor=1a1a2e">
-	<a href="https://github.com/astral-sh/uv"><img src="https://img.shields.io/badge/⚡uv-Ready-ff6b6b?style=for-the-badge&logo=python&logoColor=white&labelColor=1a1a2e"></a>
-	<img src="https://img.shields.io/badge/License-MIT-4ecdc4?style=for-the-badge&logo=opensourceinitiative&logoColor=white" alt="MIT License">
+    <img src="https://img.shields.io/badge/Python-3.12-00d9ff?style=flat-square&logo=python&logoColor=white&labelColor=1a1a2e">
+	<a href="https://github.com/astral-sh/uv"><img src="https://img.shields.io/badge/uv-Ready-ff6b6b?style=flat-square&logo=uv&logoColor=white&labelColor=1a1a2e"></a>
+	<img src="https://img.shields.io/badge/License-MIT-4ecdc4?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="MIT License">
+    <a href="https://github.com/HKUDS/ViMax/releases/tag/v1.2.0"><img src="https://img.shields.io/badge/Version-v1.2.0-2563eb?style=flat-square&labelColor=1a1a2e" alt="ViMax v1.2.0"></a>
+    <a href='https://www.youtube.com/@AI-Creator-is-here'><img src='https://img.shields.io/badge/YouTube-ff0000?style=flat-square&logo=youtube&logoColor=white&labelColor=1a1a2e' /></a>
+    <a href='https://arxiv.org/abs/2606.07649'><img src='https://img.shields.io/badge/arXiv-2606.07649-b31b1b?style=flat-square&logo=arxiv&logoColor=white&labelColor=1a1a2e' /></a>
   </p>
 
   <p align="center">
-    <a href="./Communication.md"><img src="https://img.shields.io/badge/💬Feishu-Group-07c160?style=for-the-badge&logoColor=white&labelColor=1a1a2e"></a>
-    <a href="./Communication.md"><img src="https://img.shields.io/badge/WeChat-Group-07c160?style=for-the-badge&logo=wechat&logoColor=white&labelColor=1a1a2e"></a>
+    <a href="./Communication.md"><img src="https://img.shields.io/badge/Feishu-Group-07c160?style=flat-square&logo=lark&logoColor=white&labelColor=1a1a2e"></a>
+    <a href="./Communication.md"><img src="https://img.shields.io/badge/WeChat-Group-07c160?style=flat-square&logo=wechat&logoColor=white&labelColor=1a1a2e"></a>
+	<a href="readme.md"><img src="https://img.shields.io/badge/English-1a1a2e?style=flat-square"></a>
+    <a href="README_ZH.md"><img src="https://img.shields.io/badge/中文版-1a1a2e?style=flat-square"></a>
+    <a href="#quick-start"><img src="https://img.shields.io/badge/Quick%20Start-Get%20Started%20Now-FFC107?style=flat-square&logo=rocket&logoColor=white&labelColor=1a1a2e"></a>
   </p>
-
-  <p align="center">
-    <a href='https://www.youtube.com/@AI-Creator-is-here'><img src='https://badges.aleen42.com/src/youtube.svg' /></a>
-  </p>
-
-</div>
-<div align="center">
-	
-<p>
-	<a href="README_VIMAX.md"><img src="https://img.shields.io/badge/English-1a1a2e?style=for-the-badge"></a>
-    <a href="README_ZH.md"><img src="https://img.shields.io/badge/中文版-1a1a2e?style=for-the-badge"></a>
-</p>
-    <a href="#quick-start" style="text-decoration: none;">
-      <img src="https://img.shields.io/badge/Quick%20Start-Get%20Started%20Now-FFC107?style=for-the-badge&logo=rocket&logoColor=white&labelColor=1a1a2e">
-    </a>
 
 </div>
 
@@ -50,113 +45,33 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 
 ---
 
+### 📰 **动态**
+
+- **2026-07-20** 🚀 **ViMax v1.2.0** 发布 Web UI，支持命名项目、Agent Loop 对话、产物与分镜预览、渲染检查点、文件上传、供应商设置和深色模式。
+- **2026-07-17** 🎬 新增 OpenRouter GPT Image 2 图像生成与 Seedance 2.0 Fast 视频生成支持。
+
+---
+
 
 ## 📑 目录
 
-- [💡 核心特性](#核心特性)
+- [✨ 核心特性](#核心特性)
 - [🔮 演示示例](#演示示例)
-- [🏗️ 系统架构](#️-系统架构)
-- [🚀 快速开始](#快速开始)
+- [🚀 快速开始](#quick-start)
 
 ---
-## 💡核心特性
+## ✨ 核心特性
 
-<br/>
+ViMax 是一个智能体驱动的视频创作框架，在统一且可扩展的工作流中串联叙事规划、视觉一致性、图像生成、视频生成与成片组装。
 
-<table align="center" width="100%" style="border: none; table-layout: fixed;">
-<tr>
-<td width="25%" align="center" style="vertical-align: top; padding: 20px;">
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<h3 style="margin: 0; padding: 0;">🌟 <strong>创意到视频</strong></h3>
-</div>
-
-<div align="center" style="margin: 15px 0;">
-  <img src="https://img.shields.io/badge/创意-生成-ff6b6b?style=for-the-badge&logo=algorithm&logoColor=white" alt="算法徽章" />
-</div>
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<p align="center"><strong>从灵感到银幕</strong></p>
-</div>
-
-<div style="height: 60px; display: flex; align-items: center; justify-content: center;">
-<p align="center">通过智能多智能体工作流，将<strong>原始创意</strong>自动转化为完整视频故事，涵盖<strong>叙事构建、角色设计与视频制作</strong>全流程。
-</p>
-</div>
-
-
-
-</td>
-<td width="25%" align="center" style="vertical-align: top; padding: 20px;">
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<h3 style="margin: 0; padding: 0;">🎨 <strong>小说到视频</strong></h3>
-</div>
-
-<div align="center" style="margin: 15px 0;">
-  <img src="https://img.shields.io/badge/小说-改编-4ecdc4?style=for-the-badge&logo=book&logoColor=white" alt="前端徽章" />
-</div>
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<p align="center"><strong>智能文学改编引擎</strong></p>
-</div>
-
-<div style="height: 60px; display: flex; align-items: center; justify-content: center;">
-<p align="center">将<strong>完整小说</strong>智能压缩并转化为<strong>分集视频内容</strong>，实现角色追踪、叙事压缩与逐场景视觉化改编。</p>
-</div>
-
-
-
-</td>
-<td width="25%" align="center" style="vertical-align: top; padding: 20px;">
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<h3 style="margin: 0; padding: 0;">⚙️ <strong>剧本到视频</strong></h3>
-</div>
-
-<div align="center" style="margin: 15px 0;">
-  <img src="https://img.shields.io/badge/剧本-改编-9b59b6?style=for-the-badge&logo=server&logoColor=white" alt="后端徽章" />
-</div>
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<p align="center"><strong>无限剧本视频创作</strong></p>
-</div>
-
-<div style="height: 60px; display: flex; align-items: center; justify-content: center;">
-<p align="center">自由创作<strong>任意剧本</strong>——从个人故事到史诗冒险，全面掌控视觉叙事的每个细节。</p>
-</div>
-
-
-
-
-
-</td>
-<td width="25%" align="center" style="vertical-align: top; padding: 20px;">
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<h3 style="margin: 0; padding: 0;">🤳 <strong>智能客串</strong></h3>
-</div>
-
-<div align="center" style="margin: 15px 0;">
-  <img src="https://img.shields.io/badge/互动-生成-FFC107?style=for-the-badge&logo=server&logoColor=white" alt="后端徽章" />
-</div>
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<p align="center"><strong>用你的照片生成视频</strong></p>
-</div>
-
-<div style="height: 60px; display: flex; align-items: center; justify-content: center;">
-<p align="center"><strong>创建属于你的客串视频</strong>，将自己融入无限创意剧本、电影级镜头与互动剧情中，成为故事中的明星角色。</p>
-</div>
-
-
-
-</td>
-</tr>
-</table>
-
-<br/>
-
+- **Idea2Video** — 将简短创意扩展为结构化故事、角色、剧本、分镜、镜头设计与最终视频。
+- **Script2Video** — 将明确剧本转化为可控的多场景、多镜头视频，同时保留原有创作意图。
+- **Novel2Video** — 通过叙事压缩、角色追踪与场景规划，将长篇小说改编为分集视觉内容。
+- **AutoCameo** — 根据参考照片将人物或宠物融入生成故事，并保持外观一致性。
+- **Agent Loop 与 TUI** — 在统一交互工作区中讨论创意、修改规划、恢复 session、检查文本产物并控制渲染。
+- **Web UI** — 在浏览器中管理命名项目、与 ViMax Agent 协作、上传源文件、查看产物和分镜进度、预览渲染并配置供应商。
+- **一致性制作流程** — 端到端协调参考图、首帧、机位连续性与最终组装。
+- **并行加速生成** — 并发生成可并行处理的镜头与媒体资产，缩短多镜头视频制作时间。
 
 ---
 <table>
@@ -220,6 +135,16 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 
 ---
 
+### 🖥️ **ViMax Web UI**
+
+<div align="center">
+  <img src="assets/vimax-web-ui.png" width="100%" alt="ViMax Web UI 工作区">
+</div>
+
+Web UI 将 Agent 对话、项目产物、分镜预览与渲染进度集中在同一个可视化工作区中。
+
+---
+
 ### 🎯 **端到端视频创作引擎**
 
 **面临的挑战**：
@@ -256,106 +181,15 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 
 ---
 
+### ☄️ **路线图**
 
-## 🏗️ 系统架构
-
-### 📊 **系统概览**
-
-**ViMax** 是一个多智能体视频生成框架，支持自动化多镜头视频生成，并确保角色与场景的一致性。系统能将你的创意无缝转化为对应视频，让你专注于讲故事，而非技术实现。
-
-🎯 **技术能力**：
-
-🧬 **智能长剧本生成**  
-基于 RAG 的长剧本引擎，可智能分析小说级长文本，并自动切分为多场景剧本格式，精准保留关键情节与角色对话。
-
-🪄 **表现力分镜设计**  
-基于用户需求与目标受众，运用电影语言生成富有表现力的镜头级分镜，为后续视频生成奠定叙事节奏。
-
-🔮 **多机位拍摄模拟**  
-模拟多机位拍摄，提供沉浸式观看体验，同时确保同一场景内角色位置与背景的一致性。
-
-🧸 **智能参考图选择**  
-智能选取当前视频首帧所需的参考图（包括前序时间线中的分镜），确保视频越长，多角色与环境元素越准确。
-
-⚙️ **自动化图像生成**  
-基于所选参考图与前序时间线的视觉逻辑，自动生成图像生成器提示词，合理安排角色与环境的空间交互位置。
-
-✅ **图像生成一致性校验**  
-并行生成多张图像，并通过 MLLM/VLM 选择最一致的图像作为首帧，模拟人类创作者的工作流程。
-
-⚡ **高效并行镜头生成**  
-对同一机位拍摄的连续镜头进行并行处理，极大提升视频生产效率。
-
-
-
-
-
-### 🤖 <strong>多智能体视频生成流水线</strong>
-
-<div align="center">
-  <table align="center" width="100%" style="border: none; border-collapse: collapse;">
-    <tr>
-      <td colspan="3" align="center" style="padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white; font-weight: bold;">
-        🧠 <strong>输入层</strong><br/>
-        📝 创意/剧本/小说 • 💭 自然语言提示 • 🖼️ 参考图像 • 🎨 风格指令 • 🧩 配置参数
-      </td>
-    </tr>
-    <tr><td colspan="3" height="20"></td></tr>
-    <tr>
-      <td colspan="3" align="center" style="padding: 15px; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); border-radius: 12px; color: white; font-weight: bold;">
-        🧭 <strong>中央调度</strong><br/>
-        智能体调度 • 阶段切换 • 资源管理 • 重试/降级逻辑
-      </td>
-    </tr>
-    <tr><td colspan="3" height="15"></td></tr>
-    <tr>
-      <td align="center" style="padding: 12px; background: linear-gradient(135deg, #3742fa 0%, #2f3542 100%); border-radius: 10px; color: white; width: 50%;">
-        🧾 <strong>剧本理解</strong><br/>
-        <small>角色/环境提取 • 场景边界识别 • 风格意图解析</small>
-      </td>
-      <td width="10"></td>
-      <td align="center" style="padding: 12px; background: linear-gradient(135deg, #8c7ae6 0%, #9c88ff 100%); border-radius: 10px; color: white; width: 50%;">
-        🎥 <strong>场景与镜头规划</strong><br/>
-        <small>分镜步骤 • 镜头列表 • 关键帧与节奏点</small>
-      </td>
-    </tr>
-    <tr><td colspan="3" height="15"></td></tr>
-    <tr>
-      <td colspan="3" align="center" style="padding: 15px; background: linear-gradient(135deg, #00d2d3 0%, #54a0ff 100%); border-radius: 12px; color: white; font-weight: bold;">
-        🧪 <strong>视觉资产规划</strong><br/>
-        参考图选择 • 外观/风格引导 • 提示词条件化
-      </td>
-    </tr>
-    <tr><td colspan="3" height="15"></td></tr>
-    <tr>
-      <!-- 左：资产索引 -->
-      <td align="center" style="padding: 12px; background: linear-gradient(135deg, #e056fd 0%, #f368e0 100%); border-radius: 10px; color: white; width: 50%;">
-        🗂️ <strong>资产索引</strong><br/>
-        <small>帧/参考图目录 • 嵌入向量 • 复用检索</small>
-      </td>
-      <td width="10"></td>
-      <!-- 右：一致性与连续性 -->
-      <td align="center" style="padding: 12px; background: linear-gradient(135deg, #ffa726 0%, #ff7043 100%); border-radius: 10px; color: white; width: 50%;">
-        ♻️ <strong>一致性与连续性</strong><br/>
-        <small>角色/环境追踪 • 参考匹配 • 时序连贯性</small>
-      </td>
-    </tr>
-    <tr><td colspan="3" height="15"></td></tr>
-    <tr>
-      <td colspan="3" align="center" style="padding: 15px; background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%); border-radius: 12px; color: white; font-weight: bold;">
-        ✂️ <strong>视觉合成与组装</strong><br/>
-        图像生成 • 最佳帧选择 • 首尾帧→视频 • 剪辑与时间线合成
-      </td>
-    </tr>
-    <tr><td colspan="3" height="15"></td></tr>
-    <tr>
-      <td colspan="3" align="center" style="padding: 20px; background: linear-gradient(135deg, #045de9 0%, #09c6f9 100%); border-radius: 15px; color: white; font-weight: bold;">
-        🚀 <strong>输出层</strong><br/>
-        🖼️ 帧图像 • 🎞️ 片段与最终视频 • 📜 日志 • 📦 工作目录产物
-      </td>
-    </tr>
-  </table>
-</div>
+- ✅ 🖥️ **支持产物、分镜与渲染预览的 Web 前端工作区**
+- ✅ 🤖 **Agent Loop + TUI 交互式工作流**
+- ✅ 🎬 **Seedance 2.0 Fast 视频生成支持**
+- ✅ 🖼️ **GPT Image 2 图像生成支持**
+- ☑️ 🎬 **MiniMax H3 视频生成支持**
+- ☑️ 🧩 **可组合 Skills，用于自定义视频工作流**
+---
 
 
 
@@ -376,7 +210,70 @@ uv sync
 ```
 
 
-### 🎯 **Usage**
+<details>
+<summary><strong>Agent TUI / Agents Loop</strong></summary>
+
+ViMax 还提供用于交互式 Agent 视频创作的最小 TUI。先从受 Git 跟踪的示例创建私有本地配置：
+
+```bash
+cp configs/agent.example.yaml configs/agent.local.yaml
+```
+
+随后在 `configs/agent.local.yaml` 中配置 LLM、图像和视频供应商，并从 ViMax 根目录启动 TUI。
+```bash
+vimax tui
+```
+
+Start a new session or resume an existing one:
+```bash
+vimax tui new
+vimax tui resume
+vimax tui resume <session_id>
+```
+
+</details>
+
+<details>
+<summary><strong>Web UI</strong></summary>
+
+Web UI 与 TUI 共用同一套 ViMax agent runtime、session、tools 和私有的 `configs/agent.local.yaml` 配置。运行 Web UI 需要 Node.js 18 或更高版本。
+
+在 `ViMax` 仓库根目录中，首次使用时安装前端依赖，然后启动本地服务：
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+在浏览器中打开 [http://127.0.0.1:4173](http://127.0.0.1:4173)。Web UI 支持命名项目、Agent 对话、斜杠命令、产物与渲染查看、分镜预览、文件上传和供应商设置。
+
+服务默认只监听 `127.0.0.1`。如果 ViMax 运行在远程服务器上，请在本地电脑建立 SSH 端口转发：
+
+```bash
+ssh -N -L 4173:127.0.0.1:4173 <user>@<server>
+```
+
+需要改用其他端口时，设置 `VIMAX_WEB_PORT`：
+
+```bash
+VIMAX_WEB_PORT=4174 npm run dev
+```
+
+</details>
+
+<details>
+<summary><strong>Usage</strong></summary>
+
+**图像筛选**
+
+默认并发生成 2 张关键帧候选图，由支持视觉输入的聊天模型二选一，有助于提升画面质量与一致性，但 API 开销更高。在 YAML 配置中设置：
+
+```yaml
+image_selection:
+  num_candidates: 2 # 设为 1 关闭筛选。
+```
+
 main_idea2video.py is used to convert your ideas into videos.
 You need to configure the model and API key information in the configs/idea2video.yaml file, including three parts—the chat model, the image generator, and the video generator, as shown below
 ```yaml
@@ -432,6 +329,6 @@ Fast-paced with no more than 20 shots.
 style = "Animate Style"
 ```
 
+</details>
 
 ---
-

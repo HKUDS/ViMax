@@ -1,0 +1,93 @@
+{
+  "story_overview": "In a calm community workshop, an adult mentor teaches an adult student the basics of woodworking. They practice measuring, cutting, and assembling a small wooden keepsake box together, overcoming a mistake and finishing the craft as a team.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide two-shot inside a bright community makerspace workshop. Character A (mentor): a 45-year-old woman, medium height, warm brown skin, short curly black hair, thin rectangular glasses, wearing a forest-green work jacket over a light gray crewneck shirt, dark denim jeans, and brown leather work boots; she has a calm, focused expression. Character B (student): a 26-year-old man, tall and slim, light skin, short sandy-blond hair, clean-shaven, wearing a navy-blue button-up work shirt, tan canvas work pants, and gray sneakers; he looks attentive. They stand at a large maple workbench with a neatly arranged measuring tape, pencil, try square, wood glue bottle, two bar clamps, and four pre-cut pine boards. Sunlight from high windows creates soft highlights; the background shows pegboards with tools and a safety poster.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. The mentor gestures to the tools laid out, then points to a simple sketch of a small keepsake box on a clipboard. The student nods and leans slightly forward to see. Subtle handheld stability, gentle workshop ambiance, soft daylight."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Over-the-shoulder medium shot from behind the mentor (Character A) looking down at the clipboard on the workbench. Her forest-green jacket sleeve and thin glasses frame the view. Character B’s hands rest near the pencil and try square. The sketch shows dimensions for a small rectangular box. The wood grain of the maple bench is crisp; sunlight stripes cross the paper.",
+          "video_prompt": "Over-the-shoulder medium shot, 50mm lens. The mentor taps the dimension lines with the pencil, then slides the measuring tape toward the student. The student’s hands move in to take the tape carefully. The camera holds steady with a slight push-in as the exchange happens."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Close-up two-shot at the workbench edge focusing on both characters’ hands: Character A’s hands (sleeves of forest-green jacket) guide the try square; Character B’s hands (navy-blue cuff visible) hold a pencil. A pine board lies flat with a faint mark line starting. The background is softly blurred tools on pegboard.",
+          "video_prompt": "Table-level close-up, 85mm lens. The mentor aligns the try square and demonstrates a clean right-angle mark; the student follows, drawing a straight pencil line. The mentor nods approvingly; their hands stay clearly separate, with no clothing attribute mixing. Soft daylight glints on the metal square."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Medium two-shot from the side of the bench. Character A stands on the left, Character B on the right. A compact benchtop miter saw sits further down the bench with its blade guard down. Both wear clear safety glasses (in addition to Character A’s thin rectangular glasses beneath). The mentor points to the saw’s safety features while the student watches closely, hands off the tool.",
+          "video_prompt": "Eye-level medium two-shot, 35mm lens. The mentor demonstrates the safe stance and indicates the clamp point without powering the saw. The student mirrors her posture and repeats the steps with empty hands. The camera makes a small lateral move to keep both faces visible, emphasizing instruction and attention."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Wide shot of the workbench and miter saw area. Character B positions a pine board against the saw fence; Character A stands slightly behind and to his left, supervising. Bar clamps and offcuts are neatly to the side. Bright, even workshop lighting; no harsh shadows.",
+          "video_prompt": "Wide shot, 24mm lens. The student secures the board and performs a careful cut motion (tool implied as operating safely with guard; no visible debris). The mentor watches the alignment and signals a stop with a small hand gesture. The camera remains steady to show both characters and the tool in frame."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Reaction two-shot, medium close-up. Character B holds two cut pieces up at chest height; one looks slightly longer than the other. He frowns mildly, confused but calm. Character A leans in with a reassuring expression, her forest-green jacket collar visible, glasses catching light.",
+          "video_prompt": "Eye-level medium close-up two-shot, 50mm lens. The student compares the pieces side-by-side, then lowers them. The mentor gently points to the measurement mark on one piece and nods as if explaining the mismatch. The student exhales, then nods in understanding. Subtle push-in to emphasize the learning moment."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Over-the-shoulder shot from behind the student (Character B). His navy-blue shoulders frame the view as Character A uses the measuring tape on the pine board. The tape hook sits at the board edge; her finger indicates the correct measurement. The bench surface shows pencil shavings and a neatly placed eraser.",
+          "video_prompt": "Over-the-shoulder medium shot, 50mm lens. The mentor re-measures slowly, then marks a new line with the pencil. The student’s hand enters to hold the board steady, keeping his navy cuff clearly distinct from her green sleeve. The camera stays locked with crisp focus on the tape and mark."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Close-up on sanding action at the bench: a rectangular sanding block in Character B’s hands (navy cuffs visible) smooths a pine edge. Character A’s hand (green sleeve) steadies the piece from the far side. Fine wood dust is minimal and controlled; a small dust brush and shop vacuum hose are nearby.",
+          "video_prompt": "Low table-level close-up, 85mm lens. The student sands with short, even strokes; the mentor adjusts the piece’s angle slightly to keep it flat. The camera tracks a few inches along the edge to reveal the smoother surface, with soft highlights on the wood grain."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Medium two-shot at the center of the workbench. The four pine boards are arranged into a rectangle, and a small bottle of wood glue stands upright. Character A holds the glue bottle; Character B holds a small brush. Both look focused, standing shoulder-to-shoulder with clear personal attire separation (green jacket vs navy shirt).",
+          "video_prompt": "Eye-level medium two-shot, 35mm lens. The mentor applies a thin bead of glue along an edge; the student spreads it evenly with the brush. They then bring two boards together carefully. The camera makes a slight arc move to show the joint closing cleanly."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 10,
+          "first_frame": "Wide shot of the assembly stage. The forming box sits on the bench with two bar clamps partially tightened. Character A on the left adjusts one clamp; Character B on the right holds the try square against a corner to check for a right angle. Warm overhead lights mix with daylight, creating a cozy, determined mood.",
+          "video_prompt": "Wide shot, 24mm lens. The mentor tightens the clamp gradually while the student checks the corner and signals with a thumbs-up when it aligns. The camera dollies in slightly to emphasize teamwork and precision."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Tight close-up of the box corner and try square. The metal square sits flush against the pine corner; a tiny line of glue squeeze-out is visible and being wiped with a clean cloth held by Character A’s green-sleeved hand. Character B’s navy cuff points at the corner, confirming alignment.",
+          "video_prompt": "Macro-style close-up, 100mm lens. The mentor wipes away excess glue in one smooth motion; the student taps the square lightly to confirm the corner is true. The camera holds focus on the crisp 90-degree junction and the wood texture."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Medium two-shot reveal at the bench. The clamps are now removed and placed aside. The small keepsake box sits centered, lightly sanded and clean. Character B looks relieved and proud; Character A smiles gently, hands folded. A simple water-based finish tin and a clean brush sit nearby, unopened.",
+          "video_prompt": "Eye-level medium two-shot, 50mm lens. The student carefully rotates the box a quarter turn to show the even joints. The mentor nods and gestures toward the smooth edges. The camera makes a slow, subtle push-in as their expressions shift from concentration to satisfaction."
+        },
+        {
+          "shot_id": 13,
+          "first_frame": "Wide final two-shot in the makerspace. Character A and Character B stand side-by-side behind the workbench with the finished keepsake box on a small felt pad. They exchange a brief, respectful handshake. The workshop background remains tidy: pegboard tools, safety poster, and soft sunlight through high windows.",
+          "video_prompt": "Eye-level wide shot, 28mm lens. The mentor and student shake hands once, then both look down at the box and nod appreciatively. The camera holds steady, then performs a gentle pull-back to end on the completed craft and the calm, supportive atmosphere."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "mentor_student_craft_learning",
+    "theme_description": "A mentor and student learning a craft together",
+    "consistency_type": "Type C",
+    "requested_scenes": 3,
+    "requested_shots": 13
+  }
+}

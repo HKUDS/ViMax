@@ -7,8 +7,10 @@ from typing import List, Optional
 from google import genai
 from google.genai import types
 from google.genai.errors import ClientError
-from tenacity import retry, stop_after_attempt
+from tenacity import retry, stop_after_attempt, wait_exponential
 from interfaces.image_output import ImageOutput
+from tools.image_orientation import ensure_not_portrait, landscape_guard_requested
+from tools.image_response import image_from_response_part
 from utils.retry import after_func
 from utils.rate_limiter import RateLimiter
 
@@ -25,7 +27,7 @@ class ImageGeneratorNanobananaGoogleAPI:
             api_key=api_key,
         )
 
-    @retry(stop=stop_after_attempt(3), after=after_func)
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=1, max=10), after=after_func, reraise=True)
     async def generate_single_image(
         self,
         prompt: str,
@@ -77,11 +79,19 @@ class ImageGeneratorNanobananaGoogleAPI:
             if part.text is not None:
                 text += part.text
             elif part.inline_data is not None:
-                image = part.as_image()
+                image = image_from_response_part(part)
 
         if image is None:
             logging.error(f"No image generated. The response text is: {text}")
             raise ValueError("No image generated")
+
+        if landscape_guard_requested(
+            size=kwargs.get("size"),
+            aspect_ratio=aspect_ratio,
+            enforce_landscape=kwargs.get("enforce_landscape", True),
+            allow_portrait=kwargs.get("allow_portrait", False),
+        ):
+            ensure_not_portrait(image)
 
         return ImageOutput(fmt="pil", ext="png", data=image)
 

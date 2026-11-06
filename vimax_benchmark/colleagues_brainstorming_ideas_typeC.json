@@ -1,0 +1,108 @@
+{
+  "story_overview": "Three adult colleagues collaborate in a modern meeting room, moving from a stuck start to an energetic brainstorming session, culminating in a clear, agreed creative concept captured on a whiteboard and celebrated with a team alignment.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide establishing view of a modern meeting room with a large oval light-wood table, glass wall with frosted banding, a whiteboard on wheels at frame right, a wall-mounted display at frame left, and warm overhead LED panel lighting. Three adults are present: Character A (a 29-year-old woman, tall and slim, light skin, straight blonde bob haircut, wearing a modest red blazer over a white high-neck blouse and dark tailored trousers) sits on the left side of the table with a closed notebook. Character B (a 35-year-old man, shorter and stocky, medium-brown skin, neatly trimmed dark beard, wearing a modest cobalt-blue sweater vest over a light gray button-down shirt and khaki trousers) sits near the center with a capped marker in hand. Character C (a 41-year-old woman, average height, East Asian features, long black hair in a low ponytail, wearing a modest forest-green cardigan over a black crew-neck top and a knee-length charcoal skirt with opaque tights) sits on the right with a laptop open. Coffee mugs, sticky notes, and pens are neatly arranged; mood is calm but slightly tense.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. The trio exchange brief glances and small nods; Character B uncaps the marker and taps it lightly on a notepad, Character A slides her notebook closer, and Character C rotates her laptop slightly toward the others. Subtle chair shifts and hand movements communicate they are about to start; warm LED lighting stays steady and soft."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium two-shot from the table’s near corner: Character A (red blazer, blonde bob) and Character B (blue sweater vest, dark beard) are in the foreground, facing each other across the table edge. Character A holds a pen above her notebook; Character B holds the marker upright. The whiteboard is blurred in the background; Character C is visible out of focus beyond them with her laptop. Lighting is warm and even, with gentle reflections on the tabletop.",
+          "video_prompt": "Eye-level medium two-shot, 50mm lens. Character A gestures with her pen toward a blank page, then pauses; Character B responds with a small shrug and points the marker toward the whiteboard, suggesting a new direction. Their expressions shift from uncertain to curious, while Character C in the background leans in slightly, indicating attention."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Over-the-shoulder shot from behind Character C (green cardigan, low ponytail), framing her laptop screen edge and the two colleagues across the table. Character A is left of frame, Character B center-right. A small cluster of sticky notes sits near the laptop. The room’s glass wall and display screen reflect soft light; mood is focused.",
+          "video_prompt": "Over-the-shoulder shot, 35mm lens. Character C scrolls briefly on her laptop, then turns the laptop a few degrees to show a simple list template. Character A leans forward a little, and Character B nods once, raising the marker as if to start listing ideas. The camera remains steady, emphasizing shared focus."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Tight close-up of hands at the tabletop: Character B’s hand (blue vest sleeve visible) places the uncapped marker next to a stack of colorful sticky notes; Character A’s hand (red blazer sleeve) slides two sticky notes toward the center; Character C’s hand (green cardigan sleeve) places a small hourglass-style desk timer beside a mug. The wood grain and paper textures are crisp; lighting is warm with soft highlights.",
+          "video_prompt": "Tabletop macro close-up, 85mm lens. Hands coordinate: Character A pushes the sticky notes into a neat pile, Character B picks one up and flicks the marker cap into his palm, and Character C flips the timer once so sand begins to flow. The small, synchronized motions signal the brainstorming session officially starting."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Wide shot from near the whiteboard: the board dominates frame right, with Character B (blue sweater vest, dark beard) standing beside it, marker poised. Character A (red blazer, blonde bob) stands near the table holding a cluster of sticky notes. Character C (green cardigan, low ponytail) stands closer to the display screen with her laptop now closed, holding a thin notepad. The room feels brighter as the overhead LEDs reflect off the whiteboard surface.",
+          "video_prompt": "Eye-level wide shot, 28mm lens. Character B writes the first big heading on the whiteboard in clear block letters (unreadable from distance but visibly bold). Character A steps forward and offers sticky notes; Character B takes one and presses it onto the board. Character C gestures toward the display, then turns back to the board, aligning attention on the shared workspace."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Medium shot, three-quarter angle on the whiteboard: Character B is in profile writing; Character A stands slightly behind him, watching the marker tip; Character C stands to the side, pointing at a sticky note already placed. The board shows a few sticky notes arranged in a small grid. Clothing remains distinct: red blazer, blue sweater vest, green cardigan.",
+          "video_prompt": "Eye-level medium shot, 45mm lens. Character B finishes a short line, then steps half a pace back. Character A reaches in to reposition one sticky note higher; Character C taps a different note with one finger, suggesting grouping. The trio’s hands briefly converge near the board without overlapping identities, then separate as they agree on placement."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Over-the-shoulder from behind Character A (red blazer visible), looking toward Character B and Character C across the table edge. Character B holds the marker like a pointer; Character C holds a notepad and pen. The timer and mugs sit in the midground. The mood is building with lively attention.",
+          "video_prompt": "Over-the-shoulder shot, 40mm lens. Character A raises a sticky note and reads it silently, then hands it across the table edge toward Character B. Character B accepts it and points with the marker toward an empty space on the whiteboard. Character C nods and makes a quick note, eyes moving between the sticky note and the board."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Close-up of Character C (green cardigan, East Asian features, low ponytail) at the side of the table, softly lit by overhead LEDs. She looks thoughtful, lips pressed in concentration. Behind her, out of focus, Character A (red blazer) and Character B (blue vest) stand near the whiteboard.",
+          "video_prompt": "Eye-level close-up, 85mm lens. Character C’s expression shifts from thoughtful to inspired; she raises her index finger slightly, then turns her head toward the others and begins speaking. In the blurred background, Character A pivots to face her and Character B pauses his writing, signaling they are listening."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Wide shot from the far end of the room with the glass wall behind the camera: all three are visible around the whiteboard and table. The whiteboard now contains multiple sticky notes in columns. Character A (red blazer) stands nearest the board holding a marker cap; Character B (blue sweater vest) holds the marker; Character C (green cardigan) stands closer to the table with a small stack of notes. The mood is energetic and collaborative.",
+          "video_prompt": "Eye-level wide shot, 26mm lens. Character C steps forward and places two sticky notes onto the board; Character B adjusts them into alignment; Character A points to the top row as if naming categories. Their movements are coordinated, with clear spacing so identities remain distinct. The camera stays locked while the action fills the frame."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "High-angle shot looking down at the table: a large sheet of paper (or flipchart pad page) lies centered with a simple hand-drawn mind map forming. Character A’s red blazer sleeve enters from left as she writes with a pen; Character B’s blue vest sleeve enters from top as he places a sticky note; Character C’s green cardigan sleeve enters from right as she slides a ruler-like straightedge to tidy lines. The wood tabletop texture is prominent.",
+          "video_prompt": "Overhead top-down shot, 24mm lens. The mind map grows: Character A draws a new branch, Character B adds a sticky note label, and Character C straightens the paper and taps a corner to keep it flat. Hands move in turn-taking rhythm, avoiding overlap, emphasizing structured collaboration."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Medium over-the-shoulder from behind Character B (blue sweater vest visible), facing Character A and Character C seated now at the table. Character A (red blazer) leans forward with her notebook open; Character C (green cardigan) sits upright with a pen poised. The whiteboard is visible behind them with organized columns of sticky notes.",
+          "video_prompt": "Over-the-shoulder shot, 50mm lens. Character B speaks while gesturing with the marker toward the whiteboard; Character A responds by circling a phrase in her notebook; Character C points gently at the mind map sheet on the table, guiding attention back to the core concept. The trio’s eye-lines track between board and paper in a clear feedback loop."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Tight close-up of the whiteboard surface: several sticky notes are arranged neatly under two bold headings (text not fully legible). Character A’s hand (red blazer sleeve) presses one note flat; Character B’s hand (blue vest sleeve) draws a clean rectangle around a cluster; Character C’s hand (green cardigan sleeve) adds a small check mark next to one note using a fine-tip pen. The board’s glossy texture shows soft reflections.",
+          "video_prompt": "Close-up, 70mm lens. Final organization happens quickly: Character B completes the rectangle, Character A shifts one sticky note into the boxed cluster, and Character C adds a second check mark beside another note. The cluster visually reads as the leading idea set, signaling they are converging."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Wide shot with the whiteboard centered: the trio stand shoulder-to-shoulder a step back from the board, all clearly visible. Character A (red blazer, blonde bob) stands left holding her notebook to her chest; Character B (blue sweater vest, dark beard) stands center holding the marker down at his side; Character C (green cardigan, low ponytail) stands right holding a notepad. The sticky notes are now arranged into a clean final layout with one central boxed cluster. Mood: confident and upbeat.",
+          "video_prompt": "Eye-level wide shot, 30mm lens. Character B gestures to the boxed cluster as the ‘final direction’; Character A nods decisively and lightly taps her notebook with a finger; Character C smiles subtly and points to a single sticky note that reads as the key message (not legible, but clearly emphasized by her gesture). Their posture relaxes into agreement."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Medium two-shot from the side: Character A (red blazer) and Character C (green cardigan) face each other near the table edge, with the whiteboard blurred behind them. Character A holds a single sticky note; Character C holds a pen and notepad. Character B (blue sweater vest) is visible in the background, slightly out of focus, placing the marker onto the tray of the whiteboard.",
+          "video_prompt": "Eye-level medium two-shot, 55mm lens. Character A hands the sticky note to Character C; Character C accepts it and writes a brief summary line on her notepad. In the background, Character B sets the marker down and straightens the whiteboard tray, signaling wrap-up. The exchange reads as a clean handoff from ideation to documentation."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Close, front-facing three-shot at the table: all three adults are seated again with the finalized mind map sheet placed neatly in the center. Character A (red blazer) sits left with pen resting; Character B (blue sweater vest) sits center with hands folded; Character C (green cardigan) sits right with notepad closed. Warm overhead lighting creates a professional, cozy tone; the whiteboard with organized sticky notes is visible in the background as proof of progress.",
+          "video_prompt": "Eye-level close three-shot, 35mm lens. They perform a brief team alignment: Character C slides the mind map sheet slightly toward the center, Character B nods once and offers an open-palmed gesture of agreement, and Character A gives a small thumbs-up-like approval gesture with her pen hand (non-exaggerated). They share a final satisfied look toward the whiteboard, concluding the brainstorming climax with clear consensus."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "colleagues_brainstorming_ideas",
+    "theme_description": "Colleagues brainstorming creative ideas in a meeting room",
+    "consistency_type": "Type C",
+    "requested_scenes": 4,
+    "requested_shots": 15
+  }
+}

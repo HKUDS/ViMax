@@ -1,0 +1,68 @@
+{
+  "story_overview": "Two adult siblings collaborate to organize a family reunion, coordinating details at home and then successfully hosting the event as family members arrive and enjoy the gathering.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide, bright daytime kitchen-dining area in a cozy home. Character A (adult woman, 28 years old, tall and slim, medium-brown skin, dark curly hair in a high puff, thin round glasses, wearing a forest-green cardigan over a white crew-neck shirt and dark jeans, white sneakers) stands at a wooden dining table covered with a paper calendar, colored sticky notes, and a laptop. Character B (adult man, 32 years old, average height with a sturdy build, light skin, short dark hair, neatly trimmed beard, wearing a navy zip-up hoodie over a light-gray T-shirt and khaki chinos, brown casual shoes) stands opposite her holding a pen and a clipboard. Both look focused and friendly; no other people visible. Soft sunbeams through a window, houseplants on the sill, neutral decor.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. Character A points to a date on the paper calendar while Character B nods and writes on the clipboard; they lean in toward the table together. Subtle handheld sway as the camera slowly pushes in, emphasizing teamwork and planning."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Over-the-shoulder view from behind Character B toward Character A at the dining table. The laptop screen shows a simple invite draft (no logos), and sticky notes are arranged in columns labeled 'Food', 'Games', 'Seating'. Character A’s thin round glasses catch a soft reflection; her green cardigan sleeves are rolled neatly to the wrist. Character B’s navy hoodie shoulder frames the foreground.",
+          "video_prompt": "Over-the-shoulder medium shot, 50mm lens. Character A types briefly, then turns the laptop slightly toward Character B; Character B’s hand enters frame to point at a line on the screen. The camera holds steady with a slight micro-pan to keep their hands and the laptop centered."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Two-shot at the table from the side, medium framing. Character A holds up a printed checklist titled 'Reunion Essentials' while Character B holds a small cardboard box containing blank name tags and markers. On the table: a folded banner that reads 'Family Reunion' in generic lettering, a roll of tape, and a stack of paper plates. Warm indoor lighting; tidy background shelves.",
+          "video_prompt": "Eye-level medium two-shot, 35mm lens. Character A and Character B compare the checklist to the box contents; Character B gently sets the box down and slides it across the table to Character A. Character A smiles and taps the checklist with the pen, signaling the next step. Camera makes a slow lateral slide to the right for a fresh composition shift."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Close-up on hands at the table: Character A’s hands (with a simple watch) and Character B’s hands (no rings) assembling a paper centerpiece. A small bundle of string lights (unplugged) and a jar of pens sit nearby. The green cardigan cuff and navy hoodie cuff are visible, clearly separated. Background softly blurred.",
+          "video_prompt": "Tabletop close-up, 85mm lens. Their hands coordinate: Character B holds the folded paper steady while Character A ties a ribbon; they finish and set the centerpiece upright. The camera performs a gentle rack focus from the ribbon knot to the completed centerpiece, then back to their hands as they reach for the next item."
+        },
+        {
+          "shot_id": 5,
+          "first_frame": "Exterior, late afternoon. A compact car is parked in a driveway beside a small house. Character A and Character B stand at the open trunk together. Character A holds a folded picnic blanket and a paper bag labeled 'Snacks' (generic). Character B holds a large, flat box containing the folded reunion banner. The sky is golden; trees sway lightly.",
+          "video_prompt": "Low angle medium-wide shot, 28mm lens. Character B carefully places the banner box into the trunk while Character A sets the picnic blanket on top, patting it to level the stack. They exchange an encouraging nod and close the trunk together. Camera tilts up slightly as the trunk shuts, ending on their determined expressions."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 6,
+          "first_frame": "Community center hall interior, early evening. Long folding tables form a U-shape with neutral tablecloths; a registration table is near the entrance with name tags and markers. A simple 'Family Reunion' banner hangs on the far wall. Character A stands on the left side of frame holding a roll of tape; Character B stands on the right holding a small step stool. Lighting is bright and even; polished floor reflects overhead lights.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. Character B carries the step stool to the wall and sets it down; Character A walks alongside him, gesturing where the banner should align. They move in sync across the frame, reinforcing shared responsibility. Camera remains locked-off to emphasize spatial clarity as they cross the room."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Over-the-shoulder shot from behind Character A looking toward Character B near the registration table. Character B leans slightly over the table, arranging name tags in neat rows. Character A holds a clipboard with a guest list. In the background, a doorway reveals the hall entrance; a few indistinct adult relatives are beginning to appear as silhouettes at a distance (no detailed faces yet).",
+          "video_prompt": "Over-the-shoulder medium shot, 50mm lens. Character A reads a name from the clipboard and points; Character B matches it to a name tag and sets it at the front. In the background, two adult relatives step into the hall and pause, looking around. The camera makes a small, controlled pan right to include the entrance activity, building anticipation."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Eye-level two-shot near the entrance, medium-wide framing. Character A (green cardigan, glasses) and Character B (navy hoodie, beard) stand behind the registration table. Two adult relatives (generic, modest casual clothing) stand in front of the table; one holds a tote bag. Character A offers a name tag; Character B holds a pen and gestures toward the seating area. The banner and decorated tables are visible behind them.",
+          "video_prompt": "Eye-level medium-wide two-shot, 35mm lens. Character A hands a name tag across the table to a relative; Character B points toward the U-shaped tables and then gives a welcoming wave. The relatives nod appreciatively and begin walking past the camera toward the seating area. The camera subtly dollies backward to keep all four adults in frame while maintaining clear separation of the siblings’ identities and outfits."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Climax: Wide shot of the community hall now lively but orderly and family-friendly. Adults sit and stand around the U-shaped tables chatting; a few hold paper cups. Character A and Character B stand together at the center aisle holding the ends of a simple ribbon (not a barrier, just ceremonial) with a small sign that reads 'Welcome, Family!' They smile with relief and pride. Bright, warm lighting; decorations modest and neat.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. Character A and Character B raise the ribbon slightly and then lower it as if signaling the reunion has officially started; nearby relatives clap softly and turn toward them with smiles. The camera performs a slow, smooth push-in toward the siblings, ending on their satisfied expressions as ambient conversation continues in the background."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "siblings_organizing_family_event",
+    "theme_description": "Siblings organizing a family reunion event",
+    "consistency_type": "Type C",
+    "requested_scenes": 2,
+    "requested_shots": 9
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "story_overview": "In a Victorian mansion’s grand parlor, an adult family gathers for a warm reunion, prepares a group toast, and culminates in a heartfelt moment as an old music box and a framed family photo bring everyone together for a keepsake picture.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Grand Victorian mansion parlor interior, unchanged layout for the entire story: a tall arched window with heavy burgundy drapes on the left wall, a carved marble fireplace centered on the far wall with a brass fireguard, a large gilded mirror above the mantel, and an antique mantel clock to the right. A round mahogany tea table sits center-left on a patterned rug, with a silver tea service and a covered cake stand. Two tufted armchairs face the fireplace at mid-right, and a long settee sits along the right wall beneath a gallery of framed family portraits. A spiral staircase is visible through a wide doorway at the back-left, leading upward. Warm amber chandelier light mixes with soft daylight from the window. Three adults (all 20+): a 42-year-old woman with dark hair in a neat bun wearing a forest-green cardigan and long navy skirt; a 45-year-old man with short salt-and-pepper hair wearing a charcoal blazer and light button-up shirt; a 25-year-old woman with curly auburn hair wearing a modest cream sweater and ankle-length brown skirt. They stand near the doorway, smiling, holding small gift bags.",
+          "video_prompt": "Eye-level wide shot on a 24mm lens from the parlor’s front-right corner, framing the fireplace, tea table, and doorway. Over 6 seconds, the three adults step into the room from the doorway, pausing to take in the parlor; they set the gift bags gently onto the edge of the tea table, glancing around with warm anticipation. The background architecture and furniture remain perfectly fixed and unchanged."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Same parlor geometry and furniture placement. Camera now closer to the tea table: the silver tea service gleams, cake stand centered, delicate porcelain cups aligned. The 42-year-old woman leans slightly toward the tea table, hands hovering over cups; the 25-year-old woman stands opposite her, attentive. The 45-year-old man is in the background near the settee, turning toward the staircase doorway as if expecting someone else. Lighting remains warm chandelier with soft window fill; polished wood reflects highlights.",
+          "video_prompt": "Eye-level medium shot on a 35mm lens aimed at the tea table. Over 5–7 seconds, the 42-year-old woman straightens two cups and adjusts a small plate; the 25-year-old woman nods and lightly rotates the cake stand a few inches to center it. In the background, the 45-year-old man takes two steps toward the doorway by the staircase, then stops. The room’s structural details remain stable; only the people and small table objects move."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Same parlor. Camera positioned near the staircase doorway looking into the room: the doorway framing shows the spiral staircase partially. The 45-year-old man stands near the doorway, half-turned toward the staircase. A fourth adult enters: a 48-year-old woman with shoulder-length gray-streaked hair wearing a burgundy knit sweater and a long black skirt, holding a wrapped box. She is stepping in from the staircase side. The tea table and fireplace remain visible deeper in frame, unchanged.",
+          "video_prompt": "Eye-level medium-wide shot on a 28mm lens from the staircase doorway. Over 6 seconds, the 48-year-old woman steps into the parlor and hands the wrapped box to the 45-year-old man; he accepts it with both hands. They exchange a brief, friendly greeting gesture (a small wave and a warm smile). They then pivot slightly toward the tea table, beginning to walk inward. The spiral staircase, doorway trim, and parlor furniture remain perfectly consistent."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Same parlor. Camera now from behind the settee on the right wall, looking toward the center. The settee backrest occupies the foreground lower-right. The 25-year-old woman walks behind the tea table toward the fireplace, partially occluded by the tea table and chair edges as she passes. The 42-year-old woman stands at the tea table. The 45-year-old man and 48-year-old woman are mid-room, moving toward the settee area. The portraits above the settee and the mirror above the fireplace are crisp and unchanged.",
+          "video_prompt": "Eye-level medium-wide shot on a 40mm lens from behind the settee, emphasizing depth and occlusion. Over 7 seconds, the 25-year-old woman crosses behind the tea table toward the fireplace, briefly disappearing behind the cake stand and chair backs; the 45-year-old man and 48-year-old woman walk forward into the foreground-right and stop near the settee, careful not to disturb it. The 42-year-old woman remains by the tea table, hands poised. The parlor’s layout and wall décor remain locked."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Same parlor, unchanged. Camera faces the right wall settee and portrait gallery. The 45-year-old man lowers himself onto the settee, sitting upright; the 48-year-old woman sits beside him, smoothing her skirt. In the mid-ground, the 42-year-old woman stands near an armchair, and the 25-year-old woman is near the fireplace mantel, looking at an ornate wooden music box resting on the mantel to the left of the clock. Warm light reflects off the polished settee wood trim.",
+          "video_prompt": "Eye-level medium shot on a 50mm lens centered on the settee. Over 6 seconds, the 45-year-old man and 48-year-old woman settle into seated positions (contact and weight visible as cushions compress slightly). In the background, the 25-year-old woman reaches toward the mantel, pausing before touching the music box. The architecture and furniture placement remain unchanged."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Same parlor. Close-up framing of the mantel area: the carved marble fireplace surround, gilded mirror edge, antique clock, and the small wooden music box with inlaid floral patterns. The 25-year-old woman’s modestly dressed torso and hands enter frame from the right; her fingers hover over the music box latch. The chandelier glow creates warm highlights on brass and wood grain.",
+          "video_prompt": "Eye-level close-up on an 85mm lens focused on the music box atop the mantel. Over 5–6 seconds, the 25-year-old woman gently opens the music box lid; the lid rises smoothly and stops. She turns a tiny key once, careful and slow. The mantel objects remain fixed in position; only the lid and her hands move."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Same parlor. Camera from near the tea table looking toward the settee and fireplace. The 42-year-old woman carries a tray with teacups from the tea table toward the armchairs, stepping behind one armchair so her lower body is partially occluded. The 45-year-old man and 48-year-old woman on the settee watch with appreciative smiles. The 25-year-old woman stands near the fireplace, music box open on the mantel.",
+          "video_prompt": "Eye-level medium-wide shot on a 32mm lens with the tea table foreground-left and settee mid-right. Over 7 seconds, the 42-year-old woman walks with the tray, passing behind the nearer armchair; her hands remain steady as the tray stays level. She emerges from behind the armchair and lowers the tray onto a small side surface beside the armchair. The room geometry, rug pattern, and furniture placement remain consistent."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Same parlor. Camera positioned low near the rug, aimed upward slightly at the round tea table. The 48-year-old woman stands from the settee and approaches the tea table, reaching for the covered cake stand. The 45-year-old man remains seated, visible behind her. The 42-year-old woman is near the armchair, and the 25-year-old woman is near the fireplace. The silver tea service reflects warm highlights; all background elements remain fixed.",
+          "video_prompt": "Low-angle medium shot on a 35mm lens from rug height, emphasizing the tea table’s legs and the cake stand. Over 6 seconds, the 48-year-old woman steps up to the table, places one hand on the cake stand lid knob, and lifts the lid carefully, revealing the cake inside. She sets the lid down on the table without shifting other items. The parlor’s architecture and furniture remain unchanged."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Same parlor. Two-shot composition near the fireplace: the 25-year-old woman stands at the mantel with the music box open; the 45-year-old man has stood up and walked closer, stopping beside her at a respectful distance. Both look down at the music box and then toward a framed family portrait on the mantel. The mirror above reflects chandelier light; the clock remains to the right.",
+          "video_prompt": "Eye-level two-shot on a 55mm lens, framing the two adults from waist-up with the mantel in view. Over 6–7 seconds, the 25-year-old woman gestures lightly toward the framed portrait; the 45-year-old man nods and points gently at a detail in the photo, then both share a quiet smile. The mantel objects remain in their exact positions; only their hands and head movements change."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 10,
+          "first_frame": "Same parlor. Camera from the back-left doorway near the spiral staircase, looking toward the center. All four adults gather closer to the tea table: the 42-year-old woman stands at the table pouring tea; the 48-year-old woman holds a small dessert plate; the 45-year-old man holds a teacup; the 25-year-old woman approaches from the fireplace side. The chandelier glow is slightly brighter, giving a celebratory warmth; daylight remains soft through drapes.",
+          "video_prompt": "Eye-level wide shot on a 26mm lens from the doorway near the spiral staircase. Over 7 seconds, the 42-year-old woman pours tea into two cups, then sets the teapot down; the 25-year-old woman steps in to accept a cup with both hands. The 45-year-old man and 48-year-old woman adjust their stance around the table, forming a closer circle. The parlor’s geometry and furniture placement remain locked."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Same parlor. Over-the-shoulder angle from behind the 45-year-old man, looking toward the 42-year-old woman and 48-year-old woman across the tea table. The 45-year-old man’s shoulder and cup are in the foreground. The 42-year-old woman holds a cup at chest height; the 48-year-old woman mirrors her with a cup. The 25-year-old woman stands slightly behind them, smiling. The cake stand and tea service are centered and steady.",
+          "video_prompt": "Over-the-shoulder medium shot on a 65mm lens from behind the 45-year-old man. Over 5–6 seconds, the 42-year-old woman raises her cup slightly, initiating a toast; the 48-year-old woman and 25-year-old woman lift their cups in response. The 45-year-old man’s cup rises into the frame. They hold the toast moment briefly without clinking aggressively, maintaining a gentle family-friendly mood. Background remains structurally unchanged."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Same parlor. Camera now near the portraits on the right wall, aiming diagonally toward the fireplace and tea table. The group begins to reposition for a keepsake photo: the 45-year-old man steps behind the tea table toward the settee; the 48-year-old woman moves to sit on the settee; the 42-year-old woman guides the 25-year-old woman toward the armchairs. Their bodies pass behind the armchairs causing clear occlusions. The settee and armchairs remain fixed.",
+          "video_prompt": "Eye-level medium-wide shot on a 30mm lens from the right wall near the portrait gallery. Over 7 seconds, the 48-year-old woman sits on the settee (cushion compression visible), the 45-year-old man stands just behind the settee backrest, and the 42-year-old woman gently motions the 25-year-old woman to stand near the armchair. The 25-year-old woman steps behind an armchair, briefly occluded, then reappears in her spot. The room’s layout remains perfectly consistent."
+        },
+        {
+          "shot_id": 13,
+          "first_frame": "Same parlor. Camera is placed near the fireplace facing outward toward the settee and group, as if from the mantel area. A vintage wooden tripod camera (period-appropriate, non-branded) is set near the tea table aimed at the settee. The 42-year-old woman leans forward near the tripod camera, adjusting the shutter timer lever. The 45-year-old man and 48-year-old woman are in position by the settee; the 25-year-old woman stands nearby with hands clasped. Warm chandelier light glows; everything else remains fixed.",
+          "video_prompt": "Eye-level medium shot on a 45mm lens from near the fireplace, framing the tripod camera and the group beyond it. Over 6 seconds, the 42-year-old woman carefully adjusts the camera timer and then steps backward, moving around the tea table without bumping it. She retreats toward the group, briefly passing behind the tripod legs (occlusion), then clears the frame to join the others. Background geometry remains unchanged."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Same parlor. Camera now faces the settee straight-on from the tea table area. The four adults are posed for the photo: the 48-year-old woman seated on the settee center, the 42-year-old woman seated on the settee edge or perched modestly beside it, the 25-year-old woman standing to the left near an armchair, and the 45-year-old man standing behind them with relaxed posture. The music box remains open on the mantel in the background, and the mirror and clock are unchanged. Everyone smiles softly, hands calm and modestly placed.",
+          "video_prompt": "Eye-level medium-wide shot on a 35mm lens from the tea table side, symmetrical framing with the settee centered. Over 5–8 seconds, the group holds still for the timed photograph; a subtle, brief change in brightness suggests the camera’s shutter capture. After the moment, they relax slightly—small shoulder drops and gentle laughter—while maintaining their positions. The Victorian parlor’s architecture and furniture remain perfectly stable and consistent to the end."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "family_gathering_victorian_mansion",
+    "theme_description": "A family gathering in a Victorian mansion",
+    "consistency_type": "Type B",
+    "requested_scenes": 3,
+    "requested_shots": 14
+  }
+}

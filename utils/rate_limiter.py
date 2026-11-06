@@ -41,65 +41,54 @@ class RateLimiter:
         Acquire permission to make a request.
 
         This method will block until it's safe to make a request according to the rate limits.
+
+        The lock is only held while checking and recording, never while sleeping:
+        a caller waiting out a window (up to 24h for the daily limit) must not
+        block every other caller's check. After each sleep the limits are
+        re-checked, since another caller may have taken the freed slot.
         """
         if not self.max_requests_per_minute and not self.max_requests_per_day:
             # Rate limiting is disabled
             return
 
-        async with self.lock:
-            current_time = time.time()
+        while True:
+            message = None
+            async with self.lock:
+                current_time = time.time()
 
-            # Clean up old request times (keep requests from last 24 hours for daily limit)
-            if self.max_requests_per_day:
-                self.request_times = [t for t in self.request_times if current_time - t < 86400]
-            elif self.max_requests_per_minute:
-                self.request_times = [t for t in self.request_times if current_time - t < 60]
+                # Clean up old request times (keep requests from last 24 hours for daily limit)
+                if self.max_requests_per_day:
+                    self.request_times = [t for t in self.request_times if current_time - t < 86400]
+                elif self.max_requests_per_minute:
+                    self.request_times = [t for t in self.request_times if current_time - t < 60]
 
-            # Check daily limit first
-            if self.max_requests_per_day and self.max_requests_per_day > 0:
-                daily_requests = [t for t in self.request_times if current_time - t < 86400]
+                wait_time = 0.0
 
-                if len(daily_requests) >= self.max_requests_per_day:
-                    oldest_request = daily_requests[0]
-                    wait_time = 86400 - (current_time - oldest_request)
-
-                    if wait_time > 0:
+                # Check daily limit first
+                if self.max_requests_per_day and self.max_requests_per_day > 0:
+                    daily_requests = [t for t in self.request_times if current_time - t < 86400]
+                    if len(daily_requests) >= self.max_requests_per_day:
+                        wait_time = 86400 - (current_time - daily_requests[0])
                         hours = wait_time / 3600
-                        print(f"Daily rate limit reached ({self.max_requests_per_day} requests/day). Waiting {hours:.1f} hours...")
-                        await asyncio.sleep(wait_time)
-                        current_time = time.time()
+                        message = f"Daily rate limit reached ({self.max_requests_per_day} requests/day). Waiting {hours:.1f} hours..."
 
-                        # Clean up after waiting
-                        self.request_times = [t for t in self.request_times if current_time - t < 86400]
+                # Check per-minute limit
+                if wait_time <= 0 and self.max_requests_per_minute and self.max_requests_per_minute > 0:
+                    minute_requests = [t for t in self.request_times if current_time - t < 60]
+                    if len(minute_requests) >= self.max_requests_per_minute:
+                        wait_time = 60 - (current_time - minute_requests[0])
+                        message = f"Rate limit reached ({self.max_requests_per_minute} requests/min). Waiting {wait_time:.1f}s..."
+                    elif self.request_times and self.min_delay > 0:
+                        # Also ensure minimum delay between consecutive requests
+                        time_since_last = current_time - self.request_times[-1]
+                        if time_since_last < self.min_delay:
+                            wait_time = self.min_delay - time_since_last
 
-            # Check per-minute limit
-            if self.max_requests_per_minute and self.max_requests_per_minute > 0:
-                minute_requests = [t for t in self.request_times if current_time - t < 60]
+                if wait_time <= 0:
+                    # Record this request
+                    self.request_times.append(current_time)
+                    return
 
-                if len(minute_requests) >= self.max_requests_per_minute:
-                    oldest_request = minute_requests[0]
-                    wait_time = 60 - (current_time - oldest_request)
-
-                    if wait_time > 0:
-                        print(f"Rate limit reached ({self.max_requests_per_minute} requests/min). Waiting {wait_time:.1f}s...")
-                        await asyncio.sleep(wait_time)
-                        current_time = time.time()
-
-                        # Clean up old request times again after waiting
-                        if self.max_requests_per_day:
-                            self.request_times = [t for t in self.request_times if current_time - t < 86400]
-                        else:
-                            self.request_times = [t for t in self.request_times if current_time - t < 60]
-
-                # Also ensure minimum delay between consecutive requests
-                if self.request_times and self.min_delay > 0:
-                    last_request = self.request_times[-1]
-                    time_since_last = current_time - last_request
-
-                    if time_since_last < self.min_delay:
-                        wait_time = self.min_delay - time_since_last
-                        await asyncio.sleep(wait_time)
-                        current_time = time.time()
-
-            # Record this request
-            self.request_times.append(current_time)
+            if message:
+                print(message)
+            await asyncio.sleep(wait_time)

@@ -1,0 +1,113 @@
+{
+  "story_overview": "In a cozy cafe hosting a friendly board game tournament, three adult participants navigate tense rounds, an unexpected rules question, and a final decisive move—while the cafe’s warm interior remains perfectly consistent across every shot.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide establishing view of a cozy indoor cafe game corner with fixed geometry: a honey-colored wooden floor; exposed brick back wall with three framed art prints aligned horizontally; a tall black metal-and-wood bookshelf on the left wall; a large front window on the right with rain streaks and warm streetlight glow; a long oak communal table centered with four mismatched wooden chairs (two on each long side); a small round table in the back-right with two chairs; a brass floor lamp near the bookshelf; a wooden service counter at the back with a glass pastry case and a menu board above it. On the communal table: a colorful board game set up with cards, tokens, and a score pad; ceramic mugs; a small jar of pencils. Lighting is warm, amber, and soft; everything feels inviting and PG-rated. Three adults (all 20+): a 32-year-old woman with medium-brown skin, curly dark hair in a low bun, wearing a teal knit sweater and dark jeans; a 35-year-old man with light skin, short sandy hair, wearing a charcoal cardigan over a collared shirt; a 29-year-old East Asian man with short black hair, wearing a forest-green hoodie and khaki chinos. They sit/stand around the communal table preparing to start.",
+          "video_prompt": "Eye-level wide shot from the cafe entrance corner, 24mm lens. The camera holds steady with a slight slow push-in as the three adults arrange components: the woman slides a deck of cards to the center, the man in the cardigan places tokens into neat piles, and the man in the hoodie sets a mug down carefully. Background remains unchanged: bookshelf left, brick wall with frames, counter and pastry case at back, rainy window right."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium shot focused on the communal table from the bookshelf side, keeping the same cafe layout visible behind: brick wall and framed prints centered; brass floor lamp partially in frame left; counter and menu board in the distance. The teal-sweater woman sits on the left side chair nearest camera, hands hovering over the rulebook; the cardigan man sits opposite her, pen poised above the score pad; the green-hoodie man sits to the right, organizing tokens. Mugs and pencils jar are in the foreground; board and cards are crisp and colorful.",
+          "video_prompt": "Shoulder-height medium shot, 35mm lens, static tripod. Over 6 seconds, the teal-sweater woman opens the rulebook and points to a section; the cardigan man nods and writes the tournament round number on the score pad; the hoodie man deals starting cards in a smooth clockwise motion. Subtle cafe ambience: warm reflections on the wooden table; rain glow from the right window remains consistent."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Low angle close-up from table level looking across the board game toward the counter in the background (counter, pastry case, and menu board stay fixed). The board fills the foreground with tokens and a small hourglass timer. The cardigan man’s hands enter from left holding a card; the hoodie man’s hand from right reaches toward a token; the teal-sweater woman’s hands rest near the rulebook at the top edge of frame.",
+          "video_prompt": "Low angle close-up, 50mm lens, shallow depth of field. Over 5–7 seconds, the hourglass is flipped (sand starts flowing), the cardigan man places a card onto the board, and the hoodie man slides a token precisely into a new space. The camera remains locked; only hands and small objects move, emphasizing contact and physics on the tabletop."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Overhead shot directly above the communal table showing the full board layout and all three players’ positions around it. The cafe’s fixed elements are visible at the edges: the right-side rainy window glow, the left bookshelf edge, and the back counter line. The teal-sweater woman leans forward slightly; the cardigan man has his pen and score pad at the top; the hoodie man has a small hand of cards at the right. Tokens are neatly arranged; mugs sit near each player.",
+          "video_prompt": "Overhead top-down shot, 28mm equivalent, static. Over 6 seconds, the teal-sweater woman draws one card and places it face-up; the cardigan man updates the score pad with two quick strokes; the hoodie man taps the hourglass to signal time is nearly up. Movements remain contained to the table; the cafe background geometry stays perfectly stable."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Wide shot from near the front window looking inward across the room: rainy window frame dominates right foreground; communal table is mid-ground; bookshelf and brass lamp on left; brick wall and framed prints centered; counter and pastry case at back. The hoodie man stands and steps away from his chair, moving toward the counter; the teal-sweater woman remains seated; the cardigan man half-turns in his chair. Chairs, tables, and furniture placement are unchanged.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. Over 7 seconds, the hoodie man walks from the communal table toward the back counter, passing behind the near-side chair and briefly occluding his torso with chair backs as he threads through. The camera stays fixed; depth is emphasized by his movement from mid-ground to background."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Medium shot aimed at the back counter area (same counter, glass pastry case, and menu board). The hoodie man arrives at the counter and leans his forearms lightly on the wooden edge; a barista (adult, 26-year-old woman with light-brown skin, hair in a neat ponytail, wearing a modest black t-shirt and a tan apron) stands behind the pastry case. The communal table is visible in the far left background, unchanged.",
+          "video_prompt": "Eye-level medium shot, 35mm lens. Over 6 seconds, the hoodie man points politely at the menu board and speaks; the barista nods, reaches down to pick up a ceramic mug, and sets it on the counter with a gentle clink. The hoodie man slides a small receipt-sized slip toward himself. All actions remain friendly and non-violent."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Tracking-ready composition along the left side near the bookshelf: the black metal-and-wood bookshelf dominates left; brass floor lamp stands in front of it; communal table is mid-ground. The hoodie man is returning from the counter carrying a mug with both hands, walking behind the brass lamp and partially occluded by it for a moment. The teal-sweater woman watches from her seat; the cardigan man tidies cards.",
+          "video_prompt": "Side-on medium-wide shot, 28mm lens, gentle lateral tracking (camera moves slightly right). Over 5–8 seconds, the hoodie man walks from background toward mid-ground, passing behind the brass lamp (occlusion test), then re-emerges and slows near his chair. The camera’s small glide accentuates the room’s fixed depth and the solidity of the lamp and bookshelf."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Close shot focused on seating interaction at the communal table from the brick-wall side: the teal-sweater woman sits left, cardigan man sits opposite, hoodie man stands beside his chair on the right holding the mug. The chair legs and table legs are clearly visible on the wooden floor; tokens and cards remain in consistent places relative to the board. Warm light reflects off the tabletop.",
+          "video_prompt": "Eye-level close shot, 50mm lens. Over 6 seconds, the hoodie man pulls his chair back, sits down fully (clear contact with chair seat), and places the mug on the table without spilling. The teal-sweater woman slides the rulebook toward him, and the cardigan man rotates the score pad slightly to face the group. Camera remains steady; background geometry does not change."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Over-the-shoulder shot from behind the cardigan man’s right shoulder toward the teal-sweater woman and the board. The brick wall with framed prints is sharp behind her; the rainy window glow softly rims the table edge. The teal-sweater woman holds the rulebook open; a disputed card lies near the center of the board; the hoodie man’s hands rest near his tokens.",
+          "video_prompt": "Over-the-shoulder medium shot, 45mm lens. Over 6 seconds, the teal-sweater woman calmly points to a specific line in the rulebook and traces it with her finger; the cardigan man’s shoulder subtly shifts as he leans in; the hoodie man nods and repositions one token to match the clarified rule. No argument—just a friendly clarification."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "High angle medium-wide shot from near the brass floor lamp looking down toward the communal table. The lamp, bookshelf, and table edges form strong diagonals; the counter and pastry case remain in the back. The cardigan man reaches across the table with the hourglass; the teal-sweater woman sits upright; the hoodie man holds a card close to his chest, thinking.",
+          "video_prompt": "High angle medium-wide shot, 30mm lens, static. Over 7 seconds, the cardigan man passes the hourglass across the table to the teal-sweater woman (object handoff), who receives it and sets it beside the board; the hoodie man places a card onto the table and then slides his hand back. The movement tests contact and placement on the tabletop."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Low angle medium shot from beneath table height but not showing anything inappropriate—just legs, chair rungs, and the lower edges of the table. The wooden floorboards and chair legs are crisp; the hoodie man’s feet step carefully as he scoots his chair inward; the teal-sweater woman’s shoes are planted; the cardigan man’s chair shifts slightly. The back counter line is visible above the table edge, unchanged.",
+          "video_prompt": "Low angle medium shot, 28mm lens. Over 5–7 seconds, the hoodie man pushes his chair in (chair legs slide a few centimeters, audible scrape implied), then stills; the cardigan man adjusts his chair angle slightly; the teal-sweater woman taps a foot once, then stops. Camera remains fixed, highlighting realistic floor contact and stable room geometry."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Tight close-up on the score pad and pencil jar at the table’s edge, with the board blurred behind. The cardigan man’s hand holds a pencil above the score pad; the teal-sweater woman’s hand enters to point at a number; the hoodie man’s hand places a token near the pad. The warm cafe light creates soft shadows; the rainy window glow is a cool accent.",
+          "video_prompt": "Tabletop close-up, 65mm lens, shallow depth of field. Over 6 seconds, the cardigan man writes updated scores in two lines, the teal-sweater woman gently taps the correct column, and the hoodie man nudges a token into a neat stack beside the pad. The camera stays locked; the action is precise and tactile."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Wide dramatic composition from the back counter area looking toward the front window: counter and pastry case in the foreground bottom edge; communal table is center; rainy window glows right; bookshelf left. The three adults lean in toward the board in anticipation. The hourglass is centered and ready; mugs sit near each player; chairs remain in the same positions.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, slow push-in. Over 7 seconds, the teal-sweater woman flips the hourglass for the final round; the cardigan man straightens the score pad; the hoodie man fans his cards once and selects one, holding it poised above the board. The room stays perfectly consistent; tension is conveyed through body language only."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Extreme close-up of the hoodie man’s chosen card hovering over the board space, with the hourglass and a cluster of tokens visible. The card art is generic and non-branded. The hoodie man’s fingers are steady; the teal-sweater woman’s hands are clasped; the cardigan man’s pencil tip waits just out of focus.",
+          "video_prompt": "Extreme close-up, 85mm lens, shallow depth. Over 5–6 seconds, the hoodie man lowers the card onto the board with a deliberate motion, releases it, then slides a token to complete the action. The hourglass sand continues to fall. The shot emphasizes precise placement and contact with the board."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Reaction two-shot from the window side: the teal-sweater woman and cardigan man are in the foreground facing the board (off-camera left). The rainy window frames them with soft backlight; brick wall and frames are still visible deeper in the room. The teal-sweater woman’s eyebrows lift in surprise; the cardigan man smiles and glances down at the score pad.",
+          "video_prompt": "Eye-level medium two-shot, 40mm lens. Over 6 seconds, the teal-sweater woman exhales and smiles, then nods appreciatively; the cardigan man writes the final score and turns the pad slightly toward the center of the table. Their movement is small and natural; background remains unchanged."
+        },
+        {
+          "shot_id": 16,
+          "first_frame": "Overhead final tableau above the communal table: the completed board state is clearly visible; the score pad shows final tallies (no readable brand names). The three adults’ hands meet briefly in the center for a friendly group handshake-like clasp (palms and fingers only), then rest back near their mugs. The cafe edges—bookshelf left, window right, counter back—remain stable and consistent.",
+          "video_prompt": "Overhead top-down shot, 28mm equivalent, static. Over 6–8 seconds, the group performs a brief friendly congratulations gesture: hands come together at the center, then separate; the teal-sweater woman closes the rulebook; the hoodie man gathers cards into a neat stack; the cardigan man places the pencil back into the jar. The scene ends with an orderly, warm, family-friendly finish in the same unchanging cafe environment."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "board_game_cafe_interior",
+    "theme_description": "A board game tournament in a cozy cafe",
+    "consistency_type": "Type B",
+    "requested_scenes": 4,
+    "requested_shots": 16
+  }
+}

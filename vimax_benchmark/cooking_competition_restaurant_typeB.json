@@ -1,0 +1,98 @@
+{
+  "story_overview": "In a modern restaurant kitchen set for a friendly cooking competition, two adult chefs race to plate their signature dishes while a judge observes. The action intensifies through timed prep, coordinated movement, and careful plating, culminating in a final tasting and winner announcement—all within one consistent, detailed kitchen environment.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide establishing view of a modern restaurant kitchen interior, geometry locked: a central stainless-steel island with an induction cooktop and overhead vent hood; left wall has a row of ovens and a heat lamp pass; right wall has a double-door fridge, open metal shelving with neatly stacked bowls, and a hand-sink. Back wall features a glass door to a dry pantry. On the island: two identical cutting boards (one at each end), two mixing bowls, a digital timer, a basket of vegetables, and a tray of herbs. Three adults (20+): Chef A (adult woman, 30s, medium height, curly dark hair tied back, white chef jacket, black chef pants, black clogs), Chef B (adult man, 40s, tall, short brown hair, neatly trimmed beard, white chef jacket, black chef pants, black clogs), and Judge (adult woman, 50s, short silver hair, navy blazer over a modest blouse and slacks) stand near the island. Bright neutral LED ceiling lighting, clean reflective steel surfaces, upbeat professional mood.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, locked-off camera. The judge gestures toward the digital timer on the island, nodding to both chefs. Chef A and Chef B step in from opposite sides of the island, placing their hands near their cutting boards without touching tools yet. The timer display is visible as the judge points, setting the start. No camera movement; only character motion within the fixed kitchen layout."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium shot from the right side of the island, framing the fridge and open shelving in the background (unchanged placement). Chef A stands foreground right at her cutting board, her bowl and herbs to her left. Chef B is visible midground left across the island. The digital timer sits centered on the island edge, readable. Stainless surfaces gleam under even LED lighting.",
+          "video_prompt": "Eye-level medium shot, 50mm lens. Chef A presses the digital timer start button with one finger; the numbers begin counting down. Chef B reacts with a focused nod, reaching for his knife handle but not lifting it yet. Chef A pulls her chef knife closer. Subtle handheld micro-movement for energy, while the kitchen geometry remains fixed."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Overhead top-down view centered on the island: two cutting boards at opposite ends, the timer in the middle, vegetables (carrots, zucchini, bell peppers) arranged in a basket near Chef A’s side, and a tray of herbs near Chef B’s side. The induction cooktop is visible built into the island with clean black glass. Hands of both chefs hover at their stations. Lighting is bright and shadow-minimal.",
+          "video_prompt": "Overhead static shot, 18mm equivalent top-down. Both chefs begin prep simultaneously: Chef A slides carrots onto her board and starts a careful dice; Chef B gathers herbs and begins a fine chop. Their hands move briskly but controlled. The timer digits tick down in the center, anchoring the action. No change to the room layout; only tools and ingredients shift position on the island."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Low-angle shot near the oven row on the left wall, looking toward the island and the overhead vent hood. The ovens, heat lamp pass, and island remain in fixed positions. Chef B crosses from the island toward the ovens, carrying a modest metal sheet tray. Chef A remains at the island in background, continuing to chop. The judge stands near the pass, hands clasped, observing.",
+          "video_prompt": "Low-angle wide shot, 28mm lens. Chef B walks behind the island’s near corner, partially occluded by the island edge as he passes. He reaches the ovens on the left wall and slides the sheet tray onto a rack with a smooth motion. Chef A stays in the background, chopping steadily. The judge leans slightly to keep Chef B in view. Camera remains low and steady, emphasizing depth and occlusion."
+        },
+        {
+          "shot_id": 5,
+          "first_frame": "Medium shot from behind a structural element: the island’s overhead vent hood support column is foreground left, partially blocking the view. Chef A is midground at her station, visible through the gap, stirring ingredients in a metal pan placed on the induction cooktop. Chef B is background near the ovens. The fixed sink and shelving on the right wall remain visible in peripheral view.",
+          "video_prompt": "Eye-level medium shot, 70mm lens, slight parallax as the camera gently slides 10–15 cm to the right. Chef A turns on the induction zone; a small indicator light glows on the cooktop. She stirs with a wooden spoon, then adds diced vegetables. Steam begins to rise lightly. Chef B returns from the ovens toward the island, briefly disappearing behind the vent hood support (occlusion) before reappearing."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 6,
+          "first_frame": "Two-shot at the central island from the pantry-door side (back wall). The glass pantry door is centered in the background, unchanged. Chef A and Chef B stand on opposite sides of the island, each with a mixing bowl and utensils. The judge stands to the right near the sink area, holding a clipboard. Timer remains centered on the island. Bright, clean lighting.",
+          "video_prompt": "Eye-level two-shot, 35mm lens. Both chefs whisk simultaneously in their bowls. Chef B reaches across the island to grab a pinch of herbs from the shared tray, careful not to cross into Chef A’s cutting board area. Chef A glances at the timer, then increases whisking speed. The judge watches and makes a small note on the clipboard. Camera stays fixed to preserve the room’s locked geometry."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Close-up on Chef B’s hands at the island, with the fixed background softly visible: the ovens on the left wall and the vent hood above the cooktop remain in place. Chef B holds a small saucepan and pours a thin sauce into it from a ladle; a folded kitchen towel lies neatly beside the pot. No mess, professional setup.",
+          "video_prompt": "Eye-level close-up, 85mm lens. Chef B tilts the saucepan, swirling the sauce to coat the bottom, then sets it on the induction cooktop. He adjusts a knob with two fingers. The sauce begins a gentle simmer, forming small bubbles. The camera holds tight focus on the hands and the saucepan; background remains stable and consistent."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Wide shot from the right wall near the sink, capturing the sink faucet foreground right, open shelving midground, and the island centered. Chef A moves from the island toward the sink holding a bowl; Chef B is midground at the island. The judge stands near the pass on the left, unchanged in position relative to the set.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. Chef A walks toward the sink, passing behind the sink faucet so her torso is briefly occluded by the fixture (depth test). She rinses a small bunch of herbs quickly, shakes off water, and returns toward the island, again partially hidden by the faucet for a moment. Chef B continues stirring at the island. The kitchen structure and fixtures remain perfectly fixed."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Medium shot angled from the left toward the heat lamp pass. The pass counter is foreground left with empty white plates stacked neatly. Chef A approaches the pass holding a clean plate; Chef B is behind her near the island. The judge stands behind the pass, ready to inspect. Ovens and island remain in their fixed positions.",
+          "video_prompt": "Eye-level medium shot, 50mm lens. Chef A sets a plate onto the pass counter with a careful, audible placement. She leans lightly against the counter edge for a second while checking a garnish in her hand (contact with environment). Chef B steps into frame carrying a second plate, stopping just behind Chef A without bumping. The judge nods, indicating plating can begin soon."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 10,
+          "first_frame": "Overhead shot of the island focused on plating: two empty plates now sit near the pass-side edge of the island, with squeeze bottles, tweezers, and a small ramekin of microgreens arranged neatly. Timer is still centered. Chef A’s pan sits on the cooktop; Chef B’s saucepan is nearby. The fixed vent hood and island geometry are implied by the consistent top-down layout.",
+          "video_prompt": "Overhead static shot, 18mm top-down. Chef A spoons sautéed vegetables onto her plate in a tidy mound; Chef B uses a spoon to place sauce in a smooth arc. Both use plating tweezers carefully to add microgreens. The timer counts down toward the final seconds, increasing urgency. All movement is confined to hands and tools on the unchanging island."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Dramatic low-angle shot from the floor near the island base, looking up at the chefs and the underside of the vent hood. The island blocks part of their bodies (occlusion). Chef A reaches across to slide her plate toward the pass; Chef B mirrors the action from the opposite side. The judge is visible beyond the island near the pass.",
+          "video_prompt": "Low-angle wide shot, 20mm lens. Chef A and Chef B each slide a finished plate across the island’s steel surface toward the pass-side edge. Their hands briefly disappear behind the island lip (occlusion), then reappear as plates reach the edge. The judge steps forward one pace, aligning with the plates. Camera remains low and steady, emphasizing the solidity and depth of the environment."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Medium close-up at the pass counter: two plated dishes sit under the heat lamp, steam faintly visible. The judge stands behind the pass, clipboard in hand. Chef A and Chef B stand side-by-side in the background, hands clasped in front, maintaining modest professional posture. The pass, plates, and lamp are fixed in the same location as earlier shots.",
+          "video_prompt": "Eye-level medium close-up, 60mm lens. The judge leans in, inspecting both plates, then uses a fork to take a small bite from Chef A’s dish, followed by Chef B’s. She pauses thoughtfully, eyes shifting between plates, then writes a brief note on the clipboard. The chefs remain still, watching for the decision."
+        },
+        {
+          "shot_id": 13,
+          "first_frame": "Tight reaction two-shot of the chefs at the island with the fixed pantry door in the background. Chef A and Chef B stand on the same side now near the timer, shoulders squared, calm but expectant. The timer shows near completion. Stainless reflections remain consistent, lighting steady.",
+          "video_prompt": "Eye-level close two-shot, 75mm lens. The chefs exchange a quick respectful glance, then look toward the judge off-camera. Chef A exhales slowly; Chef B gives a small encouraging nod. The timer beeps softly at the end of the countdown. Camera holds steady, focusing on facial reactions without changing the room geometry."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Wide final shot matching the kitchen layout: central island in the middle, ovens on the left wall, fridge and shelving on the right, pantry door at back, pass counter at left foreground. The judge stands by the pass holding the clipboard; Chef A and Chef B stand facing her near the island. Two plated dishes remain under the heat lamp. Bright, celebratory but professional mood.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, locked-off. The judge steps forward and announces the winner with a warm gesture toward Chef A, then offers a firm handshake to Chef A first and to Chef B second (friendly, sportsmanlike). Chef B applauds lightly. Chef A nods appreciatively. The camera remains fixed, showcasing the unchanged 3D kitchen environment as the story concludes."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "cooking_competition_restaurant",
+    "theme_description": "A cooking competition in a modern restaurant kitchen",
+    "consistency_type": "Type B",
+    "requested_scenes": 3,
+    "requested_shots": 14
+  }
+}

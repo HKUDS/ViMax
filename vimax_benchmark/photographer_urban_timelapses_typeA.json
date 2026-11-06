@@ -1,0 +1,63 @@
+{
+  "story_overview": "A single adult photographer keeps a visual diary by capturing the same city’s changing moods across radically different urban locations and lighting—from sunrise to deep night—culminating in a final long-exposure masterpiece under neon rain.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Early sunrise on a quiet rooftop overlooking a modern city skyline. The main character is clearly defined: an adult woman (32 years old) with warm medium-brown skin, short curly black hair, and round matte-black glasses; she has a small crescent-shaped scar above her right eyebrow. She wears a mustard-yellow field jacket with flap pockets, dark indigo jeans, and clean white sneakers. A black mirrorless camera with a red neck strap hangs from her neck; a compact black backpack sits by her feet. She stands near a low concrete parapet, facing the skyline, soft golden light catching the texture of her jacket. No other people are near. Crisp air, gentle haze over distant buildings.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, tripod-stable. She lifts the black mirrorless camera with the red strap to her eye and slowly pans her upper body from left to right, framing the skyline as the sun edge brightens. A light breeze ruffles her jacket hem and hair; she lowers the camera slightly to check the rear screen, calm and focused. Warm sunrise light intensifies and glints off her glasses for a moment."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Hard cut to a bustling morning street market corridor between brick buildings. The same 32-year-old woman with the crescent scar above her right eyebrow, round matte-black glasses, mustard-yellow field jacket, dark indigo jeans, and white sneakers stands beside stacked crates of produce. The black camera with red neck strap rests in her hands at chest height. Colorful awnings create striped shadows; vendors and shoppers are present in the background but not prominent. Moist pavement reflects morning light; hand-lettered signs and chalkboards add texture.",
+          "video_prompt": "Low angle medium shot, 35mm lens, handheld with gentle sway. She steps sideways to avoid a passing cart, raises the camera, and takes a photo toward the awnings and reflections. She shifts her stance, leans slightly to align leading lines, then lowers the camera to review the image. Background figures move naturally through the corridor while the lighting flickers across her jacket as she turns."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Hard cut to bright midday at a glass-and-steel business district plaza with a shallow reflecting pool. The same photographer—32, short curly black hair, round matte-black glasses, crescent scar above right eyebrow—wears the same mustard-yellow field jacket, dark indigo jeans, and white sneakers. She stands on pale stone tiles near the pool edge; the black camera with red strap hangs mid-torso. Harsh overhead sunlight creates crisp shadows; mirrored skyscraper facades dominate the background; a few office workers in modest attire pass at a distance.",
+          "video_prompt": "High angle wide shot, 20mm lens, slow tilt-down from buildings to subject. As the camera tilts, she walks along the pool edge and crouches carefully, bracing elbows on her knees to capture ripples and reflections. She adjusts a lens ring with deliberate fingers, takes one shot, then stands and steps forward, her silhouette sharp against the bright plaza."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Hard cut to late afternoon on an elevated pedestrian bridge above a multi-lane avenue. The same woman (32) with round matte-black glasses and crescent scar above right eyebrow, mustard-yellow field jacket, dark indigo jeans, and white sneakers leans against a metal railing. The black camera with red strap is mounted to a compact travel tripod placed on the bridge deck. Long shadows stretch across the gridded metal floor; warm amber light hits the railing; traffic streams below as blurred color bands.",
+          "video_prompt": "Overhead three-quarter shot, 28mm lens, tripod-stable. She tightens the tripod knob, then nudges the camera angle downward toward the flowing traffic. She triggers the shutter with a small remote in her right hand, pauses, then re-frames slightly. Below, cars create continuous motion while the sun drops, intensifying orange highlights along the bridge rail and her jacket seams."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Hard cut to blue-hour dusk at a quiet canal-side walkway lined with modern lampposts and graffiti-tagged retaining walls. The same photographer—32, warm medium-brown skin, short curly black hair, round matte-black glasses, crescent scar above right eyebrow—still in the mustard-yellow field jacket, dark indigo jeans, and white sneakers—stands near the canal railing. The black mirrorless camera with red neck strap is in her hands; the water reflects a deep cobalt sky. Lamplights begin to glow, creating soft pools of light.",
+          "video_prompt": "Eye-level medium shot, 50mm lens, slow lateral dolly left. She walks a few steps along the railing, stops under a lamppost, and raises the camera to capture the first lights reflecting in the canal. She exhales, steadies, clicks once, then lowers the camera and glances at the screen. The lamplight warms her face and jacket collar while the sky deepens toward night."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Hard cut to an evening subway platform with glossy tiled walls and a digital timetable board. The same woman (32) with the crescent scar above her right eyebrow and round matte-black glasses, wearing the mustard-yellow field jacket, dark indigo jeans, and white sneakers, stands behind a yellow safety line at a respectful distance. She holds the black camera with red strap close to her chest. Fluorescent lighting casts cool tones; a train’s headlights glow in the tunnel; commuters in modest clothing wait in the background.",
+          "video_prompt": "Long lens medium shot, 85mm, slight handheld. She pivots her shoulders to frame the oncoming train lights, then quickly raises the camera and takes a photo as the train arrives. The train slides into the station, creating streaks of motion across the frame; she steps one pace back, keeping safe distance, and checks her screen as doors open and people begin to move."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Hard cut to night in a neon-lit alleyway with wet pavement after a light rain. The same photographer—32, short curly black hair, round matte-black glasses, crescent scar above right eyebrow—wears the same mustard-yellow field jacket, dark indigo jeans, and white sneakers. She stands beside a wall of posters and reflective signage, setting her black camera with red strap onto a small tripod on the ground. Neon signs in blues and magentas reflect in puddles; steam rises from a street vent, creating atmospheric haze.",
+          "video_prompt": "Low angle close-to-ground wide shot, 18mm lens, slow push-in. She kneels carefully, adjusts the tripod legs, and points the camera toward the neon reflections in a puddle. She wipes a raindrop from her glasses with the back of her sleeve, then starts a long exposure using a remote. The steam curls through the colored light, and the reflections shimmer as distant footsteps pass out of frame."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Hard cut to the city’s central intersection at deep night, viewed from a corner under a bright storefront awning. The same woman (32) with warm medium-brown skin, short curly black hair, round matte-black glasses, and the crescent scar above her right eyebrow stands firmly with her small tripod set at curbside (well back from the street). She wears the same mustard-yellow field jacket, dark indigo jeans, and white sneakers; the black mirrorless camera with a red neck strap is locked on the tripod, aimed at the crosswalk and traffic lights. Wet asphalt mirrors red, green, and white light trails; tall buildings loom with scattered lit windows. The mood is focused and triumphant.",
+          "video_prompt": "Corner-position wide shot, 24mm lens, tripod-stable with slight time-lapse feel. She checks the framing, presses the remote, and holds still as cars and buses pass, producing smooth light trails. The traffic signal cycles, pedestrians cross in the distance, and the rain-slick street becomes a canvas of moving color. She leans in to review the final image on the camera screen, then relaxes her shoulders—climax achieved with a clean, dramatic long-exposure city-night photograph."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "photographer_urban_timelapses",
+    "theme_description": "A photographer documenting different times of day in urban settings",
+    "consistency_type": "Type A",
+    "requested_scenes": 2,
+    "requested_shots": 8
+  }
+}

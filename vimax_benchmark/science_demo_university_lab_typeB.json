@@ -1,0 +1,73 @@
+{
+  "story_overview": "In a university teaching laboratory, an adult instructor and two adult students set up and safely run a dramatic but family-friendly chemical indicator demonstration, culminating in a color-change reveal that confirms their hypothesis.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide establishing view of a bright university laboratory classroom. The 3D room layout is clear and must remain identical in all shots: a central long stainless-steel lab bench with two sinks (one near left third, one near right third), three black lab stools tucked under the bench, a tall fume hood on the back-left wall with its glass sash half-raised, a whiteboard centered on the back wall with a marker tray, a shelving unit on the back-right wall holding labeled reagent bottles and folded paper towels, and a doorway on the far-right wall. Overhead fluorescent panels cast even, cool light. On the central bench: a blue absorbent spill mat, a clear beaker, a glass stirring rod, a small digital scale, a tray of safety goggles, and a small pH indicator bottle with a dropper cap. Three adults (20+), modestly dressed in button-up shirts and slacks under white lab coats, stand near the bench: the instructor at the bench center, two students to the right. Everyone wears safety goggles; no exposed skin beyond hands and face.",
+          "video_prompt": "Eye-level wide shot with a 24mm lens from the front-left corner of the room. The camera holds steady with a subtle slow push-in toward the central bench as the instructor gestures toward the beaker and the students nod. The students step closer to the bench, keeping the same room geometry visible: fume hood back-left, whiteboard centered, shelving back-right, doorway far-right."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium shot from the right side of the central bench, keeping the fixed background: the doorway on the far-right wall is visible behind the students, and the shelving unit on the back-right wall aligns behind them. The instructor (adult, 20+) stands on the left side of frame at the bench edge, lab coat sleeves down, gloved hands near the tray. One student (adult, 20+) is seated on the nearest stool, the other stands behind the stool. The tray of goggles and nitrile gloves sits on the blue spill mat; the beaker and stirring rod are to the left of the mat; the digital scale is near the center.",
+          "video_prompt": "Eye-level medium shot with a 50mm lens from the room’s right aisle, angled slightly left toward the bench. The instructor slides a pair of gloves across the bench to the seated student, who reaches forward to take them. The standing student leans in to look at the digital scale, then straightens, maintaining clear contact with the stool and bench."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Close-up of hands and tools on the central bench, with the stainless surface texture and blue spill mat prominent. The beaker sits on the digital scale; the pH indicator bottle stands upright to the right; the stirring rod lies diagonally on the mat. In the blurred background, the same fixed room elements remain: the whiteboard centered and the fume hood back-left. Gloved adult hands (20+) enter frame from left and right, poised above the beaker and indicator bottle.",
+          "video_prompt": "Top-down close-up with a 70mm lens, camera locked directly above the beaker and scale. One pair of gloved hands steadies the beaker while the other carefully adds a measured amount of clear liquid (water) and taps the scale button. The indicator bottle is nudged slightly to align with the beaker, then hands withdraw, leaving the setup neat and centered."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Over-the-shoulder view from behind the instructor toward the whiteboard on the back wall, preserving the room’s fixed geometry: central bench in foreground, fume hood back-left, shelving back-right. The whiteboard shows a simple handwritten title: 'Indicator Demo: Hypothesis' and a basic pH scale sketch. The instructor’s lab coat shoulder and goggles frame the left foreground. The two adult students (20+) stand to the right, one partially occluded by the shelving edge as they shift position near the bench.",
+          "video_prompt": "Over-the-shoulder medium shot with a 35mm lens from behind the instructor, aimed at the whiteboard and students. The instructor points to the pH scale sketch with a capped marker while speaking; the students nod and one steps left, briefly passing behind the instructor’s shoulder (occlusion), then reappears to face the bench."
+        },
+        {
+          "shot_id": 5,
+          "first_frame": "Medium-wide shot facing the fume hood on the back-left wall, keeping the entire room layout consistent: central bench runs horizontally across mid-frame, stools underneath, whiteboard centered behind, shelving back-right, doorway far-right. The instructor and one student walk along the front edge of the bench toward the fume hood; the second student remains near the right side of the bench. The instructor carries a sealed container of baking soda (clearly labeled) and a small measuring spoon; all adults (20+) wear goggles, gloves, and lab coats with modest attire underneath.",
+          "video_prompt": "Eye-level medium-wide shot with a 28mm lens positioned near the center aisle, looking toward the fume hood. The instructor and student move left-to-right across the frame, then curve toward the fume hood, briefly disappearing behind the fume hood frame edge (partial occlusion) before stopping. The student at the right side of the bench leans over the spill mat to check the beaker, then looks up toward the instructor."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 6,
+          "first_frame": "Wide shot from the back-right corner of the same laboratory, ensuring the fixed geometry is unmistakable: the shelving unit is now close in the right foreground, the doorway is visible far-right, the whiteboard centered on the back wall, and the fume hood back-left. The central bench dominates the middle with the blue spill mat, beaker, indicator bottle, stirring rod, and a small tray containing a cup labeled 'Baking Soda Solution' and a bottle labeled 'Vinegar Solution' (household, safe). The instructor (adult, 20+) stands at the bench center; the two adult students (20+) stand on either side, one near the right stools.",
+          "video_prompt": "High angle wide shot with a 24mm lens from the back-right corner, camera slightly tilted down. The instructor directs the students with calm hand motions; one student steps forward from background to foreground to place the labeled solutions on the mat, then steps back, demonstrating depth and consistent placement on the solid bench surface."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Medium two-shot at the central bench from the front, maintaining the same room background: whiteboard centered behind, fume hood back-left, shelving back-right. The instructor stands on the left; a student stands on the right. The beaker sits centered on the blue mat; the pH indicator bottle is in the instructor’s gloved hand, dropper tip above the beaker. The student holds the stirring rod above the beaker, ready but not touching yet.",
+          "video_prompt": "Eye-level medium two-shot with a 50mm lens from directly in front of the bench. The instructor squeezes in several drops of indicator into the clear beaker; the student lowers the stirring rod and stirs slowly. The liquid shifts from clear to a faint tint as it mixes, with gentle swirling motion visible while both maintain steady posture."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Close-up on the beaker and hands, with the stainless surface reflections and blue mat texture sharp. The beaker now contains lightly tinted liquid. A small cup labeled 'Vinegar Solution' sits to the left; a small cup labeled 'Baking Soda Solution' sits to the right. Gloved adult hands (20+) hover: one holds a small measuring spoon above the baking soda cup; the other steadies the beaker. Background remains the same lab room but blurred, with the whiteboard’s bright rectangle centered.",
+          "video_prompt": "Macro close-up with an 85mm lens, camera fixed at bench height, slightly angled down. A measured spoonful is added into the beaker and the mixture swirls; the color begins to shift more noticeably. The spoon withdraws and taps lightly on the cup rim; the beaker stays planted on the mat, showing solid contact with the surface."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Medium shot from the left side of the bench looking toward the shelving back-right, preserving the unchanging room geometry. One student (adult, 20+) sits on a stool, leaning forward with elbows near (not on) the bench edge; the other student stands behind them. The instructor stands opposite, slightly left of frame. The beaker is centered; a small handheld pH strip container lies beside it. The seated student reaches for a pH strip while keeping goggles on. The standing student is partially occluded by the seated student and stool backrest, emphasizing depth and occlusion with fixed furniture.",
+          "video_prompt": "Eye-level medium shot with a 35mm lens from the left aisle, angled toward the shelving. The seated student pulls a single pH strip, dips it briefly into the beaker, then lifts it to compare against the strip color chart on the container. The instructor leans in, then steps back, and the standing student shifts sideways, briefly disappearing behind the seated student’s shoulder before reappearing."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Dramatic final wide shot centered on the bench with the entire lab layout unchanged: fume hood back-left, whiteboard centered, shelving back-right, doorway far-right, stools under the bench. The beaker now shows a vivid, family-friendly color change (e.g., bright purple or deep blue) indicating the completed reaction/indicator shift. The instructor and two adult students (20+) stand behind the bench in a neat line, modest attire under lab coats, goggles on, gloves on. The whiteboard behind them now includes a large check mark next to 'Hypothesis Confirmed' written in clear block letters.",
+          "video_prompt": "Eye-level wide shot with a 28mm lens from the front center of the room. The camera performs a slow, steady push-in toward the beaker as the instructor lifts the beaker slightly (kept level, no spilling) to display the final color. The students point toward the whiteboard check mark, then give a small, contained celebratory gesture (thumbs-up and nods). The shot ends with the beaker centered in frame, the fixed lab environment stable and unwarped."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "science_demo_university_lab",
+    "theme_description": "A science demonstration in a university laboratory",
+    "consistency_type": "Type B",
+    "requested_scenes": 2,
+    "requested_shots": 10
+  }
+}

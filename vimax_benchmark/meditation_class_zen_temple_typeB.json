@@ -1,0 +1,98 @@
+{
+  "story_overview": "Inside a serene zen temple meditation hall, three adult participants arrive and settle into a guided session. The class progresses from preparation to focused breathing, culminating in a resonant bell and a calm group bow—while the indoor 3D environment remains perfectly consistent as participants move through it.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide, symmetrical establishing view of a zen temple meditation hall interior (indoor 3D environment). Polished honey-toned wooden floorboards run horizontally across frame. A raised tatami platform occupies the center, bordered by a thin dark wood trim. At the back wall: a simple altar niche with a small bronze singing bowl on a low shelf, a single framed calligraphy panel above it, and a shallow vase with a green branch. Left side: two thick cedar pillars support a beam; a low wooden bench sits between pillar and wall. Right side: a latticed shoji-style window wall with soft daylight; a rolled reed mat stack neatly arranged near the right-front corner. In the foreground, a row of evenly spaced dark charcoal meditation cushions (zafu) with matching mats (zabuton). No people yet. Soft morning light, visible wood grain, tranquil mood.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, locked-off tripod. The room remains perfectly still; subtle dust motes drift in the sunlight near the shoji window. A faint shift in light intensity suggests passing clouds, but the geometry and furniture placement remain unchanged."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium-wide shot from near the right-front corner, looking diagonally toward the center platform and left pillars. The same fixed room layout: tatami platform center, altar niche back wall, bench left, cushions foreground. An adult instructor (approx. 40, calm expression) in modest dark-gray robe stands near the left pillar, holding a small wooden clipboard at waist height. Two adult students (20+), in modest long-sleeve tops and loose pants, enter from the back-left walkway behind the bench, partially occluded by the left pillar.",
+          "video_prompt": "Medium-wide, 35mm lens, slight right-to-left pan. The two students walk behind the left pillar and bench (occlusion clearly visible), then emerge into the open floor area, slowing respectfully. The instructor turns their head gently to acknowledge them, keeping posture relaxed. Background architecture and object positions remain unchanged."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Low angle medium shot focused on the foreground cushions: three zafu aligned. The tatami platform edge and wood trim are visible behind them. One adult student (20+, modest cream sweater, dark loose trousers) kneels beside a cushion, hands placed on the mat, preparing to sit. Another adult student (20+, muted blue cardigan over a plain shirt, dark trousers) stands just behind, waiting, seen from mid-thigh down. The shoji window light falls from the right, making soft highlights on the floorboards.",
+          "video_prompt": "Low angle medium shot, 40mm lens, locked-off. The kneeling student slides the cushion a few centimeters to align it with the mat (contact with floor; slight fabric compression). The standing student steps forward carefully, feet crossing from background to midground, then stops, maintaining respectful distance. Environment remains fixed and undistorted."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Over-the-shoulder shot from behind the instructor at left, looking toward the center platform and the row of cushions in the foreground. The instructor’s shoulder and sleeve edge frame the left side. Three adult participants (instructor plus two students) are now inside the hall: the students move toward cushions, one passing behind the center platform corner. The altar niche and calligraphy remain centered in the far background.",
+          "video_prompt": "Over-the-shoulder, 50mm lens, gentle dolly-in a few inches. The students walk from midground to foreground, one briefly disappearing behind the raised tatami platform corner (occlusion and depth), then reappearing to kneel at a cushion. The instructor lowers the clipboard slightly, preparing to begin. All room elements stay spatially consistent."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Top-down overhead shot centered on the tatami platform and surrounding floor. The platform’s woven texture is clear; the dark wood border forms a crisp rectangle. Three cushions form a neat line below the platform. The instructor stands at the front edge of the platform, feet together on the wood floor. The two students kneel on their mats, backs straight, hands resting on thighs. Left pillars and right shoji window edges are visible as framing cues.",
+          "video_prompt": "Overhead static shot, 20mm lens, locked-off. The instructor steps onto the tatami platform (visible foot placement and slight tatami compression), then turns to face the seated students. The students shift from kneeling to seated posture on their cushions, settling slowly with minimal movement. Background geometry remains unchanged."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Eye-level medium close-up of the instructor seated cross-legged on the front-center of the tatami platform, hands resting in lap. Behind them, the altar niche is softly in focus, with the bronze singing bowl on the shelf. The instructor’s robe is modest and neatly folded. Soft daylight from the right shoji window creates gentle rim light along the instructor’s shoulder.",
+          "video_prompt": "Eye-level medium close-up, 70mm lens, locked-off. The instructor inhales and exhales slowly, then raises one hand to demonstrate a relaxed hand mudra, returning it to the lap. Subtle head nod as if offering guidance. The altar, bowl, and all room features remain fixed."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Side-profile two-shot at floor level: the two adult students sit on their cushions in the foreground row, facing left toward the platform (off-frame). The nearer student in cream sweater sits upright; the second in muted blue cardigan sits one cushion behind and slightly to the right. The wooden floorboards lead toward the left pillars; the bench is visible in the far left background. Shoji window light from right creates soft gradients on their clothing.",
+          "video_prompt": "Side-profile medium shot, 55mm lens, slow lateral slider move right-to-left. Both students perform synchronized breathing: shoulders rise subtly on inhale, settle on exhale; hands remain still on thighs. The camera move reveals slight parallax against the fixed pillars and bench, confirming stable room geometry."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Medium shot from the back of the room looking forward: the altar niche and calligraphy are centered at the far wall; the tatami platform occupies midground with the instructor seated. The two students are in the foreground, seen from behind, seated on cushions. A narrow walkway runs along the left side behind the bench. Lighting remains soft and even, morning calm.",
+          "video_prompt": "Eye-level medium-wide shot, 28mm lens, locked-off. The instructor gently gestures with an open palm as if cueing attention to breath. One student subtly adjusts posture—straightening spine and rolling shoulders back—then becomes still. No objects shift; the room remains spatially identical."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Close shot on the bronze singing bowl in the altar niche: the bowl sits on a small cushion on the shelf; a wooden striker rests beside it. The shelf wood grain is visible; the calligraphy frame edge appears above. The instructor’s robe sleeve enters frame from the left, hand approaching the striker.",
+          "video_prompt": "Close-up, 85mm lens, locked-off. The instructor’s hand lifts the striker (contact and lift clearly shown), pauses above the bowl, then lowers it gently to touch the rim without striking yet. The bowl and niche remain fixed; lighting stays constant with soft highlights on bronze."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 10,
+          "first_frame": "Low angle shot near the floor, looking toward the tatami platform corner. The instructor stands from seated position at the platform’s front, robe draping modestly. The students remain seated on cushions in the foreground, facing forward. The platform edge and wood trim create strong lines; the left pillar is visible, anchoring the consistent geometry.",
+          "video_prompt": "Low angle medium-wide, 32mm lens, locked-off. The instructor rises smoothly to standing (robe folds shift naturally), steps to the platform edge, and turns slightly toward the altar niche. The students remain still, emphasizing the instructor’s motion against the stable set."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Over-the-shoulder shot from behind the instructor facing the altar niche. The instructor’s shoulder frames the left foreground; the bronze singing bowl is centered midframe on the shelf. The striker is held in the instructor’s right hand. The shoji window light from the right side adds a bright strip of highlight on the bowl rim.",
+          "video_prompt": "Over-the-shoulder, 60mm lens, gentle push-in. The instructor makes a single, controlled strike: the striker moves forward, contacts the bowl rim, then withdraws. The bowl remains stationary; only a subtle vibration shimmer in the highlight suggests resonance. The room stays perfectly consistent."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Reaction two-shot from the front of the seated students, facing them with the platform behind (instructor visible in soft focus). The students’ faces are calm, eyes softly lowered. Their modest clothing remains unchanged. The cushions and mats are neatly aligned; floor reflections are faint and stable.",
+          "video_prompt": "Eye-level medium two-shot, 50mm lens, locked-off. The students complete a slow exhale in unison, then bring hands together briefly at chest level in a respectful gesture before returning hands to thighs. The instructor remains in the background, still. No background elements move."
+        },
+        {
+          "shot_id": 13,
+          "first_frame": "Wide shot from the left side of the hall, capturing the left pillars in the foreground and the group aligned: instructor near the platform, students on cushions. One student is partially occluded by the nearer pillar as the camera angle places the pillar between viewer and student. The bench remains against the left wall; the shoji windows line the right wall unchanged.",
+          "video_prompt": "Wide shot, 26mm lens, slow dolly rightward. As the camera moves, the occluded student gradually reveals from behind the pillar (clear occlusion/parallax). The instructor steps down from the platform to the wood floor (visible contact), approaching the students calmly to signal closing. Geometry and furniture placement remain constant."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Symmetrical front wide shot mirroring the opening composition: centered tatami platform, altar niche and calligraphy at back, cushions in foreground. All three adults are now kneeling in a line on their mats facing the altar: instructor in the middle, two students on either side. Soft morning light continues through the shoji windows; the room looks undisturbed and perfectly consistent.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, locked-off. The trio performs a synchronized closing bow: hands slide forward to the mat (contact), torsos incline, pause, then return upright. They remain still for a final breath as the light holds steady. End on calm, stable tableau with no changes to the environment."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "meditation_class_zen_temple",
+    "theme_description": "A meditation class in a zen temple interior",
+    "consistency_type": "Type B",
+    "requested_scenes": 3,
+    "requested_shots": 14
+  }
+}

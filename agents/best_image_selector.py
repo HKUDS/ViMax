@@ -1,9 +1,12 @@
 import logging
+import json
 from typing import List, Tuple
-from pydantic import BaseModel, Field
-from tenacity import retry, stop_after_attempt
+from pydantic import BaseModel, Field, StrictInt
+from tenacity import retry, stop_after_attempt, wait_exponential
+from langchain.chat_models.base import BaseChatModel
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_core.output_parsers import PydanticOutputParser
+from langchain_core.exceptions import OutputParserException
+from utils.robust_json_parser import TrailingCommaTolerantPydanticOutputParser as PydanticOutputParser, strip_trailing_commas
 from langchain.chat_models import init_chat_model
 from utils.image import image_path_to_b64
 
@@ -29,6 +32,11 @@ The user will provide the following content:
 [Output]
 {format_instructions}
 
+[Hard constraints]
+- There are exactly {candidate_count} candidate images, indexed from 0 to {candidate_max_index}.
+- Return a single JSON object with only "best_image_index" and "reason".
+- Choose one of the provided indices. Do not invent candidates or return a JSON schema.
+
 [Guidelines]
 - Prioritize Character Consistency: Ensure that the characters in the generated image are highly consistent with those in the reference image in terms of visual features (e.g., a. gender b.ethnicity, c.age, d.facial features, e.body shape, f.outlook, g. hairstyle etc.).
 - Focus on Spatial Consistency: Verify whether the relative positions of characters, object arrangements, and perspectives align logically with the reference image (e.g., if Character A is on the left and Character B is on the right in the reference image, the generated image should not reverse this).
@@ -48,8 +56,9 @@ human_prompt_template_select_most_consistent_image = \
 
 
 class BestImageResponse(BaseModel):
-    best_image_index: int = Field(
+    best_image_index: StrictInt = Field(
         ...,
+        ge=0,
         description="The index of the best image."
     )
     reason: str = Field(
@@ -61,29 +70,50 @@ class BestImageResponse(BaseModel):
 class BestImageSelector:
     def __init__(
         self,
-        base_url: str,
-        api_key: str,
-        chat_model: str,
+        base_url: str | None = None,
+        api_key: str | None = None,
+        chat_model: str | BaseChatModel | None = None,
     ):
         
-        self.chat_model = init_chat_model(
-            model=chat_model,
-            model_provider="openai",
-            base_url=base_url,
-            api_key=api_key,
-        )
+        if chat_model is None:
+            raise ValueError("A vision-capable chat_model is required for image selection")
+        if isinstance(chat_model, str):
+            self.chat_model = init_chat_model(
+                model=chat_model,
+                model_provider="openai",
+                base_url=base_url,
+                api_key=api_key,
+            )
+        else:
+            self.chat_model = chat_model
 
 
-    @retry(
-        stop=stop_after_attempt(3),
-        after=lambda retry_state: logging.warning(f"Retrying best image selection due to {retry_state.outcome.exception()}"),
-    )
     async def __call__(
         self,
         reference_image_path_and_text_pairs: List[Tuple[str, str]],
         target_description: str,
         candidate_image_paths: List[str],
     ) -> str:
+        response = await self.select(
+            reference_image_path_and_text_pairs,
+            target_description,
+            candidate_image_paths,
+        )
+        return candidate_image_paths[response.best_image_index]
+
+
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=1, max=4),
+        reraise=True,
+        after=lambda retry_state: logging.warning(f"Retrying best image selection due to {retry_state.outcome.exception()}"),
+    )
+    async def select(
+        self,
+        reference_image_path_and_text_pairs: List[Tuple[str, str]],
+        target_description: str,
+        candidate_image_paths: List[str],
+    ) -> BestImageResponse:
         """
         Args:
             ref_image_path_and_text_pairs:
@@ -130,18 +160,31 @@ class BestImageSelector:
         parser = PydanticOutputParser(pydantic_object=BestImageResponse)
 
         messages = [
-            SystemMessage(content=system_prompt_template_select_most_consistent_image.format(format_instructions=parser.get_format_instructions())),
+            SystemMessage(content=system_prompt_template_select_most_consistent_image.format(
+                format_instructions=parser.get_format_instructions(),
+                candidate_count=len(candidate_image_paths),
+                candidate_max_index=len(candidate_image_paths) - 1,
+            )),
             HumanMessage(content=human_content)
         ]
 
-        chain = self.chat_model | parser
-
-        response = await chain.ainvoke(messages)
+        message = await self.chat_model.ainvoke(messages)
+        raw = message.content
+        if isinstance(raw, list):
+            raw = "".join(block.get("text", "") for block in raw if isinstance(block, dict))
+        try:
+            response = parser.parse(raw)
+        except OutputParserException:
+            # Some gateways wrap values in a JSON-schema "properties" object.
+            text = strip_trailing_commas(raw)
+            obj, _ = json.JSONDecoder().raw_decode(text[text.index("{"):])
+            if isinstance(obj, dict) and isinstance(obj.get("properties"), dict):
+                obj = obj["properties"]
+            response = BestImageResponse.model_validate(obj)
         idx = response.best_image_index
-        if not isinstance(idx, int) or idx < 0 or idx >= len(candidate_image_paths):
-            logging.warning(f"Received invalid best_image_index={idx}; defaulting to 0")
-            idx = 0
+        if idx >= len(candidate_image_paths):
+            raise ValueError(f"VLM selected invalid candidate index {idx} for {len(candidate_image_paths)} images")
         best_image_path = candidate_image_paths[idx]
         logging.info(f"Best image selected: {best_image_path}")
         logging.info(f"Selection reason: {response.reason}")
-        return best_image_path
+        return response

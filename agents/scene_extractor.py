@@ -5,6 +5,7 @@ from langchain.chat_models import init_chat_model
 from pydantic import BaseModel, Field
 from typing import List, Optional, Literal, Tuple, Dict
 from langchain_core.output_parsers import PydanticOutputParser
+from utils.robust_json_parser import TrailingCommaTolerantPydanticOutputParser as PydanticOutputParser
 from tenacity import retry, stop_after_attempt
 import logging
 

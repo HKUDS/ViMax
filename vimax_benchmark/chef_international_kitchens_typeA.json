@@ -1,0 +1,63 @@
+{
+  "story_overview": "An adult chef uses a well-worn recipe notebook to explore four international kitchens in wildly different environments, gathering techniques and flavors, then returns to a modern test kitchen for a final, harmonious dish.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Eye-level medium shot of a 32-year-old chef (adult) with warm brown skin, dark brown eyes, thick eyebrows, and a neat short black undercut; a distinctive crescent-shaped scar above his right eyebrow. He wears a crisp white double-breasted chef jacket with black piping, black-and-white houndstooth pants, a charcoal-gray neckerchief, and a light gray apron with a small embroidered whisk icon at the chest; no jewelry, no hat. He stands in a bright, stainless-steel culinary test kitchen: brushed metal counters, hanging pans, induction burners, a glass-front spice cabinet, and a large window with soft morning light. He holds a worn tan leather recipe notebook with an elastic strap and a clipped-on fountain pen. Mood: focused, curious; clean, PG-rated, modest attire.",
+          "video_prompt": "Eye-level medium shot, 35mm lens, static camera. The chef opens the tan leather recipe notebook and flips to a page with small hand-drawn ingredient icons; he taps the page with the pen, then looks up toward the prep station. Subtle motion in the background: a kettle releases a gentle puff of steam, and daylight glints off stainless steel. He takes one measured breath, signaling the start of his culinary journey."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "High-angle wide shot looking down into a compact Japanese ramen-ya kitchen with warm lantern lighting and wood textures: a narrow counter, steaming broth pots, hanging ladles, and a noren curtain at the entrance. The same chef (same scar, same face, same exact outfit and apron with whisk icon) stands at a wooden prep board. A small bowl of noodles, sliced scallions, and a simmering pot are arranged neatly. Ambient steam curls upward, creating soft haze.",
+          "video_prompt": "High-angle wide shot, 24mm lens, gentle right-to-left pan. The chef ladles broth into a bowl, then uses chopsticks to arrange noodles with careful precision. Steam rises and briefly veils his face before clearing, testing identity consistency. He jots a quick note in the tan leather notebook with the clipped pen, then closes it with the elastic strap."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Low-angle medium-wide shot inside a rustic Italian trattoria kitchen: terracotta tiles, a brick wood-fired oven glowing orange, copper pots on a rack, and a marble-topped table dusted with flour. The same chef (unchanged identity and clothing) leans over the marble table with a rolling pin and a neat mound of dough. Warm, firelit highlights contrast with cooler ambient kitchen light.",
+          "video_prompt": "Low-angle medium-wide shot, 28mm lens, slight push-in. The chef rolls dough smoothly, then slides it onto a wooden peel near the open oven. The oven flame flickers and casts moving light across his jacket piping and scar. He checks the notebook, nods, and marks a line with the pen while flour motes drift through the air."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Eye-level close-up of the chef’s hands and upper torso at an open-air Mexican market kitchen stall under bright midday sun: colorful papel picado banners overhead, a comal on a gas burner, bowls of chopped cilantro and onions, limes, and a molcajete (stone mortar). The chef’s face is partially visible: same scar above right eyebrow, same neat undercut, same white jacket with black piping, gray neckerchief, gray apron with whisk icon. Vibrant, high-contrast lighting.",
+          "video_prompt": "Eye-level close-up, 50mm lens, handheld micro-shake. The chef presses masa into a tortilla, places it on the comal, and uses a spatula to flip it once as it puffs slightly. He squeezes a lime wedge over a small bowl (no mess, no splatter), then quickly scribbles a note in the tan notebook held in his left hand. Sunlight flashes across the apron embroidery as a banner above flutters."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Wide establishing shot of an Indian tandoor kitchen at dusk: clay tandoor ovens, stacks of metal trays, sacks of spices, and warm amber hanging bulbs. The same chef (identical facial features, scar, and outfit) stands near a tandoor opening holding metal tongs and the tan leather notebook tucked under his arm. Heat shimmer is visible above the tandoor, adding atmospheric distortion.",
+          "video_prompt": "Wide shot, 24mm lens, slow dolly-in. The chef carefully places a flatbread onto the inside wall of the tandoor with practiced motion, then withdraws the tongs. Heat shimmer ripples the air in front of his jacket and face without changing his identity. He briefly opens the notebook, compares a page, and closes it with a decisive nod as the oven glow brightens."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Overhead medium shot in a modern Scandinavian-inspired kitchen with cool, icy-blue lighting and minimalist design: pale wood counters, matte-white cabinets, a single pendant light, and a frosted window suggesting snowy weather outside. The same chef (unchanged identity and clothing) arranges small bowls: herbs, citrus zest, and a light broth. The tan leather notebook lies open beside a sleek cutting board.",
+          "video_prompt": "Overhead medium shot, 35mm lens, smooth top-down slide to the right. The chef methodically plates components with tweezers, then pauses to adjust one garnish for symmetry. He turns a notebook page, underlines a note with the pen, and closes the book. The cool lighting shifts subtly as the pendant sways, testing the character’s consistent look under different color temperature."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Dramatic close-up, three-quarter profile of the chef at a bustling French bistro kitchen pass: warm tungsten lights, order tickets clipped on a rail, polished stainless pass shelf, and a shallow depth of field with soft bokeh of moving staff shapes (no distinct faces). The same chef’s scar above the right eyebrow is clearly visible; same jacket with black piping and gray apron with whisk icon. A plated dish sits in front of him with a small sauce pot nearby. Tension and momentum build.",
+          "video_prompt": "Close-up, 85mm lens, slight rack focus from the order tickets to the chef’s eyes. He tastes a spoonful of sauce, considers, then adds a careful final swirl to the plate. He snaps the notebook shut with quiet confidence, and the background motion blurs as the pace intensifies—signaling the approaching climax."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Eye-level wide shot back in the original bright stainless-steel culinary test kitchen from Shot 1: same counters, hanging pans, spice cabinet, and soft morning-like light. The same chef (identical adult identity, scar, hairstyle, and exact outfit) stands centered at the main prep island. In front of him: a single composed fusion dish plated neatly, plus the tan leather notebook opened to a page filled with small, tidy notes and icons. Mood: uplifting, accomplished; clean and family-friendly.",
+          "video_prompt": "Eye-level wide shot, 28mm lens, slow circular dolly clockwise around the chef. He presents the finished plate by sliding it forward slightly, then gestures to the open notebook as if connecting the international techniques. He takes one calm tasting bite, smiles subtly, and closes the notebook with the elastic strap—climax and resolution in a single confident finish as light glints off the stainless steel."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "chef_international_kitchens",
+    "theme_description": "A chef exploring different international kitchens",
+    "consistency_type": "Type A",
+    "requested_scenes": 2,
+    "requested_shots": 8
+  }
+}

@@ -1,6 +1,7 @@
 import logging
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
+from utils.robust_json_parser import TrailingCommaTolerantPydanticOutputParser as PydanticOutputParser
 from langchain.chat_models import init_chat_model
 from pydantic import BaseModel, Field
 from tenacity import retry, stop_after_attempt

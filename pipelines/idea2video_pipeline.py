@@ -1,16 +1,24 @@
 import os
+import shutil
 import logging
 from agents import Screenwriter, CharacterExtractor, CharacterPortraitsGenerator
-from pipelines.script2video_pipeline import Script2VideoPipeline
+from pipelines.script2video_pipeline import Script2VideoPipeline, _scoped_progress
 from interfaces import CharacterInScene
-from typing import List, Dict, Optional
+from typing import Any, Callable, List, Dict, Optional
 import asyncio
 import json
-from moviepy import VideoFileClip, concatenate_videoclips
 import yaml
 from langchain.chat_models import init_chat_model
 from tools.render_backend import RenderBackend
 from utils.provider_presets import resolve_chat_model_config
+from utils.text import safe_path_component
+from utils.video import concatenate_video_files
+from utils.image_selection import DEFAULT_IMAGE_CANDIDATES, image_candidate_count_from_config, validate_image_candidate_count
+
+
+def _pipeline_print(quiet: bool, message: str) -> None:
+    if not quiet:
+        print(message)
 
 
 class Idea2VideoPipeline:
@@ -20,10 +28,12 @@ class Idea2VideoPipeline:
         image_generator: str,
         video_generator: str,
         working_dir: str,
+        num_image_candidates: int = DEFAULT_IMAGE_CANDIDATES,
     ):
         self.chat_model = chat_model
         self.image_generator = image_generator
         self.video_generator = video_generator
+        self.num_image_candidates = validate_image_candidate_count(num_image_candidates)
         self.working_dir = working_dir
         os.makedirs(self.working_dir, exist_ok=True)
 
@@ -47,11 +57,13 @@ class Idea2VideoPipeline:
             image_generator=backend.image_generator,
             video_generator=backend.video_generator,
             working_dir=config["working_dir"],
+            num_image_candidates=image_candidate_count_from_config(config),
         )
 
     async def extract_characters(
         self,
         story: str,
+        quiet: bool = False,
     ):
         save_path = os.path.join(self.working_dir, "characters.json")
 
@@ -60,14 +72,13 @@ class Idea2VideoPipeline:
                 characters = json.load(f)
             characters = [CharacterInScene.model_validate(
                 character) for character in characters]
-            print(f"🚀 Loaded {len(characters)} characters from existing file.")
+            _pipeline_print(quiet, f"🚀 Loaded {len(characters)} characters from existing file.")
         else:
             characters = await self.character_extractor.extract_characters(story)
             with open(save_path, "w", encoding="utf-8") as f:
                 json.dump([character.model_dump()
                           for character in characters], f, ensure_ascii=False, indent=4)
-            print(
-                f"✅ Extracted {len(characters)} characters from story and saved to {save_path}.")
+            _pipeline_print(quiet, f"✅ Extracted {len(characters)} characters from story and saved to {save_path}.")
 
         return characters
 
@@ -90,6 +101,11 @@ class Idea2VideoPipeline:
             self.generate_portraits_for_single_character(character, style)
             for character in characters
             if character.identifier_in_scene not in character_portraits_registry
+            # Characters never shown on screen (e.g. a voice or chat-only
+            # character) have no physical description, so asking the image
+            # model for front/side/back portraits of them is nonsensical and
+            # fails repeatedly (finish_reason=IMAGE_OTHER, empty candidates).
+            and character.is_visible
         ]
         if tasks:
             for future in asyncio.as_completed(tasks):
@@ -110,18 +126,19 @@ class Idea2VideoPipeline:
         self,
         idea: str,
         user_requirement: str,
+        quiet: bool = False,
     ):
         save_path = os.path.join(self.working_dir, "story.txt")
         if os.path.exists(save_path):
             with open(save_path, "r", encoding="utf-8") as f:
                 story = f.read()
-            print(f"🚀 Loaded story from existing file.")
+            _pipeline_print(quiet, f"🚀 Loaded story from existing file.")
         else:
-            print("🧠 Developing story...")
+            _pipeline_print(quiet, "🧠 Developing story...")
             story = await self.screenwriter.develop_story(idea=idea, user_requirement=user_requirement)
             with open(save_path, "w", encoding="utf-8") as f:
                 f.write(story)
-            print(f"✅ Developed story and saved to {save_path}.")
+            _pipeline_print(quiet, f"✅ Developed story and saved to {save_path}.")
 
         return story
 
@@ -129,18 +146,19 @@ class Idea2VideoPipeline:
         self,
         story: str,
         user_requirement: str,
+        quiet: bool = False,
     ):
         save_path = os.path.join(self.working_dir, "script.json")
         if os.path.exists(save_path):
             with open(save_path, "r", encoding="utf-8") as f:
                 script = json.load(f)
-            print(f"🚀 Loaded script from existing file.")
+            _pipeline_print(quiet, f"🚀 Loaded script from existing file.")
         else:
-            print("🧠 Writing script based on story...")
+            _pipeline_print(quiet, "🧠 Writing script based on story...")
             script = await self.screenwriter.write_script_based_on_story(story=story, user_requirement=user_requirement)
             with open(save_path, "w", encoding="utf-8") as f:
                 json.dump(script, f, ensure_ascii=False, indent=4)
-            print(f"✅ Written script based on story and saved to {save_path}.")
+            _pipeline_print(quiet, f"✅ Written script based on story and saved to {save_path}.")
         return script
 
     async def generate_portraits_for_single_character(
@@ -149,7 +167,7 @@ class Idea2VideoPipeline:
         style: str,
     ):
         character_dir = os.path.join(
-            self.working_dir, "character_portraits", f"{character.idx}_{character.identifier_in_scene}")
+            self.working_dir, "character_portraits", f"{character.idx}_{safe_path_component(character.identifier_in_scene)}")
         os.makedirs(character_dir, exist_ok=True)
 
         front_portrait_path = os.path.join(character_dir, "front.png")
@@ -163,15 +181,28 @@ class Idea2VideoPipeline:
         if os.path.exists(side_portrait_path):
             pass
         else:
-            side_portrait_output = await self.character_portraits_generator.generate_side_portrait(character, front_portrait_path)
-            side_portrait_output.save(side_portrait_path)
+            try:
+                side_portrait_output = await self.character_portraits_generator.generate_side_portrait(character, front_portrait_path)
+                side_portrait_output.save(side_portrait_path)
+            except Exception as e:
+                # gemini-2.5-flash-image intermittently (sometimes beyond
+                # the tenacity retry budget) fails this front->side
+                # re-angling edit with finish_reason=IMAGE_OTHER / empty
+                # content. Fall back to the front portrait rather than
+                # aborting the whole pipeline.
+                print(f"⚠️ Side portrait generation failed for {character.identifier_in_scene} after retries ({e}); reusing front portrait as fallback.")
+                shutil.copy(front_portrait_path, side_portrait_path)
 
         back_portrait_path = os.path.join(character_dir, "back.png")
         if os.path.exists(back_portrait_path):
             pass
         else:
-            back_portrait_output = await self.character_portraits_generator.generate_back_portrait(character, front_portrait_path)
-            back_portrait_output.save(back_portrait_path)
+            try:
+                back_portrait_output = await self.character_portraits_generator.generate_back_portrait(character, front_portrait_path)
+                back_portrait_output.save(back_portrait_path)
+            except Exception as e:
+                print(f"⚠️ Back portrait generation failed for {character.identifier_in_scene} after retries ({e}); reusing front portrait as fallback.")
+                shutil.copy(front_portrait_path, back_portrait_path)
 
         print(
             f"☑️ Completed character portrait generation for {character.identifier_in_scene}.")
@@ -198,11 +229,13 @@ class Idea2VideoPipeline:
         idea: str,
         user_requirement: str,
         style: str,
+        quiet: bool = False,
+        progress: Callable[[str, str, Dict[str, Any] | None], None] | None = None,
     ):
 
-        story = await self.develop_story(idea=idea, user_requirement=user_requirement)
+        story = await self.develop_story(idea=idea, user_requirement=user_requirement, quiet=quiet)
 
-        characters = await self.extract_characters(story=story)
+        characters = await self.extract_characters(story=story, quiet=quiet)
 
         character_portraits_registry = await self.generate_character_portraits(
             characters=characters,
@@ -210,7 +243,7 @@ class Idea2VideoPipeline:
             style=style,
         )
 
-        scene_scripts = await self.write_script_based_on_story(story=story, user_requirement=user_requirement)
+        scene_scripts = await self.write_script_based_on_story(story=story, user_requirement=user_requirement, quiet=quiet)
 
         all_video_paths = []
 
@@ -222,6 +255,7 @@ class Idea2VideoPipeline:
                 image_generator=self.image_generator,
                 video_generator=self.video_generator,
                 working_dir=scene_working_dir,
+                num_image_candidates=self.num_image_candidates,
             )
             final_video_path = await script2video_pipeline(
                 script=scene_script,
@@ -229,17 +263,16 @@ class Idea2VideoPipeline:
                 style=style,
                 characters=characters,
                 character_portraits_registry=character_portraits_registry,
+                quiet=quiet,
+                progress=_scoped_progress(progress, scene_idx=idx),
             )
             all_video_paths.append(final_video_path)
 
         final_video_path = os.path.join(self.working_dir, "final_video.mp4")
         if os.path.exists(final_video_path):
-            print(f"🚀 Skipped concatenating videos, already exists.")
+            _pipeline_print(quiet, f"🚀 Skipped concatenating videos, already exists.")
         else:
-            print(f"🎬 Starting concatenating videos...")
-            video_clips = [VideoFileClip(final_video_path)
-                           for final_video_path in all_video_paths]
-            final_video = concatenate_videoclips(video_clips)
-            final_video.write_videofile(final_video_path)
-            print(f"☑️ Concatenated videos, saved to {final_video_path}.")
+            _pipeline_print(quiet, f"🎬 Starting concatenating videos...")
+            concatenate_video_files(all_video_paths, final_video_path)
+            _pipeline_print(quiet, f"☑️ Concatenated videos, saved to {final_video_path}.")
         return final_video_path

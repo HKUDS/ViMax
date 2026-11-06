@@ -20,12 +20,11 @@ PROVIDER_PRESETS: Dict[str, Dict[str, Any]] = {
     "minimax": {
         "base_url": "https://api.minimax.io/v1",
         "env_key": "MINIMAX_API_KEY",
-        "default_model": "MiniMax-M2.7",
+        "default_model": "MiniMax-M3",
         "models": [
+            "MiniMax-M3",
             "MiniMax-M2.7",
             "MiniMax-M2.7-highspeed",
-            "MiniMax-M2.5",
-            "MiniMax-M2.5-highspeed",
         ],
         "temperature_range": (0.0, 1.0),
     },

@@ -1,0 +1,68 @@
+{
+  "story_overview": "In a modern office, two adult business partners negotiate a vendor deal: they start with differing terms, work through a product demo and budget tradeoffs, and culminate in a signed agreement and handshake.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide establishing image of a modern, tidy office conference room in daylight. A rectangular light-oak table sits center with two gray upholstered chairs facing each other. On the left sits Character A: a 32-year-old woman, tall and athletic build, medium-brown skin, neat black hair in a low bun, wearing a teal blazer over a white button-up shirt, charcoal slacks, and black loafers; thin silver rectangular eyeglasses. On the right sits Character B: a 38-year-old man, shorter and stockier build, light skin, neatly trimmed dark beard, short dark hair, wearing a navy suit, light-blue button-up shirt (no tie), and brown leather shoes. Between them: a closed silver laptop, a notepad with a pen, and a small cup of pens. Background: glass wall with subtle frosting, a potted plant in the corner, and a whiteboard with simple, non-branded charts. Mood: professional, calm.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. Over 6 seconds, both partners lean slightly forward toward the table; Character A slides the notepad to the center with an open palm, and Character B nods while placing his hands neatly on the table edge, signaling the start of negotiation. Soft daylight remains steady, no camera movement."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Over-the-shoulder close shot from behind Character B’s right shoulder, focusing on Character A across the table. Character A’s teal blazer and silver rectangular eyeglasses are crisp; her expression is attentive and composed. The notepad is in front of her, pen aligned parallel to the table edge. Character B’s navy suit shoulder is blurred in the foreground. Background shows the frosted glass wall and a corner of the whiteboard.",
+          "video_prompt": "Over-the-shoulder medium close-up, 50mm lens. Over 5–7 seconds, Character A speaks with measured hand gestures: she taps the notepad once, then points gently toward the closed laptop, suggesting a structured proposal. Character B’s shoulder remains still in foreground; shallow depth of field keeps attention on Character A."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Reverse over-the-shoulder shot from behind Character A’s left shoulder, focusing on Character B. Character B’s neatly trimmed dark beard and navy suit are clear; he looks thoughtful. Character A’s teal blazer shoulder is blurred foreground. The closed laptop sits between them, slightly nearer to Character B. The potted plant is visible behind Character B.",
+          "video_prompt": "Over-the-shoulder medium close-up, 50mm lens. Over 6 seconds, Character B responds: he raises one hand with fingers together to indicate a counterpoint, then gently slides the laptop a few inches toward the center without opening it, signaling a request to review details. His expression remains professional and calm."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Top-down overhead shot of the tabletop. Two sets of hands are visible: Character A’s hands (no rings, neatly manicured) on the left, Character B’s hands on the right. The silver laptop is now centered; the notepad lies slightly left; a printed one-page term sheet (generic, no logos) lies slightly right. Lighting is even daylight, emphasizing clean textures of paper and wood grain.",
+          "video_prompt": "Overhead static shot, 35mm equivalent. Over 5–8 seconds, Character A pulls the term sheet toward the center, aligning it square with the table edge, while Character B places a finger near a specific line item. They both pause with hands hovering briefly, creating a clear moment of focus on a sticking point."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Side two-shot at table height, medium framing. Character A (teal blazer, white shirt, silver rectangular glasses, hair in low bun) is on the left, Character B (navy suit, light-blue shirt, dark beard) on the right. The laptop is now open and angled slightly toward both. On the screen: a generic bar chart and timeline (no brands). The whiteboard behind them shows simple bullet points and arrows. Mood shifts to more analytical but still friendly.",
+          "video_prompt": "Eye-level medium two-shot, 35mm lens. Over 6–7 seconds, Character B rotates the open laptop slightly toward Character A, and Character A leans in to examine the chart; she nods once, then points to the timeline on-screen with an open hand (not touching the screen), indicating a compromise path."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Low-angle close-up of the table edge and hands, looking slightly upward so both torsos are partially visible. Character A’s teal blazer sleeve and Character B’s navy suit sleeve frame the term sheet. A simple calculator (generic) is placed near Character B; the notepad is near Character A. Their hands hover above the paper as if about to mark changes.",
+          "video_prompt": "Low-angle close-up, 60mm lens. Over 5–8 seconds, Character A writes a brief note on the notepad, then slides the notepad toward Character B. Character B glances down, then taps the calculator once and nods, signaling agreement on revised numbers. Camera remains fixed; the action is hands-driven."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Over-the-shoulder shot from behind Character B, aimed at Character A as she presents a final point. Character A’s face is sharp; her silver rectangular glasses catch soft window light. Character B’s navy suit shoulder is in foreground blur. The term sheet is now neatly centered, and a pen lies directly above it.",
+          "video_prompt": "Over-the-shoulder medium close-up, 50mm lens. Over 6 seconds, Character A calmly summarizes: she places her palm flat beside the term sheet (non-threatening, reassuring), then slides the pen toward Character B, inviting signature. Character B’s shoulder shifts slightly, indicating he’s leaning in."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Tight close-up on Character B’s hands signing the generic term sheet on the table; the pen is in his right hand. Character A’s teal blazer sleeve is visible at frame left, her hands folded politely. The paper texture and ink line are crisp; no personal data or logos are visible.",
+          "video_prompt": "Macro close-up, 85mm lens. Over 5–7 seconds, Character B signs in one smooth motion, then sets the pen down parallel to the paper edge. Character A’s folded hands relax slightly, and she gives a small approving nod just out of focus, emphasizing the climax: the deal is sealed."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Medium two-shot standing beside the conference table. Character A (tall, teal blazer, white shirt, charcoal slacks, black loafers, silver rectangular glasses, hair in low bun) stands on the left; Character B (shorter, stockier, navy suit, light-blue shirt, brown shoes, neatly trimmed dark beard) stands on the right. The signed term sheet lies on the table between them; the open laptop is off to the side. Daylight glows through the glass wall; the office looks orderly and warm.",
+          "video_prompt": "Eye-level medium two-shot, 35mm lens. Over 6 seconds, they complete a professional handshake once (single shake), release, and share a brief satisfied smile. Character A gathers the term sheet into a folder while Character B closes the laptop, concluding the negotiation with a clear, friendly resolution."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "business_partners_office_negotiation",
+    "theme_description": "Two business partners negotiating a deal in an office",
+    "consistency_type": "Type C",
+    "requested_scenes": 2,
+    "requested_shots": 9
+  }
+}

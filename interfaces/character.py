@@ -24,7 +24,8 @@ class CharacterInScene(BaseModel):
             "Bob the Builder is a middle-aged man with a sturdy build.",
         ]
     )
-    dynamic_features: str = Field(
+    dynamic_features: Optional[str] = Field(
+        default=None,
         description="The dynamic features of the character in this specific scene, such as clothing and accessories that may change from scene to scene. If not mentioned, this field can be left empty. If the character is not visible, this field should be None.",
         examples=[
             "Wearing a red scarf and a black leather jacket",

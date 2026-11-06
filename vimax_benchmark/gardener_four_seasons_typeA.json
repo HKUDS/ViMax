@@ -1,0 +1,88 @@
+{
+  "story_overview": "An adult gardener tends the same community plot through spring, summer, autumn, and winter, adapting to changing weather and light until a final winter reveal shows the garden’s year-long effort preserved and ready for the next cycle.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Spring morning in a community garden plot. Center frame: a 32-year-old gardener named Rowan, adult, medium height and build, warm brown skin, short curly black hair, neat trimmed beard, small crescent-shaped scar on the left eyebrow. He wears the same consistent outfit: forest-green canvas jacket with brass buttons, beige work pants, brown leather work boots, and tan gardening gloves; a small wooden-handled trowel is tucked into his right jacket pocket. He kneels beside a raised bed of dark, freshly turned soil with tiny green sprouts. Soft golden sunrise light, dewy leaves, pastel sky, shallow depth of field with a blurred fence and budding trees behind him.",
+          "video_prompt": "Eye-level medium shot with a 50mm lens. Rowan gently presses soil around a sprout with gloved fingers, then looks up and smiles slightly at the bed. A light breeze stirs his jacket hem and nearby seedlings; the camera makes a slow, subtle push-in to emphasize his focused expression and the scar on his left eyebrow. Warm spring birdsong mood, soft sunlight glinting on dew."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Bright spring midday on a different location: a tidy greenhouse interior with translucent panels and condensation beads. Rowan (same exact face, scar, hair, beard, and same outfit) stands near a potting bench crowded with seed trays and labeled sticks. Overhead diffused light creates soft shadows; a coil of hose hangs on the wall; a metal watering can sits on the bench. The environment is distinctly indoors, humid, and reflective.",
+          "video_prompt": "High angle wide shot with a 24mm lens. Rowan slides a seed tray forward, sprinkles soil from a scoop, and lightly mist-sprays the tray. The camera tilts down and pans slightly to follow his hands as droplets sparkle in the diffused greenhouse light. Condensation subtly streaks on the panels; the watering can remains stationary as a visual anchor."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Spring rainy late afternoon in an open field allotment far from the greenhouse. Heavy clouds, wet earth, and a shallow puddle reflecting gray sky. Rowan (same identity and same outfit) stands under a large, plain umbrella held in his left hand; his right hand steadies a wooden stake next to young plants. Raindrops streak diagonally; cool bluish light; distant hills blurred by mist.",
+          "video_prompt": "Low angle medium-wide shot with a 35mm lens. Rowan pushes the stake into the mud, then ties a soft garden twine around the plant support. The umbrella trembles slightly under rain; water drips from its edge. The camera holds steady while rain motion and Rowan’s careful tying provide action; subtle rack focus from his gloved hands to his face, keeping the eyebrow scar visible."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Spring golden hour at a riverside footbridge near the garden, dramatically different setting. Rowan (same exact outfit and features) leans on the bridge railing, holding a small paper packet of seeds in both gloved hands. The river below reflects orange sunlight; willow branches sway; cyclists pass in the distant background as silhouettes. Warm, cinematic backlight outlines his jacket.",
+          "video_prompt": "Over-the-shoulder medium shot with a 70mm lens. From behind Rowan’s right shoulder, he opens the seed packet and checks the label, then pockets it. The camera slowly tracks left along the railing, keeping Rowan framed against the glowing river. Background silhouettes drift past; lens flare blooms briefly as he turns his head, revealing the consistent scar and beard in profile."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Summer noon in a sun-baked rooftop garden. Heat shimmer above gravel, bright harsh sunlight, strong shadows. Rowan (same identity and same outfit) stands beside large planters overflowing with leafy greens and small tomatoes. A city skyline rises behind him; a white reflective wall bounces light. He holds a watering wand connected to a hose, poised over a planter.",
+          "video_prompt": "Eye-level wide shot with a 28mm lens. Rowan turns the watering wand on; a fan of water arcs into the planter, droplets sparkling in the harsh sun. He steps sideways along the planters, watering in a steady rhythm. The camera makes a slow lateral dolly to match his movement; heat shimmer dances in the background while the skyline stays sharp."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Summer late afternoon in a shaded orchard path, entirely different from the rooftop. Dappled sunlight filters through thick leaves. Rowan (same exact features and outfit) crouches near a low branch, examining a leaf with small holes. A wooden basket sits on the ground beside him. The mood is calm but concerned; soft green light wraps around him.",
+          "video_prompt": "Close-up with an 85mm lens at eye level. The camera starts tight on Rowan’s gloved hands holding the leaf, then racks focus to his face as he narrows his eyes thoughtfully. He gently turns the leaf, then nods and places it back. The camera remains steady; dappled light shifts across his jacket and the eyebrow scar as leaves sway overhead."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Summer night at an outdoor community garden worktable under string lights. The setting is different again: dark sky, warm bulbs, moths fluttering. Rowan (same identity and same outfit) sits on a wooden bench, leaning over a notebook with simple garden sketches and dates. A thermos and a few seed packets lie nearby. Warm, cozy lighting with deep shadows.",
+          "video_prompt": "Top-down overhead shot with a 35mm lens. Rowan writes a short note, taps the page with his pen, and flips to a new page with a chart. The camera slowly rotates a few degrees clockwise for visual energy while staying overhead. String lights flicker subtly; moths drift through the frame edges; his tan gloves and green jacket remain consistent and clearly visible."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Autumn early morning in a foggy pumpkin patch, dramatically different from the summer night table. Pale fog, orange pumpkins scattered, wet grass. Rowan (same exact face, scar, beard, hair, and same outfit) stands with a small hand pruner in his right glove, inspecting a vine. Cool, muted light; breath faintly visible in the chill.",
+          "video_prompt": "Medium shot at eye level with a 50mm lens. Rowan trims a dried vine carefully with the pruner, then gently lifts a pumpkin to check its stem. The camera performs a slow push-in through the fog, increasing intimacy. Fog curls around his boots; a soft exhale briefly clouds near his face, emphasizing the seasonal shift."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Autumn midday at a bustling farmer’s market, a new environment. Colorful stalls and crates of produce, people in modest clothing moving in the background. Rowan (same identity and same outfit) stands at a stall with apples and jars, holding a reusable cloth bag. Neutral daylight with crisp contrast; banners flutter overhead.",
+          "video_prompt": "Handheld-style medium-wide shot with a 35mm lens at eye level. Rowan selects a few apples and places them into the cloth bag, then exchanges a friendly nod with an unseen vendor. The camera makes slight natural sway, then reframes to keep Rowan centered as a crowd passes behind him. Fabric textures—canvas jacket, cloth bag—remain detailed and consistent."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Late autumn sunset on a windswept hillside garden plot. Tall dry grasses, copper sky, leaves spinning in gusts. Rowan (same exact features and same outfit) struggles to hold a lightweight row cover (white fabric) over a raised bed frame. The mood is tense but hopeful; dramatic side light outlines him.",
+          "video_prompt": "Low angle wide shot with a 24mm lens. A gust catches the row cover; Rowan steps forward, grips the fabric with both gloved hands, and pulls it down to align it over the frame. The camera tracks a half-step forward as he anchors one corner, emphasizing effort without violence. Leaves whip past the lens; sunset light flares along the jacket’s brass buttons."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Winter twilight during first snowfall in a lantern-lit courtyard garden, new setting. Snowflakes drift down; stone paths and bare trellises. Rowan (same identity and same outfit) kneels beside a low bed, placing a thick layer of straw mulch around dormant plants. A metal lantern on the ground casts warm light on his gloves and face; cool blue ambient light surrounds.",
+          "video_prompt": "Knee-level close shot with a 50mm lens, slightly low angle. Rowan spreads straw mulch in a careful ring, pats it down, then pauses to brush snow off the bed’s edge. The camera slowly pans from the lantern to his face, catching the consistent eyebrow scar and calm determination. Snow accumulates lightly on his shoulders and jacket sleeves."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Winter dawn after snowfall at the original community garden plot, now quiet and white. Raised beds are neatly covered; a small handmade sign reads “Spring Starts Here.” Rowan (same exact face, scar, beard, hair, and same outfit) stands centered, holding a simple wooden crate with neatly folded garden cloths and a sealed jar labeled “Saved Seeds.” Pale pink sunrise reflects on snow; crisp, serene atmosphere.",
+          "video_prompt": "Wide establishing shot with a 35mm lens at eye level. Rowan walks a few steps forward in the snow, sets the crate gently on the edge of a raised bed, and straightens the sign so it faces the camera. The camera remains steady, then performs a slow, subtle zoom-in as he looks across the beds with a quiet satisfied expression—climax of preparedness and continuity. Snow sparkles in the sunrise; the scene ends on the garden sign and Rowan’s steady presence."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "gardener_four_seasons",
+    "theme_description": "A gardener working through the four seasons",
+    "consistency_type": "Type A",
+    "requested_scenes": 3,
+    "requested_shots": 12
+  }
+}

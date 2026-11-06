@@ -29,4 +29,7 @@ video_generator:
   max_requests_per_day: 10
 
 
+image_selection:
+  num_candidates: 2  # 1 disables VLM selection; the chat model must support vision.
+
 working_dir: .working_dir/idea2video

@@ -1,9 +1,10 @@
 # https://yunwu.apifox.cn/api-347960869
 
+import asyncio
 import logging
 import aiohttp
 from typing import List, Optional
-from tenacity import retry, stop_after_attempt
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 from utils.retry import after_func
 from utils.image import image_path_to_b64
 from interfaces.image_output import ImageOutput
@@ -27,7 +28,13 @@ class ImageGeneratorDoubaoSeedreamYunwuAPI:
         self.model = model
 
 
-    @retry(stop=stop_after_attempt(3), after=after_func)
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, max=30),
+        retry=retry_if_exception_type((aiohttp.ClientError, asyncio.TimeoutError)),
+        reraise=True,
+        after=after_func,
+    )
     async def generate_single_image(
         self,
         prompt: str,
@@ -75,6 +82,11 @@ class ImageGeneratorDoubaoSeedreamYunwuAPI:
         except Exception as e:
             logging.error(f"Error occurred while generating image: {e}")
             raise e
+        async with aiohttp.ClientSession() as session:
+            async with session.post(self.base_url, json=payload, headers=headers) as response:
+                response_json = await response.json()
+                if response.status >= 400:
+                    raise RuntimeError(f"Image generation failed with HTTP {response.status}: {response_json}")
 
         # OpenAI-compatible endpoints return either a URL or inline b64_json
         # (gpt-image-* always returns b64_json).

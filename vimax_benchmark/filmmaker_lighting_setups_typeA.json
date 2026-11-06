@@ -1,0 +1,88 @@
+{
+  "story_overview": "A meticulous adult filmmaker runs a lighting stress-test for a single short scene, moving through dramatically different locations and lighting sources to prove that consistent subject identity can hold up across natural and artificial setups, culminating in a controlled mixed-light final take.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "A 32-year-old filmmaker (adult), medium height with warm brown skin, short curly black hair, a neat goatee, and a small crescent-shaped scar on the left eyebrow. He wears the same outfit for the entire story: a charcoal-gray chore jacket over a light beige button-up shirt, dark indigo jeans, and matte black lace-up boots; a black canvas camera strap crosses his chest. He stands in a bright, sunlit meadow at golden hour, tall grasses glowing amber, distant tree line softly blurred. He holds a compact mirrorless camera in both hands and a small notepad clipped to a board. The composition is a wide establishing frame with the filmmaker centered, sun low behind him creating a rim light and long shadows.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. He walks three steps forward through the grasses, raises the camera to eye level, and pans slightly to test exposure; the wind moves the grass and his jacket hem. Lens catches mild sun flare as he tilts the camera toward the backlight, then he checks the notepad with a focused, calm expression."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "The same 32-year-old filmmaker in the exact same outfit and features stands on a rugged coastal cliff under harsh midday sun. The ocean below is deep blue with whitecaps; jagged rocks frame the foreground. He squints slightly from the brightness, holding the camera with a rectangular white bounce card clipped to his left forearm. Hard shadows fall under his brow and chin; the sky is clear and bright.",
+          "video_prompt": "Low angle medium shot, 35mm lens. He angles the bounce card to fill his face, then rotates his torso toward the sun to compare contrast; he taps the camera controls with his thumb. The camera (viewer) holds steady while he steps closer to the cliff edge, then stops safely, nodding as he observes the shadow change."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "The same filmmaker, unchanged outfit and identity, stands in a misty evergreen forest at dawn. Cool blue-gray fog hangs between tall trunks; the ground is damp with moss and pine needles. Soft, diffuse light filters through branches. He has a small LED pocket light in his right hand (switched off), camera in his left, and a compact reflector folded at his side. The frame is a quiet medium-wide with vertical tree lines creating depth.",
+          "video_prompt": "Shoulder-height medium-wide shot, 28mm lens. He walks slowly between two trunks, stops, and turns his head to judge the ambient softness; he switches the pocket LED on briefly toward his face, then off, comparing. The camera subtly dollies right to reveal parallax in the trees as fog drifts gently."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "The same filmmaker, unchanged, inside a dim industrial underpass at night. Concrete pillars recede into the background; a single sodium-vapor streetlight casts a warm orange pool of light, while distant cool bluish spill from a nearby sign adds contrast. He stands half in shadow, half in the orange light, holding his camera and a small handheld light meter. The composition is a moody medium shot with strong chiaroscuro.",
+          "video_prompt": "Eye-level medium shot, 50mm lens. He raises the light meter into the orange beam, then steps forward so his face crosses from shadow into warm light; he watches the meter reading and adjusts the camera dial. The camera makes a gentle push-in, emphasizing the warm/cool color split across his jacket and cheek."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "The same filmmaker, unchanged outfit and facial details, sits on a wooden park bench beneath a canopy of leaves with dappled sunlight flickering across him. Bright green highlights and moving shadow patches pattern his jacket and face. A compact collapsible diffuser is propped beside him; his camera rests in his lap. The shot is a side-profile medium frame with background bokeh of sunlit leaves.",
+          "video_prompt": "Side-on medium shot, 85mm lens. He lifts the diffuser overhead with one hand, reducing contrast on his face; the dappled shadows soften. He glances down to review the camera screen, then lowers the diffuser to compare, his expression analytical. The camera remains locked, letting the leaf shadows animate the scene."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "The same filmmaker, unchanged, in a rainy city street at night under vivid neon signage. Wet pavement reflects magenta and cyan; raindrops bead on his charcoal jacket. He stands beneath an awning, holding the camera close to his chest and a small translucent umbrella tucked under his arm. The frame is a tight medium close-up with neon bokeh behind him and specular highlights on water droplets.",
+          "video_prompt": "Eye-level medium close-up, 70mm lens. He leans slightly forward, tilts his face into the neon glow to see color casts, and wipes a raindrop from the camera body with his sleeve. The camera performs a slow left-to-right slide, changing how magenta and cyan wrap across his cheekbones and scar."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "The same filmmaker, unchanged, in a bright white cyc studio with controlled artificial lighting. Two softboxes on stands are visible at the edges, and a black flag on a C-stand cuts spill. The environment is clean and minimal; the floor is seamless white. He stands centered, holding his camera; a clapperboard rests on a stool nearby. Lighting is neutral, soft, and even.",
+          "video_prompt": "Front-facing medium shot, 35mm lens. He reaches to the left softbox and rotates it inward, then steps back to center to observe; his face transitions from flat to slightly more modeled. The camera gently tilts down and up (micro tilt) as he checks the histogram on the camera screen, then looks up with a satisfied nod."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "The same filmmaker, unchanged outfit and identity, in a cozy home workshop lit by a warm table lamp and a cool computer monitor. Wooden shelves with tools and fabric rolls line the background; a small practical lamp with a linen shade glows amber on a desk. He stands at the desk, placing a small LED panel next to the lamp. The frame is an over-the-shoulder view showing his hands, the LED panel, and the camera on the desk.",
+          "video_prompt": "Over-the-shoulder medium shot, 40mm lens. He powers on the LED panel and adjusts brightness; the mixed lighting shifts on his hands and jacket sleeve. He slides a sheet of diffusion in front of the LED, then points the camera at a small color chart on the desk, making tiny exposure tweaks. The camera holds steady while the color temperature interplay becomes more apparent."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "The same filmmaker, unchanged, on a snow-covered hillside at late afternoon with bright sun reflecting off snow, creating strong bounce and high contrast. Evergreen trees dot the slope; the sky is crisp and pale. He wears the same outfit (no added clothing layers), standing firmly on packed snow, holding the camera and a gray card. The frame is a wide shot with intense highlights and sparkling snow texture.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. He holds the gray card up to the camera, then lowers it and turns slightly as the sun glints; he shields his eyes briefly with his hand and adjusts exposure compensation. The camera makes a slow push-in while the glittering snow bounce brightens the underside of his jaw and jacket collar."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "The same filmmaker, unchanged, inside a greenhouse at midday where sunbeams streak through glass panes, creating striped highlights across rows of plants. Humid air produces soft haze; water droplets cling to leaves. He stands in a narrow aisle between plant benches, camera held at chest height, a small battery lantern placed on the floor behind a pot to create an artificial fill. The composition is a dramatic medium-wide with leading lines of the benches.",
+          "video_prompt": "Low angle medium-wide shot, 28mm lens. He kneels carefully, repositions the lantern behind a leaf cluster to test motivated fill, then stands back up and frames a shot down the aisle. The camera tracks backward slightly as he steps forward, showing shifting sun stripes across his face and the persistent scar detail."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "The same filmmaker, unchanged, in a dark theater stage environment with a single bright spotlight from above and faint haze in the air. Black curtains and rigging are visible; a tripod stands to one side. He stands in the spotlight circle, his face and jacket sharply lit while the background falls into deep shadow. The frame is a centered medium shot with strong top light emphasizing facial structure and casting a shadow under his brow and nose.",
+          "video_prompt": "High angle medium shot, 50mm lens. He steps half a pace forward within the spotlight, then raises a small white card under his chin to reduce harsh shadows; the contrast softens. He looks into the lens, then to the side toward an unseen lighting control, and gives a small confirming nod. The camera slowly arcs a few degrees, keeping him centered while the spotlight edge remains crisp."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "The same filmmaker, unchanged outfit and identity, back in the white cyc studio but now arranged for a final mixed-light test: one softbox with a warm gel on camera-left, one cool LED panel on camera-right, and a practical lamp in the background for depth. A simple backdrop table holds a color chart and a small neutral prop (a matte ceramic mug). He stands at center holding a clapperboard in his left hand and the camera in his right, ready to roll. Lighting creates a deliberate warm-cool split on his face while keeping modest, clean visuals.",
+          "video_prompt": "Eye-level medium close-up, 55mm lens. He snaps the clapperboard once, sets it on the table, then lifts the camera to eye level and holds steady for a final exposure check. He makes one precise dial adjustment, breathes out, and gives a subtle satisfied smile as the warm and cool lights balance across his features. The camera performs a short, smooth push-in to end on his focused eyes and consistent scar detail."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "filmmaker_lighting_setups",
+    "theme_description": "A filmmaker testing different natural and artificial lighting setups",
+    "consistency_type": "Type A",
+    "requested_scenes": 3,
+    "requested_shots": 12
+  }
+}

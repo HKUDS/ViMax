@@ -1,0 +1,73 @@
+{
+  "story_overview": "Inside an antique bookshop, two adult staff members investigate a subtle mystery: a rare ledger appears to be missing. Their careful search through the shop’s fixed interior reveals a hidden compartment behind a rolling ladder, culminating in the discovery of the ledger and a clue that explains the misplacement without any wrongdoing.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "A richly detailed antique bookshop interior, fixed layout: a long mahogany checkout counter on the right foreground with a brass desk lamp and receipt book; a narrow central aisle of creaking wooden floorboards leading to the back wall; towering floor-to-ceiling bookshelves on both left and right; a rolling wooden ladder on a brass rail attached to the left bookshelf; a round reading table with two high-back chairs mid-left; a carved wooden pillar near center-left; a stained-glass transom window above the back doorway; a small globe on a side cabinet near the back-right. Warm amber light from hanging pendant lamps and dust motes in the air. Two adults: Bookshop owner (woman, 42, medium height, brown skin, hair in a neat bun, wearing a forest-green cardigan over a cream blouse and dark slacks) stands behind the counter, looking concerned at an open inventory ledger; assistant (man, 35, tall, light skin, short dark hair, wearing a navy sweater over a collared shirt and khaki trousers) stands in the central aisle holding a modest flashlight pointed down at the floorboards.",
+          "video_prompt": "Eye-level wide shot from near the front door, 24mm lens, static camera. The owner taps a page in the open ledger and gestures toward the back shelves; the assistant nods and takes two careful steps down the aisle, sweeping the flashlight beam low across the floorboards while dust floats in the warm light. No changes to the room layout; all furniture and architecture remain fixed."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Same fixed bookshop geometry and placement. Closer view on the right side: the mahogany counter dominates foreground right; brass desk lamp casts a warm pool of light; the owner’s hands hover over a handwritten inventory page with an empty line highlighted by a small paper marker. Behind her, shelves remain aligned; the central aisle and pillar are visible in the midground.",
+          "video_prompt": "Eye-level medium close-up, 50mm lens, slight handheld steadiness. The owner slides the paper marker to the missing entry, then closes the ledger gently and points toward the left bookshelf and ladder, indicating where the rare book should be. Light flickers subtly from the lamp; background remains structurally identical."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Same bookshop layout. View angled toward the left bookshelf: the rolling ladder on its brass rail is mid-left; the carved pillar is center-left foreground, partially blocking the aisle. The assistant is mid-aisle, now closer to the ladder, his flashlight angled upward toward book spines. The reading table and chairs sit to the left, unchanged.",
+          "video_prompt": "Low angle wide shot, 28mm lens, slow lateral pan left-to-right. The assistant walks behind the carved pillar (briefly occluded), emerging on the other side to reach for the ladder rung. He raises the flashlight to scan titles; the ladder and shelves do not warp or shift."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Same fixed interior. Tight view on the ladder and left shelves: the assistant’s hands grip the ladder’s side rails; brass rail hardware is visible along the top. Rows of aged leather-bound books line the shelves; tiny title labels and worn gilding are visible. The central aisle remains in the background with the back doorway and stained-glass transom.",
+          "video_prompt": "Eye-level medium shot, 35mm lens, static camera. The assistant rolls the ladder smoothly along the brass rail from left to right by pushing with his hands; the wheels track along the floor with a soft creak. He pauses, leans in to examine a gap in the shelf, and adjusts one book. The room’s geometry remains perfectly consistent."
+        },
+        {
+          "shot_id": 5,
+          "first_frame": "Same bookshop layout. The owner is now out from behind the counter, standing near the reading table mid-left; the assistant is at the left shelves. A small step stool sits near the table (unchanged position relative to table). The owner holds a folded note card and a pencil. Warm pendant light pools on the table surface, showing a few stacked books and a magnifying glass.",
+          "video_prompt": "Eye-level two-shot, 40mm lens, slow push-in. The owner walks from the reading table toward the central aisle, stopping beside the assistant; she unfolds the note card and points to a penciled shelf code while the assistant listens and nods. Their movement respects depth: they pass in front of the reading table and remain clearly separated from the fixed shelves and pillar."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 6,
+          "first_frame": "Same fixed interior. View toward the back of the shop: the back doorway sits under the stained-glass transom; to the back-right is a small side cabinet with a globe on top; the central aisle leads straight to it. The assistant kneels near the baseboard along the back-right shelves, flashlight beam grazing the lower shelf edge. The owner stands a few steps behind him in the aisle, holding the note card.",
+          "video_prompt": "High angle wide shot, 24mm lens, static camera from near the ceiling corner. The assistant scoots forward on his knees and peers under the lowest shelf, moving the flashlight beam along the baseboard; the owner leans slightly to see, then steps closer. The cabinet, globe, doorway, and shelves remain locked in place."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Same fixed layout. Close on the back-right side cabinet and adjacent shelf: the globe sits on the cabinet top; a small framed shop sign rests beside it. The assistant’s hand reaches behind the globe toward a subtle seam in the cabinet’s side panel. The owner’s torso is partially visible in the background, out of focus, standing in the aisle.",
+          "video_prompt": "Eye-level close-up, 85mm lens, shallow depth of field. The assistant carefully rotates the globe a few degrees, revealing a hidden latch; he presses it, and a narrow cabinet side panel pops open slightly. The motion is gentle and non-violent; the cabinet’s structure remains stable and consistent."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Same fixed interior. Medium view with strong depth: the assistant crouches at the open cabinet compartment back-right; the owner kneels beside him, both facing the compartment. Inside, a leather-bound ledger with a faded spine label is visible. The central aisle extends forward; the carved pillar and reading table remain in their exact positions in the midground-left.",
+          "video_prompt": "Eye-level medium shot, 35mm lens, slow tilt down to the compartment. The assistant reaches in and slides the leather-bound ledger out with both hands, then places it carefully on the cabinet top. The owner steadies the compartment door with one hand. Their bodies partially occlude the cabinet and shelf edges, emphasizing solidity; background stays unchanged."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Same fixed layout. Over-the-shoulder angle from behind the owner: her shoulder and green cardigan frame the left foreground; the ledger lies open on the cabinet top beside the globe. The assistant, facing the pages, points to a handwritten entry. Warm light catches the paper texture and ink. The back doorway and stained glass are still visible above.",
+          "video_prompt": "Over-the-shoulder medium shot, 50mm lens, subtle handheld micro-movement. The assistant turns one page slowly, then taps a margin note that matches the shelf code on the owner’s card; the owner nods and relaxes her posture. The page-turn is the main motion; the cabinet, globe, and doorway remain fixed."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Same fixed interior, wider composition re-establishing the whole shop: counter right foreground with brass lamp; central aisle; left ladder; reading table; carved pillar; back doorway and stained glass; cabinet and globe back-right. The owner stands behind the counter again, placing the recovered ledger into a protective cloth wrap. The assistant stands in the aisle holding the note card, now smiling with relief. Lighting remains warm and calm, dust motes drifting.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, slow dolly backward toward the front door for a gentle concluding reveal. The owner ties the cloth wrap neatly and sets the ledger in a labeled drawer behind the counter; the assistant walks a few steps toward the counter and pins the note card onto a small corkboard beside the lamp. They exchange a satisfied nod, resolving the mystery. The room’s 3D structure and all furniture placements remain perfectly consistent to the end."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "investigation_antique_bookshop",
+    "theme_description": "A mysterious investigation in an antique bookshop",
+    "consistency_type": "Type B",
+    "requested_scenes": 2,
+    "requested_shots": 10
+  }
+}

@@ -2,12 +2,13 @@ import logging
 import requests
 import base64
 import mimetypes
-from tenacity import retry
 from io import BytesIO
 import cv2
 
+from utils.retry import download_retry
 
-@retry
+
+@download_retry
 def download_image(url, save_path):
     try:
         # Providers may inline the result as a data URL instead of hosting it.
@@ -20,7 +21,7 @@ def download_image(url, save_path):
 
         logging.info(f"Downloading image from {url} to {save_path}")
 
-        response = requests.get(url, stream=True)
+        response = requests.get(url, stream=True, timeout=(10, 300))
         response.raise_for_status() # Check for HTTP errors
 
         with open(save_path, 'wb') as file:

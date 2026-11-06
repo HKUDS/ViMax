@@ -5,8 +5,10 @@ from PIL import Image
 from typing import List, Optional
 from google import genai
 from google.genai import types
-from tenacity import retry, stop_after_attempt
+from tenacity import retry, stop_after_attempt, wait_exponential
 from interfaces.image_output import ImageOutput
+from tools.image_orientation import ensure_not_portrait, landscape_guard_requested
+from tools.image_response import image_from_response_part
 from utils.retry import after_func
 
 
@@ -15,18 +17,19 @@ class ImageGeneratorNanobananaYunwuAPI:
         self,
         api_key: str,
         model: str = "gemini-2.5-flash-image-preview",
+        base_url: str = "https://yunwu.ai",
     ):
         self.client = genai.Client(
             api_key=api_key,
             http_options=types.HttpOptions(
-                base_url="https://yunwu.ai",
+                base_url=base_url.rstrip("/"),
                 api_version="v1beta",
             ),
         )
         self.model = model
 
 
-    @retry(stop=stop_after_attempt(3), after=after_func)
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=1, max=10), after=after_func, reraise=True)
     async def generate_single_image(
         self,
         prompt: str,
@@ -46,7 +49,7 @@ class ImageGeneratorNanobananaYunwuAPI:
             model=self.model,
             contents=reference_images + [prompt],
             config=types.GenerateContentConfig(
-                response_modalities=["IMAGE"],
+                response_modalities=["TEXT", "IMAGE"],
                 image_config=types.ImageConfig(
                     aspect_ratio=aspect_ratio,
                 ),
@@ -59,11 +62,18 @@ class ImageGeneratorNanobananaYunwuAPI:
             if part.text is not None:
                 text += part.text
             elif part.inline_data is not None:
-                image = part.as_image()
+                image = image_from_response_part(part)
 
         if image is None:
             logging.error(f"No image generated. The response text is: {text}")
             raise ValueError(f"Error occurred while generating image.")
 
-        return ImageOutput(fmt="pil", ext="png", data=image)
+        if landscape_guard_requested(
+            size=kwargs.get("size"),
+            aspect_ratio=aspect_ratio,
+            enforce_landscape=kwargs.get("enforce_landscape", True),
+            allow_portrait=kwargs.get("allow_portrait", False),
+        ):
+            ensure_not_portrait(image)
 
+        return ImageOutput(fmt="pil", ext="png", data=image)

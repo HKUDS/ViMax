@@ -1,0 +1,88 @@
+{
+  "story_overview": "A single dedicated adult painter pushes through increasingly extreme weather—scorching desert heat, a violent coastal storm, and a whiteout blizzard—to complete one resilient landscape painting, culminating in a final, hard-won finishing stroke.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Bright midday desert plain under a blazing sun. In the center foreground stands the same adult artist: a 32-year-old woman with warm brown skin, dark curly hair in a low bun, a small crescent-shaped scar on her left eyebrow, and rectangular black eyeglasses. She wears a sage-green canvas field jacket (buttoned), a cream crew-neck T-shirt, dark indigo straight-leg jeans, tan lace-up work boots, and a muted red scarf wrapped once around her neck; no skin-revealing clothing. She holds a wooden palette in her left hand and a medium flat brush in her right, facing a sturdy tripod easel with a stretched canvas. The canvas shows the first faint underpainting lines of a wide horizon. Heat haze ripples above cracked earth; distant mesas blur in shimmering air. Hard shadows, high contrast, dust texture on her boots and jacket hem.",
+          "video_prompt": "Eye-level medium-wide shot with a 35mm lens from slightly left of the easel. The artist squints behind her glasses and begins laying confident underpainting strokes while a hot gust lifts fine sand past her legs. The scarf flutters subtly; she steadies the easel with her hip without changing her outfit or identity. The camera makes a slow 10% push-in as heat shimmer warps the distant mesas, emphasizing the harsh sunlight and gritty textures."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Low angle close-up near the easel’s lower clamps, looking upward. The same artist’s tan work boots are planted on cracked desert ground; a corner of her sage-green jacket and dark jeans frames the left edge. The wooden easel legs dig into sand; a small metal cup of water and a cloth rag sit on a flat stone. The sun is a bright white disc overhead; harsh glare reflects off the metal cup. Fine grains of sand collect around the easel feet.",
+          "video_prompt": "Low angle close-up with a 50mm lens aimed up from ground level. A stronger gust pushes sand across the frame; the artist’s boot shifts half a step to brace the easel, and her hand (sleeve of the same sage-green jacket visible) tightens a clamp. The metal cup trembles slightly, water rippling but not spilling. The camera remains locked while the environment moves, highlighting stability against the wind."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Over-the-shoulder view from behind the artist’s right shoulder, framing the canvas prominently. The same woman (scar on left eyebrow visible in profile, black rectangular glasses) leans in slightly. Her muted red scarf is tucked neatly; jacket buttoned. The canvas now has a simple block-in: warm ochres and pale blues forming desert sky and mesa shapes. The background is a wide, sun-bleached expanse with mirage-like distortion.",
+          "video_prompt": "Over-the-shoulder medium shot with a 70mm lens, camera positioned just behind her right shoulder. She mixes paint on the wooden palette, then paints a clean horizon line and broad sky gradient. Heat shimmer intensifies and the light flares slightly at the top edge; she pauses to wipe her brow with the back of her jacket sleeve (no exposed skin beyond hands). The camera performs a gentle rightward slide to reveal more of the canvas progress."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Abrupt environmental shift: a windswept rocky coastline at late afternoon under heavy slate clouds. Sea spray hangs in the air. The same artist (32-year-old woman, crescent scar on left eyebrow, black rectangular glasses, dark curly hair in low bun) stands beside her easel on wet rock, wearing the exact same outfit: sage-green field jacket, cream T-shirt, dark indigo jeans, tan work boots, muted red scarf. The canvas is strapped to the easel with visible elastic bands to resist wind. The ocean churns behind her; light is cooler and directional, with wet reflections on rock.",
+          "video_prompt": "Wide shot with a 24mm lens at waist height, camera facing the artist and easel with the stormy ocean behind. A strong coastal gust whips mist across the scene; she leans forward, tightening a strap around the canvas, then resumes painting with quick, controlled strokes. Waves surge and retreat in the background; the camera slowly tilts up from the wet rock to the artist’s focused face, emphasizing the drastic lighting and weather change while her identity and clothing remain unchanged."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Tight portrait close-up of the artist’s face in the coastal storm. Her black rectangular eyeglasses are speckled with sea mist; the small crescent scar on her left eyebrow is clearly visible. Her muted red scarf flutters near her chin; sage-green jacket collar is up but still modest and fully covering. The background is softly blurred gray ocean and cloud. Cool, diffuse lighting; droplets cling to her lenses and hairline.",
+          "video_prompt": "Eye-level close-up with an 85mm lens. She exhales steadily, then uses a clean cloth to wipe mist from her glasses in one deliberate motion and looks back to the canvas with calm determination. Fine spray continues to hit her jacket and scarf. The camera holds steady with minimal breathing, letting the micro-movements and droplets convey intensity."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Top-down angle looking at the palette and hands. The same artist’s hands hold a wooden palette and brush; sleeves of the sage-green jacket are rolled down, buttoned at the wrist. On the palette: thick paint—deep ultramarine, titanium white, warm ochre, and a touch of gray-green. A few drops of seawater bead on the palette surface. The rocky ground below is dark and slick with water.",
+          "video_prompt": "Overhead close-up with a 35mm lens, camera directly above the palette. She mixes ultramarine and white into a stormy sky tone, then taps excess moisture off the brush against the palette edge. A gust sends a few droplets across the paint, slightly thinning a small area; she compensates by adding more pigment. The camera gently rotates a few degrees clockwise to emphasize dynamic weather without losing the constant identity cues (same sleeves, same hands, same tools)."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Side profile medium shot on the coastline. The artist stands to the right of frame, easel to the left. The ocean is rough; a wave breaks in the midground, throwing spray. The same outfit and features are consistent: sage-green jacket, cream T-shirt, dark indigo jeans, tan boots, muted red scarf, black rectangular glasses, scar on left eyebrow. The canvas shows a clearer composition now: a horizon line, storm clouds, and the suggestion of surf. Cool, dramatic lighting with occasional bright breaks in cloud.",
+          "video_prompt": "Medium shot with a 50mm lens from the artist’s left side. She paints rapidly, then pauses to shield the canvas with her body as a burst of spray arrives; the elastic straps hold firm. She nods as if satisfied with the resilience of the setup and adds a decisive dark stroke to define a cloud edge. The camera performs a short lateral truck left-to-right, keeping her profile and the canvas in frame while the surf churns behind."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Extreme environment shift: nighttime urban rooftop under heavy rain. Neon signage from distant buildings casts magenta and cyan reflections on puddles. The same artist stands under a small, clear rain hood integrated into her sage-green jacket (still the same jacket, now hood up), scarf visible, glasses on, hair bun tucked. She uses a clip-on LED lamp attached to the easel, illuminating the canvas. The canvas is now a composite: desert horizon tones blended with stormy sea grays, suggesting a thematic series. Raindrops streak diagonally; wind pushes the rain.",
+          "video_prompt": "Wide shot with a 28mm lens, slightly high angle looking down at the rooftop setup. Rain falls hard; she adjusts the clip-on LED to reduce glare, then continues painting, making careful highlights while water ripples in rooftop puddles. Neon reflections shimmer and shift as the camera slowly arcs around her 20 degrees, emphasizing the drastic lighting change while her identity, clothing, and tools remain constant."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Daytime alpine ridge in a whiteout blizzard. Visibility is low; everything is desaturated with pale gray sky and blowing snow. The same artist stands firm, bundled only in her exact consistent outfit: sage-green jacket (hood up), cream T-shirt beneath, dark indigo jeans, tan work boots, muted red scarf, black rectangular glasses; crescent scar on left eyebrow visible when she turns slightly. Snow clings to her shoulders and hood. The easel is anchored with a compact sandbag; the canvas is partially covered by a transparent protective sheet clipped at the top.",
+          "video_prompt": "Eye-level wide shot with a 24mm lens facing the artist head-on. Wind drives snow across the frame; she tightens the clips on the protective sheet, then lifts it briefly to paint, keeping the canvas shielded between strokes. The camera makes a slow push-in through the swirling snow, increasing tension while maintaining clarity on her face and outfit details."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Close-up on the canvas surface in the blizzard, angled from the right side. The brush tip touches thick paint; the scene on the canvas has evolved into a unified triptych-like landscape: warm desert hues at the lower left, stormy sea and sky at center, and icy whites at the upper right. Snowflakes land on the protective sheet; a few melt into droplets along the edge. The artist’s gloved hands are NOT present (to avoid introducing new wardrobe elements); her bare hands are visible, sleeves of the same jacket covering wrists.",
+          "video_prompt": "Macro close-up with a 100mm lens, camera angled 30 degrees to the canvas. She adds careful, bright highlights for snow glare using short, controlled strokes, then gently dabs a small droplet off the canvas edge with a cloth. Snow continues to pepper the protective sheet overhead. The camera remains steady, letting the paint texture and small movements convey precision under extreme conditions."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "High angle medium shot looking down from slightly behind and above the artist’s left shoulder. The blizzard swirls; the easel stands firm with the sandbag visible at its base. The artist’s muted red scarf is tucked, jacket hood up, glasses catching soft gray light; the scar on her left eyebrow is partially visible as she glances toward the horizon. The canvas appears nearly finished, with cohesive color transitions linking desert, storm, and snow themes.",
+          "video_prompt": "High angle medium shot with a 35mm lens, camera positioned behind and above her left shoulder. She steps half a pace back to assess, then steps forward again and mixes a final neutral tone on the palette. The wind gusts harder; she steadies the easel with one hand and positions the brush for a final mark. The camera subtly tilts down to emphasize the painting’s completion and the physical anchoring of the setup."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Front-facing medium close-up in the blizzard with the finished canvas held upright on the easel. The artist—same 32-year-old woman with warm brown skin, black rectangular glasses, crescent scar on left eyebrow, dark curly hair in a low bun under the hood—stands beside the painting in her unchanged modest outfit: sage-green canvas jacket, cream T-shirt, dark indigo jeans, tan work boots, muted red scarf. Snow swirls around them, but the canvas image is clear: a resilient, blended landscape bridging sun, storm, rain-neon reflections, and snow. Soft, diffuse light; snow crystals sparkle faintly.",
+          "video_prompt": "Eye-level medium close-up with a 50mm lens, camera centered on the artist and the finished painting. She makes one final, deliberate finishing stroke at the canvas edge, then lowers the brush and allows herself a small, calm smile of relief. The wind continues to blow snow past the lens; the camera holds steady for a beat, then performs a subtle 5% pull-back to frame both her and the completed work as the story’s climax and resolution."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "artist_extreme_weather",
+    "theme_description": "An artist painting in various extreme weather conditions",
+    "consistency_type": "Type A",
+    "requested_scenes": 3,
+    "requested_shots": 12
+  }
+}

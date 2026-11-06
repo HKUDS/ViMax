@@ -1,8 +1,7 @@
-import requests
 from typing import List
 import aiohttp
 import asyncio
-from tenacity import retry, stop_after_attempt
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 import logging
 
 
@@ -21,6 +20,9 @@ class RerankerBgeSiliconapi:
 
     @retry(
         stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, max=30),
+        retry=retry_if_exception_type((aiohttp.ClientError, asyncio.TimeoutError)),
+        reraise=True,
         after=lambda retry_state: logging.warning(f"Retrying SiliconReranker due to error: {retry_state.outcome.exception()}"),
     )
     async def __call__(
@@ -50,6 +52,8 @@ class RerankerBgeSiliconapi:
         async with aiohttp.ClientSession() as session:
             async with session.post(url, json=payload, headers=headers) as resp:
                 response = await resp.json()
+                if resp.status >= 400:
+                    raise RuntimeError(f"Rerank request failed with HTTP {resp.status}: {response}")
 
 
         """

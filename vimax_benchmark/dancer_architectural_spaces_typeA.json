@@ -1,0 +1,63 @@
+{
+  "story_overview": "A single contemporary dancer rehearses a short piece, adapting the same precise costume and identity across dramatically different architectural spaces, building from quiet preparation to a confident final performance under stage lights.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "A 28-year-old woman contemporary dancer with warm brown skin, almond-shaped dark eyes, a small crescent-shaped scar just above her left eyebrow, and black hair in a tight low bun. She wears a modest matte-black long-sleeve mock-neck leotard, loose black ankle-length dance pants, and soft black dance shoes; no jewelry. She stands alone in a bright modern rehearsal studio with pale maple sprung floor, white walls, tall frosted windows, and a mirrored wall to camera-left. A simple canvas tote and a capped water bottle sit near the back wall. Morning sunlight creates soft rectangular window highlights on the floor. She faces the mirror in a calm, focused posture, hands resting at her sides.",
+          "video_prompt": "Eye-level medium-wide shot (35mm), locked-off camera facing the dancer and mirror at a slight angle. She inhales, rolls her shoulders, and marks the opening counts with small, precise arm pathways, then takes two quiet steps forward; subtle reflections move in the mirror. Sunlight glows and dust motes drift; no other people enter."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "The same 28-year-old woman dancer (crescent scar above left eyebrow, low bun; same modest all-black long-sleeve leotard, loose pants, black dance shoes) now inside a vast minimalist concrete atrium with high ceilings, exposed concrete walls, and a long skylight overhead. A shallow reflecting pool runs along camera-right, and a thin line of indoor trees in planters sits in the far background. Cool daylight pours from above, casting crisp shadows. She stands near the edge of the pool, centered in frame, body angled three-quarters toward camera.",
+          "video_prompt": "High-angle wide shot (24mm) from an upper balcony looking down. She begins a traveling phrase: a controlled pivot, then a sweeping side reach that arcs over the pool’s reflection; she steps along the pool edge with measured footwork. The water surface ripples gently from air movement, mirroring her silhouette; the camera remains steady while her path shifts slightly left-to-right."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "The same dancer (28, crescent scar above left eyebrow; same black long-sleeve leotard, loose pants, black dance shoes) in a historic grand hall with warm honey-colored stone, a coffered ceiling, and tall arched windows draped with cream curtains. Ornate but tasteful chandeliers hang high above. The polished stone floor reflects light. Golden late-afternoon sun streams in, creating long diagonal beams. She stands near a central column, fingertips lightly touching the stone for balance, gaze forward and intent.",
+          "video_prompt": "Low-angle medium shot (50mm) near the base of the column, looking up slightly. She pushes away from the column into a smooth turn, then a gentle, grounded leap with arms extended in a soft V, landing quietly and continuing into a spiraling torso contraction. The chandelier light twinkles overhead; her shadow stretches across the reflective floor as she completes the phrase."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "The same dancer (28, crescent scar above left eyebrow; same modest all-black dance outfit and shoes) on an open-air rooftop terrace at night. Surrounding her are geometric glass railings, a metal pergola, and distant city buildings with windows glowing. Cool blue moonlight mixes with warm amber string lights wrapped neatly around the pergola beams. A light breeze lifts the fabric of her loose pants slightly. She stands near the pergola posts, feet planted, arms raised overhead as if preparing for a more daring sequence.",
+          "video_prompt": "Dutch-tilted medium-wide shot (28mm), camera positioned waist-high, angled upward to include pergola lines and skyline. She performs a faster sequence: a quick triple step, a sharp directional change under the pergola, then a controlled drop into a low lunge and rise, arms carving through the air. String lights shimmer; the breeze subtly moves her clothing and loose wisps of hair while the camera holds the dynamic tilted composition."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "The same dancer (28, crescent scar above left eyebrow; low bun; same black long-sleeve leotard, loose pants, black dance shoes) in a quiet museum gallery with white walls and a grid of framed architectural sketches. A long wooden bench sits mid-ground. Track lights create focused pools of neutral light and soft shadows. She stands beside the bench, one hand hovering above the bench’s backrest, as if using it as a rehearsal partner. The mood is hushed and contemplative.",
+          "video_prompt": "Side-profile medium shot (50mm), camera at eye level, bench leading lines toward the back wall. She places her palm lightly on the bench for a moment, then slides her hand along it as she rotates, stepping around the bench’s end; she transitions into a balanced extension with a calm facial expression. The track lights remain steady; the framed sketches stay fixed as she moves through the light pools."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "The same dancer (28, crescent scar above left eyebrow; same modest all-black outfit and shoes) inside a luminous glass greenhouse with curved steel ribs and condensation on panes. Tall potted palms and ferns create layered depth. Humid, diffused daylight gives a soft, milky glow; droplets cling to leaves. She stands on a narrow stone path between planters, framed by arching greenery, hands at chest height as if gathering energy.",
+          "video_prompt": "Slow push-in close-to-medium shot (70mm), camera at chest height aligned with the stone path. She begins a fluid wave through her arms and spine, then threads her body between two large fern fronds, careful not to touch them, and completes a slow turn with precise spotting. Leaves sway slightly from her passing; condensation sparkles as the camera advances a few feet, tightening the frame."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "The same dancer (28, crescent scar above left eyebrow; same black long-sleeve leotard, loose pants, black dance shoes) in an unfinished timber-frame hall under construction: exposed wooden beams, temporary scaffolding, and clean plywood flooring. Sunlight slants through open wall sections, creating striped shadows. Safety cones and neatly stacked materials sit far in the background, out of her path. She stands centered beneath a tall triangular truss, arms lowered, chin lifted with determination, ready for the final run.",
+          "video_prompt": "Crane-like descending wide shot (24mm), starting high to reveal the timber geometry, then easing down to frame her under the truss. She launches into her most athletic phrase: a traveling diagonal with two light jumps, a controlled turn, then a deep grounded slide to one knee and a smooth recovery to standing. The striped sunlight moves across her as she crosses the floor; the camera’s descent emphasizes scale and momentum."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "The same dancer (28, crescent scar above left eyebrow; low bun; same modest matte-black long-sleeve leotard, loose black pants, black dance shoes) on a professional theater stage with a clean wooden floor and a simple architectural set piece: three tall matte-gray rectangular frames arranged upstage like doorways. Warm amber spotlights create a bright circle center stage with soft falloff into darkness. A faint haze in the air catches the beams. She stands in the center spotlight, facing camera, composed and confident, hands relaxed at her sides—final performance moment.",
+          "video_prompt": "Eye-level medium shot (40mm) centered on the dancer in the spotlight. She performs the completed choreography with clarity: a precise opening gesture, a sustained turn that resolves into a strong still pose, then a final expansive reach toward the architectural frames behind her before returning to center. The haze gently swirls in the light beams; she finishes by holding a calm, grounded stance, breathing steady as the stage remains quiet and focused—climactic completion."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "dancer_architectural_spaces",
+    "theme_description": "A dancer performing in different architectural spaces",
+    "consistency_type": "Type A",
+    "requested_scenes": 2,
+    "requested_shots": 8
+  }
+}

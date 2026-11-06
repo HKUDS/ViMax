@@ -1,0 +1,108 @@
+{
+  "story_overview": "Three adult friends secretly coordinate decorations, a cake, and a surprise entrance plan, then successfully surprise their fourth friend at a cozy community hall party.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Interior, quiet coffee shop corner booth in daytime. Three adults sit together around a small wooden table with a closed laptop and notebooks. Character A: a 28-year-old woman, tall and athletic build, medium-brown skin, curly dark hair in a high puff, wearing a mustard-yellow cardigan over a white crew-neck blouse and dark jeans, thin rectangular glasses. Character B: a 32-year-old man, average height, light skin, short dark hair, neatly trimmed beard, wearing a navy crewneck sweater over a light collared shirt and khaki pants. Character C: a 29-year-old woman, shorter, East Asian features, straight black bob haircut, wearing a forest-green blazer over a beige turtleneck and black slacks, a silver wristwatch. On the table: a sticky note that reads “SURPRISE” in block letters, pens, and a small plate of cookies. Soft window light, warm tones, family-friendly mood.",
+          "video_prompt": "Eye-level medium wide two-and-a-half-shot (all three in frame), 35mm lens. A leans in and slides the sticky note to the center; B opens a notebook and points to a handwritten checklist; C nods and taps the laptop lid, then quietly gestures toward the shop entrance as if confirming secrecy. Subtle handheld sway, ambient cafe movement in background, no other faces prominent."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Close-up on hands and tabletop in the same booth. A’s mustard cardigan sleeve and glasses chain visible near frame edge; B’s navy sweater cuff and watch; C’s green blazer cuff with silver wristwatch. The sticky note “SURPRISE” sits beside a simple printed calendar page. A pen hovers over the calendar. Warm daylight reflections on wood grain and ceramic mug.",
+          "video_prompt": "Top-down close-up, 50mm lens. B’s finger taps a date on the calendar; A writes a time in neat block letters; C slides a small list of supplies into the center. The hands briefly overlap as they coordinate, then separate cleanly, emphasizing distinct sleeves and accessories."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Over-the-shoulder view from behind B (navy sweater shoulder in foreground) looking at A and C across the table. A’s curly puff and mustard cardigan are clear; C’s green blazer and bob haircut are clear. The laptop is now open, showing a generic party-planning checklist UI (no brand logos), with bullet points: “Decor,” “Cake,” “Guest texts.” Soft bokeh of coffee shop behind them.",
+          "video_prompt": "Over-the-shoulder medium shot, 70mm lens. A scrolls the checklist with two fingers on the trackpad; C points to the “Cake” line and mimes a round shape; B’s shoulder subtly shifts as he leans in. A then gives a small thumbs-up toward C, confirming roles."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Exterior sidewalk outside the coffee shop, late afternoon. The three friends stand together near a community bulletin board with generic flyers (no real brands). A (mustard cardigan) holds her phone; B (navy sweater) holds a folded paper bag; C (green blazer) holds a small notebook. They form a tight huddle, looking alert but cheerful. Sunlight creates crisp shadows; parked bicycles in background.",
+          "video_prompt": "Eye-level medium wide shot, 28mm lens. C steps half a pace closer and quietly counts on her fingers; A nods and types on her phone; B looks left and right as if making sure the plan stays secret, then smiles and points toward the street as they agree to split up. They begin to turn in different directions by the end of the clip."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Interior craft store aisle under bright fluorescent lighting. Shelves packed with colorful paper lanterns, streamers, and balloons (all family-friendly). A (mustard cardigan, glasses) and C (green blazer, silver watch) stand side-by-side comparing two rolls of ribbon—one gold, one teal. B (navy sweater, beard) is slightly behind them pushing a small basket cart with tissue paper. The aisle perspective is deep with repeating shelves.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. A lifts the gold ribbon toward the overhead light to check sheen; C shakes her head and points to teal, then holds it against a packet of neutral balloons. B rolls the basket cart forward between them, stopping neatly as A and C place selected items into the basket without mixing their clothing or positions."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Close-up at the craft store shelf. C’s hands (green blazer cuffs, silver watch) pick up a pack of letter stickers; A’s hands (mustard sleeve) hold a roll of tape. B’s navy sleeve enters frame holding a plain white card that reads “WELCOME” in simple marker. Colorful packaging surrounds them.",
+          "video_prompt": "Side-angle close-up, 85mm lens. C tests letter stickers by peeling one corner (no full removal), A offers the tape, and B slides the “WELCOME” card under the stickers to compare spacing. Their hands pass items carefully: A hands tape to B; B hands the card to C; C returns the sticker pack to A—clear, coordinated object passing."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Interior small neighborhood bakery counter, warmly lit with display case. Behind glass: frosted cupcakes and a plain round cake base (generic, no logos). B (navy sweater) stands at the counter speaking to a baker off-camera; A (mustard cardigan) points at the cake size with both hands; C (green blazer) holds a notepad open, pen ready. A small sign reads “Custom Cakes” in generic font.",
+          "video_prompt": "Eye-level medium shot, 35mm lens. B gestures politely with an open palm toward the cake base; A measures a circle in the air to indicate size; C writes notes quickly, then tilts the notepad toward B for confirmation. B nods and taps the notepad lightly with one finger as if approving the final wording."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Interior community hall entryway at dusk. Neutral walls, coat rack, stackable chairs, and a long folding table visible deeper inside. The three friends enter carrying supplies: A holds a bag of balloons; B carries a cake box carefully with both hands; C carries a box of streamers and a roll of teal ribbon. The hall is empty and quiet, overhead lights slightly dim.",
+          "video_prompt": "Low-angle wide shot, 20mm lens. The trio steps through the doorway together; B leads slowly to keep the cake steady; A shifts the balloon bag to avoid bumping the doorframe; C nudges the door closed with her shoulder, then points down the hall toward the main room. They move deeper, growing smaller in frame to emphasize depth."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Interior main room of the community hall, evening. A long folding table sits center-left with a plain tablecloth; stackable chairs line the right wall; a small stage platform is at the far end; two support pillars stand mid-room. A (mustard cardigan) kneels by the table tying balloon strings; B (navy sweater) stands on a stable step stool taping a banner to the wall; C (green blazer) is near a pillar winding teal ribbon around it. Warm overhead lighting with soft shadows.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. B carefully presses tape and smooths the banner edge; A ties off two balloons and sets them to bob gently; C circles the pillar, ribbon wrapping around as she moves partially behind it (brief occlusion), then reappears to secure the ribbon end. The camera stays steady as all three actions happen in coordinated rhythm."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Over-the-shoulder shot from behind A (mustard cardigan shoulder in foreground) looking toward B on the step stool and C at the pillar. The banner is partially readable: “HAPPY DAY!” in generic letters. A holds a spool of string; B reaches to align the banner; C gives a small hand signal indicating ‘a little higher.’",
+          "video_prompt": "Over-the-shoulder medium shot, 50mm lens. A tosses the spool gently across the table toward C; C catches it with both hands without stepping out of frame. B adjusts the banner upward by an inch, then steps down one rung on the stool, checking alignment. A nods, keeping her distinct mustard sleeve prominent in the foreground."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Close-up of the cake table setup. A plain frosted cake sits on a stand; paper plates and napkins arranged neatly. C (green blazer cuffs, silver watch) places teal ribbon along the table edge; B’s navy sleeve sets down the cake box lid; A’s mustard sleeve places a small bowl of wrapped candies. The textures: matte frosting, glossy ribbon, crisp paper goods.",
+          "video_prompt": "Table-level close-up, 65mm lens. C smooths the ribbon with her palm; B slides the lid away and straightens the cake stand; A rotates the candy bowl slightly to center it. Their hands briefly meet at the table edge as they align items, then pull back, leaving a symmetrical arrangement."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Interior hall near the entryway, lights lowered slightly as if preparing for the surprise. The three friends huddle behind a tall folding screen near the doorway. A (mustard cardigan) holds her phone showing a generic text message thread; B (navy sweater) raises a finger to his lips in a friendly “quiet” gesture; C (green blazer) peeks around the screen edge toward the door. The screen creates a strong foreground occluder.",
+          "video_prompt": "Low-light eye-level medium shot, 35mm lens. A tilts the phone toward B and C, then dims the screen with her thumb; B slowly lowers his hand and points to a spot behind the screen for everyone to stand; C leans out to peek, then retreats behind the screen, keeping her blazer and watch clearly visible. The camera remains fixed, emphasizing the hiding place."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Interior hall doorway area, moments later. The door is slightly open, showing a sliver of corridor light. A, B, and C are hidden behind the folding screen at frame left; only partial glimpses of their distinct clothing appear: A’s mustard sleeve, B’s navy shoulder, C’s green blazer edge. A large bunch of balloons is tucked beside them. The main room beyond is decorated and softly lit.",
+          "video_prompt": "Static eye-level wide shot, 28mm lens. The door swings open a little wider (driven by someone entering off-camera), corridor light spills in. Behind the screen, A adjusts the balloon strings; B steadies the balloons with one hand; C raises two fingers in a countdown signal. Their movements are small and controlled to stay hidden."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Two-shot facing the three friends now stepping out from behind the screen into the decorated room. A (mustard cardigan, glasses) holds the balloon bunch; B (navy sweater, beard) holds a small party popper-style confetti tube that is clearly labeled 'paper confetti' and not explosive; C (green blazer, bob) holds the “WELCOME” card. All three are smiling, standing in a line with the decorated banner and table behind them.",
+          "video_prompt": "Eye-level medium wide shot, 35mm lens. The three step forward together and raise their items: A lifts balloons shoulder-high, C lifts the “WELCOME” card chest-high, and B twists the confetti tube downward so paper confetti flutters gently to the floor (light, non-messy effect). They look toward the doorway (off-camera) as if greeting the arriving friend."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Reverse angle from near the doorway looking into the hall. A, B, and C stand together near the center of the room with decorations fully visible: banner on wall, ribbon-wrapped pillar, cake table. The trio forms a clear group composition: A on left with balloons, B center with hands open in a welcoming gesture, C on right holding the card. Warm, celebratory lighting; clean, PG-rated atmosphere.",
+          "video_prompt": "Eye-level medium shot, 50mm lens. The three lean in slightly toward the camera as if addressing the entering friend, then relax into laughter. A gently bounces the balloon bunch; B gestures toward the cake table with an inviting sweep; C nods and points to the decorated banner. The clip ends on their shared, satisfied reaction, completing the surprise-party climax."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "three_friends_surprise_planning",
+    "theme_description": "Three friends planning a surprise party",
+    "consistency_type": "Type C",
+    "requested_scenes": 4,
+    "requested_shots": 15
+  }
+}

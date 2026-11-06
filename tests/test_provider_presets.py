@@ -27,14 +27,13 @@ class TestProviderPresets(unittest.TestCase):
         self.assertEqual(PROVIDER_PRESETS["minimax"]["env_key"], "MINIMAX_API_KEY")
 
     def test_minimax_preset_default_model(self):
-        self.assertEqual(PROVIDER_PRESETS["minimax"]["default_model"], "MiniMax-M2.7")
+        self.assertEqual(PROVIDER_PRESETS["minimax"]["default_model"], "MiniMax-M3")
 
     def test_minimax_preset_has_models_list(self):
         models = PROVIDER_PRESETS["minimax"]["models"]
+        self.assertIn("MiniMax-M3", models)
         self.assertIn("MiniMax-M2.7", models)
         self.assertIn("MiniMax-M2.7-highspeed", models)
-        self.assertIn("MiniMax-M2.5", models)
-        self.assertIn("MiniMax-M2.5-highspeed", models)
 
     def test_minimax_preset_temperature_range(self):
         lo, hi = PROVIDER_PRESETS["minimax"]["temperature_range"]
@@ -58,19 +57,19 @@ class TestResolveChatModelConfig(unittest.TestCase):
         self.assertEqual(result["model"], "gpt-4")
 
     def test_minimax_rewrites_provider_to_openai(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7", "api_key": "sk-test"}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3", "api_key": "sk-test"}
         result = resolve_chat_model_config(args)
         self.assertEqual(result["model_provider"], "openai")
 
     def test_minimax_sets_base_url(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7", "api_key": "sk-test"}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3", "api_key": "sk-test"}
         result = resolve_chat_model_config(args)
         self.assertEqual(result["base_url"], "https://api.minimax.io/v1")
 
     def test_minimax_preserves_custom_base_url(self):
         args = {
             "model_provider": "minimax",
-            "model": "MiniMax-M2.7",
+            "model": "MiniMax-M3",
             "api_key": "sk-test",
             "base_url": "https://custom-proxy.example.com/v1",
         }
@@ -80,64 +79,64 @@ class TestResolveChatModelConfig(unittest.TestCase):
     def test_minimax_defaults_model(self):
         args = {"model_provider": "minimax", "api_key": "sk-test"}
         result = resolve_chat_model_config(args)
-        self.assertEqual(result["model"], "MiniMax-M2.7")
+        self.assertEqual(result["model"], "MiniMax-M3")
 
     def test_minimax_preserves_explicit_model(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.5-highspeed", "api_key": "sk-test"}
+        args = {"model_provider": "minimax", "model": "MiniMax-M2.7-highspeed", "api_key": "sk-test"}
         result = resolve_chat_model_config(args)
-        self.assertEqual(result["model"], "MiniMax-M2.5-highspeed")
+        self.assertEqual(result["model"], "MiniMax-M2.7-highspeed")
 
     @patch.dict(os.environ, {"MINIMAX_API_KEY": "env-key-123"})
     def test_minimax_reads_api_key_from_env(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7"}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3"}
         result = resolve_chat_model_config(args)
         self.assertEqual(result["api_key"], "env-key-123")
 
     def test_minimax_prefers_explicit_api_key_over_env(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7", "api_key": "explicit-key"}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3", "api_key": "explicit-key"}
         with patch.dict(os.environ, {"MINIMAX_API_KEY": "env-key"}):
             result = resolve_chat_model_config(args)
         self.assertEqual(result["api_key"], "explicit-key")
 
     def test_minimax_clamps_temperature_above_max(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7", "api_key": "sk", "temperature": 1.5}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3", "api_key": "sk", "temperature": 1.5}
         result = resolve_chat_model_config(args)
         self.assertEqual(result["temperature"], 1.0)
 
     def test_minimax_clamps_temperature_below_min(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7", "api_key": "sk", "temperature": -0.5}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3", "api_key": "sk", "temperature": -0.5}
         result = resolve_chat_model_config(args)
         self.assertEqual(result["temperature"], 0.0)
 
     def test_minimax_passes_valid_temperature(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7", "api_key": "sk", "temperature": 0.7}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3", "api_key": "sk", "temperature": 0.7}
         result = resolve_chat_model_config(args)
         self.assertEqual(result["temperature"], 0.7)
 
     def test_minimax_temperature_zero_allowed(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7", "api_key": "sk", "temperature": 0.0}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3", "api_key": "sk", "temperature": 0.0}
         result = resolve_chat_model_config(args)
         self.assertEqual(result["temperature"], 0.0)
 
     def test_minimax_no_temperature_key(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7", "api_key": "sk"}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3", "api_key": "sk"}
         result = resolve_chat_model_config(args)
         self.assertNotIn("temperature", result)
 
     def test_minimax_temperature_none_ignored(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7", "api_key": "sk", "temperature": None}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3", "api_key": "sk", "temperature": None}
         result = resolve_chat_model_config(args)
         self.assertIsNone(result["temperature"])
 
     def test_original_dict_not_mutated(self):
-        args = {"model_provider": "minimax", "model": "MiniMax-M2.7", "api_key": "sk"}
+        args = {"model_provider": "minimax", "model": "MiniMax-M3", "api_key": "sk"}
         resolve_chat_model_config(args)
         self.assertEqual(args["model_provider"], "minimax")
 
     def test_empty_model_string_gets_default(self):
         args = {"model_provider": "minimax", "model": "", "api_key": "sk"}
         result = resolve_chat_model_config(args)
-        self.assertEqual(result["model"], "MiniMax-M2.7")
+        self.assertEqual(result["model"], "MiniMax-M3")
 
 
 class TestDetectProviderFromEnv(unittest.TestCase):
@@ -161,7 +160,7 @@ class TestConfigYAMLLoading(unittest.TestCase):
         with open(path) as f:
             config = yaml.safe_load(f)
         self.assertEqual(config["chat_model"]["init_args"]["model_provider"], "minimax")
-        self.assertEqual(config["chat_model"]["init_args"]["model"], "MiniMax-M2.7")
+        self.assertEqual(config["chat_model"]["init_args"]["model"], "MiniMax-M3")
 
     def test_script2video_minimax_yaml(self):
         import yaml
@@ -169,7 +168,7 @@ class TestConfigYAMLLoading(unittest.TestCase):
         with open(path) as f:
             config = yaml.safe_load(f)
         self.assertEqual(config["chat_model"]["init_args"]["model_provider"], "minimax")
-        self.assertEqual(config["chat_model"]["init_args"]["model"], "MiniMax-M2.7")
+        self.assertEqual(config["chat_model"]["init_args"]["model"], "MiniMax-M3")
 
 
 if __name__ == "__main__":

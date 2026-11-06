@@ -1,38 +1,34 @@
 <div align="center">
-  <img src="./assets/vimax.png"> 
-	<br>
-  <br>
-<a href="https://trendshift.io/repositories/15299" target="_blank"><img src="https://trendshift.io/api/badge/repositories/15299" alt="HKUDS%2FViMax | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-  <h1 align="center">ViMax: Agentic Video Generation</h1>
 
+<picture>
+    <img src="assets/vimax.svg" width="130px" style="border: none; box-shadow: none;" alt="ViMax Logo">
+</picture>
+</div>
+<div align="center">
+  <h1 align="center">ViMax: Agentic Video Generation</h1>
+  <p align="center">
+    <a href="https://trendshift.io/repositories/15299" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/15299" alt="HKUDS%2FViMax | Trendshift" width="250" height="55"/></a>
+    <a href="https://trendshift.io/repositories/15299?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-15299" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/15299/weekly?language=Python" alt="HKUDS%2FViMax | Trendshift" width="250" height="55"/></a>
+  </p>
   <div align="center">
   </div>
 
   <p align="center">
-    <img src="https://img.shields.io/badge/🐍Python-3.12-00d9ff?style=for-the-badge&logo=python&logoColor=white&labelColor=1a1a2e">
-	<a href="https://github.com/astral-sh/uv"><img src="https://img.shields.io/badge/⚡uv-Ready-ff6b6b?style=for-the-badge&logo=python&logoColor=white&labelColor=1a1a2e"></a>
-	<img src="https://img.shields.io/badge/License-MIT-4ecdc4?style=for-the-badge&logo=opensourceinitiative&logoColor=white" alt="MIT License">
+    <img src="https://img.shields.io/badge/Python-3.12-00d9ff?style=flat-square&logo=python&logoColor=white&labelColor=1a1a2e">
+	<a href="https://github.com/astral-sh/uv"><img src="https://img.shields.io/badge/uv-Ready-ff6b6b?style=flat-square&logo=uv&logoColor=white&labelColor=1a1a2e"></a>
+	<img src="https://img.shields.io/badge/License-MIT-4ecdc4?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="MIT License">
+    <a href="https://github.com/HKUDS/ViMax/releases/tag/v1.2.0"><img src="https://img.shields.io/badge/Version-v1.2.0-2563eb?style=flat-square&labelColor=1a1a2e" alt="ViMax v1.2.0"></a>
+    <a href='https://www.youtube.com/@AI-Creator-is-here'><img src='https://img.shields.io/badge/YouTube-ff0000?style=flat-square&logo=youtube&logoColor=white&labelColor=1a1a2e' /></a>
+    <a href='https://arxiv.org/abs/2606.07649'><img src='https://img.shields.io/badge/arXiv-2606.07649-b31b1b?style=flat-square&logo=arxiv&logoColor=white&labelColor=1a1a2e' /></a>
   </p>
 
   <p align="center">
-    <a href="./Communication.md"><img src="https://img.shields.io/badge/💬Feishu-Group-07c160?style=for-the-badge&logoColor=white&labelColor=1a1a2e"></a>
-    <a href="./Communication.md"><img src="https://img.shields.io/badge/WeChat-Group-07c160?style=for-the-badge&logo=wechat&logoColor=white&labelColor=1a1a2e"></a>
+    <a href="./Communication.md"><img src="https://img.shields.io/badge/Feishu-Group-07c160?style=flat-square&logo=lark&logoColor=white&labelColor=1a1a2e"></a>
+    <a href="./Communication.md"><img src="https://img.shields.io/badge/WeChat-Group-07c160?style=flat-square&logo=wechat&logoColor=white&labelColor=1a1a2e"></a>
+	<a href="readme.md"><img src="https://img.shields.io/badge/English-1a1a2e?style=flat-square"></a>
+    <a href="README_ZH.md"><img src="https://img.shields.io/badge/中文版-1a1a2e?style=flat-square"></a>
+    <a href="#quick-start"><img src="https://img.shields.io/badge/Quick%20Start-Get%20Started%20Now-FFC107?style=flat-square&logo=rocket&logoColor=white&labelColor=1a1a2e"></a>
   </p>
-
-  <p align="center">
-    <a href='https://www.youtube.com/@AI-Creator-is-here'><img src='https://badges.aleen42.com/src/youtube.svg' /></a>
-  </p>
-
-</div>
-<div align="center">
-	
-<p>
-	<a href="README_VIMAX.md"><img src="https://img.shields.io/badge/English-1a1a2e?style=for-the-badge"></a>
-    <a href="README_ZH.md"><img src="https://img.shields.io/badge/中文版-1a1a2e?style=for-the-badge"></a>
-</p>
-    <a href="#quick-start" style="text-decoration: none;">
-      <img src="https://img.shields.io/badge/Quick%20Start-Get%20Started%20Now-FFC107?style=for-the-badge&logo=rocket&logoColor=white&labelColor=1a1a2e">
-    </a>
 
 </div>
 
@@ -55,111 +51,40 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 ---
 
 
+### 📰 **News**
+
+- **2026-07-20** 🚀 **ViMax v1.2.0** introduces the Web UI with named projects, Agent Loop conversations, artifact and storyboard previews, render checkpoints, file uploads, provider settings, and dark mode.
+- **2026-07-17** 🎬 OpenRouter GPT Image 2 image generation and Seedance 2.0 Fast video generation support added.
+- **2026-06-28** 🛠️ Agent Loop and TUI stability update: stronger LLM retries, persistent render status, landscape image guards, and Script2Video resume fixes.
+- **2026-06-09** 📄 Technical report released.
+- **2026-06-08** 🤖 Agents Loop + TUI workflow integrated for interactive planning, revision, rendering control, session reuse, and context compaction.
+- **2026-06-07** 📖 Novel2Video workflow released.
+- **2026-06-01** 🎬 Google Omni video generator support added.
+- **2026-03-23** ⚡ MiniMax chat model provider support added.
+
+---
+
+
+
 ## 📑 Table of Contents
 
-- [💡 Key Features](#key-features)
+- [✨ Key Features](#key-features)
 - [🔮 Demos](#Video-Demos-Generated-from-Scratch)
-- [🏗️ Architecture](#️-architecture)
 - [🚀 Quick Start](#quick-start)
 
 ---
-## 💡 Key Features
+## ✨ Key Features
 
-<br/>
+ViMax is an agentic video creation framework that connects narrative planning, visual consistency, image generation, video generation, and final assembly in one extensible workflow.
 
-<table align="center" width="100%" style="border: none; table-layout: fixed;">
-<tr>
-<td width="25%" align="center" style="vertical-align: top; padding: 20px;">
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<h3 style="margin: 0; padding: 0;">🌟 <strong>Idea2Video</strong></h3>
-</div>
-
-<div align="center" style="margin: 15px 0;">
-  <img src="https://img.shields.io/badge/IDEA-GENERATION-ff6b6b?style=for-the-badge&logo=algorithm&logoColor=white" alt="Algorithm Badge" />
-</div>
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<p align="center"><strong>From Spark to Screen</strong></p>
-</div>
-
-<div style="height: 60px; display: flex; align-items: center; justify-content: center;">
-<p align="center">Transform <strong> raw ideas </strong> into complete video stories through intelligent multi-agent workflows automating <strong> storytelling, character design, and production </strong>.
-</p>
-</div>
-
-
-
-</td>
-<td width="25%" align="center" style="vertical-align: top; padding: 20px;">
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<h3 style="margin: 0; padding: 0;">🎨 <strong>Novel2Video</strong></h3>
-</div>
-
-<div align="center" style="margin: 15px 0;">
-  <img src="https://img.shields.io/badge/NOVEL-ADAPTATION-4ecdc4?style=for-the-badge&logo=book&logoColor=white" alt="Frontend Badge" />
-</div>
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<p align="center"><strong>Smart Literary Adaptation Engine</strong></p>
-</div>
-
-<div style="height: 60px; display: flex; align-items: center; justify-content: center;">
-<p align="center">Transform <strong>complete novels</strong> into <strong>episodic video content</strong> with intelligent narrative compression, character tracking, and scene-by-scene visual adaptation</p>
-</div>
-
-
-
-</td>
-<td width="25%" align="center" style="vertical-align: top; padding: 20px;">
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<h3 style="margin: 0; padding: 0;">⚙️ <strong>Script2Video</strong></h3>
-</div>
-
-<div align="center" style="margin: 15px 0;">
-  <img src="https://img.shields.io/badge/SCRIPT-ADAPTATION-9b59b6?style=for-the-badge&logo=server&logoColor=white" alt="Backend Badge" />
-</div>
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<p align="center"><strong>Unlimited Screenplay Video Creation</strong></p>
-</div>
-
-<div style="height: 60px; display: flex; align-items: center; justify-content: center;">
-<p align="center">Unleash your creativity by writing <strong>any screenplay</strong> from personal stories to epic adventures, giving you complete control over every aspect of your visual storytelling.</p>
-</div>
-
-
-
-
-
-</td>
-<td width="25%" align="center" style="vertical-align: top; padding: 20px;">
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<h3 style="margin: 0; padding: 0;">🤳 <strong>AutoCameo</strong></h3>
-</div>
-
-<div align="center" style="margin: 15px 0;">
-  <img src="https://img.shields.io/badge/INTERACTIVE-GENERATION-FFC107?style=for-the-badge&logo=server&logoColor=white" alt="Backend Badge" />
-</div>
-
-<div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-<p align="center"><strong>Generate Video from Your Photo</strong></p>
-</div>
-
-<div style="height: 60px; display: flex; align-items: center; justify-content: center;">
-<p align="center"> <strong>Create your own cameo</strong> video, transforming yourself/pet into a guest star who appears across limitless creative scripts, cinematic sequences, and interactive storylines.</p>
-</div>
-
-
-
-</td>
-</tr>
-</table>
-
-<br/>
+- **Idea2Video** — turn a short concept into structured stories, characters, scripts, storyboards, shots, and a finished video.
+- **Script2Video** — convert an explicit screenplay into controllable multi-scene, multi-shot video while preserving its creative intent.
+- **Novel2Video** — adapt long-form fiction into episodic visual narratives with narrative compression, character tracking, and scene planning.
+- **AutoCameo** — place a person or pet from a reference photo into generated stories while maintaining a consistent appearance.
+- **Agent Loop and TUI** — discuss ideas, revise plans, resume sessions, review text artifacts, and control rendering from one interactive workspace.
+- **Web UI** — manage named projects, work with the ViMax Agent, upload source files, inspect artifacts and storyboard progress, preview renders, and configure providers from the browser.
+- **Consistent production pipeline** — coordinate references, first frames, camera continuity, and final assembly end to end.
+- **Parallelized generation** — generate compatible shots and media assets concurrently to accelerate multi-shot video production.
 
 ---
 
@@ -223,7 +148,15 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 
 ---
 
+### 🖥️ **ViMax Web UI**
 
+<div align="center">
+  <img src="assets/vimax-web-ui.png" width="100%" alt="ViMax Web UI workspace">
+</div>
+
+The Web UI brings agent conversation, project artifacts, storyboard previews, and render progress into one visual workspace.
+
+---
 
 ### 🎯 **End-to-End Video Creation Engine**
 
@@ -258,127 +191,20 @@ https://github.com/user-attachments/assets/5bad46b2-8276-4e1d-9480-3522640744b2
 | One-Prompt to Finished Video | From Any Narrative to Reality | Synchronized Storytelling | Movie-Grade Output | Make Your Own Cameo Video
 | Skip the technical complexity—just describe your vision and let ViMax handle script generation, storyboarding, shot design, reference management, and consistency validation | No creative limits—whether it's a trailer, short story, novel chapter, or original concept, ViMax intelligently structures narratives and designs cinematography to bring any idea to life | Seamlessly integrate character voice, and sound effects with visual content to create immersive experiences where audio and video work in perfect harmony | Automated quality control ensures character consistency, proper scene composition, and professional visual standards across every frame of your video | Interact in your own short stories by uploading your photo—ViMax intelligently integrates you as a character with consistent appearance and natural interactions throughout the entire video
 
+ViMax now also includes an **Agents Loop + TUI** workflow for interactive planning, revision, rendering control, session reuse, and context compaction while preserving the original direct pipeline entrypoints.
 
 
 ---
 
-### ☄️ **Coming Soon**
+### ☄️ **Roadmap**
 
-- 👨‍💻 **Google AI Studio API config✅**
-- 🤖 **Agents Loop☑️**
-- 📄 **Technical Report☑️**
-
+- ✅ 🖥️ **Web frontend workspace with artifact, storyboard, and render previews**
+- ✅ 🤖 **Agent Loop + TUI interactive workflow**
+- ✅ 🎬 **Seedance 2.0 Fast video generator support**
+- ✅ 🖼️ **GPT Image 2 image generator support**
+- ☑️ 🎬 **MiniMax H3 video generator support**
+- ☑️ 🧩 **Skill-based workflow extensions**
 ---
-
-
-## 🏗️ Architecture
-
-### 📊 **System Overview**
-
-**ViMax** is a multi-agent video framework that enables automated multi-shot video generation while ensuring character and scene consistency. Our system seamlessly translates your ideas into corresponding videos, allowing you to focus on storytelling rather than technical implementation.
-
-🎯 **Technical Capabilities**:
-
-🧬 **Intelligent Long Script Generation**
-
-RAG-based long script design engine that intelligently analyzes lengthy, novel-like stories and automatically segments them into a multi-scene script format. The process meticulously ensures that all key plot developments and character dialogues are accurately retained within the new structure.
-
-🪄 **Expressive Storyboard Design**
-
-Shot-level storyboard design system that create expressive storyboards through cinematography language based on user requirements and target audiences, which establishs the narrative rhythm for subsequent video generation.
-
-🔮 **Multi-camera Filming Simulation**
-
-Simulates multi-camera filming to deliver an immersive viewing experience while maintaining consistent character positioning and backgrounds within the same scene.
-
-🧸 **Intelligent Reference Images Selection**
-
-Intelligently select the reference image required for the first frame of the current video, including the storyboards that occurred in the previous timeline, to ensure the accuracy of multiple characters and environmental elements as the video becomes longer.
-
-⚙️ **Automated Images Generation**
-
-Based on the selected reference image and the visual logical order on the previous timeline, the prompt of the image generator is automatically generated to reasonably arrange the spatial interaction position between the character and the environment.
-
-✅ **Automated Image Generation Consistency Check**
-
-Generate multiple images in parallel and select the best consistent image as the first frame through MLLM/VLM to imitate the workflow of human creators.
-
-⚡ **High-efficiency Parallel Shot Generation**
-
-Parallel processing for sequential shots captured from the same camera enables highly efficient video production.
-
-
-
-
-
-### 🤖 <strong>Multi-Agent Video Generation Pipeline</strong>
-
-<div align="center">
-  <table align="center" width="100%" style="border: none; border-collapse: collapse;">
-    <tr>
-      <td colspan="3" align="center" style="padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white; font-weight: bold;">
-        🧠 <strong>INPUT LAYER</strong><br/>
-        📝 Idea & Scripts & Novels • 💭 Natural Language Prompts • 🖼️ Reference Images • 🎨 Style Directives • 🧩 Configs
-      </td>
-    </tr>
-    <tr><td colspan="3" height="20"></td></tr>
-    <tr>
-      <td colspan="3" align="center" style="padding: 15px; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); border-radius: 12px; color: white; font-weight: bold;">
-        🧭 <strong>CENTRAL ORCHESTRATION</strong><br/>
-        Agent Scheduling • Stage Transitions • Resource Management • Retry/Fallback Logic
-      </td>
-    </tr>
-    <tr><td colspan="3" height="15"></td></tr>
-    <tr>
-      <td align="center" style="padding: 12px; background: linear-gradient(135deg, #3742fa 0%, #2f3542 100%); border-radius: 10px; color: white; width: 50%;">
-        🧾 <strong>SCRIPT UNDERSTANDING</strong><br/>
-        <small>Character/Environment Extraction • Scene Boundaries • Style Intent</small>
-      </td>
-      <td width="10"></td>
-      <td align="center" style="padding: 12px; background: linear-gradient(135deg, #8c7ae6 0%, #9c88ff 100%); border-radius: 10px; color: white; width: 50%;">
-        🎥 <strong>SCENE & SHOT PLANNING</strong><br/>
-        <small>Storyboard Steps • Shot List • Key Frames & Beats</small>
-      </td>
-    </tr>
-    <tr><td colspan="3" height="15"></td></tr>
-    <tr>
-      <td colspan="3" align="center" style="padding: 15px; background: linear-gradient(135deg, #00d2d3 0%, #54a0ff 100%); border-radius: 12px; color: white; font-weight: bold;">
-        🧪 <strong>VISUAL ASSET PLANNING</strong><br/>
-        Reference Image Selection • Look/Style Guidance • Prompt Conditioning
-      </td>
-    </tr>
-    <tr><td colspan="3" height="15"></td></tr>
-    <tr>
-      <!-- Swapped: ASSET INDEXING is now on the left -->
-      <td align="center" style="padding: 12px; background: linear-gradient(135deg, #e056fd 0%, #f368e0 100%); border-radius: 10px; color: white; width: 50%;">
-        🗂️ <strong>ASSET INDEXING</strong><br/>
-        <small>Frames/Refs Catalog • Embeddings • Retrieval for Reuse</small>
-      </td>
-      <td width="10"></td>
-      <!-- Swapped: CONSISTENCY & CONTINUITY is now on the right -->
-      <td align="center" style="padding: 12px; background: linear-gradient(135deg, #ffa726 0%, #ff7043 100%); border-radius: 10px; color: white; width: 50%;">
-        ♻️ <strong>CONSISTENCY & CONTINUITY</strong><br/>
-        <small>Character/Environment Tracking • Ref Matching • Temporal Coherence</small>
-      </td>
-    </tr>
-    <tr><td colspan="3" height="15"></td></tr>
-    <tr>
-      <td colspan="3" align="center" style="padding: 15px; background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%); border-radius: 12px; color: white; font-weight: bold;">
-        ✂️ <strong>VISUAL SYNTHESIS & ASSEMBLY</strong><br/>
-        Image Generation • Best-Frame Selection • First/Last-Frame→Video • Cut & Timeline Assembly
-      </td>
-    </tr>
-    <tr><td colspan="3" height="15"></td></tr>
-    <tr>
-      <td colspan="3" align="center" style="padding: 20px; background: linear-gradient(135deg, #045de9 0%, #09c6f9 100%); border-radius: 15px; color: white; font-weight: bold;">
-        🚀 <strong>OUTPUT LAYER</strong><br/>
-        🖼️ Frames • 🎞️ Clips & Final Videos • 📜 Logs • 📦 Working Directory Artifacts
-      </td>
-    </tr>
-  </table>
-</div>
-
-
 
 
 
@@ -400,7 +226,91 @@ uv sync
 ```
 
 
-### 🎯 **Usage**
+<details>
+<summary><strong>Agent TUI</strong></summary>
+
+ViMax also provides a minimal TUI for interactive agent-based video creation. Create a private local configuration from the tracked example first:
+
+```bash
+cp configs/agent.example.yaml configs/agent.local.yaml
+```
+
+Then configure the model and API key information in `configs/agent.local.yaml`, including the LLM, image generator, and video generator, as shown below.
+```yaml
+llm:
+  model_provider: openai
+  model: <YOUR_LLM_MODEL>
+  base_url: <YOUR_LLM_BASE_URL>
+  api_key: <YOUR_API_KEY>
+
+image:
+  model: <YOUR_IMAGE_MODEL>
+  base_url: <YOUR_IMAGE_BASE_URL>
+  api_key: <YOUR_API_KEY>
+
+video:
+  model: <YOUR_VIDEO_MODEL>
+  base_url: <YOUR_VIDEO_BASE_URL>
+  api_key: <YOUR_API_KEY>
+```
+
+Then, start the TUI from the ViMax root directory:
+```bash
+vimax tui
+```
+
+Start a new session or resume an existing one:
+```bash
+vimax tui new
+vimax tui resume
+vimax tui resume <session_id>
+```
+
+You can also keep `configs/agent.local.yaml` empty and provide the same values through environment variables, such as `VIMAX_LLM_API_KEY`, `VIMAX_IMAGE_API_KEY`, and `VIMAX_VIDEO_API_KEY`.
+
+</details>
+
+<details>
+<summary><strong>Web UI</strong></summary>
+
+The Web UI uses the same ViMax agent runtime, sessions, tools, and private `configs/agent.local.yaml` configuration as the TUI. Node.js 18 or newer is required.
+
+From the `ViMax` repository root, install the frontend dependencies once and start the local server:
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+Open [http://127.0.0.1:4173](http://127.0.0.1:4173) in your browser. The Web UI supports named projects, agent conversations, slash commands, artifact and render inspection, storyboard previews, file uploads, and provider settings.
+
+The server binds to `127.0.0.1` by default. When ViMax runs on a remote machine, forward the port from your local computer:
+
+```bash
+ssh -N -L 4173:127.0.0.1:4173 <user>@<server>
+```
+
+Use `VIMAX_WEB_PORT` when another local port is required:
+
+```bash
+VIMAX_WEB_PORT=4174 npm run dev
+```
+
+</details>
+
+<details>
+<summary><strong>Usage</strong></summary>
+
+**Image Selection**
+
+ViMax generates 2 keyframe candidates in parallel and selects one using your vision-capable chat model. This can improve visual quality and consistency, at a higher API cost. Set in your YAML config:
+
+```yaml
+image_selection:
+  num_candidates: 2 # Set to 1 to disable selection.
+```
+
 main_idea2video.py is used to convert your ideas into videos.
 You need to configure the model and API key information in the configs/idea2video.yaml file, including three parts—the chat model, the image generator, and the video generator, as shown below
 ```yaml
@@ -437,35 +347,6 @@ For children, do not exceed 3 scenes.
 style = "Cartoon"
 ```
 
-#### Using MiniMax as Chat Model Provider
-
-[MiniMax](https://www.minimaxi.com/) models can be used as an alternative chat model provider. MiniMax offers OpenAI-compatible API access to models such as **MiniMax-M2.7** (1M context window) and **MiniMax-M2.5** (204K context).
-
-Simply set `model_provider: minimax` in your config — the base URL is resolved automatically:
-```yaml
-chat_model:
-  init_args:
-    model: MiniMax-M2.7
-    model_provider: minimax
-    api_key: <YOUR_MINIMAX_API_KEY>
-```
-
-Or export the API key as an environment variable and leave `api_key` empty:
-```bash
-export MINIMAX_API_KEY=<YOUR_KEY>
-```
-
-See `configs/idea2video_minimax.yaml` and `configs/script2video_minimax.yaml` for complete examples.
-
-| Model | Context | Note |
-|---|---|---|
-| MiniMax-M2.7 | 1M tokens | Latest, recommended |
-| MiniMax-M2.7-highspeed | 1M tokens | Fast variant |
-| MiniMax-M2.5 | 204K tokens | Stable |
-| MiniMax-M2.5-highspeed | 204K tokens | Fast variant |
-
----
-
 main_script2video.py generates a video based on a specific script.
 You similarly need to set up the API configuration in configs/script2video.yaml file. Then, provide a scene script and the corresponding creative requirements in main_script2video.py, as shown below.
 ```python
@@ -485,12 +366,4 @@ Fast-paced with no more than 20 shots.
 style = "Animate Style"
 ```
 
-
----
-
-**🌟 If this project helps you, please give us a Star!**
-
-<p align="center">
-  <em> ❤️ Thanks for visiting ✨ ViMax!</em><br><br>
-</p>
-
+</details>

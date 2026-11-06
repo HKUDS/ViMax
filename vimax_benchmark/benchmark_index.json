@@ -1,0 +1,219 @@
+{
+  "total_stories": 35,
+  "model_config": {
+    "model": "",
+    "api": ""
+  },
+  "stories": [
+    {
+      "id": 1,
+      "type": "Type A",
+      "theme": "chef_international_kitchens",
+      "file": "chef_international_kitchens_typeA.json"
+    },
+    {
+      "id": 2,
+      "type": "Type A",
+      "theme": "artist_extreme_weather",
+      "file": "artist_extreme_weather_typeA.json"
+    },
+    {
+      "id": 3,
+      "type": "Type A",
+      "theme": "musician_cultural_venues",
+      "file": "musician_cultural_venues_typeA.json"
+    },
+    {
+      "id": 4,
+      "type": "Type A",
+      "theme": "photographer_urban_timelapses",
+      "file": "photographer_urban_timelapses_typeA.json"
+    },
+    {
+      "id": 5,
+      "type": "Type A",
+      "theme": "scientist_natural_environments",
+      "file": "scientist_natural_environments_typeA.json"
+    },
+    {
+      "id": 6,
+      "type": "Type A",
+      "theme": "writer_contrasting_locations",
+      "file": "writer_contrasting_locations_typeA.json"
+    },
+    {
+      "id": 7,
+      "type": "Type A",
+      "theme": "dancer_architectural_spaces",
+      "file": "dancer_architectural_spaces_typeA.json"
+    },
+    {
+      "id": 8,
+      "type": "Type A",
+      "theme": "gardener_four_seasons",
+      "file": "gardener_four_seasons_typeA.json"
+    },
+    {
+      "id": 9,
+      "type": "Type A",
+      "theme": "athlete_training_conditions",
+      "file": "athlete_training_conditions_typeA.json"
+    },
+    {
+      "id": 10,
+      "type": "Type A",
+      "theme": "barista_coffee_cultures",
+      "file": "barista_coffee_cultures_typeA.json"
+    },
+    {
+      "id": 11,
+      "type": "Type A",
+      "theme": "filmmaker_lighting_setups",
+      "file": "filmmaker_lighting_setups_typeA.json"
+    },
+    {
+      "id": 12,
+      "type": "Type A",
+      "theme": "fashion_model_runway_styles",
+      "file": "fashion_model_runway_styles_typeA.json"
+    },
+    {
+      "id": 13,
+      "type": "Type B",
+      "theme": "investigation_antique_bookshop",
+      "file": "investigation_antique_bookshop_typeB.json"
+    },
+    {
+      "id": 14,
+      "type": "Type B",
+      "theme": "cooking_competition_restaurant",
+      "file": "cooking_competition_restaurant_typeB.json"
+    },
+    {
+      "id": 15,
+      "type": "Type B",
+      "theme": "puzzle_solving_escape_room",
+      "file": "puzzle_solving_escape_room_typeB.json"
+    },
+    {
+      "id": 16,
+      "type": "Type B",
+      "theme": "fashion_shoot_art_gallery",
+      "file": "fashion_shoot_art_gallery_typeB.json"
+    },
+    {
+      "id": 17,
+      "type": "Type B",
+      "theme": "family_gathering_victorian_mansion",
+      "file": "family_gathering_victorian_mansion_typeB.json"
+    },
+    {
+      "id": 18,
+      "type": "Type B",
+      "theme": "theater_rehearsal_community_stage",
+      "file": "theater_rehearsal_community_stage_typeB.json"
+    },
+    {
+      "id": 19,
+      "type": "Type B",
+      "theme": "science_demo_university_lab",
+      "file": "science_demo_university_lab_typeB.json"
+    },
+    {
+      "id": 20,
+      "type": "Type B",
+      "theme": "meditation_class_zen_temple",
+      "file": "meditation_class_zen_temple_typeB.json"
+    },
+    {
+      "id": 21,
+      "type": "Type B",
+      "theme": "wine_tasting_cellar_venue",
+      "file": "wine_tasting_cellar_venue_typeB.json"
+    },
+    {
+      "id": 22,
+      "type": "Type B",
+      "theme": "pottery_workshop_studio_space",
+      "file": "pottery_workshop_studio_space_typeB.json"
+    },
+    {
+      "id": 23,
+      "type": "Type B",
+      "theme": "music_recording_home_studio",
+      "file": "music_recording_home_studio_typeB.json"
+    },
+    {
+      "id": 24,
+      "type": "Type B",
+      "theme": "board_game_cafe_interior",
+      "file": "board_game_cafe_interior_typeB.json"
+    },
+    {
+      "id": 25,
+      "type": "Type C",
+      "theme": "business_partners_office_negotiation",
+      "file": "business_partners_office_negotiation_typeC.json"
+    },
+    {
+      "id": 26,
+      "type": "Type C",
+      "theme": "mentor_student_craft_learning",
+      "file": "mentor_student_craft_learning_typeC.json"
+    },
+    {
+      "id": 27,
+      "type": "Type C",
+      "theme": "three_friends_surprise_planning",
+      "file": "three_friends_surprise_planning_typeC.json"
+    },
+    {
+      "id": 28,
+      "type": "Type C",
+      "theme": "couple_cooking_dinner_together",
+      "file": "couple_cooking_dinner_together_typeC.json"
+    },
+    {
+      "id": 29,
+      "type": "Type C",
+      "theme": "scientists_lab_collaboration",
+      "file": "scientists_lab_collaboration_typeC.json"
+    },
+    {
+      "id": 30,
+      "type": "Type C",
+      "theme": "teacher_student_tutoring_session",
+      "file": "teacher_student_tutoring_session_typeC.json"
+    },
+    {
+      "id": 31,
+      "type": "Type C",
+      "theme": "athletes_gym_training_duo",
+      "file": "athletes_gym_training_duo_typeC.json"
+    },
+    {
+      "id": 32,
+      "type": "Type C",
+      "theme": "detective_witness_interview",
+      "file": "detective_witness_interview_typeC.json"
+    },
+    {
+      "id": 33,
+      "type": "Type C",
+      "theme": "colleagues_brainstorming_ideas",
+      "file": "colleagues_brainstorming_ideas_typeC.json"
+    },
+    {
+      "id": 34,
+      "type": "Type C",
+      "theme": "siblings_organizing_family_event",
+      "file": "siblings_organizing_family_event_typeC.json"
+    },
+    {
+      "id": 35,
+      "type": "Type C",
+      "theme": "musicians_band_rehearsal",
+      "file": "musicians_band_rehearsal_typeC.json"
+    }
+  ]
+}

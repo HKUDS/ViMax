@@ -1,0 +1,113 @@
+{
+  "story_overview": "In an underground wine cellar during a public tasting event, adult staff and guests move through a fixed, richly detailed room while preparing, sampling, and culminating in a friendly toast after a featured bottle is unveiled and poured.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Establishing view of a complex underground wine cellar tasting room, architecture locked: arched brick ceiling, warm amber wall sconces, long oak tasting table centered in frame, four high wooden stools along the near side, a wrought-iron pillar slightly left of center, stacked wooden barrels lining the left wall, a tall metal wine rack on the right wall, a small service counter at the far end with a brass desk lamp and a neat row of empty wine glasses. Stone floor with subtle damp sheen. Several adult guests (20+), modest attire (button-down shirts, sweaters, slacks, ankle-length skirts), gather near the table; an adult sommelier stands by the service counter holding a clipboard.",
+          "video_prompt": "Eye-level wide shot, 24mm lens from the room entrance. Slow, gentle push-in toward the center oak table as guests step aside and approach their places; one guest walks behind the wrought-iron pillar (occlusion), while the sommelier at the far counter sets the clipboard down under the brass lamp. Warm, steady lighting; no geometry changes to the room."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium shot from the right side of the oak table, showing the fixed background: the left wall barrels, the central pillar, and the far service counter aligned the same. Two adult guests stand near the stools; an adult server in a dark vest and white shirt (modest, long sleeves) carries a tray of clean glasses.",
+          "video_prompt": "Eye-level medium shot, 50mm lens from the right aisle beside the table. The server walks from the far counter toward foreground, tray level; a guest pulls out a stool and sits (contact with stool), while another guest sidesteps behind the pillar, briefly disappearing, then reappearing on the other side. Camera stays locked; room layout remains constant."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Close-up on the service counter at the far end: brass lamp, corkscrew, folded linen, and a lineup of empty glasses. The fixed cellar details remain visible in bokeh: arched brick ceiling and right-wall wine rack. The adult sommelier (20+, neat hair, modest suit jacket) reaches for a dark bottle resting on the counter.",
+          "video_prompt": "Eye-level close-up, 85mm lens focused on hands and tools at the counter. The sommelier places the bottle upright, rotates it to face the room, and sets a corkscrew beside it; a guest passes behind in soft focus, moving from right rack area toward the table (depth and background continuity). Subtle lamp glow highlights glass reflections."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "High angle view looking down onto the center oak table: place settings of empty wine glasses and small note cards. The four stools on the near side are clearly spaced; the iron pillar and left barrels remain in fixed positions. Adult guests begin to cluster around the table, hands resting on the tabletop.",
+          "video_prompt": "Overhead high-angle static shot, 35mm lens. Guests slide note cards into place and align glasses; one guest leans a forearm on the table edge (contact), another steps between stools and the pillar, briefly occluded by the pillar as they move to the far side. Warm light pools on wood grain; no change in furniture placement."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Two-shot at the center of the oak table: the adult sommelier stands on the far side facing two adult guests seated on stools. The fixed background includes the left barrels, right wine rack, and the service counter behind the sommelier. Clean glasses and note cards are arranged on the table.",
+          "video_prompt": "Eye-level medium two-shot, 40mm lens from the near side of the table. The sommelier gestures toward the bottle notes and points to the glass; guests nod and adjust their seated posture. A server crosses the background from left barrels to right rack, moving behind the sommelier (depth testing). Camera remains steady; room geometry unchanged."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Low angle shot near floor level, looking along the stone floor toward the table legs and stools. The iron pillar rises in frame; the barrel stacks on the left remain fixed. Adult guests’ shoes and pant hems move around the stools; modest clothing only.",
+          "video_prompt": "Low-angle wide shot, 28mm lens close to the stone floor. A guest pulls a stool backward (scrape implied, contact with floor), then sits; another guest walks behind the stool row toward the far side, briefly hidden by table legs and the pillar (occlusion). Lighting glints off the slightly damp stone texture; no background warping."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Close-up at the oak table surface: an adult server’s hands place a tasting mat and a glass in front of an adult guest. The fixed cellar environment is visible behind: iron pillar and barrels in soft focus, same positions.",
+          "video_prompt": "Eye-level close-up, 90mm lens on tabletop. The server sets down the glass, slides it a few centimeters to align with the note card, then withdraws hands; the guest’s hand steadies the mat (contact). In the background, another guest passes behind the pillar, partially obscured. Warm highlights reflect off the glass rim."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Wide shot from the left side of the room showing the long oak table diagonally. Left wall barrels dominate foreground; the iron pillar and right wall wine rack remain fixed. The adult sommelier stands near the far counter holding the featured bottle; guests sit and stand around the table.",
+          "video_prompt": "Wide angle, 24mm lens from near the left barrels. Slow pan from the barrels toward the table and far counter, keeping the same cellar layout. The sommelier walks from the counter to the table, passing in front of the pillar; a guest in the near right steps back to allow passage (foreground interaction). Camera pan is smooth; architecture remains consistent."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Medium close-up of the sommelier at the center of the oak table with the bottle and corkscrew. Guests’ hands and glasses ring the frame edges. The iron pillar is fixed just behind the sommelier’s left shoulder; barrels and rack remain in their established positions.",
+          "video_prompt": "Eye-level medium close-up, 65mm lens. The sommelier cuts the foil, inserts the corkscrew, and begins twisting; guests lean in slightly, glasses held steady on the table (contact). A server moves in the background behind the pillar, briefly disappearing then reappearing on the other side. Warm light emphasizes metal tool sheen."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Extreme close-up of the cork emerging from the bottle neck over the oak tabletop. Reflections of the amber sconces shimmer on the glass. Background is blurred but stable: brick ceiling tones and the fixed lamp glow from the far counter.",
+          "video_prompt": "Macro close-up, 100mm lens with shallow depth of field. The cork lifts slowly with a controlled pull; the sommelier pauses, then fully removes it and sets it on a small linen square. Subtle camera micro-movement only; maintain consistent warm lighting and stable environment."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Over-the-shoulder shot from behind the sommelier looking down the length of the oak table toward seated guests. Fixed features align: stools on near side, pillar slightly left, barrels left, wine rack right. Glasses are arranged in a neat line.",
+          "video_prompt": "Over-the-shoulder medium shot, 35mm lens. The sommelier tilts the bottle and pours a small amount into the first glass; then shifts one step to the next place setting, careful and steady. Guests slide their glasses forward a few centimeters (contact with table). A guest in mid-background stands and moves behind the pillar to the far side (occlusion and depth)."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Medium shot near the right wall wine rack, looking toward the table. The rack’s grid and bottle silhouettes remain fixed; the iron pillar still anchors the center depth. In foreground, an adult guest stands near the rack holding a glass; another guest sits at the table.",
+          "video_prompt": "Eye-level medium shot, 50mm lens from the right wall area. The standing guest steps away from the rack toward the table, passing behind a seated guest and partially occluded by chair backs; they gently set their glass down on the table and sit on an open stool (contact and physics). Camera remains locked; background geometry consistent."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Close-up on a seated adult guest’s hands at the table: they hold the glass by the stem above a tasting mat; note card and pencil beside it. Stable background blur shows the pillar and barrels in their fixed positions.",
+          "video_prompt": "Eye-level close-up, 85mm lens. The guest gently swirls the wine once, then brings the glass near their nose for a careful smell; their other hand taps a note on the card with the pencil. In soft focus, another guest walks behind the pillar toward the counter, briefly obscured. Warm highlights track across the liquid surface."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Wide shot from the far end near the service counter, looking back toward the entrance. The brass lamp and counter edge frame the foreground; the long oak table leads into the room; pillar, barrels, and rack are all in their established places. The sommelier stands at the table’s center addressing the group.",
+          "video_prompt": "Wide shot, 27mm lens from behind the service counter. Slow dolly forward along the table axis as the sommelier lifts the bottle label toward the group for a featured reveal; guests lean in and then relax back, some seated, some standing. A server crosses from right rack to left barrels behind the sommelier (depth and occlusion by pillar). No changes to set layout."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Medium group shot along the near side of the oak table: three adult guests (20+) in modest attire hold glasses at chest height; the sommelier stands opposite. The iron pillar is visible between two guests in the background; barrels and rack remain fixed.",
+          "video_prompt": "Eye-level medium group shot, 45mm lens. The sommelier invites a toast; guests raise their glasses together, lean slightly toward the center, and clink once (single, gentle contact), then smile and lower glasses. One guest steps behind the pillar to make room, briefly occluded. Lighting remains warm and celebratory, PG-rated."
+        },
+        {
+          "shot_id": 16,
+          "first_frame": "Final establishing angle: a serene wide shot from a corner near the left barrels, showing the entire stable cellar room—arched brick ceiling, amber sconces, iron pillar, long oak table, stools, right wine rack, and far service counter with brass lamp. Guests and staff are settling, glasses on the table, note cards visible.",
+          "video_prompt": "Wide angle static shot, 24mm lens from the left corner by the barrels. Gentle ambient motion: guests take their seats, a server collects an empty tray and walks behind the pillar toward the counter (occlusion), and the sommelier sets the bottle down at center table. The scene holds on the fixed architecture and cozy atmosphere to close the event."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "wine_tasting_cellar_venue",
+    "theme_description": "A wine tasting event in an underground cellar",
+    "consistency_type": "Type B",
+    "requested_scenes": 4,
+    "requested_shots": 16
+  }
+}

@@ -7,28 +7,26 @@ from langchain.chat_models.base import BaseChatModel
 from langchain.chat_models import init_chat_model
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict
-from tenacity import retry, stop_after_attempt
 from interfaces import CharacterInScene, ImageOutput
 from langchain_core.messages import HumanMessage, SystemMessage
-from utils.retry import after_func
 
 
 
 prompt_template_front = \
 """
-Generate a full-body, front-view portrait of character {identifier} based on the following description, with a pure white background. The character should be centered in the image, occupying most of the frame. Gazing straight ahead. Standing with arms relaxed at sides. Natural expression.
+Generate a full-body, front-view portrait of character {identifier} based on the following description, with a pure white background. Use a wide 16:9 landscape canvas, not a vertical portrait canvas. The character should be centered in the image, occupying the middle of the wide frame with enough horizontal empty space. Gazing straight ahead. Standing with arms relaxed at sides. Natural expression.
 Features: {features}
 Style: {style}
 """
 
 prompt_template_side = \
 """
-Generate a full-body, side-view portrait of character {identifier} based on the provided front-view portrait, with a pure white background. The character should be centered in the image, occupying most of the frame. Facing left. Standing with arms relaxed at sides.
+Generate a full-body, side-view portrait of character {identifier} based on the provided front-view portrait, with a pure white background. Use a wide 16:9 landscape canvas, not a vertical portrait canvas. The character should be centered in the image, occupying the middle of the wide frame with enough horizontal empty space. Facing left. Standing with arms relaxed at sides.
 """
 
 prompt_template_back = \
 """
-Generate a full-body, back-view portrait of character {identifier} based on the provided front-view portrait, with a pure white background. The character should be centered in the image, occupying most of the frame. No facial features should be visible.
+Generate a full-body, back-view portrait of character {identifier} based on the provided front-view portrait, with a pure white background. Use a wide 16:9 landscape canvas, not a vertical portrait canvas. The character should be centered in the image, occupying the middle of the wide frame with enough horizontal empty space. No facial features should be visible.
 """
 
 
@@ -40,13 +38,12 @@ class CharacterPortraitsGenerator:
         self.image_generator = image_generator
 
 
-    @retry(stop=stop_after_attempt(3), after=after_func, reraise=True)
     async def generate_front_portrait(
         self,
         character: CharacterInScene,
         style: str,
     ) -> ImageOutput:
-        features = "(static) " + character.static_features + "; (dynamic) " + character.dynamic_features
+        features = "(static) " + (character.static_features or "") + "; (dynamic) " + (character.dynamic_features or "")
         prompt = prompt_template_front.format(
             identifier=character.identifier_in_scene,
             features=features,
@@ -58,7 +55,6 @@ class CharacterPortraitsGenerator:
         )
         return image_output
 
-    @retry(stop=stop_after_attempt(3), after=after_func, reraise=True)
     async def generate_side_portrait(
         self,
         character: CharacterInScene,
@@ -75,7 +71,6 @@ class CharacterPortraitsGenerator:
         return image_output
 
 
-    @retry(stop=stop_after_attempt(3), after=after_func, reraise=True)
     async def generate_back_portrait(
         self,
         character: CharacterInScene,

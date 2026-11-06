@@ -1,0 +1,113 @@
+{
+  "story_overview": "A single adult musician travels the world performing the same uplifting melody in dramatically different cultural venues, building from a quiet street set to a climactic global finale where the audience joins in.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Golden-hour city plaza with warm stone paving and a small fountain in the background. Center frame: a 32-year-old man (adult) with olive skin, short curly black hair, a neatly trimmed beard, and a small crescent-shaped scar above his right eyebrow. He wears a modest outfit that must remain identical in every shot: navy wool blazer with brass buttons, light gray crew-neck sweater, dark denim jeans, and clean white low-top sneakers. He holds a natural-finish acoustic guitar with a red woven shoulder strap. A compact black gig bag lies closed at his feet; a small open case sits nearby with a few coins. Mood: calm, hopeful; soft rim light on his blazer texture.",
+          "video_prompt": "Eye-level medium-wide shot, 28mm lens. He takes a steady breath, adjusts the red woven strap, and begins a gentle fingerstyle pattern on the acoustic guitar. A few passersby slow down; the fountain sparkles behind him as the camera makes a subtle push-in and then holds, ending on his focused expression."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Same musician and identical outfit and guitar. New angle: tight close-up on his hands over the guitar’s sound hole, showing wood grain and the red strap crossing the lower corner of frame. Background bokeh of plaza lights and pedestrians; warm sunset highlights on his knuckles.",
+          "video_prompt": "Close-up, 85mm lens, shallow depth of field. His right hand alternates thumb and finger plucks while his left hand shifts to a higher chord shape; the strings visibly vibrate. Camera performs a slow lateral slide to reveal the red woven strap and the edge of the navy blazer sleeve, emphasizing consistency as the rhythm becomes more confident."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a quiet indoor rehearsal room with pale acoustic panels, a metronome on a small table, and a wall clock. Cool, neutral overhead lighting creates soft shadows under his jawline; he sits on a simple wooden chair, posture upright, guitar resting on his thigh.",
+          "video_prompt": "High-angle medium shot, 35mm lens. He taps his sneaker lightly in time, nods, and practices a brighter variation of the melody. The metronome’s arm swings steadily; the camera gently tilts down to include the tapping foot and then tilts back up to his concentrated face."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a nighttime airport terminal window wall overlooking runway lights and parked planes. Cool blue and white fluorescent lighting; reflections on polished floor. He stands near a row of seats, guitar held close, looking out the window with a determined, peaceful expression.",
+          "video_prompt": "Side-profile medium shot, 50mm lens. He walks slowly past the seats, pauses at the window, and softly strums a quiet chord as if promising the next performance. Camera tracks parallel for a few steps, then stops as he turns his head toward the runway lights, ending with his scar and beard clearly visible in the cool glow."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a rain-dampened neon-lit alley market with colorful paper lanterns and small food stalls (no readable brand signage). Wet cobblestones reflect magenta and cyan light. He stands under a simple awning; light rain falls beyond the shelter.",
+          "video_prompt": "Low-angle wide shot, 24mm lens. He begins the melody with a stronger strum pattern; raindrops ripple in puddles at the bottom of frame. Camera makes a slow dolly-in from near the puddle reflections up to him, emphasizing the neon colors washing across his navy blazer while he stays steady and composed."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a tranquil Japanese-style garden courtyard with raked gravel, stepping stones, and a wooden pavilion. Soft morning mist and diffused light; a small koi pond sits to one side. He is seated on the pavilion’s wooden edge, guitar balanced neatly.",
+          "video_prompt": "Overhead-to-oblique medium shot, 35mm lens. He plays a delicate, airy variation; his fingers move precisely. The camera slowly cranes down and slightly forward, revealing raked gravel patterns and the pond’s gentle ripples, ending on his calm expression as the melody breathes with the mist."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a sunlit desert oasis courtyard with clay walls, patterned tiles, and a shade canopy. Warm, high-contrast sunlight creates sharp shadows; a small water basin glints behind him. He stands centered, feet planted, guitar strap taut.",
+          "video_prompt": "Eye-level medium shot, 50mm lens. He leans into a rhythmic strum and adds a percussive tap on the guitar body. Camera makes a quick, controlled push-in and then stabilizes, capturing the crisp texture of the blazer and the red strap against the bright desert palette as the tempo lifts."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a bustling European-style covered market hall with iron beams, stained glass, and produce stalls. Midday light filters through colored glass, casting soft patches of color on the floor. He stands near a central aisle, a small semicircle of adults watching at a respectful distance.",
+          "video_prompt": "Handheld-feel medium-wide shot, 28mm lens. He plays the melody louder; a few listeners nod and clap lightly on the beat (family-friendly, no chanting text). The camera drifts slightly left-right to mimic a documentary feel, then settles into a steadier frame as the crowd’s attention gathers."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a candlelit stone chapel interior (no specific religious symbols in close detail), with wooden pews and tall arched windows. Warm amber candlelight flickers across stone textures; the air looks slightly hazy for atmosphere. He stands in the aisle, respectful and serene.",
+          "video_prompt": "Centered wide shot, 24mm lens. He plays softly; the notes feel reverent. Camera performs a slow, symmetrical push-in down the aisle toward him while candle flames flicker, ending on a medium framing where his facial scar and beard remain clearly defined in warm light."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a bright coastal amphitheater with white stone seating, turquoise sea visible beyond, and flags fluttering (no national identifiers). Strong sunlight and sea breeze; his blazer moves slightly in the wind. He stands on the stage area, facing empty seats that begin to fill with a few adults arriving.",
+          "video_prompt": "Wide shot, 20mm lens, slight high angle from the seating. He strikes a bold opening chord and continues confidently. Camera pans slowly as a few audience members take seats, then returns to center on him as the wind lifts the red strap subtly, highlighting motion against the ocean backdrop."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a snowy mountain overlook with a wooden railing and pine trees coated in snow. Cold, bright daylight; his breath is visible. He wears the same outfit without additions; the navy blazer contrasts sharply with the white snow.",
+          "video_prompt": "Low-angle medium shot, 35mm lens. He plays with energetic strums, stamping his sneaker once to keep time. The camera arcs slightly around him from left to right, snow crystals sparkling in the air; his breath puffs with each phrase as the melody swells toward a peak."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a tropical beach at sunset with palm silhouettes, gentle waves, and warm orange-pink sky. He stands on firm sand near a small driftwood log, facing a small group of adult listeners seated at a respectful distance. Soft backlight outlines his blazer and hair curls.",
+          "video_prompt": "Backlit medium-wide shot, 28mm lens. He transitions into the chorus-like section, strumming in a steady, uplifting rhythm. The camera slowly dolly-in while waves roll in the background; a couple of listeners clap softly on the off-beat, and the shot ends as he smiles briefly without breaking the tempo."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a modern glass-walled cultural center lobby with international-style decor elements (abstract textiles, sculptures) and bright, clean lighting. A small portable stage platform sits center; a modest microphone stand is present but he plays acoustically. Adults gather in a semicircle, attentive.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. He steps onto the platform and begins the final full arrangement, confident and joyful. Camera makes a smooth gimbal push-in as the audience leans forward slightly, ending with him centered and framed by geometric glass reflections."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: rooftop at night with a panoramic city skyline of many buildings and soft bokeh lights. String lights are hung overhead, creating warm pools of light; a gentle breeze moves them. He stands near the rooftop edge railing (safe distance), guitar ready, expression focused.",
+          "video_prompt": "Over-the-shoulder shot from behind him, 35mm lens. He strums strongly; the skyline twinkles ahead. Camera slowly rises a few inches and tilts down to catch the guitar neck and his left hand moving through the chord changes, then tilts back up to the lights as the music builds toward the climax."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: a grand indoor concert hall with wooden acoustic panels and soft spotlights. The stage is modest and uncluttered; a seated audience of adults fills the lower frame edges in silhouette. A bright key spotlight illuminates his face, making the eyebrow scar crisp.",
+          "video_prompt": "Front-facing medium close-up, 70mm lens. He reaches the emotional high point of the melody, intensifying strums and adding a clean percussive tap. The camera holds steady with a subtle micro push-in; audience silhouettes gently sway, and the spotlight glints on the guitar’s natural wood as he sustains the climax."
+        },
+        {
+          "shot_id": 16,
+          "first_frame": "Same musician, identical outfit and guitar. New setting: an outdoor world-fair-style courtyard at dusk with diverse architectural pavilions in the far background (generic, non-branded). Festoon lights glow overhead; a mixed group of adults stands in a wide circle. He is center frame, slightly angled, finishing the last phrase.",
+          "video_prompt": "Crane-down wide shot, 24mm lens. As he plays the final refrain, the camera descends gently from above to a level framing, revealing the circle of listeners. On the last measures, several audience members clap in unison; he ends with a clean final chord, lifts his gaze with a grateful smile, and the shot holds for a beat on the shared, uplifting moment."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "musician_cultural_venues",
+    "theme_description": "A musician performing in different cultural venues around the world",
+    "consistency_type": "Type A",
+    "requested_scenes": 4,
+    "requested_shots": 16
+  }
+}

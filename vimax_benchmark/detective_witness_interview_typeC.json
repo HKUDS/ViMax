@@ -1,0 +1,93 @@
+{
+  "story_overview": "In a quiet police interview room, a methodical detective interviews a nervous witness about a missing community grant file. Through careful questioning and a collaborative reenactment using a table map and objects, they uncover a crucial detail that identifies where the file was last handled, leading to a clear next step in the investigation.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide two-shot in a modest, well-lit police interview room. Detective Mira Chen (adult woman, 34, East Asian, neat chin-length black bob, calm focused expression, wearing a charcoal blazer over a light blue button-up shirt, dark slacks, no visible jewelry) sits on the left side of a gray metal table with a closed tan folder, a pen, and a small digital voice recorder. Witness Jordan Hale (adult man, 29, light skin, short curly auburn hair, light freckles, clean-shaven, wearing a forest-green crewneck sweater over a white collared shirt, dark jeans) sits on the right, hands folded. A plain wall with a clock and a frosted glass observation window sits behind them. Both are modestly dressed, PG-rated mood.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, locked-off camera. Detective Mira gently slides the small digital recorder to the center of the table and nods to begin; Jordan takes a steadying breath and straightens in his chair. Subtle room tone, soft overhead fluorescent lighting, neutral color palette."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Over-the-shoulder close-up from behind Detective Mira, framing Jordan’s upper body and face. The recorder and tan folder are blurred in the foreground. Jordan’s eyes flick toward the folder, his fingers interlaced tightly, expression anxious but cooperative.",
+          "video_prompt": "Over-the-shoulder close-up, 50mm lens, slight handheld micro-movement. Jordan speaks with small head nods, then briefly glances down at his hands; his fingers loosen and re-lace as he tries to recall details. Lighting remains soft and even, highlighting natural skin texture and sweater knit."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Reverse over-the-shoulder close-up from behind Jordan, framing Detective Mira’s face and shoulders. Mira’s charcoal blazer and light blue shirt collar are crisp. The tan folder sits near her left hand; the pen is aligned parallel to the table edge. Mira’s expression is attentive and composed.",
+          "video_prompt": "Over-the-shoulder close-up, 70mm lens, steady camera. Mira asks a precise question, tapping the pen once beside the folder for emphasis, then pauses and maintains steady eye contact. Subtle reflections on the tabletop; controlled, professional tone."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Insert shot of the tabletop: the small digital recorder centered, the closed tan folder to the left, a notepad to the right with a few neat lines, and Mira’s pen near the bottom edge. Jordan’s hands rest near the right edge of frame, sleeves of the green sweater visible.",
+          "video_prompt": "Top-down insert shot, 35mm lens, static camera. Mira’s hand enters frame to open the notepad and underline a key time; Jordan’s fingertips hover near the recorder but do not touch it, then retreat. Overhead light creates soft, diffused shadows and clear object edges."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Medium two-shot from a slight angle, showing both seated across the table. Mira has placed a simple printed map of a community center on the table between them (rooms labeled, black-and-white floor plan). A paper cup of water sits near Jordan. The frosted observation window is visible in the background.",
+          "video_prompt": "Eye-level medium two-shot, 35mm lens, gentle slow push-in. Mira slides the printed map toward Jordan and points to a hallway on the plan; Jordan leans forward, placing one finger near a marked door, indicating where he stood. The action is collaborative, calm, and focused."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Close-up on Jordan’s hands over the printed map. His index finger rests on a small labeled rectangle reading 'Office'. The knit texture of his green sweater cuffs is visible. Mira’s pen tip appears at the edge of frame, poised to mark a note on the margin.",
+          "video_prompt": "Close-up, 60mm lens, static camera. Jordan traces a short path along the hallway line on the map; Mira’s pen follows near his finger, stopping at a doorway. Their gestures coordinate precisely without overlap of identities; the paper crinkles softly."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Medium close-up on Detective Mira from Jordan’s side, her face in three-quarter view. She holds a small clear evidence bag containing a plain keycard (no logos), lifted at chest height. Her expression is gently inquisitive. Jordan is blurred in the near foreground edge.",
+          "video_prompt": "Eye-level medium close-up, 50mm lens, slight tilt as Mira raises the evidence bag into clearer view. Mira asks if Jordan recognizes the keycard; she rotates the bag slightly so the card catches the overhead light. The bag crinkles; lighting highlights plastic reflections."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Reaction close-up on Jordan’s face, framed tight. His freckles and auburn curls are clearly visible. His eyes widen with recognition; his posture leans forward slightly. Background falls into soft blur, with a hint of the frosted window.",
+          "video_prompt": "Eye-level close-up, 85mm lens, subtle handheld. Jordan nods once, then raises his right hand to gesture toward the map off-screen, speaking faster as he recalls a detail. His expression shifts from anxious to certain."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "High-angle wide shot looking down at the entire table and both participants. The printed map lies centered; the tan folder is now open near Mira with a few papers inside (text not readable). The recorder remains near the middle. Mira and Jordan both lean in, hands visible but not touching each other.",
+          "video_prompt": "High-angle wide shot, 28mm lens, locked-off. Mira places the keycard bag gently on the map near the 'Office' label; Jordan points to a different room labeled 'Copy Room' and then to the hallway, indicating a route. Their coordinated gestures create a clear shared action while keeping identities distinct."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 10,
+          "first_frame": "Low-angle medium two-shot from table level, emphasizing the recorder in the foreground and both faces above it. Mira sits upright, composed; Jordan sits forward, engaged. The room’s clock is visible on the wall behind them, showing late afternoon.",
+          "video_prompt": "Low-angle medium two-shot, 35mm lens, slow dolly left. Mira calmly summarizes the timeline; Jordan interjects with a specific time and nods emphatically. The recorder remains stationary as the focal foreground anchor; soft fluorescent lighting keeps a neutral, procedural mood."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Insert close-up of Mira’s notepad on the table. A simple timeline is drawn with neat handwriting and an empty checkbox next to 'Copy Room printer log'. Mira’s pen hovers above the checkbox. The edge of the printed map peeks in from the left.",
+          "video_prompt": "Top-down close-up insert, 55mm lens, static camera. Mira checks the box with one decisive stroke, then circles a time on the timeline. The pen lifts; paper fibers and ink edges are crisp under even overhead light."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Over-the-shoulder two-shot from behind Mira, framing Jordan and the open folder on the table. Jordan holds a small rectangular receipt slip (plain paper, no branding) between two fingers, extended across the table. Mira’s hand is open, ready to receive it; their hands are inches apart.",
+          "video_prompt": "Over-the-shoulder medium shot, 40mm lens, gentle push-in. Jordan passes the receipt slip to Mira; Mira takes it carefully and places it beside the map. This is the key shared action, clearly showing object transfer without attribute mixing. The moment feels like the turning point."
+        },
+        {
+          "shot_id": 13,
+          "first_frame": "Wide concluding two-shot, eye-level, showing both seated as the tension eases. Mira stands partially from her chair, holding the receipt slip and the evidence bag with the keycard in one hand, the tan folder tucked under her other arm. Jordan sits back, shoulders lowered, hands resting calmly on the table. The room remains tidy and unchanged, with the frosted window and clock behind them.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, locked-off. Mira offers a reassuring nod and explains the next step—checking the printer log and keycard access—then turns slightly toward the door as if to proceed. Jordan exhales with visible relief and gives a small confirming nod. Lighting stays soft and professional, ending on a clear investigative plan (climax: critical evidence revealed and direction set)."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "detective_witness_interview",
+    "theme_description": "A detective interviewing a witness about a case",
+    "consistency_type": "Type C",
+    "requested_scenes": 3,
+    "requested_shots": 13
+  }
+}

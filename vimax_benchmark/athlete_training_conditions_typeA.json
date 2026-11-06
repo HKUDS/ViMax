@@ -1,0 +1,113 @@
+{
+  "story_overview": "A single adult athlete follows a focused training plan across radically different weather and terrain, adapting technique and mindset until a final, demanding summit run proves their growth.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Early morning urban track under pale sunrise. Center frame: a 27-year-old male athlete with warm brown skin, short curly black hair, a neat trimmed beard, and a small crescent-shaped scar on his left eyebrow. He wears a forest-green zip-up track jacket with reflective piping, charcoal gray athletic pants, and white running shoes with a distinctive lime-green stripe; a black sports watch on his left wrist. He stands at lane one beside a starting line, stretching calves. Background: empty bleachers, a scoreboard, faint mist hovering above the track. Crisp, cool lighting, realistic textures on rubber track granules.",
+          "video_prompt": "Eye-level wide shot on a 24mm lens from the inside curve of the track. The athlete finishes stretching, steps to the line, takes two controlled breaths, then jogs forward into an easy warm-up; light mist drifts sideways and the sunrise brightens slightly, creating gentle highlights on the reflective piping."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Same athlete and exact outfit at the same track but now framed tight: his hands adjust the forest-green jacket zipper and he glances at the black sports watch. The scar on the left eyebrow is clearly visible. Background is softly blurred: lane markings and bleachers. Cool sunrise rim light along his cheek and jacket shoulder, shallow depth of field.",
+          "video_prompt": "Eye-level close-up on an 85mm lens, static camera. He taps the watch to start a timer, exhales, and nods with determination; a faint breeze ripples the jacket fabric and condensation in the air curls past his face."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Top-down view of the urban track’s first curve. The athlete (same face, scar, beard, hair, and same forest-green jacket/charcoal pants/white shoes with lime stripe) runs along the inside lane. The rubber track texture is prominent, lane numbers crisp. Long morning shadows stretch behind him. The environment remains urban but this shot is a new composition with strong geometry.",
+          "video_prompt": "Overhead wide shot on a 20mm lens, slow lateral drift following his path. He increases cadence into a steady pace, arms swinging compactly; his footsteps trace the curve while the long shadows slide across lane markings, emphasizing rhythm."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Hard cut to a drastically different environment: a rain-soaked coastal boardwalk at dusk. The same athlete in the exact same outfit runs toward camera, shoes splashing through shallow puddles; lime-green shoe stripe flashes. Background: gray ocean, wet wooden planks, distant pier lights reflecting on puddles. Overcast sky, raindrops visible, moody cool-blue lighting with warm pinpoints from lamps.",
+          "video_prompt": "Low angle medium shot on a 35mm lens from boardwalk level. Rain falls steadily; he runs past a puddle, splashing water outward, then slightly adjusts stride to avoid a larger puddle; the camera holds position as he passes, droplets streaking across frame and reflections shimmering underfoot."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Hard cut to bright midday desert trail. Same athlete, same forest-green jacket/charcoal pants/white shoes with lime stripe, black watch, scar on left eyebrow. He runs on sandy singletrack between low scrub and sun-baked rocks. Heat haze distorts the far horizon; harsh sunlight creates sharp shadows. Dust clings lightly to the lower pant legs and shoe soles.",
+          "video_prompt": "Eye-level wide shot on a 28mm lens, gentle handheld feel. He jogs uphill through sand, feet sinking slightly; he shortens stride and pumps arms more, kicking a small plume of dust that trails behind; heat shimmer wavers in the background."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Desert environment, tighter framing on the athlete’s torso and feet. The lime-green stripe on the shoes is prominent as he steps over a small rock. Jacket fabric shows sun highlights; watch glints. Ground texture: loose sand, pebbles, cracked earth.",
+          "video_prompt": "Low angle close-up on a 50mm lens focused on feet and lower legs. He performs quick-footwork steps—two light taps, then a careful step over the rock—sending sand grains skittering; the camera tracks a short distance alongside to emphasize precision."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Hard cut to a windy grassy hillside under fast-moving clouds. Same athlete, unchanged outfit and facial features, runs laterally across frame. Tall grass bends in gusts; a lone tree in background leans slightly. Lighting is dramatic: sun breaks through clouds, creating rolling patches of brightness across the hill.",
+          "video_prompt": "Side-on tracking shot at waist height on a 35mm lens. The camera moves parallel with him as wind pushes his jacket; he leans subtly into the gusts, stabilizing with arms; cloud shadows race over the grass while intermittent sunlight flickers across his face and the eyebrow scar."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Hard cut to nighttime city street under winter slush and streetlights. Same athlete, same clothing, jogs past a crosswalk; breath forms visible vapor. Wet asphalt reflects amber streetlights and neon signage shapes (generic, non-branded). Snow piles line the curb; light flurries fall. He looks focused, watch visible on left wrist.",
+          "video_prompt": "Eye-level medium shot on a 40mm lens with a slow forward dolly. He runs toward the camera along the slushy lane edge, carefully placing feet to avoid slick patches; his breath puffs rhythmically and streetlight reflections ripple with each footfall."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Hard cut to an indoor gym with bright, even lighting and clean, family-friendly atmosphere. Same athlete (exact identity and outfit unchanged) is on a treadmill facing left, hands lightly on side rails as he steps on. Background: free weights neatly racked, a water dispenser, rubber flooring, large windows showing neutral daylight (no logos).",
+          "video_prompt": "Three-quarter angle medium-wide shot on a 24mm lens from the treadmill’s front-right corner. He starts the treadmill, begins at a brisk walk into a jog, posture tall; the belt moves beneath him while overhead lights create soft reflections on the treadmill frame."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Indoor gym close-up of the athlete’s face and upper chest. Scar on left eyebrow is crisp; short curly hair and trimmed beard consistent. Forest-green jacket zipper and reflective piping visible. He focuses forward, beads of sweat beginning at the hairline. Background softly blurred: treadmill console lights (generic), neutral walls.",
+          "video_prompt": "Eye-level close-up on an 85mm lens, locked-off camera. He inhales through the nose, exhales steadily, then subtly tightens jaw with determination; sweat glistens under the gym lights and the reflective piping catches brief highlights as his shoulders move."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Hard cut to a foggy forest trail at dawn. Same athlete in same outfit runs away from camera along a dirt path with wet leaves. Tall trees fade into mist; soft, diffuse light filters through branches. The lime-green shoe stripe is visible as his feet lift. Mood is quiet, focused.",
+          "video_prompt": "Rear tracking shot at knee height on a 35mm lens, camera following a few meters behind. He accelerates into a tempo run, footfalls muffled by damp earth; fog swirls as he passes, and droplets shake from low branches when his shoulder brushes near them."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Hard cut to a steep stone staircase in an old hillside neighborhood during late afternoon. Same athlete, same clothing and features, climbs upward. Textured stone steps, pastel walls, potted plants along edges. Warm sunlight casts diagonal shadows; the setting is dry and bright, sharply different from fog.",
+          "video_prompt": "Low angle wide shot on a 18mm lens from the base of the steps. He runs stair intervals—driving knees up, hands relaxed—ascending rapidly for several steps; the camera remains fixed as he passes upward through the frame, sunlight flashing across the reflective piping with each stride."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Hard cut to a high-altitude rocky ridgeline at sunrise, dramatic and clear. Same athlete, unchanged outfit and identity, stands near a trail marker (generic) with a vast valley below. He checks his black sports watch; the left-eyebrow scar visible in profile. Cold golden light illuminates rocks and the green jacket, wind lightly tugging fabric.",
+          "video_prompt": "Eye-level medium-wide shot on a 28mm lens with a slow push-in. He taps the watch, sets his stance, and takes a deep breath; wind gusts ripple the jacket and a few small pebbles skitter near his shoes as the sun crests higher."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Hard cut to a narrow mountain trail with patches of snow and exposed rock. Same athlete runs toward camera, carefully navigating uneven terrain. The white shoes with lime stripe contrast against dark stone; charcoal pants show a bit of dust at the cuffs. Bright, crisp alpine light; distant peaks in background.",
+          "video_prompt": "Low angle medium shot on a 35mm lens, camera positioned just off the trail edge. He performs controlled, quick steps over rocks, briefly hopping across a small snowy patch; his arms extend slightly for balance, and loose snow crystals scatter as his shoe lands."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Hard cut to a dramatic side profile on the same mountain: the athlete climbs a final steep switchback as clouds roll in, shifting light from warm to cool. Same outfit and facial features. Background shows a sharp drop-off with layered mountains; wind stronger, jacket flutters. Mood: intense but safe, no perilous actions beyond steady running.",
+          "video_prompt": "Side-on telephoto shot on a 100mm lens with slight camera pan following him uphill. He digs in for the final push, breathing visible in the colder air; clouds slide over the sun causing the scene to dim, then brighten briefly, emphasizing effort and changing conditions."
+        },
+        {
+          "shot_id": 16,
+          "first_frame": "Hard cut to the mountain summit plateau under clear sky. Same athlete, same forest-green jacket, charcoal pants, white shoes with lime stripe, black watch, scar on left eyebrow. He slows to a stop at the top, hands on hips, smiling calmly. Background: panoramic view, sunlit rocks, a small cairn, crisp air. Lighting: bright morning sun with clean shadows; triumphant, family-friendly tone.",
+          "video_prompt": "Eye-level wide shot on a 24mm lens, static camera. He walks a few steps forward, looks across the view, then raises one fist briefly in quiet celebration before relaxing; wind gently moves his jacket while sunlight sharpens the reflective piping, concluding the training arc at the summit."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "athlete_training_conditions",
+    "theme_description": "An athlete training in different weather and terrain conditions",
+    "consistency_type": "Type A",
+    "requested_scenes": 4,
+    "requested_shots": 16
+  }
+}

@@ -168,9 +168,9 @@ class GlobalInformationPlanner:
             scene_str += "<SCRIPT_END>\n\n"
             scene_str += "<CHARACTERS_START>\n"
             for character in scene.characters:
-                scene_str += f"<CHARACTER_{character.index}_START>\n"
+                scene_str += f"<CHARACTER_{character.idx}_START>\n"
                 scene_str += str(character)
-                scene_str += f"<CHARACTER_{character.index}_END>\n"
+                scene_str += f"<CHARACTER_{character.idx}_END>\n"
             scene_str += "<CHARACTERS_END>\n"
             scene_str += f"<SCENE_{scene.idx}_END>\n"
             scenes_sequence_str += scene_str

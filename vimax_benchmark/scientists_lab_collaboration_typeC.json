@@ -1,0 +1,93 @@
+{
+  "story_overview": "In a bright university laboratory, two adult scientists collaborate to calibrate a tabletop experiment, troubleshoot a sudden instability, and successfully stabilize the system to capture a clean final measurement.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide, eye-level establishing view of a modern university laboratory. Two adult scientists stand at a clean central workbench: Scientist A is a 34-year-old woman, tall and slim, medium-brown skin, short curly black hair, wearing a forest-green lab coat over a light gray turtleneck, dark slacks, and black closed-toe shoes; she has rectangular black eyeglasses and a calm, focused expression. Scientist B is a 41-year-old man, average height with a sturdy build, light skin, short dark hair with light stubble, wearing a navy-blue lab coat over a pale blue button-up shirt, khaki trousers, and brown closed-toe shoes; he wears clear safety goggles. On the bench: a compact optical experiment setup with a small metal breadboard, two silver posts, a black cylindrical sensor, a small glass chamber with a sealed lid, and a laptop to the right. Background: shelves with labeled containers, a whiteboard with neat diagrams, and a large window casting soft daylight. Everything is modest, professional, and PG.",
+          "video_prompt": "Eye-level wide shot with a 24mm lens from across the workbench. Scientist A gestures toward the whiteboard and then points to the glass chamber; Scientist B nods and taps a checklist on a clipboard. Both lean slightly toward the apparatus, speaking silently, while daylight glows through the window and lab monitors remain steady."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium two-shot from the left side of the bench. Scientist A (green lab coat, black rectangular glasses) stands closer to camera, holding a capped marker; Scientist B (navy lab coat, clear goggles) stands beside her with a clipboard. The whiteboard fills the background with a simple graph and arrows; the optical breadboard is partially visible at frame bottom right.",
+          "video_prompt": "Medium two-shot, slight low angle with a 35mm lens. Scientist A writes a short equation and a small diagram on the whiteboard, then underlines it; Scientist B points at the graph with his pen and flips a page on the clipboard. Their bodies shift subtly, maintaining a collaborative stance, with crisp fluorescent overhead lighting and soft window fill."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Over-the-shoulder shot from behind Scientist B (navy coat, goggles) looking toward the laptop screen on the right side of the bench. Scientist A (green coat, glasses) is across the bench, hands near the sealed glass chamber. The laptop shows a clean interface with a live line graph and numeric readouts (generic, no brand). Cables run neatly from the sensor to the laptop.",
+          "video_prompt": "Over-the-shoulder close-medium shot, eye-level with a 50mm lens behind Scientist B. Scientist B moves the trackpad to start a calibration; the line graph begins to move smoothly. Scientist A steadies the glass chamber with one hand and adjusts a small silver knob with the other, glancing between the chamber and Scientist B for confirmation."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Insert close-up of hands at the apparatus: Scientist A’s hands (green sleeves) hold a small hex key near a silver adjustment post; Scientist B’s hands (navy sleeves) hold a labeled connector cable and a small torque-limited screwdriver. The black cylindrical sensor sits centered, with a tiny status LED glowing green.",
+          "video_prompt": "Macro close-up, slightly high angle with a 85mm lens. Scientist B plugs in the connector with a careful push until it clicks, then lightly tightens a fastener; Scientist A turns the hex key a quarter-turn and pauses. The sensor LED remains green, and the cables settle without snagging."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Medium two-shot from the opposite side of the bench, facing the scientists. Scientist A (green coat, glasses) holds a laminated calibration card; Scientist B (navy coat, goggles) stands at the laptop, one hand hovering over the keyboard. The glass chamber is centered between them. Lighting is slightly cooler from overhead fluorescents, with gentle reflections on metal components.",
+          "video_prompt": "Eye-level medium two-shot with a 40mm lens. Scientist A reads the calibration card and points to a specific step; Scientist B types a short command and nods. The laptop graph responds with a subtle change in slope as they exchange quick, focused looks."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Close-up of the laptop screen and Scientist B’s gloved hands (thin nitrile gloves) on the keyboard. The interface shows a live waveform and a numeric stability indicator. Scientist A’s green sleeve enters frame from left, pointing at a threshold line on the display.",
+          "video_prompt": "Eye-level close-up with a 65mm lens focused on the screen. Scientist B increases a parameter in small increments; the waveform tightens, then briefly wobbles. Scientist A’s finger traces the threshold line, indicating where to stop, and the stability indicator flickers from steady to caution for a moment."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Tight two-shot at the glass chamber. Scientist A (green coat, glasses) leans in, eyes intent; Scientist B (navy coat, goggles) holds a small handheld meter with a digital readout. The chamber’s sealed lid and gasket are clearly visible; the metal breadboard shows neatly aligned posts. The mood is concentrated.",
+          "video_prompt": "Tight two-shot, slight high angle with a 55mm lens. Scientist A gently rotates the chamber’s lid a few degrees to align a mark, then stops; Scientist B raises the handheld meter closer to the sensor and reads it aloud silently, then gestures a small 'hold' motion. Both keep steady hands as the apparatus hums quietly (implied)."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Wide shot from the back of the lab, showing the whole workbench and surrounding shelves. Scientist A and Scientist B stand on either side of the bench. A small desk fan in the background is off; a lab door is closed. The laptop graph is visible as a faint glow. The scene feels orderly but tense.",
+          "video_prompt": "Wide shot, slightly elevated with a 24mm lens. The laptop waveform suddenly becomes jagged; Scientist B leans forward quickly and raises one hand to pause input, while Scientist A braces the chamber with both hands and looks sharply at the screen. Their movements are controlled and careful, indicating an unexpected instability without any danger."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Over-the-shoulder shot from behind Scientist A (green coat, glasses) toward Scientist B (navy coat, goggles) at the laptop. Scientist B’s face is focused; his right hand hovers over an emergency stop icon (software control) on the screen. The jagged waveform is clearly visible. The bench components remain aligned and intact.",
+          "video_prompt": "Over-the-shoulder medium shot, eye-level with a 45mm lens behind Scientist A. Scientist B clicks to reduce power/output and disables a single module; the jagged waveform begins to dampen. Scientist A nods once, then points to a cable route near the sensor, suggesting a minor interference source."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Insert close-up of the cable bundle near the sensor. Scientist A’s hands (green sleeves) lift a cable gently away from a metal edge; Scientist B’s hands (navy sleeves) place a small adhesive cable clip to secure it. The sensor LED now blinks slowly, transitioning from caution to normal.",
+          "video_prompt": "Macro close-up, low angle with a 90mm lens. Scientist A repositions the cable to create a clean loop and holds it steady; Scientist B presses the cable clip into place and runs a finger along the cable to confirm it’s seated. The LED changes to a steady green as the cable stops moving."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Medium two-shot at the bench with the glass chamber centered. Scientist A (green coat, glasses) holds the calibration card at chest height; Scientist B (navy coat, goggles) rests one hand on the laptop and the other on the handheld meter. Both stand upright, poised to retry. Lighting is brighter as if the window sun has shifted slightly.",
+          "video_prompt": "Eye-level medium two-shot with a 35mm lens. Scientist A counts down silently with three fingers, then lowers her hand; Scientist B restarts the run and watches the meter. The waveform on the laptop (off to the side) stabilizes smoothly, and both scientists relax their shoulders slightly while staying attentive."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Close-up reaction two-shot of their faces side-by-side, framed from mid-chest up. Scientist A’s rectangular black glasses catch a soft reflection; Scientist B’s clear goggles reveal focused eyes. Both show restrained, professional satisfaction. Background bokeh includes the whiteboard and shelves.",
+          "video_prompt": "Eye-level close-up two-shot with a 70mm lens. Scientist A glances from the screen to Scientist B and gives a small approving nod; Scientist B exhales, then returns a brief thumbs-up near his chest (not exaggerated). Their expressions remain calm and PG, emphasizing teamwork and success."
+        },
+        {
+          "shot_id": 13,
+          "first_frame": "High-angle overhead shot of the workbench: the optical breadboard, sealed glass chamber, laptop with a smooth stable line, the handheld meter placed neatly, and the clipboard with a checked final box. Scientist A’s green sleeves and Scientist B’s navy sleeves enter from opposite sides as they sign and place a small label reading 'Run 3: Stable' (generic).",
+          "video_prompt": "Overhead high-angle shot with a 28mm lens. Scientist A writes a final note on the clipboard; Scientist B applies the small label to a sample log card and aligns it squarely. Both withdraw their hands, leaving the tidy, stable setup centered in frame as the shot ends on an organized, successful conclusion."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "scientists_lab_collaboration",
+    "theme_description": "Two scientists collaborating on an experiment",
+    "consistency_type": "Type C",
+    "requested_scenes": 3,
+    "requested_shots": 13
+  }
+}

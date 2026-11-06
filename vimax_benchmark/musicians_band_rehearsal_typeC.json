@@ -1,0 +1,93 @@
+{
+  "story_overview": "Three adult musicians rehearse in a community arts studio for an evening showcase, refining timing and dynamics, overcoming a brief coordination hiccup, and ending with a confident final run-through.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide establishing view of a tidy community arts rehearsal studio with light gray acoustic panels, warm wooden floor, coiled cables neatly along the wall, a black music stand center, a compact keyboard on a stand to the left, a cajón box drum to the right, and a small amplifier near the back wall. Three adults (all 20+): Character A is a tall woman (late 20s) with medium-brown skin, curly black hair in a high puff, wearing a forest-green cardigan over a white crew-neck blouse, dark straight-leg jeans, and white sneakers; she holds a natural-finish acoustic guitar with a brown strap. Character B is a shorter man (early 30s) with light skin, neatly trimmed dark beard, short dark hair, wearing a navy button-up shirt, tan chinos, and brown shoes; he stands behind a compact keyboard, hands hovering above the keys. Character C is a medium-height woman (mid 30s) with East Asian features, straight chestnut hair in a low ponytail, wearing a burgundy sweater, black slacks, and black flats; she sits upright on the cajón with relaxed shoulders. Soft afternoon light enters from a high window, creating gentle shadows.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. The camera slowly dollies forward 1 meter toward the trio as they exchange friendly nods; Character A adjusts her guitar strap, Character B taps a metronome app on a phone placed on the keyboard stand, and Character C lightly pats the cajón surface to test tone. Ambient room tone and a calm, focused mood."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium two-shot from stage-left side: Character A (forest-green cardigan, acoustic guitar) in the foreground left, Character B (navy button-up) slightly behind to the right at the keyboard. The music stand sits between them with sheet music clipped in place. Warm light highlights the guitar’s wood grain; acoustic panels blur softly in the background.",
+          "video_prompt": "Three-quarter medium two-shot, 50mm lens. The camera holds steady while Character A strums a quiet chord progression and looks to Character B for the count-in; Character B raises two fingers as a visual cue, then places both hands on the keys, testing a gentle harmony. Their eye contact and subtle head nods coordinate timing."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Over-the-shoulder shot from behind Character B’s right shoulder: the keyboard keys fill the lower frame, sheet music on the stand centered, and Character A visible beyond the stand with her acoustic guitar. Character C is visible on the right edge, seated on the cajón, attentive and ready. Lighting is even and warm.",
+          "video_prompt": "Over-the-shoulder medium shot, 35mm lens. The camera remains fixed as Character B plays a simple arpeggio; Character A follows with soft strums, and Character C begins a gentle backbeat with palms on the cajón. The trio starts the first rehearsal groove together, building from very quiet to moderately present."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Low-angle close-up near the floor focusing on Character C’s hands on the cajón and her black flats planted on the wooden floor. The edge of Character A’s guitar body passes through the left side of frame; the keyboard stand legs appear in the background. The wood textures (cajón faceplate and floor) are crisp.",
+          "video_prompt": "Low-angle close-up, 70mm lens. The camera pans slightly right as Character C alternates bass hits and snare-like taps; her wrists stay relaxed. The rhythm tightens and becomes more confident, while the guitar strums and keyboard chords are implied by visible movement at frame edges."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Eye-level medium three-shot centered on the trio: Character A stands left with acoustic guitar, Character B stands center at the keyboard, Character C sits right on the cajón. The music stand is between A and B, angled slightly toward them. A small water bottle sits on the floor near the stand. The room feels brighter as the sun shifts, adding a soft highlight on faces.",
+          "video_prompt": "Eye-level medium shot, 35mm lens. The camera slowly slides laterally from left to right as the trio plays a fuller section; Character A strums more assertively, Character B adds a chord change, and Character C increases rhythmic complexity. Their expressions are focused, with occasional quick glances to the sheet music and each other."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Over-the-shoulder from behind Character A’s left shoulder: her forest-green cardigan sleeve and the acoustic guitar neck lead into frame. Character B is centered beyond the music stand, and Character C is to the right, poised to play. The sheet music is visible but not readable; binder clips hold pages flat.",
+          "video_prompt": "Over-the-shoulder medium shot, 40mm lens. The camera holds steady while Character A pauses strumming to point at a measure on the sheet music with her pick hand; Character B leans in slightly and nods, and Character C leans forward, watching the cue. They reset together with a silent count."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Tight two-shot on Character B (navy button-up, dark beard) and Character C (burgundy sweater, low ponytail). Character B’s hands hover above the keyboard; Character C sits on the cajón turned slightly toward him. The amplifier is softly blurred behind them. Their faces show concentration and problem-solving.",
+          "video_prompt": "Eye-level tight two-shot, 85mm lens. The camera makes a small push-in as Character B demonstrates a syncopated rhythm by tapping lightly on the keyboard edge (no damage, gentle), then plays the corrected chord entrance; Character C mirrors the timing by tapping a simplified pattern on the cajón. They exchange a quick confirming nod."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Wide shot from the back of the room: the trio appears mid-distance with the music stand centered. Cables are neatly taped along the floor near the wall; acoustic panels and a high window frame the scene. The overall look is clean and organized, with warm afternoon light now slightly more golden.",
+          "video_prompt": "Wide shot, 24mm lens. The camera remains locked off as they run the section again; Character A steps half a pace toward the stand while strumming, Character B keeps steady posture at the keys, and Character C maintains consistent hits. The group tightens timing; near the end of the clip, Character A raises her chin as if signaling a transition."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Side-profile medium shot: Character A in foreground left strumming acoustic guitar, Character C in midground right on cajón, and Character B slightly behind them at the keyboard. The music stand is visible between A and B. The lighting creates a gentle rim on hair and shoulders.",
+          "video_prompt": "Side-profile medium shot, 50mm lens. The camera slowly pans from Character A toward Character C as they coordinate a dynamic swell: Character A increases strumming intensity, Character C adds stronger accents, and Character B punctuates with brighter chords. Their movements are synchronized, communicating a shared build toward the final chorus."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 10,
+          "first_frame": "Close-up on the music stand and hands: Character A’s hand (with guitar pick) enters from left to turn a page; Character B’s hand enters from right to steady the paper; a corner of Character C’s burgundy sleeve appears as she points to a line. The paper edges and binder clips are sharp; background softly blurred.",
+          "video_prompt": "Close-up, 90mm lens. The camera holds still as Character A flips the page carefully; Character B keeps the sheets aligned; Character C taps the page once to mark the starting line. They pull hands back in unison, readying for the final run-through."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Eye-level medium three-shot with stronger evening-like warm lighting (as if studio lights are now on): Character A (forest-green cardigan) stands left with acoustic guitar, Character B (navy button-up) stands center at keyboard, Character C (burgundy sweater) sits right at cajón. The trio’s posture is upright and prepared; expressions are determined but calm.",
+          "video_prompt": "Eye-level medium shot, 35mm lens. The camera gently dollies in as Character B gives a clear visual count with his fingers; all three start together precisely. Character A strums steady rhythm, Character B plays a supportive chord progression, and Character C locks a crisp, even beat. The sound and energy feel performance-ready."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Overhead shot looking down at the trio in a triangle arrangement: music stand at the center, keyboard to the left side of frame, cajón to the right, guitar body visible on the lower-left. The wooden floorboards form clean leading lines; shadows are soft and consistent.",
+          "video_prompt": "Overhead static shot, 18mm lens. The trio executes the climactic build: Character A leans slightly into the strum pattern, Character B’s hands move confidently across the keys for a brighter voicing, and Character C adds a controlled accent pattern. Their bodies move subtly in time, showing tight ensemble cohesion."
+        },
+        {
+          "shot_id": 13,
+          "first_frame": "Medium-wide front-facing shot as if from an imaginary audience position: the trio centered with the music stand slightly off-center. Character A lowers the guitar neck slightly at rest position, Character B’s hands lift from the keys, and Character C’s hands hover above the cajón, all poised at the end of the final chord. Warm, studio-like lighting gives a polished look.",
+          "video_prompt": "Front-facing medium-wide shot, 28mm lens. The camera holds steady as they finish the last chord together and let it ring; Character A relaxes her shoulders and smiles, Character B exhales and gives a small satisfied nod, and Character C offers a quiet thumbs-up. They share a brief, relieved laugh and begin packing their sheet music neatly, signaling readiness for the performance."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "musicians_band_rehearsal",
+    "theme_description": "Musicians rehearsing together for a performance",
+    "consistency_type": "Type C",
+    "requested_scenes": 3,
+    "requested_shots": 13
+  }
+}

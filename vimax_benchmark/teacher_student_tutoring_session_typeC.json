@@ -1,0 +1,108 @@
+{
+  "story_overview": "During an after-hours tutoring session, an adult teacher helps an adult student tackle a challenging problem. They work through confusion, test a solution on a whiteboard, and end with a confident breakthrough and a clear study plan.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Establishing two-shot in a quiet classroom at dusk: Character A (teacher), a 34-year-old woman with warm brown skin, dark curly hair in a neat low bun, rectangular black eyeglasses, wearing a forest-green cardigan over a white button-up shirt and charcoal slacks, stands beside a wooden desk. Character B (student), a 22-year-old man with light skin, short straight black hair, clean-shaven, wearing a navy crewneck sweater over a light-blue collared shirt and khaki pants, sits at the desk with an open notebook and a capped pen. A large whiteboard with faint grid lines is behind them; soft amber light from a window and overhead fluorescents mix gently. Both are modestly dressed; the mood is focused and calm.",
+          "video_prompt": "Eye-level wide two-shot from the front of the desk. The teacher sets a closed textbook and a folder onto the desk, then gestures toward the student’s notebook; the student nods and turns the notebook slightly toward her. Subtle classroom ambience, steady camera, hard cut at end."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Over-the-shoulder medium shot from behind the teacher’s right shoulder: the teacher’s forest-green cardigan sleeve and hand are in the foreground pointing at the student’s notebook. The student’s face is visible, attentive but slightly uncertain, pen in hand above a page filled with neatly written equations. Whiteboard and a wall clock blur in the background; lighting remains warm and even.",
+          "video_prompt": "Over-the-shoulder medium shot (teacher foreground, student midground). The teacher taps a specific line in the notebook with a capped marker, then slides a sticky note onto the page; the student follows with his eyes and lightly underlines the referenced step. Minor handheld micro-movement for realism."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Medium close-up on the student at the desk: Character B’s navy sweater and light-blue collar are crisp; he looks down at the notebook, brows knit in concentration. The teacher stands just out of focus to frame-left; her green cardigan edge and hand holding a dry-erase marker are visible. A tidy pencil cup and a calculator sit near the notebook.",
+          "video_prompt": "Eye-level medium close-up on the student. He attempts to write the next step, pauses, then looks up toward the teacher with a questioning expression; the teacher’s hand enters frame to indicate a different line, guiding him back. Shallow depth of field; gentle rack focus from his pencil tip to his eyes."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Side-angle medium two-shot: the teacher leans slightly (respectfully) over the desk without touching the student, pointing to the notebook; the student angles the notebook toward her. The whiteboard behind them shows a clean area ready for writing; chairs are stacked at the back of the room. Lighting is calm, with mild reflections on the whiteboard.",
+          "video_prompt": "Medium two-shot from a 45-degree side angle. The teacher offers the marker to the student; he takes it carefully, then both turn their gaze toward the whiteboard as if preparing to stand and work there. Camera remains static; hard cut."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Wide shot facing the whiteboard: the teacher (green cardigan, glasses) stands to the left of the board holding a marker cap; the student (navy sweater) stands to the right holding the marker, both adults. The board has a heading written neatly: “Practice Problem.” A small ledge holds extra markers and an eraser. Classroom desks sit in the foreground, slightly out of focus.",
+          "video_prompt": "Eye-level wide shot centered on the whiteboard. The student writes the first line of the problem; the teacher points to where to align terms, then steps half a pace back to give him space. The student pauses, reads aloud silently (no on-screen text), and continues writing."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Over-the-shoulder medium shot from behind the student: his navy sweater shoulder dominates foreground; the teacher is visible across the board, her glasses catching a soft reflection. The student’s writing on the whiteboard is legible in structure (symbols and lines), with a few terms circled by the teacher in a different color.",
+          "video_prompt": "Over-the-shoulder medium shot (student foreground, teacher midground). The teacher adds a small annotation beside a circled term, then hands the eraser across the ledge; the student accepts it and cleans one mistaken line, leaving the rest intact. Slight camera sway as if on a shoulder rig."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Close-up on hands at the whiteboard ledge: the teacher’s hand (green sleeve) passes a blue marker; the student’s hand (navy sleeve) receives it. The ledge holds two other markers, a felt eraser, and a small magnet. The background is softly blurred with whiteboard texture visible.",
+          "video_prompt": "Macro close-up with shallow depth of field at the whiteboard ledge. The marker transfer completes (one clean pass), then the student clicks the cap and raises the marker out of frame; the teacher’s hand steadies the eraser and slides it aside. Focus shifts from the marker tip to the teacher’s fingertips."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Medium two-shot near the whiteboard from slightly below eye level: the student points at a step he just wrote, looking unsure; the teacher listens, chin slightly tilted, calm expression. Their outfits remain consistent and distinct: green cardigan and glasses for the teacher; navy sweater for the student. The board shows a multi-step solution in progress.",
+          "video_prompt": "Slight low-angle medium two-shot. The student gestures at the questionable step; the teacher responds by tracing an invisible path in the air from one term to the next, then writes a short corrective note on the board. The student nods but still looks uncertain as the teacher finishes the note."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Wide shot from the back of the classroom toward the whiteboard: desks in the foreground, teacher and student midground at the board. The student stands closer to the board; the teacher stands slightly behind and to his left, maintaining a respectful distance. The classroom is orderly; evening light is dimmer, with overhead lights now more prominent.",
+          "video_prompt": "Back-of-room wide shot. The student tries to complete the next line, hesitates, and lowers the marker; the teacher steps forward and points to the earlier circled term, prompting him to reconsider. The student erases a small section and rewrites with more confidence."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Close-up on the teacher’s face and upper torso: Character A’s rectangular black glasses, calm focused eyes, and green cardigan are clear. She holds a marker and a small stack of sticky notes. The whiteboard is blurred behind her with lines of math faintly visible.",
+          "video_prompt": "Eye-level close-up on the teacher. She speaks silently with a reassuring expression, then demonstrates a small ‘check’ motion with the marker (tapping the air), and places a sticky note on the board edge labeled only by a simple drawn star (no readable text beyond a star shape). Subtle rack focus from her glasses to the marker."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Close-up on the student’s face and upper torso: Character B’s short black hair and navy sweater are crisp; he looks from the board to the teacher, then back to the board, visibly processing. A soft highlight from overhead lighting outlines his profile.",
+          "video_prompt": "Eye-level close-up on the student. He takes a steady breath, nods once, then raises the marker and turns slightly toward the board, determination replacing confusion. Camera holds steady; hard cut."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Tight medium shot on the whiteboard writing area between them: the student’s arm (navy sleeve) writes a clean line; the teacher’s hand (green sleeve) hovers nearby pointing at alignment. The board shows a nearly complete solution with one final step remaining; marker strokes are bold and tidy.",
+          "video_prompt": "Tight medium shot focused on the board and their hands. The student completes the penultimate step; the teacher briefly stops his motion with a gentle open-palm gesture (no contact), then redirects his marker to add a missing symbol. The student adjusts and the line looks correct; both hands withdraw slightly."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Medium two-shot facing them at the whiteboard: the student writes the final line while the teacher watches, smiling subtly. Their identities remain distinct: teacher in green cardigan with glasses; student in navy sweater. The board now has a boxed final answer, drawn by the student, with the teacher’s earlier circled annotations still present.",
+          "video_prompt": "Eye-level medium two-shot. The student finishes the final stroke, boxes the result, and steps half a pace back; the teacher gives a single approving nod and points to the boxed answer, then gestures toward the earlier steps to reinforce the method. Lighting feels slightly brighter as they lean back from the board."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Over-the-shoulder medium shot from behind the teacher toward the desk: the student sits again at the wooden desk, notebook open; the teacher stands beside him. The teacher places a simple checklist sheet (blank-looking with lines, no readable text) next to the notebook. A calculator and pen are neatly arranged.",
+          "video_prompt": "Over-the-shoulder medium shot (teacher foreground, student midground at desk). The teacher slides the checklist sheet forward; the student writes a short note in his notebook, then taps the page once with his pen as if confirming the plan. The teacher lightly points to two bullet-like lines on the sheet (no legible text)."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Final wide two-shot near the classroom door: the teacher holds her folder against her side; the student holds his notebook and a closed textbook. Both smile politely, relaxed. The whiteboard is visible in the background with the completed solution, and the room remains tidy and well-lit. Modest attire maintained; family-friendly tone.",
+          "video_prompt": "Eye-level wide two-shot by the doorway. The student offers a respectful handshake; the teacher returns it briefly, then the student gives a grateful nod. They turn slightly toward the exit together, walking one step out of frame as the shot ends. Hard cut end."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "teacher_student_tutoring_session",
+    "theme_description": "A teacher and student having a tutoring session",
+    "consistency_type": "Type C",
+    "requested_scenes": 4,
+    "requested_shots": 15
+  }
+}

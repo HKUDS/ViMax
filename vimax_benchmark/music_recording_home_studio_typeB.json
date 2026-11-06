@@ -1,0 +1,98 @@
+{
+  "story_overview": "In a cozy home recording studio, two adult musicians collaborate to capture the perfect take. They set up microphones and levels, record multiple passes while moving through the room’s fixed layout, then achieve a polished final performance and celebrate the successful session.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "A detailed view of a compact home recording studio with fixed geometry: a rectangular room with warm acoustic foam panels on the walls, a large window on the left wall with closed beige blinds, and a thick patterned rug centered on the floor. In the exact center sits a sturdy wooden desk facing the back wall, holding a computer monitor with a DAW timeline visible, a small MIDI keyboard, an audio interface with knobs, and two black studio monitors on isolation pads. A boom microphone stand with a silver condenser mic and circular black pop filter stands just in front of the desk, slightly right of center. A second straight mic stand is positioned near the right wall. A tall bookshelf filled with binders and music books stands on the back-right corner. Two adult musicians (both 20+): Person A (an adult woman, late 20s, medium height, brown skin, dark curly hair tied back, wearing a modest forest-green sweater and dark jeans) stands near the doorway at front-left. Person B (an adult man, early 30s, tall, light-to-medium skin, short dark hair, neatly trimmed beard, wearing a modest navy button-up shirt and tan chinos) stands near the desk. Warm, soft ceiling light and subtle monitor glow; tidy cables run along the baseboards.",
+          "video_prompt": "Eye-level wide shot from the front-left corner, 24mm lens. Person A walks from the doorway toward the center rug, stepping around the boom mic stand without touching it; Person B gestures toward the computer monitor and audio interface. Both glance at the fixed desk setup and mic placement; the camera remains locked off while their movement tests depth and occlusion around the mic stands and desk edges."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Same studio layout unchanged: desk centered facing back wall, boom mic stand with pop filter slightly right of center, straight mic stand near right wall, bookshelf back-right, window with blinds left. Person B is seated in the desk chair, hands near the audio interface knobs; Person A stands behind the boom mic stand, partially occluded by the pop filter ring. The DAW timeline on the monitor shows multiple tracks. Lighting remains warm with a slight screen glow.",
+          "video_prompt": "Over-the-shoulder medium shot from behind Person B’s right shoulder, 50mm lens aimed at the monitor and audio interface. Person B turns a gain knob and taps a key on the MIDI keyboard; Person A leans in from behind the pop filter to adjust the mic height, carefully sliding the boom clutch. Person A’s face moves in and out behind the pop filter, emphasizing occlusion and depth while the background geometry stays perfectly stable."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Same fixed room: desk, monitors, audio interface, boom mic, straight mic stand near right wall, bookshelf, window blinds, rug. Person A kneels on the rug near the desk’s left side, reaching toward a neatly coiled cable that runs along the baseboard; Person B stands near the right wall by the straight mic stand, holding a pair of closed-back headphones. The pop filter remains centered in front of the condenser mic.",
+          "video_prompt": "Low-angle medium-wide shot from near the rug’s front edge, 28mm lens. Person A slides the cable coil closer to the desk and tucks it along the baseboard, then stands up, moving from foreground to midground. Person B steps behind the straight mic stand, briefly occluded by it, and places the headphones on the desk corner. No furniture shifts; only the characters and cable move."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Same unchanging studio: desk centered, DAW visible, boom mic with pop filter, straight mic stand right, bookshelf back-right, window left with blinds, patterned rug. Person A now stands at the boom mic position, hands relaxed at her sides, looking toward the monitor. Person B leans slightly against the desk edge, one hand on the mouse. The room feels ready for recording; warm light and soft shadows.",
+          "video_prompt": "Side-profile medium shot from the right side of the room, 35mm lens, framing Person A at the boom mic and Person B at the desk. Person B clicks the mouse and nods; Person A inhales and does a short, quiet warm-up gesture (mouth shapes as if humming) while maintaining a modest, professional posture. Person A’s body subtly shifts closer to the pop filter, stopping at a consistent speaking distance; the desk and mic stands remain rigidly fixed."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Same fixed home studio layout. The boom mic with pop filter is center-right in front of the desk. Person A stands behind the pop filter wearing over-ear headphones now, facing the mic; Person B sits in the desk chair, one hand on the keyboard and the other near the audio interface. The DAW shows armed tracks and a visible recording area. Warm overhead light with slightly dimmed ambience, monitor glow more pronounced.",
+          "video_prompt": "Eye-level tight medium shot from directly in front of Person A and the mic, 85mm lens compressing the background. Person A begins a focused performance: subtle head movement and steady posture, hands down. Person B is visible softly in the background through the gap beside the pop filter, reaching forward to press record. The action emphasizes depth: Person A sharp in foreground, desk and Person B behind, all room geometry unchanged."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Same studio geometry unchanged. View toward the desk: monitor with DAW waveforms starting to appear, audio interface lights on, studio monitors fixed. Person B is seated close to the desk, leaning forward; Person A is visible at the mic position in the left background, partially blocked by the boom stand and pop filter.",
+          "video_prompt": "Eye-level close-up on the audio interface and Person B’s hands, 60mm lens. Person B carefully turns a knob a few degrees and watches the meters; his other hand hovers over the keyboard for a quick marker. In the background, Person A remains steady at the mic, her silhouette intermittently occluded by the boom arm. The camera is locked; only hands and subtle body shifts move."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Same room fixed: bookshelf back-right, straight mic stand near right wall, desk centered. Person A has stepped away from the mic and now stands near the bookshelf, holding a lyric sheet (plain paper). Person B stands up from the desk chair and walks toward the center rug. The boom mic remains in place at center-right.",
+          "video_prompt": "Wide shot from the back wall looking toward the desk, 24mm lens. Person B walks from the desk across the rug toward Person A; as he crosses, he passes behind the boom mic stand, briefly occluded by the pop filter and stand. Person A points to a line on the paper; they confer with calm expressions. No objects shift; the bookshelf and stands remain perfectly aligned."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Same unchanging studio. Person A sits on a simple armless chair positioned on the rug’s left side (chair stays fixed), holding the lyric sheet in her lap. Person B kneels near the center of the rug, reaching toward a small footswitch on the floor (a compact rectangular device) placed in front of the desk. The boom mic and pop filter remain center-right.",
+          "video_prompt": "Overhead medium-wide shot from above the center of the room, 26mm lens. Person B slides the footswitch a few inches closer to Person A’s standing path, then taps it once to test; Person A nods and rises from the chair, moving from seated to standing while the chair stays put. The overhead angle emphasizes the frozen floor plan: rug pattern, desk footprint, and stand positions remain constant."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Same fixed studio layout. Person A returns to the boom mic position, headphones on, standing squarely behind the pop filter. Person B sits at the desk, but now slightly turned to the left to see both the monitor and Person A. The DAW shows a previous take waveform and a new empty lane ready to record.",
+          "video_prompt": "Eye-level two-shot from the left side of the desk, 35mm lens, framing Person B in the foreground and Person A at the mic in the midground. Person B raises one finger as a silent count-in, then presses a key to start recording. Person A begins again with steadier rhythm, leaning in slightly and then returning to neutral distance from the pop filter. The action focuses on coordinated timing while the studio geometry remains unchanged."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 10,
+          "first_frame": "Same room fixed: desk with monitor and speakers, boom mic center-right, straight mic stand right wall, bookshelf back-right, window left with blinds, rug centered. Person B has moved away from the desk and stands near the right wall by the straight mic stand, holding a small handheld shaker (simple percussion). Person A remains at the boom mic, headphones on, ready. Lighting slightly brighter, as if they’re energized for the final take.",
+          "video_prompt": "Eye-level medium-wide shot from the front-right corner, 28mm lens. Person B walks from the right wall toward the desk, passing behind the boom mic stand so the stand briefly occludes his torso. He stops at a marked spot on the rug (implied by his positioning) and lifts the shaker. Person A watches him briefly, then refocuses on the mic. Background elements do not warp or move."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Same fixed studio. A close view of Person A at the condenser mic: pop filter centered, boom arm visible, desk and monitor blurred behind. Person A’s expression is concentrated and calm; her posture is upright, hands relaxed. The headphones’ cable trails down toward the floor along the same path as before.",
+          "video_prompt": "Eye-level close-up, 85mm lens on Person A’s face and the pop filter. Person A performs the final take with controlled breath and subtle head motion; she leans in slightly on an emphasized phrase and eases back to consistent distance. The pop filter remains stationary; the camera holds steady to highlight clean performance without any background changes."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Same studio geometry. Person B stands mid-rug between the desk and right wall, holding the shaker at chest height. The straight mic stand is behind him near the right wall; the boom mic is visible left of him. Person A is visible in the background at the mic, partially obscured by the pop filter.",
+          "video_prompt": "Low-angle medium shot from near the floor at the rug’s front edge, 35mm lens. Person B plays the shaker with small rhythmic wrist movements, stepping one pace forward then back, testing depth as he moves closer to and farther from camera. The boom mic stand intermittently occludes Person A in the background. All studio furniture, stands, and bookshelf remain fixed and consistent."
+        },
+        {
+          "shot_id": 13,
+          "first_frame": "Same unchanging room. Person B is back at the desk chair, leaning forward with one hand on the mouse and the other on the keyboard. Person A stands just behind the desk’s left side, having stepped away from the mic, looking at the monitor. The DAW shows multiple stacked waveforms, indicating the final layered take.",
+          "video_prompt": "Over-the-shoulder medium shot from behind Person A’s left shoulder toward the monitor, 40mm lens. Person B drags a region slightly on the timeline, then clicks play; both listen intently, heads tilting in sync. Person A points once at the screen, then relaxes her hand. The monitor glow subtly pulses with playback meters; the desk, speakers, and mic stands remain perfectly stable."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Same fixed studio layout for the conclusion: desk centered, boom mic and pop filter center-right, straight mic stand right wall, bookshelf back-right, window with blinds left, rug centered. Person A and Person B stand side-by-side on the rug in front of the desk, both smiling gently and relaxed. Person B holds the headphones loosely in one hand; Person A holds the lyric sheet folded neatly. Warm overhead light gives a cozy, finished-session mood.",
+          "video_prompt": "Eye-level wide shot from the front-center, 24mm lens. Person B sets the headphones carefully on the desk corner; Person A places the folded paper on the desk near the keyboard. They share a brief celebratory nod and a small, professional handshake, then both look toward the monitor as if satisfied with the final result. The camera remains locked; the room’s geometry and object placement stay unchanged through the final beat."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "music_recording_home_studio",
+    "theme_description": "A music recording session in a home studio",
+    "consistency_type": "Type B",
+    "requested_scenes": 3,
+    "requested_shots": 14
+  }
+}

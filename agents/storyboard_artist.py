@@ -241,6 +241,9 @@ class StoryboardArtist:
             timeout=retry_timeout,
         )
 
+        validate_char_idxs(decomposition.ff_vis_char_idxs, len(characters), "ff_vis_char_idxs")
+        validate_char_idxs(decomposition.lf_vis_char_idxs, len(characters), "lf_vis_char_idxs")
+
         return ShotDescription(
             idx=shot_brief_desc.idx,
             is_last=shot_brief_desc.is_last,
@@ -254,4 +257,19 @@ class StoryboardArtist:
             lf_vis_char_idxs=decomposition.lf_vis_char_idxs,
             motion_desc=decomposition.motion_desc,
             audio_desc=shot_brief_desc.audio_desc,
+        )
+
+
+def validate_char_idxs(idxs, num_characters, field_name):
+    """Reject LLM-emitted character indices outside [0, num_characters).
+
+    Negative values would silently select the wrong character via Python
+    indexing; out-of-range values would crash deep inside the render gather.
+    Raising here lets the @retry on decompose_visual_description re-ask.
+    """
+    invalid = [idx for idx in idxs if idx < 0 or idx >= num_characters]
+    if invalid:
+        raise ValueError(
+            f"{field_name} contains invalid character indices {invalid}; "
+            f"valid range is 0..{num_characters - 1}"
         )

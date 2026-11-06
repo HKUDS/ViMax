@@ -28,7 +28,7 @@ class VideoGeneratorVeoGoogleAPI:
         self.client = genai.Client(
             api_key=api_key,
         )
-    
+
     async def generate_single_video(
         self,
         prompt: str,
@@ -36,6 +36,7 @@ class VideoGeneratorVeoGoogleAPI:
         resolution: str = "1080p",
         aspect_ratio: str = "16:9",
         duration: int = 8,
+        **kwargs,
     ) -> VideoOutput:
 
         params = {
@@ -52,9 +53,19 @@ class VideoGeneratorVeoGoogleAPI:
             params["model"] = self.ff2v_model
             params["image"] = types.Image.from_file(location=reference_image_paths[0])
         elif len(reference_image_paths) == 2:
-            params["model"] = self.flf2v_model
+            # First+last-frame ("flf2v") interpolation returns 400
+            # INVALID_ARGUMENT ("Your use case is currently not supported")
+            # on the public Gemini Developer API (it appears to require
+            # Vertex AI / allowlisting). Fall back to first-frame-only so
+            # the shot still renders instead of failing the pipeline; the
+            # clip just is not pinned to the generated last frame.
+            logging.warning(
+                "Two reference images provided but first+last-frame video "
+                "generation is not available on this API key; falling back "
+                "to first-frame-only generation."
+            )
+            params["model"] = self.ff2v_model
             params["image"] = types.Image.from_file(location=reference_image_paths[0])
-            config_params["last_frame"] = types.Image.from_file(location=reference_image_paths[1])
         else:
             raise ValueError("The number of reference images must be no more than 2")
 
@@ -76,7 +87,10 @@ class VideoGeneratorVeoGoogleAPI:
                 )
                 break
             except ClientError as e:
-                if e.status_code == 429 and attempt < max_retries - 1:
+                # google.genai.errors.ClientError exposes the HTTP status
+                # as `.code`; `.status_code` does not exist, so this line
+                # raised AttributeError and masked every real ClientError.
+                if e.code == 429 and attempt < max_retries - 1:
                     wait_time = retry_delay * (2 ** attempt)
                     logging.warning(f"Rate limit hit (429), retrying in {wait_time}s... (attempt {attempt + 1}/{max_retries})")
                     await asyncio.sleep(wait_time)

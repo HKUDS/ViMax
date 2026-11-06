@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <style>
+    .logo-primary { fill: #000; }
+    .logo-mid { fill: #444; }
+    .logo-shadow { fill: #888; }
+
+    @media (prefers-color-scheme: dark) {
+      .logo-primary { fill: #fff; }
+      .logo-mid { fill: #c4c4c4; }
+      .logo-shadow { fill: #747474; }
+    }
+  </style>
+
+  <!-- Left face and front crossbar. -->
+  <path class="logo-mid" d="
+    M 771 810
+    L 55 809
+    L 448 74
+    L 555 75
+    L 240 699
+    L 705 701
+    Z
+  "/>
+
+  <!-- Bright face from the original mark; theme-aware black/white. -->
+  <path class="logo-primary" d="
+    M 931 902
+    L 554 281
+    L 345 698
+    L 240 699
+    L 555 75
+    L 984 799
+    Z
+  "/>
+
+  <!-- Inner return and lower depth face. -->
+  <path class="logo-shadow" d="
+    M 931 903
+    L 115 903
+    L 55 810
+    L 772 809
+    L 705 701
+    L 503 700
+    L 705 699
+    L 503 382
+    L 554 282
+    Z
+  "/>
+</svg>

@@ -1,0 +1,113 @@
+{
+  "story_overview": "An adult writer struggles with a stalled draft, then deliberately seeks inspiration by working through radically different environments—quiet, chaotic, natural, and futuristic—until a final breakthrough arrives and the story clicks into place.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Interior, small apartment writing nook at dawn. A 34-year-old woman writer with warm brown skin, short tightly-curled black hair, and a small crescent-shaped scar above her right eyebrow sits at a simple oak desk. She wears a forest-green chunky knit sweater, straight-leg dark indigo jeans, and clean white low-top sneakers; a thin silver ring on her left hand. A matte-black laptop is open with a blank document; a ceramic mug of tea steams beside a yellow notepad and a black gel pen. Soft window light, pale blue shadows, quiet and cozy mood, shallow depth of field focused on her face and the blank screen.",
+          "video_prompt": "Eye-level medium shot, 50mm lens from across the desk. She exhales, taps the pen against the notepad, and stares at the blank laptop screen; her left hand (silver ring visible) hovers over the keyboard but doesn’t type. Steam curls from the mug as she glances toward the window, then back to the screen, showing frustration without speaking."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Same writer in the apartment entryway, morning light brighter. She stands near a coat rack and a small mirror. She still wears the forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring visible. A canvas tote bag hangs from her shoulder; she holds the yellow notepad and black gel pen. The background includes a closed door with a simple peephole and a small potted plant on a shelf. Crisp, practical mood, slightly wider framing.",
+          "video_prompt": "Wide shot, 24mm lens, slightly high angle from the corner of the entryway. She slips the notepad into the tote, checks the black gel pen, and adjusts the tote strap. She pauses, touches the crescent scar above her right eyebrow as if thinking, then nods with resolve and opens the door to leave; the door swings outward into bright hallway light."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Exterior, rooftop garden on a city building in late morning. The same 34-year-old woman writer (crescent scar above right eyebrow, short tightly-curled black hair) sits on a wooden bench among raised planters filled with herbs and small flowers. She wears the same forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring on left hand. She holds her yellow notepad on her lap and the black gel pen poised. Sunlight is strong and clean; wind gently ruffles leaves. Distant skyline and blue sky form the backdrop.",
+          "video_prompt": "Low angle medium-wide shot, 28mm lens from near the planter edge. A breeze moves the plants as she starts writing a few lines, then pauses to look up at the skyline. She smiles faintly, underlines something on the notepad, and flips to the next page, energized by the open air."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Exterior, busy indoor-outdoor city market at midday with colorful stalls, baskets of produce, and hanging string lights. The same writer stands at the edge of a walkway, still in forest-green chunky knit sweater, dark indigo jeans, and white sneakers; tote bag at her side, silver ring visible. She holds her yellow notepad and black gel pen. The environment is bustling but family-friendly: vendors arranging fruit, people walking by with shopping bags, warm sunlight filtering through awnings. She watches, attentive, as if collecting details.",
+          "video_prompt": "Handheld-feel eye-level wide shot, 24mm lens from a few steps away. She steps aside to avoid passersby, quickly jots sensory notes, and looks from one stall to another. The camera subtly pans with her as she turns, tracking her gaze across colors and movement; she circles a word on the notepad and tucks a loose curl behind her ear."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Interior, quiet museum gallery in the afternoon. White walls, polished wood floor, soft spotlights on abstract paintings and a sculpture on a plinth. The same 34-year-old woman writer (crescent scar above right eyebrow) stands near a bench, wearing the same forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring visible. She holds the yellow notepad and black gel pen close to her chest. The mood is hushed, contemplative, with gentle warm lighting and crisp shadows.",
+          "video_prompt": "Over-the-shoulder medium shot, 35mm lens aimed toward the artwork with her shoulder and notepad in frame. She leans slightly forward to study brushstrokes, then looks down and writes a short line. She steps to the side, aligning herself with another painting; the camera makes a small lateral move to keep her centered as she compares shapes and colors."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Interior, underground subway platform at rush hour, evening. Fluorescent lighting, tiled walls, electronic signboards, and a train arriving in the background. The same writer stands behind the safety line, still in forest-green chunky knit sweater, dark indigo jeans, and white sneakers; tote bag strap across her shoulder, silver ring visible. She holds her notepad open with one hand and the black gel pen in the other. The scene is lively but safe: commuters in coats, no pushing, just movement and sound implied.",
+          "video_prompt": "Eye-level medium-wide shot, 28mm lens with slight telephoto compression. The train rolls in; wind from the arriving cars lightly flutters her sweater and notepad pages. She braces the notepad against her tote, quickly writes a fragment, then pauses to watch reflections in the train windows as doors open and people step out; the camera tilts gently to follow her gaze."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Exterior, rainy bus stop at dusk. Wet pavement reflecting streetlights, a glass shelter with raindrops beading on panels. The same writer sits on the bench inside the shelter, wearing the forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring visible. Her tote bag rests beside her. She holds the yellow notepad on her knees and writes with the black gel pen. Umbrellas and blurred car headlights pass in the background; mood is introspective, cinematic reflections.",
+          "video_prompt": "Close-up, 85mm lens focusing on her hands and notepad, shallow depth of field. Raindrops streak the glass behind her as she writes, pauses, then draws a small arrow and rewrites a sentence. She rubs her thumb over the silver ring thoughtfully, then resumes writing with more confidence; the camera slowly racks focus from the pen tip to her concentrated eyes."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Interior, cozy all-night diner at night. Warm amber pendant lights, checkered floor, chrome accents, and a window showing blurred neon from outside. The same writer sits in a booth, still wearing the forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring visible as she rests her left hand near a water glass. Her matte-black laptop is open now, and the yellow notepad sits beside it. A small plate with a simple sandwich and a napkin is on the table. Mood: inviting, focused, late-night creativity.",
+          "video_prompt": "Three-quarter angle medium shot, 35mm lens from across the booth. She types a few lines, stops, checks the notepad, then types again faster. She takes a small sip of water, nods, and highlights a line on the screen (implied by her hand motion and focus). The camera gently pushes in as her face brightens with a new direction."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Exterior, windswept beach at sunrise. Pale pink and orange sky, gentle waves, scattered smooth stones. The same 34-year-old woman writer stands near the shoreline, wearing the forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring visible. She holds the yellow notepad against the breeze with the black gel pen ready. The mood is expansive and calm; sunlight glints on wet sand.",
+          "video_prompt": "Wide shot, 20mm lens, low angle near the sand looking slightly upward. She walks slowly along the waterline, stopping to write a line while waves approach and retreat. The wind lifts a few pages; she presses them down with her left hand (ring catching the sunrise), then looks out over the horizon, breathing in, and writes again with renewed steadiness."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Exterior, mountain lookout in bright midday sun. Rocky foreground, distant peaks, crisp blue sky. The same writer sits on a flat rock, still in forest-green chunky knit sweater, dark indigo jeans, and white sneakers; tote bag beside her. Silver ring visible as she props the notepad on her knee. The light is intense with sharp shadows; the mood is bold and clarifying.",
+          "video_prompt": "High angle medium shot, 35mm lens from slightly above and behind her. She sketches a quick outline on the notepad, taps the pen twice, and draws a connecting line between points. She turns her head to scan the peaks, then flips the page decisively. The camera makes a short, smooth arc around her right side to reveal the sweeping landscape as she continues writing."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Exterior, dense forest trail under dappled light, afternoon. Ferns, mossy logs, tall trees, soft sunbeams cutting through leaves. The same writer walks along a narrow path, wearing the forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring visible. She holds the notepad in one hand and the pen in the other, careful but curious. The mood is intimate, textural, and grounded.",
+          "video_prompt": "Steadicam-style tracking shot, 24mm lens, eye-level following a few steps ahead facing her. She walks toward camera, slows beside a mossy log, and crouches slightly to observe details (staying fully modest and practical). She writes a quick phrase, then stands and continues forward; the camera retreats smoothly to maintain distance as sunbeams shift across her face and sweater knit texture."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Exterior, snow-covered town square at twilight. Soft snowfall, warm lights in shop windows, a decorated evergreen tree (seasonal, non-denominational) in the center. The same writer stands near a bench, wearing the same forest-green chunky knit sweater, dark indigo jeans, and white sneakers; she appears comfortable and composed. Silver ring visible; tote bag tucked under her arm, notepad open. Cool blue ambient light contrasts with warm window glow. Mood: serene, reflective.",
+          "video_prompt": "Medium-wide shot, 40mm lens, eye-level with gentle lateral slider move. Snow drifts down as she writes slowly, then pauses and looks at the glowing windows, as if hearing a line in her head. She smiles, closes the notepad with a soft pat, then reopens it to add one more sentence; the camera slides past a lit lamppost to frame her against the warm storefront bokeh."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Interior, ultra-modern coworking studio at night with cool white LED strips, glass partitions, minimalist desks, and a city skyline visible through tall windows. The same 34-year-old woman writer sits at a sleek desk, still wearing the forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring visible. Her matte-black laptop is open; the yellow notepad and black gel pen are neatly aligned beside it. Mood: crisp, futuristic focus; reflections on glass surfaces.",
+          "video_prompt": "Eye-level medium shot, 50mm lens from the side, framing her profile and the laptop glow. She types in concentrated bursts, pauses to glance at a page of notes, then resumes faster. The camera makes a slow push-in as LED reflections slide across the glass wall behind her, emphasizing momentum and clarity."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Interior, planetarium auditorium in near-darkness. A domed ceiling displays soft star projections; rows of seats are mostly empty. The same writer sits alone near the middle row, wearing the forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring visible as she holds the notepad open on her lap. The pen rests in her right hand. The starfield glow casts gentle, cool highlights across her face and sweater texture. Mood: awe and quiet revelation.",
+          "video_prompt": "Low-light close-up, 85mm lens, angled slightly upward from the seat in front of her. Star projections drift slowly across her features as she reads what she’s written, then adds a final line with deliberate care. She stops, looks up at the moving stars, and her expression shifts to certainty; the camera holds steady as the light pattern glides over her crescent eyebrow scar, reinforcing identity."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Exterior, quiet hillside overlook just before dawn. The sky is deep indigo transitioning to faint gold; a distant city glows below. The same writer stands at a wooden railing, wearing the forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring visible as she grips the railing. Tote bag on her shoulder; notepad tucked under her arm. Mood: climactic calm, breath of fresh air, poised to finish.",
+          "video_prompt": "Wide shot, 24mm lens, rear three-quarter view from behind her left side. She takes out the notepad, flips to a marked page, and nods as if the structure is complete. She turns slightly toward the rising light and presses the notepad to her chest for a beat, then looks down toward the city, ready to commit the final version; the camera slowly cranes up a little to widen the horizon."
+        },
+        {
+          "shot_id": 16,
+          "first_frame": "Interior, back at her apartment writing nook in early morning, mirroring the first scene but brighter and warmer. The same 34-year-old woman writer (warm brown skin, short tightly-curled black hair, small crescent scar above right eyebrow) sits at the oak desk wearing the exact forest-green chunky knit sweater, dark indigo jeans, and white sneakers; silver ring on left hand. The matte-black laptop now shows a filled page of text (not readable), and the yellow notepad is open with multiple pages turned. A fresh mug of tea steams. Mood: satisfied, hopeful, gentle sunlight across the desk.",
+          "video_prompt": "Eye-level close-medium shot, 50mm lens from just off the laptop’s corner. She types the final lines, then stops and rests both hands lightly on the keyboard, exhaling with relief. She closes the laptop calmly, sets the pen atop the notepad, and looks toward the window with a quiet smile. The camera holds on her steady, confident posture as morning light brightens the room, signaling completion."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "writer_contrasting_locations",
+    "theme_description": "A writer finding inspiration in contrasting locations",
+    "consistency_type": "Type A",
+    "requested_scenes": 4,
+    "requested_shots": 16
+  }
+}

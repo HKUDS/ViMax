@@ -1,18 +1,17 @@
 # Example configuration using MiniMax as the chat model provider.
-# MiniMax M2.7 is used via its OpenAI-compatible API.
+# MiniMax M3 is used via its OpenAI-compatible API.
 #
 # Set your API key below or export MINIMAX_API_KEY in the environment.
 # Available models:
-#   - MiniMax-M2.7           (latest, 1M context)
+#   - MiniMax-M3             (latest, recommended)
+#   - MiniMax-M2.7           (previous generation)
 #   - MiniMax-M2.7-highspeed (fast variant)
-#   - MiniMax-M2.5           (204K context)
-#   - MiniMax-M2.5-highspeed (fast variant)
 
 chat_model:
   init_args:
-    model: MiniMax-M2.7
+    model: MiniMax-M3
     model_provider: minimax
-    api_key: <YOUR_MINIMAX_API_KEY>
+    api_key:  # leave empty to use the MINIMAX_API_KEY environment variable
     # base_url is auto-resolved to https://api.minimax.io/v1
   max_requests_per_minute: 500
   max_requests_per_day: 2000
@@ -20,14 +19,14 @@ chat_model:
 image_generator:
   class_path: tools.ImageGeneratorNanobananaGoogleAPI
   init_args:
-    api_key: <YOUR_API_KEY>
+    api_key:
   max_requests_per_minute: 10
   max_requests_per_day: 500
 
 video_generator:
   class_path: tools.VideoGeneratorVeoGoogleAPI
   init_args:
-    api_key: <YOUR_API_KEY>
+    api_key:
   max_requests_per_minute: 2
   max_requests_per_day: 10
 

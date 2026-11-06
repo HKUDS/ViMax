@@ -1,0 +1,113 @@
+{
+  "story_overview": "In a community theater, three adult performers and a stage manager rehearse a short scene. They block entrances, adjust props, and solve a timing issue with a set piece. The rehearsal builds to a clean final run-through where everyone hits their marks under rehearsal lights.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide establishing view of a community theater stage from the center aisle of the empty auditorium. The indoor 3D environment is clearly defined and must remain identical in every shot: a proscenium arch with deep red curtains pulled to the sides; a painted backdrop of a cozy living room; stage left: a worn olive-green sofa angled slightly toward center, a standing floor lamp beside it, and a small side table with a closed notebook; center stage: a rectangular wooden coffee table with a taped-out mark on the floor in front of it; upstage center: a freestanding doorway flat (cream-colored frame) with a practical door; stage right: a tall bookshelf flat with scattered books, and a rolling costume rack behind it; downstage right: a black stage monitor and a coiled cable; overhead: visible lighting grid casting bright rehearsal work-lights. Three adults (20+), modest clothing: a stage manager in dark sweater and jeans holding a clipboard at downstage left; two performers in long-sleeve tops and slacks near center; a third performer near the doorway upstage.",
+          "video_prompt": "Eye-level wide shot from the center aisle. The camera slowly dollies forward toward the proscenium while the stage manager raises the clipboard to signal the start; the two center performers step into their taped marks near the coffee table, and the upstage performer reaches for the doorway handle, testing it gently. Rehearsal work-lights remain steady; the set geometry and prop placement do not change."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium shot from stage left looking diagonally across to stage right, emphasizing depth: the olive-green sofa dominates the foreground left; the coffee table sits mid-ground center; the bookshelf flat and costume rack are visible in the background right. The stage manager (adult, 20+) stands near the sofa arm, modest dark sweater, jeans, hair tied back, clipboard in hand. A performer (adult, 20+) in a light blue button-up shirt and dark slacks stands mid-ground by the coffee table. All set pieces remain exactly as established.",
+          "video_prompt": "Stage-left medium shot with a mild telephoto lens. The camera holds steady as the stage manager walks behind the sofa (partially occluded by its backrest), taps a floor tape mark with a pen, and points toward center. The performer by the coffee table nods and takes two small steps forward to align with the taped mark, stopping with feet together."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Over-the-shoulder shot from behind the performer in the light blue shirt, looking toward the stage manager near the sofa. The coffee table edge is visible bottom frame; the floor lamp and side table sit left; the doorway flat is visible upstage center. The stage manager’s clipboard catches the overhead rehearsal light.",
+          "video_prompt": "Over-the-shoulder medium shot, eye-level. The camera subtly pans right as the stage manager demonstrates the blocking with open palms; the performer in the foreground adjusts posture and turns slightly toward the doorway. Upstage, the third performer (adult, 20+) in a mustard cardigan and dark trousers waits by the door, hands relaxed at sides."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Low-angle close shot from downstage right near the black stage monitor and coiled cable, looking up toward center stage. The coffee table legs and taped floor marks are prominent. The performer in a cream sweater and dark skirt-like trousers (modest, ankle-length) crouches carefully near the coffee table, checking a small prop (a folded letter) placed on the table’s corner. The rest of the set remains fixed.",
+          "video_prompt": "Low-angle close shot from downstage right. The camera stays locked as the performer gently places the folded letter precisely on a tape-aligned spot on the coffee table, then stands, stepping backward toward the sofa. Their movement passes in front of the table, emphasizing depth; they avoid the coiled cable near the monitor."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Medium-wide shot from upstage center, facing downstage. The doorway flat frames the left edge of the image; the coffee table is center; the sofa is stage left; bookshelf flat stage right. The performer in the mustard cardigan stands at the doorway, hand on the handle, partially hidden by the doorframe (occlusion). The other two performers stand downstage near the coffee table, facing upstage. Lighting remains bright rehearsal work-lights.",
+          "video_prompt": "Upstage center medium-wide shot, slight high angle. The camera slowly tilts down as the doorway performer opens the door inward and steps through, briefly disappearing behind the door edge, then reappearing into the room set. Downstage performers shift their weight and turn their heads to track the entrance."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Two-shot at eye level near center stage, framed between the coffee table and the sofa. The performer in light blue shirt stands screen left; the performer in cream sweater stands screen right. The folded letter is visible on the coffee table. The sofa and lamp remain fixed in the left background.",
+          "video_prompt": "Eye-level medium two-shot with a normal lens. The camera gently pushes in as the two performers rehearse a silent exchange: the cream-sweater performer points to the letter, then slides it across the table toward the light-blue-shirt performer, who places a hand on it but does not pick it up yet. Their expressions are focused and calm, matching rehearsal concentration."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Side angle from stage right, looking across the bookshelf flat toward center. The bookshelf occupies the near foreground right, creating strong depth; the coffee table and sofa are mid-ground; the doorway is visible upstage. The mustard-cardigan performer walks from upstage center toward downstage, passing behind the coffee table line.",
+          "video_prompt": "Stage-right medium shot with slight telephoto. The camera tracks left a small amount as the mustard-cardigan performer crosses from the doorway toward the coffee table, moving behind the bookshelf edge for a moment (partial occlusion), then emerging fully into view. They stop at a taped mark near the table, toes aligned to the tape."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "High-angle shot from the lighting grid perspective, looking straight down onto the stage layout. The fixed geometry is clear: sofa stage left, coffee table center, doorway upstage center, bookshelf stage right, costume rack behind it, monitor downstage right. Three performers form a triangle around the coffee table; the stage manager stands downstage left with clipboard.",
+          "video_prompt": "Overhead high-angle static shot. The stage manager steps forward two paces and uses the clipboard edge to indicate spacing; the performers adjust: one steps closer to the sofa, another pivots to face the doorway, and the third shifts a half-step back, keeping the triangle formation symmetrical around the coffee table."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Close shot on the stage manager at downstage left, with the sofa armrest in the near foreground and the floor lamp behind. The clipboard is open, showing taped notes. The stage manager (adult, 20+) wears a modest dark sweater and jeans, hair tied back, neutral expression focused on timing.",
+          "video_prompt": "Eye-level close-up with mild telephoto. The camera holds as the stage manager looks up from the clipboard, raises a hand for a count-in, then points toward the doorway. Off-screen, a performer cues a line silently (mouths words) as the manager nods once, signaling to continue."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Medium shot from center stage facing stage right. The rolling costume rack sits behind the bookshelf flat; the coiled cable and monitor are downstage right. The cream-sweater performer carefully walks toward downstage right, approaching the cable area. The stage manager is visible far left background near the sofa.",
+          "video_prompt": "Center-stage medium shot, slight low angle. The camera pans right as the performer approaches the coiled cable, pauses, then steps around it deliberately, demonstrating safe stage traffic. They stop beside the stage monitor, kneel briefly to straighten the cable loop without moving the monitor’s position, then stand."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Over-the-shoulder shot from behind the mustard-cardigan performer, facing the light-blue-shirt performer across the coffee table. The folded letter remains on the table. The doorway flat is visible upstage, unchanged. Both performers maintain modest attire and calm, rehearsal-focused expressions.",
+          "video_prompt": "Over-the-shoulder medium shot, eye-level. The camera slowly pushes in as the light-blue-shirt performer finally picks up the folded letter, opens it carefully, and scans it. The mustard-cardigan performer leans slightly forward with hands clasped, then relaxes back to neutral stance on the taped mark."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Wide shot from downstage center, showing the full set and all three performers plus the stage manager at the edge. The sofa, lamp, side table, coffee table, doorway, bookshelf, costume rack, monitor, and cable are all visible and unchanged. The performers prepare for a quick timing run: one at the doorway, two at the coffee table; stage manager watches.",
+          "video_prompt": "Downstage center wide shot, eye-level. The camera remains steady as the performers execute a rehearsal beat: the doorway performer steps in, the cream-sweater performer crosses behind the coffee table toward the sofa (briefly occluded by the table edge), and the light-blue-shirt performer turns to face downstage, marking a pause on the taped mark. The stage manager quietly counts time with small finger taps on the clipboard."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Medium-wide shot from stage left near the sofa, looking toward center and the doorway. The sofa backrest fills the lower left foreground; the coffee table is center; the doorway flat is upstage. The stage manager stands just off the sofa corner with clipboard. The performers reset positions for a final run-through.",
+          "video_prompt": "Stage-left medium-wide shot, eye-level. The camera glides slightly forward as the stage manager gives a clear start cue with a downward hand motion. The doorway performer places a hand on the door handle, the other two performers square their shoulders at the coffee table, and everyone holds for a beat, ready to begin cleanly."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Low-angle shot from near center front edge of the stage aimed upward at the performers around the coffee table, making the rehearsal lights and grid visible overhead. The coffee table and folded letter are prominent. The performers’ modest outfits remain consistent. The set remains fixed.",
+          "video_prompt": "Low-angle medium-wide shot with a wide lens. The camera holds as the doorway performer enters precisely on cue; the cream-sweater performer gestures toward the letter; the light-blue-shirt performer responds with a measured nod. Their movements are synchronized, hitting marks with clear spacing around the table."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Overhead shot from the same grid viewpoint as earlier, capturing the final blocking pattern: sofa stage left, coffee table center, doorway upstage center, bookshelf stage right. The three performers move in coordinated paths around the coffee table; the stage manager stands downstage left, watching.",
+          "video_prompt": "Overhead high-angle shot, slight slow zoom in. The performers complete the tricky cross: one passes behind the coffee table while another steps toward the sofa, creating layered depth; they avoid the monitor/cable zone downstage right. The stage manager lowers the clipboard slightly, indicating the timing issue is resolved."
+        },
+        {
+          "shot_id": 16,
+          "first_frame": "Medium close shot from stage right, framed with the bookshelf flat in the near foreground right and the coffee table mid-ground. The light-blue-shirt performer stands center holding the folded letter closed; the cream-sweater performer stands near the sofa line; the mustard-cardigan performer pauses near the doorway. The stage manager is visible at frame edge, attentive. Lighting remains bright and even.",
+          "video_prompt": "Stage-right medium close shot with mild telephoto. The camera gently racks focus from the bookshelf edge to the light-blue-shirt performer as they place the letter back on the coffee table exactly, then all three performers freeze in their end positions for a clean finish. The stage manager gives a small approving nod to end the run, concluding the rehearsal climax."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "theater_rehearsal_community_stage",
+    "theme_description": "A rehearsal in a community theater stage",
+    "consistency_type": "Type B",
+    "requested_scenes": 4,
+    "requested_shots": 16
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "story_overview": "Inside a contemporary art gallery set up as a fashion photoshoot, a small adult crew iterates through poses and lighting setups, culminating in a clean hero shot with perfect alignment of model, artwork, and camera.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide establishing view of a contemporary indoor art gallery with frozen, consistent geometry: polished concrete floor; white walls; a large abstract canvas on the left wall; a tall glass display case centered mid-room; two matte-black structural columns near the center-right; a long pale-wood bench in the foreground right; a track-lighting grid on the ceiling; and a reception desk far back left. A fashion photoshoot is set: a black tripod camera with tether cable aimed toward the center, a large softbox on a rolling C-stand to the left of the camera, and a silver reflector propped near the bench. Three adults (all 20+): a model (adult woman, 28) in a modest, long-sleeve navy midi dress and ankle boots stands mid-room near the glass case; a photographer (adult man, 35) in a dark button-up and trousers stands behind the tripod; a stylist (adult woman, 32) in a beige blazer and slacks stands near the bench holding a clipboard. Bright neutral gallery lighting with soft shadows.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. The photographer steps from left of the tripod to directly behind it, lightly adjusting the camera head; the model takes two small steps toward the glass display case and turns her shoulders toward the left-wall canvas; the stylist walks behind the bench in the foreground, briefly occluded by the bench backrest as she crosses to the reflector. Track lights remain fixed; the room layout does not change."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium shot from the photographer’s side, showing the tripod camera in the foreground left, the model mid-ground framed between the two matte-black columns, and the glass display case behind her. The left-wall abstract canvas remains visible. The softbox stands to camera-left; the reflector leans near the bench at frame right. The model’s expression is calm and professional, hands relaxed at waist height; the photographer’s posture is focused, one hand on the lens barrel.",
+          "video_prompt": "Medium shot, slight low angle, 50mm lens. The photographer rotates the lens focus ring and nods; the model shifts weight from left foot to right foot and subtly raises her chin; the stylist enters frame from right, then passes behind the nearer column, becoming partially occluded before reappearing to adjust the reflector angle. No background elements move; the gallery architecture stays perfectly consistent."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Overhead high-angle shot looking down onto the same gallery: the long bench is clearly anchored at the foreground right; the glass display case is centered; the two black columns stand near center-right; the tripod and softbox are positioned left-of-center. The stylist kneels beside the bench with the reflector resting against the bench leg; the model stands just in front of the glass case; the photographer stands by the tripod. Clean, even lighting from the track grid.",
+          "video_prompt": "Overhead static camera, 18mm lens. The stylist slides the reflector a few inches along the floor until it contacts the bench leg and then tilts it upward; the model takes one measured step backward so her heels align closer to the glass case base; the photographer leans in to check framing on the camera’s rear screen. Movements emphasize depth and contact with the bench and floor; the room remains fixed."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Close-up shot near the reception desk area at the back left, with the gallery’s fixed desk edge in the foreground and the tripod camera visible deeper in the room. A laptop sits on a small rolling cart (foreground) connected by a tether cable leading toward the tripod. The stylist (adult woman, 32) stands beside the cart, modest beige blazer sleeves rolled down; her finger hovers over the keyboard. Background still shows the left-wall abstract canvas and the glass display case.",
+          "video_prompt": "Eye-level close-up, 70mm lens. The stylist types briefly and drags a slider on the laptop screen, then looks up toward the model; the tether cable gently lifts and settles as she repositions the cart a few inches, wheels turning and stopping. The cart stays on the same floor plane, reinforcing the stable gallery geometry."
+        },
+        {
+          "shot_id": 5,
+          "first_frame": "Two-shot medium view from behind the glass display case (the case edge and reflections are visible in the foreground), looking outward toward the model and photographer. The model stands slightly left of center; the photographer stands behind the tripod to the left. The nearer black column partially blocks the stylist who is walking behind it, creating clear occlusion. The bench remains foreground right, unchanged.",
+          "video_prompt": "Medium two-shot, eye-level, 35mm lens. The model extends one arm gently to rest her fingertips on the glass case corner (light contact), then retracts to a neutral pose; the photographer raises the camera slightly and clicks a burst (silent visual action); the stylist crosses from right to left behind the nearer column, disappearing for a moment before reappearing beside the softbox. Background remains locked with consistent reflections and fixed placements."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 6,
+          "first_frame": "Low-angle shot from near the bench’s front edge, emphasizing depth: the bench dominates foreground right; the reflector now rests leaning against the bench seat; the model stands mid-ground between the columns; the photographer and tripod are left-of-center; the softbox is slightly angled toward the model. The glass display case remains centered behind the model. Lighting is still neutral, with a slightly brighter key from the softbox direction.",
+          "video_prompt": "Low-angle wide shot, 28mm lens. The model steps forward from mid-ground toward the foreground, then stops just behind the bench line, maintaining modest posture; the photographer takes a half-step backward to keep framing; the stylist reaches in to tilt the softbox down by a few degrees, hands on the stand yoke, then releases it. All actions maintain solid contact with floor and equipment; the gallery’s layout remains unchanged."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Over-the-shoulder shot from behind the photographer, with his shoulder and camera body in the foreground left, pointed at the model. The model is framed with the left-wall abstract canvas as a backdrop; the glass display case is still visible to her right. The stylist stands near the softbox, checking the stand clamp. The black columns remain fixed, one cutting into the right side of the frame.",
+          "video_prompt": "Over-the-shoulder, eye-level, 85mm lens. The photographer subtly pans the camera a few degrees to re-center the model against the canvas; the model turns her torso slightly toward the lens and relaxes her shoulders; the stylist steps behind the right-side column, briefly occluded, then reappears to raise the reflector off the floor and hold it at waist height. The room stays perfectly stable."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Side profile medium shot of the model near the glass display case. The case is on her immediate right; she stands at a respectful distance, hands together at mid-torso. The stylist is in the background walking from the bench toward the model, passing behind the case so her legs become partially obscured by the case base. The photographer is farther left, visible near the tripod.",
+          "video_prompt": "Medium profile shot, 50mm lens. The stylist walks behind the glass display case, partially occluded by the case frame, and stops beside the model to adjust the model’s collar and sleeve cuff (modest wardrobe touch-up); the model holds still and nods; the photographer raises a hand to signal readiness. The fixed gallery structures and object positions remain constant."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Tight close-up of the softbox and light stand hardware at left-of-center, with the gallery’s track lights above and the black column edge in the background. The stylist’s hands (beige blazer sleeves) grip the stand knob; the photographer is blurred in the background near the tripod; the model is also blurred mid-room. No logos or brand marks are visible.",
+          "video_prompt": "Close-up, 100mm macro lens. The stylist loosens the knob, lowers the softbox a few inches, then tightens it; the softbox subtly swings and settles, showing realistic inertia. Background remains stable: the same ceiling track grid and column edge do not shift or warp."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Hero wide shot aligned for the final image: the model stands centered between the two matte-black columns with the abstract canvas to the left wall and the glass display case behind her; the bench anchors the foreground right; the tripod and photographer are just off-center left, slightly lowered as if giving the model the spotlight; the stylist stands near the reflector by the bench, out of the model’s direct line. Lighting is crisp and balanced, creating a polished editorial look while remaining natural and family-friendly.",
+          "video_prompt": "Eye-level wide shot, 24mm lens. The photographer steps aside from the tripod to clear the frame, then nods; the stylist gently angles the reflector toward the model and freezes; the model takes a final micro-adjustment—one foot slides a few centimeters, shoulders square, chin slightly lifted—and holds a confident, calm pose. The moment lands as the climax: the set is perfectly arranged, with strong depth cues and consistent gallery geometry across the entire shot."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "fashion_shoot_art_gallery",
+    "theme_description": "A fashion photoshoot in an art gallery",
+    "consistency_type": "Type B",
+    "requested_scenes": 2,
+    "requested_shots": 10
+  }
+}

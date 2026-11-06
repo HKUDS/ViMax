@@ -1,10 +1,13 @@
 import logging
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
+from utils.robust_json_parser import TrailingCommaTolerantPydanticOutputParser as PydanticOutputParser
 from langchain.chat_models import init_chat_model
 from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
-from tenacity import retry
+from tenacity import retry, stop_after_attempt, wait_exponential
+
+from utils.retry import after_func
 
 
 narrative_script_prompt_template = \
@@ -341,7 +344,7 @@ class ScriptPlanner:
             api_key=api_key,
         )
 
-    @retry
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, max=30), after=after_func)
     def plan_script(
         self,
         basic_idea: str,

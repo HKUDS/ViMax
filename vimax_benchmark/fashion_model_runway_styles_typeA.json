@@ -1,0 +1,113 @@
+{
+  "story_overview": "A single adult fashion model prepares for a cultural fashion showcase and steps through dramatically different environments, presenting modest outfits inspired by multiple traditions. The show builds from rehearsal to a high-stakes final runway moment where the model unites the styles into one respectful, modern look.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Backstage dressing room, warm vanity bulbs reflecting in a large mirror. The main model is a 28-year-old East Asian woman with a sleek chin-length black bob, a small beauty mark under her right eye, and calm brown eyes. She wears the same signature outfit for the entire story: a modest ivory high-neck long-sleeve blouse, a tailored teal blazer, high-waisted charcoal wide-leg trousers, and clean white leather sneakers; simple silver hoop earrings and a thin silver watch. She stands centered, hands resting lightly on a garment rack, makeup brushes and folded fabric swatches on the counter. Soft, warm lighting, tidy professional mood.",
+          "video_prompt": "Eye-level medium shot, 50mm lens. The model takes a slow breath, checks her reflection, then lifts a small clipboard from the counter and nods with quiet confidence. Vanity lights glow steadily; slight camera push-in to emphasize her face and beauty mark."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Same model and outfit, now seen from a higher angle in the dressing room. A mood board on the wall shows abstract patterns and color palettes (no readable brand text). A steaming mug and neatly folded scarves lie on the counter. The model is three-quarters turned to camera, holding a folded paper fan as a prop at waist height. Warm tungsten lighting with gentle shadows.",
+          "video_prompt": "High-angle medium-wide shot, 35mm lens. The model opens the paper fan once with a smooth wrist motion, then closes it and places it on the counter. She glances toward the doorway as if hearing a cue, then steps one pace forward; camera tilts down slightly to follow her hands and the fan."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Hard cut to a bright outdoor plaza in midday sun with pale stone tiles and a modern fountain in the background. The same model and identical outfit stands near the fountain’s edge; water arcs sparkle behind her. She holds a lightweight patterned shawl (draped over her forearms, not worn) with geometric motifs inspired by global textiles. Crisp sunlight, high contrast, airy mood.",
+          "video_prompt": "Wide shot, low angle, 24mm lens. The model walks two measured steps along the fountain rim (at a safe distance), gently lifting the shawl to display its pattern like a banner, then lowers it. The camera tracks sideways, keeping her centered while water glints and wind lightly flutters the shawl."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Hard cut to a neon-lit night street market scene with lantern-like lights and colorful stalls blurred behind. The same model and outfit stands under a canopy of lights; reflections shimmer on wet pavement. She holds a small woven tote bag with a simple handle. Cool-magenta and teal lighting, cinematic bokeh.",
+          "video_prompt": "Eye-level close-up, 85mm lens. The model raises the woven tote to chest height, turns it slightly to show texture, then lowers it while offering a warm, professional smile. The camera performs a gentle rack focus from the tote weave to her eyes and beauty mark, then back to her hands."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Hard cut to a serene tea house interior with wood beams, paper screens, and a low table. The same model and identical outfit kneels on a floor cushion (posture upright, modest), hands resting on her thighs. A ceramic tea set sits neatly on the table. Soft diffused daylight through screens, calm atmosphere.",
+          "video_prompt": "Static eye-level medium shot, 50mm lens. The model reaches forward to lift a teacup with both hands, pauses to present it respectfully, then sets it back down gently. Subtle camera push-in as her hands move, emphasizing careful contact with the cup and table."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Hard cut to a sunlit desert at golden hour with rippled dunes and long shadows. The same model and outfit stands on firm sand, holding a lightweight scarf in both hands, arms extended slightly outward. Warm amber light, wind lifting small grains of sand; sky gradient from gold to blue.",
+          "video_prompt": "Wide shot, eye-level, 28mm lens. The model turns slowly in place a quarter turn as wind billows the scarf; she then brings the scarf closer, letting it ripple without covering her face. The camera arcs around her to the right, keeping her outfit and facial features consistent in changing light."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Hard cut to a lush tropical garden walkway after rain, glossy leaves and orchids in the background. The same model and identical outfit stands beneath a wooden pergola; droplets cling to foliage. She holds a floral lei-like garland in her hands (not worn), smiling softly. Soft overcast light, fresh green tones.",
+          "video_prompt": "Medium-wide shot, slightly high angle, 35mm lens. The model steps forward along the walkway, gently lifting the garland to show its flowers, then lowers it to waist height. The camera tracks backward smoothly; foreground leaves briefly sweep across frame edges to test depth and parallax."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Hard cut to a snowy mountain overlook with pine trees and a wooden railing. The same model and identical outfit stands near the railing; her blazer and blouse remain unchanged despite the cold setting. She holds a thick patterned wool wrap folded over her forearms. Cool daylight, crisp air, visible breath kept subtle.",
+          "video_prompt": "Low angle medium shot, 40mm lens. The model lifts the folded wool wrap slightly to display the pattern, then rests it back on her forearms. She looks out toward the mountains and nods as if acknowledging the next segment. The camera pans gently left, revealing more of the snowy vista while keeping her centered."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Hard cut to a minimalist museum gallery with white walls and spotlit textile art panels (abstract, non-branded). The same model and identical outfit stands on polished concrete floor, holding a small booklet. Cool neutral lighting with clean shadows; quiet, curated mood.",
+          "video_prompt": "Eye-level medium shot, 50mm lens. The model opens the booklet, flips one page, then gestures with an open palm toward a textile panel as if presenting inspiration. The camera slides laterally a short distance, maintaining her face and outfit details while lights remain constant."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Hard cut to an urban rooftop at sunset with skyline silhouettes and string lights overhead. The same model and identical outfit stands beside a clothing rack holding colorful, modest garments on hangers (no logos). A small handheld steamer sits on a table. Warm backlight, gentle lens flare.",
+          "video_prompt": "Medium-wide shot, backlit, 35mm lens. The model rolls the clothing rack one step forward, stops it carefully, and smooths a hanger with her fingertips. The camera dollies in slightly from the side, catching sunset glow edging her blazer and hair."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Hard cut to a professional runway venue corridor with black curtains and bright stage spill light at the far end. The same model and identical outfit stands in three-quarter profile, holding a small headset mic pack in her hand (not worn). Crew silhouettes move softly out of focus. High-contrast lighting, anticipatory tension.",
+          "video_prompt": "Over-the-shoulder medium shot, 70mm lens. The model clips the mic pack onto a belt pouch at her waist (no exposure, clothing remains modest), then takes a steadying breath. The camera pushes forward toward the bright stage opening, framing her as she steps closer to the curtains."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Hard cut to the runway entrance, intense white stage lights and a glossy catwalk stretching forward. The same model and identical outfit stands at the threshold, holding a small rectangular presentation card with abstract symbols (not readable text). Audience is a soft blur of shapes and lights. Dramatic spotlight, high energy.",
+          "video_prompt": "Low angle full-body shot, 24mm lens. The model takes two deliberate runway steps forward, pauses, then raises the presentation card briefly at chest height before lowering it. The camera tilts up from her sneakers to her face, emphasizing her beauty mark and consistent styling under harsh lights."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Hard cut to a circular stage center with projection mapping on the floor showing shifting cultural pattern mosaics (abstract, respectful, non-specific). The same model and identical outfit stands centered, holding four small fabric swatches in different colors in one hand. Bright spotlight from above, surrounding darkness, vivid projected colors.",
+          "video_prompt": "Overhead top-down shot, 18mm lens. The model rotates slowly in place while extending the fabric swatches outward like a fan, letting projections wash across her blazer and trousers. The camera descends slightly (simulated crane move) to intensify the swirling patterns around her feet."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Hard cut to a side-of-runway angle with the catwalk diagonal across frame. The same model and identical outfit walks mid-runway; behind her, large LED screens display abstract motifs inspired by multiple weaving traditions. Her posture is poised; hands relaxed at sides. Bright key light with cool fill, crisp reflections on the glossy floor.",
+          "video_prompt": "Tracking side shot, 35mm lens. The model completes a short runway pass, then performs a single clean pivot at the end mark and begins walking back. The camera tracks parallel, keeping her identity locked while the LED patterns shift in the background."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Hard cut to a close frontal runway shot. The same model and identical outfit is near camera, holding the fabric swatches now stacked neatly. Spotlight highlights her face; catchlights in her eyes, beauty mark clearly visible. Background audience remains blurred, bokeh lights sparkling.",
+          "video_prompt": "Eye-level close-up, 85mm lens. The model stops, lifts the stacked swatches slightly, then lowers them and places her free hand over her heart in a respectful gesture. The camera performs a subtle push-in and micro rack focus from her hand to her eyes, emphasizing sincerity and culmination."
+        },
+        {
+          "shot_id": 16,
+          "first_frame": "Hard cut to a bright backstage exit with daylight pouring through an open door to a quiet street outside. The same model and identical outfit stands in the doorway, holding the fabric swatches and clipboard together at her side. Confetti-like paper pieces (plain, no text) rest on the floor from the show. Soft natural light, relieved and peaceful mood.",
+          "video_prompt": "Medium-wide shot, eye-level, 35mm lens. The model takes a final step forward into the daylight, pauses, and looks back with a calm smile, then gently closes the door partway. The camera remains steady as the lighting shifts from stage glow to natural daylight, ending on her consistent silhouette."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "fashion_model_runway_styles",
+    "theme_description": "A fashion model showcasing different cultural fashion styles",
+    "consistency_type": "Type A",
+    "requested_scenes": 4,
+    "requested_shots": 16
+  }
+}

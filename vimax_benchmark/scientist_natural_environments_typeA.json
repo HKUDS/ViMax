@@ -1,0 +1,88 @@
+{
+  "story_overview": "A single adult scientist tests an eco-friendly sensor prototype across dramatically different natural environments, collecting data and refining the setup until a final stormy-night field test proves the device can reliably detect early signs of environmental change.",
+  "consistency_type": "Type A",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Interior, compact field lab trailer with matte gray cabinets and a tidy workbench. Center frame: Dr. Mara Ellison, a 34-year-old woman with warm medium-brown skin, almond-shaped dark eyes behind thin round silver eyeglasses, and a single silver streak in her otherwise dark hair pulled into a low bun. She wears a modest forest-green field jacket zipped to the collar, a light gray turtleneck, khaki cargo pants, and brown hiking boots; an ID badge clipped to her left chest pocket. On the bench: a palm-sized sensor module with a small amber status LED, coiled cables, a rugged tablet, and labeled sample vials. Soft daylight through a small window; calm, focused mood.",
+          "video_prompt": "Eye-level medium shot, 35mm lens, locked-off camera. Dr. Mara Ellison taps the rugged tablet, then gently rotates the sensor module in her gloved hands, watching the amber LED blink steadily. She marks a checklist with a pen, nods once, and closes a small foam case with the sensor inside; subtle lab hum, natural daylight remains consistent."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Bright alpine meadow under clear midday sun with wildflowers and distant snowcapped peaks. Dr. Mara Ellison (same face, glasses, silver hair streak, and the same forest-green jacket, gray turtleneck, khaki cargos, brown boots, ID badge) kneels beside a flat rock in the foreground, placing the sensor module on a small tripod. The rugged tablet sits on the rock, screen reflecting blue sky; crisp, high-contrast lighting and vivid colors.",
+          "video_prompt": "Low-angle wide shot, 24mm lens. Dr. Mara Ellison adjusts the tripod legs on uneven ground and presses a button on the sensor; the amber LED pulses. She stands, steps back into the meadow, and raises the tablet to verify readings, turning slightly so sunlight glints off her round silver eyeglasses; a light breeze moves grass and flowers."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Dense tropical rainforest at dusk, humid haze and shafts of greenish light cutting through tall leaves. Dr. Mara Ellison, unchanged in appearance and clothing, stands on a narrow muddy path with a small backpack. In the near foreground, large wet leaves frame the shot; midground shows her holding the sensor module near a mossy tree trunk. Moist surfaces gleam; the mood is exploratory and cautious.",
+          "video_prompt": "Over-the-shoulder medium shot, 50mm lens, slight handheld sway. From behind her right shoulder, Dr. Mara Ellison clips the sensor to a strap around the tree trunk, then wipes moisture from the tablet screen with a sleeve. She leans closer to check the amber LED through the mist, then steps carefully around a puddle, keeping the device stable; light beams shift subtly as leaves sway."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Coastal tidepool at golden hour with warm sunlight, wet rocks, and shallow pools reflecting the sky. Dr. Mara Ellison (same identity and outfit) crouches on a stable rock ledge in the foreground, extending a gloved hand to lower the sensor module into a clear tidepool using a short tether. The tablet rests in a waterproof case nearby; gentle waves in the background. Warm highlights, crisp reflections.",
+          "video_prompt": "Top-down oblique shot, 28mm lens, slow controlled pan. Dr. Mara Ellison lowers the sensor into the tidepool until it is just submerged, then watches the amber LED refract under water. She lifts the tablet, taps to start a timed reading, and carefully repositions her boots to keep balance on the slick rock; the camera pans slightly to follow the sensor’s placement and the rippling reflections."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Arid desert plateau at noon with pale sand, scattered stones, and distant mesas under harsh white sunlight. Heat shimmer is visible. Dr. Mara Ellison, still in the same forest-green jacket and modest layered clothing, stands beside a small foldout tripod table holding the tablet and sensor. A lightweight windscreen made of fabric is clipped to the table. High contrast, dry textures, intense glare.",
+          "video_prompt": "Eye-level medium-wide shot, 32mm lens. Dr. Mara Ellison squints behind her glasses, raises a hand to shade the tablet, and secures the windscreen as a gust flutters it. She rotates the sensor module toward the wind, then notes a fluctuating readout on the tablet; the amber LED flickers faster, prompting her to tighten a cable and steady the setup."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Polar shoreline at blue hour with snow-covered rocks and calm dark water; cold, cobalt lighting. Dr. Mara Ellison (same face, glasses, silver hair streak, same jacket, turtleneck, cargos, boots, ID badge) stands on packed snow, breath faintly visible. She holds the sensor module in both hands, examining a small rim of frost forming near the LED. The tablet is strapped to her forearm with a rugged band. Quiet, crisp atmosphere.",
+          "video_prompt": "Close-up, 85mm lens, slight push-in. Dr. Mara Ellison gently rubs the sensor casing with a gloved thumb to clear frost without removing it, then taps the tablet with her other hand to activate a warming cycle. The amber LED steadies, and she exhales in relief; the camera continues a subtle push-in to emphasize the LED’s consistent pulse against the cold blue environment."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Misty conifer forest at dawn with soft gray fog and dew on needles. Dr. Mara Ellison, unchanged in identity and clothing, stands midground beside a fallen log. A small portable antenna is mounted on a tripod; the sensor module is connected by a cable. The tablet sits on the log, its screen casting a faint cool glow. The scene is muted, quiet, and methodical.",
+          "video_prompt": "Side-profile medium shot, 40mm lens, slow lateral dolly. Dr. Mara Ellison aligns the antenna toward a clearing, then runs a quick calibration on the tablet. She lifts the sensor, taps it twice, and places it back, watching the amber LED blink in a stable rhythm; the dolly move reveals fog drifting between tree trunks, reinforcing a changing environment while she remains visually consistent."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Mountain river gorge in bright afternoon light with fast-moving turquoise water and rugged rock walls. Dr. Mara Ellison (same identity and outfit) stands on a sturdy wooden footbridge in the foreground, clipping the sensor module to the railing with a clamp. Her tablet is secured by a shoulder strap, resting against her jacket. Sunlight sparkles on water; dynamic, energetic mood without danger.",
+          "video_prompt": "High-angle medium shot, 26mm lens, gentle tilt. Dr. Mara Ellison tightens the clamp, then leans slightly to aim the sensor toward the river’s spray, keeping a safe stance. She taps the tablet, and the amber LED switches from slow pulse to a steady glow as the reading stabilizes. The camera tilts down briefly to show the churning water, then back up to her focused expression."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Volcanic geothermal field under overcast sky with steaming vents and rust-colored mineral deposits. The ground is dark and textured, with plumes of white steam drifting. Dr. Mara Ellison (same face, glasses, silver streaked bun, same jacket, turtleneck, cargos, boots, ID badge) stands in the foreground wearing sturdy gloves, holding the sensor module near a vent but at a safe distance. The tablet is on a tripod stand; moody, diffused lighting.",
+          "video_prompt": "Low-angle medium shot, 35mm lens, slight handheld. Dr. Mara Ellison carefully extends her arms to position the sensor on a heat-resistant stake in the ground, then steps back and checks the tablet’s graph. Steam wafts between her and the camera, briefly obscuring her jacket and glasses before clearing; the amber LED remains visible, blinking steadily through the haze."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Nighttime wetland boardwalk during a light rain, illuminated by a headlamp beam and distant lightning-free storm clouds. Raindrops bead on wooden planks and reeds sway. Dr. Mara Ellison, unchanged in identity and wearing the same modest field outfit, stands under a simple rain hood attached to her forest-green jacket (hood up but same glasses and silver hair streak still visible). She holds the sensor module over a marshy inlet; the tablet is protected inside a clear waterproof sleeve. Cool, cinematic lighting with reflective surfaces.",
+          "video_prompt": "Eye-level close medium shot, 50mm lens, slow push-in. Dr. Mara Ellison anchors the sensor to a short pole beside the boardwalk and starts a final test on the tablet. Rain streaks across her glasses; she wipes them with the back of her glove and watches the amber LED shift to a brighter, steady pulse. The camera pushes in as the tablet graph climbs smoothly, emphasizing the device’s improved stability in harsh weather."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Sunrise salt flat after the storm, vast mirror-like shallow water reflecting pink-orange sky. Dr. Mara Ellison (same identity and outfit; hood down again, silver hair streak visible in the bun; glasses clean) stands in the center of the frame with the sensor module mounted on a small tripod at her feet. The tablet is held in both hands, reflection visible in the wet surface. Serene, triumphant atmosphere.",
+          "video_prompt": "Wide shot, 20mm lens, slow backward dolly. Dr. Mara Ellison lifts the tablet slightly, confirming a stable final readout, then smiles subtly and gives a small satisfied nod. She picks up the sensor tripod and walks forward a few steps across the reflective surface, her boots creating gentle ripples; the camera dollies back to keep her centered against the expansive mirrored horizon."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Interior of the same compact field lab trailer, now lit by warm morning light through the window. Dr. Mara Ellison (same face, glasses, silver streak, same forest-green jacket, gray turtleneck, khaki cargos, brown boots, ID badge) sits at the workbench with the sensor module placed on a padded mat and the tablet propped up showing a clean, stable data line. Neat notes and labeled charts are pinned on a corkboard. Calm, resolved mood.",
+          "video_prompt": "Overhead medium shot, 35mm lens, locked-off. Dr. Mara Ellison slides a printed summary sheet next to the tablet, draws a final checkmark, and gently closes the sensor into its foam case. She places the case beside the tablet, then rests her hands on the bench for a beat as warm light fills the trailer; the shot ends with the stable graph visible, signaling the successful conclusion."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "scientist_natural_environments",
+    "theme_description": "A scientist conducting experiments in various natural environments",
+    "consistency_type": "Type A",
+    "requested_scenes": 3,
+    "requested_shots": 12
+  }
+}

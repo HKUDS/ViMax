@@ -1,0 +1,68 @@
+{
+  "story_overview": "Two adults cook dinner together in a cozy home kitchen, coordinating tasks, passing ingredients, and timing the meal so everything finishes at once, ending with a warm, shared plating moment.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide two-shot of a tidy, warmly lit home kitchen at dusk. Character A: a 32-year-old woman, tall and slim, medium-brown skin, curly dark hair in a low bun, wearing a forest-green cardigan over a white crew-neck shirt, dark jeans, and a light-gray apron; small silver stud earrings; calm focused expression. Character B: a 34-year-old man, average height with a sturdy build, light skin, short black hair, neatly trimmed beard, wearing a navy button-down shirt with sleeves rolled to forearms, tan chinos, and a charcoal apron; attentive expression. They stand side-by-side at a wooden island: cutting board, chef’s knife, tomatoes, bell pepper, onion, garlic, a bowl of salad greens, a bottle of olive oil, and a smartphone on a stand showing a recipe. Background: stove with a covered pot, tiled backsplash, hanging utensil rail, and a window with soft evening light. Both are modestly dressed; no revealing clothing.",
+          "video_prompt": "Eye-level wide two-shot on a 24mm lens from the kitchen entry, static tripod. Character A gestures toward the smartphone recipe while Character B nods and points to the ingredients; they lean in together, then separate to their stations—A turns toward the island to prep vegetables while B steps toward the stove, lifting the pot lid briefly to check steam, then setting it back down."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Over-the-shoulder shot from behind Character A (green cardigan visible at frame left), focusing on the cutting board on the island. Character A’s hands hold a tomato steady; Character B appears in the background right at the stove, slightly out of focus, stirring a pot. Warm under-cabinet lighting highlights the knife blade and the tomato’s glossy skin; the smartphone recipe is visible on its stand near the board.",
+          "video_prompt": "Over-the-shoulder medium shot, 50mm lens, slight handheld sway. Character A slices tomatoes into even wedges with controlled movements, sliding pieces into a bowl. In the background, Character B stirs steadily, then glances toward A as if checking timing, returning to the pot."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Reverse over-the-shoulder shot from behind Character B (navy shirt collar and charcoal apron strap visible), aimed toward the stove and pot. Character B holds a wooden spoon above a simmering pot; Character A is in the background at the island, washing greens in a colander. Soft steam rises; the backsplash tiles and utensil rail remain crisp and stable.",
+          "video_prompt": "Over-the-shoulder medium shot, 35mm lens, gentle push-in. Character B stirs and reduces the heat, then reaches to the side for a spice jar. In the background, Character A shakes the colander dry and sets it on the counter, watching B for a cue."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Medium two-shot at the island from a slight high angle. Character A holds a small bowl of chopped onion; Character B stands beside her holding a measuring spoon and an open spice jar. Their aprons are clearly distinct: A’s light-gray apron, B’s charcoal apron. The cutting board is neatly arranged with chopped vegetables, olive oil, and a lemon.",
+          "video_prompt": "Slight high-angle medium two-shot, 28mm lens, static. Character B reads the recipe on the smartphone, then measures spices carefully. Character A tilts the onion bowl forward as if ready to add; both exchange quick eye contact and a small smile, then B gestures for her to wait one beat while he finishes measuring."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Close-up on hands at the island: Character B’s hands (navy cuff visible) hold a small ramekin of spices; Character A’s hands (green cardigan cuff visible) hold a lemon half over a small bowl. The background is softly blurred, but both aprons’ colors remain distinguishable. Warm light reflects off the bowl’s rim and the lemon’s textured peel.",
+          "video_prompt": "Close-up, 85mm lens, locked-off. Character A squeezes the lemon, a few drops falling into the bowl, then sets it down. Character B slides the ramekin toward A; A accepts it and places it beside the vegetables, completing a clean handoff without mixing their sleeves or aprons."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Medium shot from the side showing the stove and island in the same frame with strong depth. Character B stands at the stove front-right, holding the pot lid slightly ajar; Character A steps in from the left carrying a bowl of chopped vegetables. Steam rises gently; the pot handle and burner grates are clearly visible.",
+          "video_prompt": "Side-angle medium shot, 35mm lens, slow lateral pan following the action. Character A walks behind Character B (brief occlusion as she passes), then emerges at the stove’s left side. Character B lifts the lid fully; Character A pours vegetables into the pot in a smooth arc, and B stirs immediately to incorporate them, then lowers the lid halfway."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Overhead shot of the island with both characters’ torsos visible at opposite edges: Character A (green cardigan, light-gray apron) on the left, Character B (navy shirt, charcoal apron) on the right. A large salad bowl sits center with greens; a small bottle of olive oil and a pepper grinder are near Character B; sliced tomatoes and cucumber are near Character A.",
+          "video_prompt": "Overhead top-down shot, 24mm lens, steady. Character A adds sliced tomatoes and cucumber into the salad bowl while Character B drizzles olive oil in a thin stream and twists the pepper grinder. They coordinate without crossing tools; their hands briefly meet at the bowl rim as they rotate it together, then separate cleanly."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Tight two-shot at the stove, eye-level, showing both faces and the pot between them. Character B holds a wooden spoon; Character A holds a small tasting spoon. The kitchen light is slightly brighter now, reflecting off the pot lid. Both look attentive and calm, leaning in modestly without any suggestive framing.",
+          "video_prompt": "Eye-level tight two-shot, 50mm lens, slight push-in. Character B stirs and pauses; Character A carefully dips the tasting spoon, cools it with a small wave, then tastes. She nods, gestures a small 'just a pinch' sign; Character B adds a tiny amount from a pinch bowl, stirs again, and both relax with relieved smiles—this is the timing-and-seasoning climax."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Wide shot of the dining nook adjacent to the kitchen. A small table is set with two plates, cloth napkins, and water glasses. Character A carries a salad bowl; Character B carries a covered serving dish from the stove. Warm, cozy lighting; no clutter. Their outfits remain unchanged and distinct.",
+          "video_prompt": "Eye-level wide shot on a 24mm lens from the dining nook, static. Character A sets the salad bowl down and adjusts the serving spoon. Character B places the covered dish at the center, lifts the lid to reveal steam (no mess), then they jointly plate portions—passing a serving spoon once—ending with both sitting down at the table, exchanging a satisfied look as the action settles."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "couple_cooking_dinner_together",
+    "theme_description": "A couple preparing dinner together in their kitchen",
+    "consistency_type": "Type C",
+    "requested_scenes": 2,
+    "requested_shots": 9
+  }
+}

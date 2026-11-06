@@ -20,7 +20,8 @@ class VideoGeneratorOmniYunwuAPI:
         enable_upsample: bool = False,
         enable_sample: Optional[bool] = None,
         poll_interval: int = 2,
-        max_poll_attempts: Optional[int] = None,
+        max_poll_attempts: Optional[int] = 300,
+        max_create_attempts: int = 3,
         rate_limiter: Optional[RateLimiter] = None,
     ):
         self.api_key = api_key
@@ -32,6 +33,7 @@ class VideoGeneratorOmniYunwuAPI:
         self.enable_sample = enable_sample
         self.poll_interval = poll_interval
         self.max_poll_attempts = max_poll_attempts
+        self.max_create_attempts = max_create_attempts
         self.rate_limiter = rate_limiter
 
     def _headers(self) -> dict:
@@ -111,22 +113,45 @@ class VideoGeneratorOmniYunwuAPI:
             await self.rate_limiter.acquire()
 
         url = f"{self.base_url}/v1/video/create"
-        while True:
+        last_error = None
+        for attempt in range(1, self.max_create_attempts + 1):
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.post(url, headers=self._headers(), json=payload) as response:
                         response_json = await response.json()
+                        http_status = response.status
                 logging.debug("Response: %s", response_json)
-
-                task_id = response_json["id"]
-                logging.info("Video generation task created successfully. Task ID: %s", task_id)
-                return task_id, payload["model"]
             except Exception as e:
+                last_error = e
                 logging.error(
-                    "Error occurred while creating video generation task: %s. Retrying in 1 second...",
+                    "Error occurred while creating video generation task (attempt %s/%s): %s",
+                    attempt,
+                    self.max_create_attempts,
                     e,
                 )
-                await asyncio.sleep(1)
+                if attempt < self.max_create_attempts:
+                    await asyncio.sleep(attempt)
+                continue
+
+            if http_status >= 400:
+                message = f"Video generation task creation failed with HTTP {http_status}: {response_json}"
+                if http_status < 500:
+                    raise RuntimeError(message)
+                last_error = RuntimeError(message)
+                logging.error("%s (attempt %s/%s)", message, attempt, self.max_create_attempts)
+                if attempt < self.max_create_attempts:
+                    await asyncio.sleep(attempt)
+                continue
+
+            task_id = response_json.get("id")
+            if not task_id:
+                raise RuntimeError(f"Video generation task creation returned no task id: {response_json}")
+            logging.info("Video generation task created successfully. Task ID: %s", task_id)
+            return task_id, payload["model"]
+
+        raise RuntimeError(
+            f"Failed to create video generation task after {self.max_create_attempts} attempts."
+        ) from last_error
 
     async def query_video_generation_task(self, task_id: str, model: str) -> str:
         url = f"{self.base_url}/v1/video/query"
@@ -197,4 +222,3 @@ class VideoGeneratorOmniYunwuAPI:
 
 class VideoGeneratorOminiYunwuAPI(VideoGeneratorOmniYunwuAPI):
     """Backward-compatible alias for the common "omini" spelling."""
-

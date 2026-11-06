@@ -1,0 +1,73 @@
+{
+  "story_overview": "In a cozy artisan pottery studio, two adult artisans prepare clay, shape a bowl together at the wheel, and culminate in a careful reveal of a freshly formed piece on the central worktable—testing consistent indoor 3D geometry as they move behind shelves, around pillars, and between foreground and background.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide establishing view of a warm, indoor artisan pottery studio with frozen geometry: a concrete floor with clay smudges; a large central wooden worktable with a folded canvas cloth; to frame-left a pottery wheel mounted on a low metal stand; behind it a waist-high rolling cart with tools (wooden ribs, sponge, wire cutter) neatly arranged; frame-right a tall wooden shelving unit filled with bisque-fired bowls and small vases; back wall has two large grid windows admitting soft golden afternoon light; a deep utility sink and faucet sit under the left window; a thick wooden support pillar stands slightly right of center foreground; a hanging pendant lamp above the worktable is off; a small potted plant on the windowsill. Two adult artisans (both 20+): Artisan A (woman, 32, medium height, medium build, warm brown skin, dark curly hair in a low bun, wearing a long-sleeve oatmeal work shirt and a dark olive apron) stands near the sink holding a wrapped block of clay. Artisan B (man, 35, tall, average build, light skin, short dark hair, wearing a denim work jacket over a light gray shirt and a tan apron) stands near the worktable reviewing tools. Modest attire, family-friendly, calm mood.",
+          "video_prompt": "Eye-level wide shot with a 24mm lens from the studio doorway, static tripod. Artisan A walks from the sink area toward the central worktable, passing behind the center-right support pillar (brief occlusion). Artisan B slides the tool tray closer on the worktable and nods to her. Dust motes drift in the golden window light; all furniture and architectural features remain fixed."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium shot focused on the central worktable from the opposite side (camera now inside the studio looking back toward the windows). The same fixed layout is visible: windows and sink in the background, shelf at frame-left edge, pottery wheel now at frame-right edge. The wooden pillar is now near frame-left foreground. Artisan A sets the wrapped clay block onto the canvas cloth on the table. Artisan B stands on the far side of the table, hands poised above a wooden rib and sponge. Warm afternoon light, soft shadows, tactile wood grain and clay texture.",
+          "video_prompt": "Eye-level medium shot with a 35mm lens, slight handheld micro-movement. Artisan A unwraps the clay with careful, deliberate motions and presses it onto the canvas. Artisan B points to the wire cutter, then gently slides it toward her across the table. The camera subtly pushes in a few inches; the table, windows, sink, shelves, pillar, and wheel remain perfectly stable in position."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Low angle close shot near the floor beside the worktable legs, looking across the concrete floor toward the rolling cart. The cart’s wheels and metal frame are sharp; the pottery wheel base is visible behind it. Artisan B’s boots step into frame; Artisan A’s hands reach down from above frame to pick up a wire cutter from the cart’s lower shelf. Clay crumbs on the floor, strong texture detail; warm light rakes across the ground plane.",
+          "video_prompt": "Low angle close shot with a 28mm lens, camera placed near floor level, locked-off. Artisan B gently nudges the rolling cart a short distance; it rolls and stops with a soft bounce. Artisan A’s hands lift the wire cutter and a sponge, then withdraw upward. Artisan B’s legs move past the cart, briefly blocking it (occlusion), while the studio background geometry stays unchanged."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Overhead top-down shot of the central worktable: canvas cloth centered; the clay block now unwrapped; a shallow bowl of water at top-left; wooden ribs and sponge arranged to the right; wire cutter coiled near the bottom edge. The pendant lamp fixture is visible above, but unlit. Artisan A’s hands press the clay; Artisan B’s hands steady the cloth edge. The windows are partially visible beyond the table edge, maintaining the same studio orientation.",
+          "video_prompt": "Overhead static shot with a 20mm lens from directly above the worktable. Artisan A wedges the clay rhythmically—push, fold, turn—while Artisan B sprinkles a few drops of water from the bowl and wipes the table edge. Their hands move in coordinated motions; tools shift slightly but remain on the table plane. No changes to room layout or background elements."
+        },
+        {
+          "shot_id": 5,
+          "first_frame": "Medium-wide shot of the pottery wheel area from camera position near the shelving unit (shelf in left foreground, partially blocking the view). The wheel is center frame on its stand; the central worktable is behind it; the pillar sits farther right. Artisan A sits on the wheel stool, posture upright, apron neatly tied, hands hovering over a centered lump of clay on the wheel head. Artisan B stands behind and slightly left, holding a small bowl of water. Warm light continues; the shelf creates depth and foreground occlusion.",
+          "video_prompt": "Medium-wide shot with a 32mm lens from behind the shelf, slight parallax as the camera gently pans right a few degrees. Artisan A starts the wheel spinning and braces her elbows; Artisan B steps behind the wheel stand, briefly occluded by the shelf edge, then reappears to offer water. The clay begins to rise into a centered mound under steady pressure; the studio’s shelf, pillar, windows, sink, and worktable remain fixed."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 6,
+          "first_frame": "Tight close-up on the spinning clay at the pottery wheel: Artisan A’s hands (clean nails, no jewelry) cup the clay; a thin sheen of water reflects the warm window light. Artisan B’s hand enters from frame-right holding a sponge near the rim. The wheel head and clay are sharp; background softly blurred but still recognizable as the same studio.",
+          "video_prompt": "Eye-level close-up with a 85mm lens, camera fixed close to the wheel. The clay spins steadily as Artisan A narrows the form, then opens the center with thumb pressure. Artisan B dabs the sponge lightly to keep it moist. The motion is smooth and controlled; no splashing, no mess beyond small droplets; the sense of depth remains consistent."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Over-the-shoulder shot from behind Artisan B looking toward Artisan A at the wheel. Artisan B’s denim shoulder and tan apron strap are in the left foreground; Artisan A’s focused face is visible, calm expression, eyes on the clay. The central worktable sits in mid-background; the pillar stands to the right; the windows and sink align exactly as before. Tools on the cart are visible near the wheel.",
+          "video_prompt": "Over-the-shoulder medium shot with a 50mm lens, slight dolly-in of a few inches. Artisan B gestures with an open palm indicating the rim height; Artisan A responds by lifting the wall of the bowl slightly taller and smoothing the rim. Artisan B leans in, then straightens, maintaining clear separation of bodies and consistent occlusion against the fixed pillar and table."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Wide shot across the studio from near the sink, looking toward the shelf and wheel. The sink and faucet are now prominent in the left foreground; the pillar is near center; the shelving unit is frame-right. Artisan A carefully lifts a thin cutting wire under the newly formed bowl on the wheel head. Artisan B stands near the worktable, clearing space by moving a folded towel. Warm afternoon light; quiet, anticipatory mood.",
+          "video_prompt": "Eye-level wide shot with a 26mm lens, tripod static. Artisan A slides the wire cutter beneath the bowl in one continuous motion, then stops the wheel. Artisan B walks from the worktable toward her, passing behind the central pillar (full-body occlusion for a moment) and reappearing near the wheel with a wooden bat. The studio geometry remains unchanged; only the artisans and small objects move."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Medium shot at the central worktable from the wheel side: the worktable fills the foreground; the pendant lamp hangs above; windows glow in the background; shelf remains at frame-left. Artisan B sets a wooden bat on the table. Artisan A carries the freshly cut bowl on the bat with both hands, arms steady, concentrating. The bowl is simple and smooth, no decoration yet.",
+          "video_prompt": "Eye-level medium shot with a 40mm lens, gentle lateral move left-to-right to track the placement. Artisan A lowers the bat onto the worktable; Artisan B stabilizes the opposite edge with fingertips, ensuring contact and no sliding. Both exhale and relax their shoulders as the bowl settles—this is the story’s climax: the successful transfer and reveal. All background architecture and furniture stay locked."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Close-up of the finished wet bowl on the central worktable: the rim is even, surface glossy with water, subtle spiral lines from throwing. A small wooden rib and sponge rest nearby. In soft background blur, the fixed studio elements—pillar, windows, and shelf—remain in their exact positions. Artisan A and B’s hands rest on the table edge, visible at the margins, relaxed.",
+          "video_prompt": "Static close-up with a 100mm macro lens, camera locked. Artisan A lightly smooths the rim with a damp sponge once, then withdraws her hand. Artisan B places a small maker’s stamp beside the bowl without pressing it into the clay, then pulls back. The shot holds on the bowl as the warm window light glints across its surface, ending on a calm resolution."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "pottery_workshop_studio_space",
+    "theme_description": "A pottery workshop in an artisan studio",
+    "consistency_type": "Type B",
+    "requested_scenes": 2,
+    "requested_shots": 10
+  }
+}

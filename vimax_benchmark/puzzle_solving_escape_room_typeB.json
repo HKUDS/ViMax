@@ -1,0 +1,113 @@
+{
+  "story_overview": "In a single, intricately designed escape room, three adult teammates collaborate to solve a sequence of interconnected puzzles—moving through the same fixed space, interacting with furniture and architectural features—until they unlock the final door just before time runs out.",
+  "consistency_type": "Type B",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "A wide, eye-level establishing view of a meticulously themed indoor escape room: a brick-and-wood study with a green felt pool table centered under three warm pendant lamps; a mahogany desk with a brass desk lamp sits on the left wall beneath a framed map; a tall bookcase and a rolling library ladder are on the back wall; a vintage wall clock and a glowing digital countdown timer are mounted high to the right; a solid exit door with a rectangular keypad is on the far right wall. A narrow red runner rug leads from foreground toward the back wall. Three adults (all 20+): Mira (28, short black curly hair, tan cardigan over a light blue button-up shirt, dark jeans, white sneakers), Jonas (32, tall, closely shaved head, dark green zip-up jacket, khaki pants, brown shoes), and Priya (30, long dark hair in a low ponytail, maroon sweater, black slacks, gray sneakers) stand near the pool table, looking around with focused, calm expressions. Modest clothing, PG-rated mood, warm practical lighting.",
+          "video_prompt": "Eye-level wide shot with a 24mm lens from the front-left corner of the room. The camera slowly dollies forward along the red runner rug toward the pool table as the three teammates spread slightly—Mira steps toward the mahogany desk on the left, Jonas circles the near edge of the pool table, and Priya looks up toward the back bookcase and ladder. The countdown timer glows steadily in the background; lighting remains warm and consistent."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium shot from the left side facing the mahogany desk beneath the framed map. The brass desk lamp casts a warm pool of light on scattered, non-copyrighted papers with geometric symbols. Mira (28) is in the foreground, modestly dressed, leaning slightly over the desk. In the deep background, the pool table remains centered; the bookcase and ladder stay fixed against the back wall.",
+          "video_prompt": "Eye-level medium shot with a 50mm lens aimed at the desk surface. Mira slides a drawer open (wooden drawer moving straight out), revealing a small wooden box with a 3-digit combination dial. She lifts the box onto the desk blotter and rotates it so the dial faces camera, then compares symbols on the papers. The camera makes a subtle push-in, maintaining the room geometry unchanged in the background."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Over-the-shoulder shot from behind Jonas at the near-right edge of the green felt pool table. The table’s leather pockets and carved wooden rails are clearly visible. Jonas (32) holds a cue stick upright like a pointer, while Priya (30) stands on the far side of the table. Several numbered billiard balls are arranged in a neat triangle near the table’s center. The exit door with keypad is visible far right; the wall clock and digital timer remain mounted in the same places.",
+          "video_prompt": "Over-the-shoulder medium shot with a 35mm lens from behind Jonas, angled across the pool table. Jonas gently nudges one billiard ball a few inches into alignment with the others (no forceful hit), while Priya points to numbers on two balls and then to the wooden box on the desk area off-frame left. The camera pans slightly right to keep the triangle of balls centered, reinforcing the fixed room layout."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Low-angle close shot near the floor, framing the base of the tall bookcase on the back wall and the rolling library ladder’s wheels on its rail. Priya (30) kneels modestly on the red runner rug, peering behind the bottom shelf. A small magnetic key with a colored tag is partially visible attached to a metal strip beneath the shelf. The pool table legs appear to the left, stationary, confirming consistent placement.",
+          "video_prompt": "Low-angle close shot with a 28mm lens positioned near floor level facing the bookcase base. Priya reaches behind the lower shelf, her hand briefly disappearing behind the wooden edge (occlusion), then pulls out the small magnetic key and holds it up to the light. She stands, moving upward out of frame as the camera tilts up slightly to follow the key’s reveal; the ladder and bookcase remain perfectly fixed."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Side wide shot of the back wall: the tall bookcase dominates center; the rolling ladder rests slightly to the left on its rail; a small wall safe (flush-mounted) sits to the right of the bookcase at chest height. Jonas (32) stands near the ladder, one hand on a rung; Priya (30) stands by the safe holding the magnetic key; Mira (28) approaches from left with the wooden combination box. The pool table remains centered in the midground under pendant lights; the desk stays on the left wall.",
+          "video_prompt": "Eye-level wide shot with a 24mm lens from the room’s mid-right side. Jonas climbs two rungs of the ladder carefully, shifting his weight while holding the side rails. Priya inserts the magnetic key into a slot beside the wall safe; the safe door clicks open slightly. Mira raises the combination box to compare markings on its dial with a small symbol plate on the safe. The camera holds steady to emphasize the unchanging room geometry while the characters interact with fixed structures."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "Tight close-up of the wall safe door now open a few inches, showing a foam-lined interior with three colored tiles and a folded note with a simple arrow diagram (generic). Priya’s hand holds the door edge; Mira’s fingers hover near the tiles. The surrounding wall texture (painted brick) is sharp, and the bookcase edge stays visible left.",
+          "video_prompt": "Close-up shot with an 85mm lens, eye-level, locked on the safe interior. Mira removes the three colored tiles one by one and places them in her palm; Priya steadies the door. The note flutters slightly as it’s unfolded. The camera racks focus from the tiles to the arrow diagram, then back to the tiles, with no changes to wall placement or safe geometry."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Medium shot from the left side of the pool table looking toward the exit door and keypad on the far right wall. Jonas (32) stands closest to the keypad, slightly blocking it; Mira (28) and Priya (30) are behind him near the pool table corner. The wall clock above and the digital countdown timer glow on the right wall, both fixed. A small wall-mounted panel with three colored slots is visible beside the keypad.",
+          "video_prompt": "Eye-level medium shot with a 40mm lens aimed at the keypad area. Jonas steps closer and leans in (his torso partially occluding the keypad), while Mira hands him the three colored tiles. He inserts them into the three-slot panel in the order Priya indicates with pointed gestures. A soft indicator light turns from red to green. The camera makes a slight handheld-style settle (very subtle) while maintaining the room’s consistent layout."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Overhead shot looking straight down at the green felt pool table. The billiard balls form a new pattern: three balls aligned in a row near the head spot, and a paper note with the arrow diagram lies flat near the center. Mira’s hands rest on the table edge at bottom of frame; Priya’s hands point from the paper to the balls; Jonas’s forearms appear at top edge, steadying a ball.",
+          "video_prompt": "Overhead top-down shot with a 16mm lens on a fixed rig above the pool table. The team repositions three balls with careful, small movements to match the arrow diagram. As the last ball clicks into place, a faint mechanical sound is implied from the right wall. The camera remains perfectly static to reinforce the pool table’s fixed position and the room’s structural continuity."
+        }
+      ]
+    },
+    {
+      "scene_num": 3,
+      "shots": [
+        {
+          "shot_id": 9,
+          "first_frame": "Medium-wide shot from behind the mahogany desk on the left wall, facing across the room: the pool table remains centered; the back bookcase and ladder are aligned on the back wall; the exit door and keypad remain on the far right wall. A small compartment in the desk’s side panel is now ajar. Mira (28) stands at the desk; Jonas (32) and Priya (30) move toward her along the red runner rug.",
+          "video_prompt": "Eye-level medium-wide shot with a 28mm lens from the desk side. Mira opens the desk’s side compartment fully and pulls out a compact, non-copyrighted metal cylinder (a flashlight-like UV lamp) and a laminated card with faint markings. Jonas and Priya step into the foreground, stopping at the desk corner. The camera pans slightly left-to-right to keep the extracted items centered, keeping the room’s fixed elements consistent."
+        },
+        {
+          "shot_id": 10,
+          "first_frame": "Close shot of a blank-looking section of the brick wall between the bookcase and the exit door. Jonas (32) stands close to the wall, holding the UV lamp; Priya (30) holds the laminated card as reference; Mira (28) watches from behind. The wall clock and digital timer are still high on the right wall, unchanged.",
+          "video_prompt": "Eye-level close shot with a 50mm lens angled toward the wall. Jonas switches on the UV lamp and slowly sweeps the beam across the bricks; hidden symbols appear in the light, forming a short sequence of shapes. Priya compares the sequence to the laminated card and traces the order in the air. The camera tracks a few inches with the UV beam, emphasizing the wall’s fixed texture and location."
+        },
+        {
+          "shot_id": 11,
+          "first_frame": "Wide shot from the far back-left corner looking diagonally across the entire room: bookcase and ladder dominate left-back; pool table centered; desk on left wall; exit door with keypad on right wall. A small floor-level hatch panel near the baseboard under the timer is visible on the right wall. Priya (30) crouches at the hatch; Jonas (32) kneels beside her; Mira (28) stands behind them holding the UV lamp. Their poses are calm, focused, non-violent.",
+          "video_prompt": "Wide shot with a 24mm lens from the back-left corner. Priya opens the floor-level hatch downward; Jonas reaches in (his arm briefly occluded by the hatch door) and retrieves a coiled cable with a plug and a small, palm-sized power module. Mira shines the UV lamp briefly into the hatch, then turns it off. The camera remains steady, reinforcing the room’s consistent 3D geometry and fixed props."
+        },
+        {
+          "shot_id": 12,
+          "first_frame": "Medium shot near the exit door keypad area on the right wall. The wall-mounted three-slot panel remains beside the keypad, already filled with colored tiles. Below it, a small recessed port is visible, matching the cable plug. Jonas (32) sits on a low bench fixed against the right wall (bench position constant), holding the cable; Priya (30) stands to his left; Mira (28) stands slightly behind, watching the timer.",
+          "video_prompt": "Eye-level medium shot with a 35mm lens facing the right wall. Jonas plugs the cable into the recessed port; Priya holds the power module steady against the wall as it snaps into place with a soft click. A subtle indicator light on the keypad brightens. Mira points at the timer as it ticks down, then nods. The camera performs a slow push-in toward the keypad, keeping the exit door and wall fixtures perfectly aligned and unchanged."
+        }
+      ]
+    },
+    {
+      "scene_num": 4,
+      "shots": [
+        {
+          "shot_id": 13,
+          "first_frame": "Over-the-shoulder shot from behind Mira (28) toward the exit door keypad. The keypad display shows blank entry fields (no readable brand text). Jonas (32) stands closest to the keypad; Priya (30) stands slightly behind him, holding the laminated card with UV symbols. The digital countdown timer remains above and to the right, glowing with limited time remaining. The pool table and pendant lights are visible in the left background, fixed.",
+          "video_prompt": "Over-the-shoulder medium shot with a 45mm lens from behind Mira. Jonas enters a code derived from the UV symbol sequence, pressing buttons deliberately. Priya quietly points to the next symbol on the card; Mira steadies the card’s corner. The camera holds position while Jonas’s shoulder partially blocks the keypad at moments, testing occlusion without changing the room layout."
+        },
+        {
+          "shot_id": 14,
+          "first_frame": "Close-up of the exit door’s metal handle and latch area on the right wall. The door surface is matte painted wood with a small rectangular window (frosted). The latch is still engaged at the start of the frame. A soft green glow from the keypad area reflects on the metal.",
+          "video_prompt": "Tight close-up with a 100mm lens, eye-level on the latch. The latch retracts with a crisp mechanical motion; the handle depresses slightly from Jonas’s unseen hand (hand enters frame briefly). The door cracks open a few inches, revealing warm hallway light spilling in. The camera remains locked, emphasizing the physical realism of the door hardware."
+        },
+        {
+          "shot_id": 15,
+          "first_frame": "Wide shot from the room’s center-left side capturing the team and the opened exit door on the right. The pool table remains centered; desk on left wall; bookcase and ladder on back wall; wall clock and digital timer on right wall. The door is open wider now, and brighter light from outside frames the doorway. Jonas (32) holds the door; Priya (30) and Mira (28) stand behind him with relieved, happy expressions.",
+          "video_prompt": "Eye-level wide shot with a 24mm lens. Jonas pulls the door open fully, stepping slightly backward to clear the threshold; Priya and Mira walk forward along the red runner rug toward the doorway. Their bodies briefly occlude the keypad as they pass. The camera pans gently right to follow their movement, maintaining the fixed geometry of all furniture and walls."
+        },
+        {
+          "shot_id": 16,
+          "first_frame": "Medium shot from just inside the room facing toward the doorway (camera still in the escape room), framing the team at the threshold. The open door occupies the right third of the frame with bright hallway light; the interior behind them shows the consistent pool table, pendant lights, and back bookcase. All three adults stand close together, modestly dressed, smiling and calm, with hands relaxed at their sides.",
+          "video_prompt": "Eye-level medium shot with a 35mm lens, positioned a few feet inside the room aimed at the open doorway. The three teammates pause, exchange satisfied nods, and step through the doorway one after another (Jonas first, then Priya, then Mira), each briefly crossing in front of the doorframe and partially blocking the light. After they exit, the door remains open, and the camera holds for a beat on the unchanged room interior and steady lighting."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "puzzle_solving_escape_room",
+    "theme_description": "A team solving puzzles in an escape room",
+    "consistency_type": "Type B",
+    "requested_scenes": 4,
+    "requested_shots": 16
+  }
+}

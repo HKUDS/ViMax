@@ -1,11 +1,13 @@
 import logging
-from optparse import Option
 from typing import List, Optional
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
+from utils.robust_json_parser import TrailingCommaTolerantPydanticOutputParser as PydanticOutputParser
 from langchain.chat_models import init_chat_model
 from pydantic import BaseModel, Field
-from tenacity import retry, stop_after_attempt
+from tenacity import retry, stop_after_attempt, wait_exponential
+
+from utils.retry import after_func
 
 
 
@@ -136,6 +138,7 @@ class Screenwriter:
         return story
 
 
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, max=30), after=after_func)
     async def write_script_based_on_story(
         self,
         story: str,

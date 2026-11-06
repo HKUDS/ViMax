@@ -1,0 +1,68 @@
+{
+  "story_overview": "Two adult athletes train together in a modern gym, warming up, coaching each other through technique drills, and culminating in a timed partner challenge that ends with a respectful handshake and shared satisfaction.",
+  "consistency_type": "Type C",
+  "scenes": [
+    {
+      "scene_num": 1,
+      "shots": [
+        {
+          "shot_id": 1,
+          "first_frame": "Wide establishing view of a clean, modern indoor gym with rubber flooring, squat racks, mirrors, and neatly racked dumbbells. Two adult athletes (both 20+): Athlete A is a tall, athletic woman (late 20s) with medium-brown skin, dark curly hair in a high ponytail, wearing a forest-green zip-up track jacket, black full-length training leggings, and white trainers. Athlete B is a shorter, athletic man (early 30s) with light skin, short dark hair, neatly trimmed beard, wearing a navy long-sleeve performance top, charcoal training pants, and black trainers. Both stand near a stretching mat and a water bottle, facing each other with relaxed, focused expressions under bright, even overhead lighting.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, static tripod. Athlete A and Athlete B perform a synchronized warm-up: shoulder rolls and gentle lunges in place while exchanging a few encouraging gestures. Athlete B points toward the lifting platform as Athlete A nods; both step forward together, staying side-by-side. Reflections in the mirror remain stable; no text legible in the environment."
+        },
+        {
+          "shot_id": 2,
+          "first_frame": "Medium two-shot from a slight angle near the mirror: Athlete A and Athlete B kneel on adjacent mats. Athlete A’s forest-green jacket and black leggings are clearly visible; Athlete B’s navy top and charcoal pants remain distinct. A foam roller sits between them. Soft bounce light from overhead panels creates gentle highlights on the rubber floor texture.",
+          "video_prompt": "Eye-level medium two-shot, 35mm lens, slow lateral slider move left-to-right. Athlete A demonstrates rolling her calf on the foam roller; Athlete B watches, then mirrors the motion on his own leg without swapping clothing or features. Athlete A gives a small thumbs-up; Athlete B nods, focused, maintaining clear separation of identities."
+        },
+        {
+          "shot_id": 3,
+          "first_frame": "Over-the-shoulder shot from behind Athlete B (navy top visible in foreground shoulder blur), looking toward Athlete A standing at a squat rack. Athlete A grips a light barbell on the rack, feet shoulder-width on a lifting platform. The gym background shows neatly stacked plates and a mirror, all clean and PG-rated.",
+          "video_prompt": "Over-the-shoulder medium shot, 50mm lens, subtle handheld steadiness. Athlete A practices controlled air squats with the empty bar on her back (no strain, safe form). Athlete B, in the foreground, raises a hand to cue depth and posture. Athlete A adjusts her stance slightly, keeping her forest-green jacket zipped and modest."
+        },
+        {
+          "shot_id": 4,
+          "first_frame": "Reverse over-the-shoulder shot from behind Athlete A (forest-green jacket shoulder in foreground), looking at Athlete B beside a flat bench holding a pair of light dumbbells. Athlete B sits upright with a neutral spine; Athlete A stands to the side as a spotter/coach. Bright overhead lighting with crisp shadows under the bench.",
+          "video_prompt": "Over-the-shoulder medium shot, 50mm lens, locked-off. Athlete B performs slow, controlled seated dumbbell presses. Athlete A counts reps with fingers and demonstrates a small wrist-alignment cue in the air. Athlete B adjusts his elbow path and completes the set, then places dumbbells down carefully—no impact or unsafe motion."
+        }
+      ]
+    },
+    {
+      "scene_num": 2,
+      "shots": [
+        {
+          "shot_id": 5,
+          "first_frame": "Low-angle wide shot of an agility lane marked by cones on the rubber floor. Athlete A (green jacket, black leggings) and Athlete B (navy top, charcoal pants) stand at the start line, side-by-side, facing forward. A jump rope and a small plyo box sit off to the right. The mood is energized but friendly.",
+          "video_prompt": "Low-angle wide shot, 28mm lens, slight push-in on a dolly. On a silent count-in, both athletes begin a coordinated agility drill: quick-feet steps through the cone lane. Athlete A leads by half a step; Athlete B matches pace, staying in his lane. Their footwork is crisp; cones remain stationary and un-kicked."
+        },
+        {
+          "shot_id": 6,
+          "first_frame": "High-angle shot from above a medicine-ball area: Athlete A and Athlete B face each other about two meters apart. Athlete A holds a medium medicine ball at chest height; Athlete B has hands ready to receive. Their outfits and facial features remain clearly distinct. Background shows organized racks and a mirrored wall.",
+          "video_prompt": "Overhead high-angle medium-wide shot, 24mm lens, static. Athlete A chest-passes the medicine ball to Athlete B; he catches it cleanly, steps back, then returns a controlled pass. They repeat several passes with steady rhythm. The ball’s path is smooth and centered; no collisions or chaotic motion."
+        },
+        {
+          "shot_id": 7,
+          "first_frame": "Eye-level tight two-shot near a wall-mounted timer (numbers not legible). Athlete A and Athlete B stand close, slightly angled toward each other, breathing calmly and focused. Athlete A holds a small towel; Athlete B holds a water bottle. Lighting is bright, neutral, and flattering.",
+          "video_prompt": "Eye-level close two-shot, 65mm lens, gentle rack focus between faces. Athlete B points toward the timer and raises two fingers to indicate a two-part finisher; Athlete A nods and taps her towel against her palm, determined. They bump fists lightly (friendly, PG) and step out of frame together, maintaining distinct clothing and identities."
+        },
+        {
+          "shot_id": 8,
+          "first_frame": "Dynamic side-on medium-wide shot of a sled track lane: a small weighted push sled sits on the rubber surface. Athlete A is positioned behind the sled handles, knees bent and back straight; Athlete B stands just behind and to the left, ready to coach and pace. Their outfits remain unchanged and modest.",
+          "video_prompt": "Side-on medium-wide shot, 35mm lens, tracking right-to-left parallel to the lane. Athlete A drives the sled forward with steady steps. Athlete B jogs alongside, calling cadence with hand signals and keeping a safe distance. The sled glides smoothly; Athlete A reaches the lane marker at the end of the clip, showing effort without distress."
+        },
+        {
+          "shot_id": 9,
+          "first_frame": "Wide finishing shot near the gym’s main floor: Athlete A and Athlete B stand facing each other in the center of frame, posture relaxed. Athlete A’s forest-green jacket and Athlete B’s navy top are crisp and unchanged. A clean, organized gym background with mirrors and racks; warm, slightly softer lighting suggests a satisfying wrap-up.",
+          "video_prompt": "Eye-level wide shot, 24mm lens, slow pull-back. Athlete B offers a handshake; Athlete A accepts, then they both smile with quiet pride. They pick up their water bottle and towel (each holding their own items) and walk side-by-side toward the exit area, ending the training session on a friendly, accomplished climax."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "theme_key": "athletes_gym_training_duo",
+    "theme_description": "Two athletes training together at a gym",
+    "consistency_type": "Type C",
+    "requested_scenes": 2,
+    "requested_shots": 9
+  }
+}

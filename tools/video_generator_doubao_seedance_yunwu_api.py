@@ -17,16 +17,17 @@ class VideoGeneratorDoubaoSeedanceYunwuAPI:
         t2v_model: str = "doubao-seedance-1-0-lite-t2v-250428",
         ff2v_model: str = "doubao-seedance-1-0-lite-i2v-250428",
         flf2v_model: str = "doubao-seedance-1-0-lite-i2v-250428",
+        max_create_attempts: int = 3,
+        poll_interval: int = 2,
+        max_poll_attempts: int = 300,
     ):
         self.api_key = api_key
-        # Platform job payloads carry the endpoint as base_url and the model
-        # override as model; keep the framework defaults when absent. The
-        # override applies to every generation mode — the platform picks one
-        # generator model explicitly, so ff2v/flf2v must follow it too.
-        self.base_url = base_url or self.DEFAULT_BASE_URL
-        self.t2v_model = model or t2v_model
-        self.ff2v_model = model or ff2v_model
-        self.flf2v_model = model or flf2v_model
+        self.t2v_model = t2v_model
+        self.ff2v_model = ff2v_model
+        self.flf2v_model = flf2v_model
+        self.max_create_attempts = max_create_attempts
+        self.poll_interval = poll_interval
+        self.max_poll_attempts = max_poll_attempts
 
 
     async def create_video_generation_task(
@@ -98,30 +99,38 @@ class VideoGeneratorDoubaoSeedanceYunwuAPI:
             'Content-Type': 'application/json'
         }
 
-        # A bounded retry: infinite silent retrying hides auth/balance errors
-        # and hammers the provider; the platform surfaces the failure instead.
-        last_error: Exception | None = None
-        for attempt in range(5):
+        last_error = None
+        for attempt in range(1, self.max_create_attempts + 1):
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.post(url, headers=headers, json=payload) as response:
                         response_json = await response.json()
-                        if response.status >= 400 or "id" not in response_json:
-                            err = response_json.get("error") if isinstance(response_json, dict) else None
-                            detail = err.get("message", "") if isinstance(err, dict) else str(response_json)[:200]
-                            raise RuntimeError(f"video task create {response.status}: {detail}")
-                        task_id = response_json["id"]
+                        http_status = response.status
+                logging.debug(f"Response: {response_json}")
             except Exception as e:
                 last_error = e
-                logging.error(f"Error occurred while creating video generation task (attempt {attempt + 1}/5): {e}")
-                await asyncio.sleep(1 + attempt)
+                logging.error(f"Error occurred while creating video generation task (attempt {attempt}/{self.max_create_attempts}): {e}")
+                if attempt < self.max_create_attempts:
+                    await asyncio.sleep(attempt)
                 continue
-            break
-        else:
-            raise RuntimeError(f"video task creation failed after 5 attempts: {last_error}")
 
-        logging.info(f"Video generation task created successfully. Task ID: {task_id}")
-        return task_id
+            if http_status >= 400:
+                message = f"Video generation task creation failed with HTTP {http_status}: {response_json}"
+                if http_status < 500:
+                    raise RuntimeError(message)
+                last_error = RuntimeError(message)
+                logging.error(f"{message} (attempt {attempt}/{self.max_create_attempts})")
+                if attempt < self.max_create_attempts:
+                    await asyncio.sleep(attempt)
+                continue
+
+            task_id = response_json.get("id")
+            if not task_id:
+                raise RuntimeError(f"Video generation task creation returned no task id: {response_json}")
+            logging.info(f"Video generation task created successfully. Task ID: {task_id}")
+            return task_id
+
+        raise RuntimeError(f"Failed to create video generation task after {self.max_create_attempts} attempts.") from last_error
 
     async def query_video_generation_task(
         self,
@@ -141,31 +150,41 @@ class VideoGeneratorDoubaoSeedanceYunwuAPI:
             'Authorization': f'Bearer {self.api_key}',
         }
 
+        attempts = 0
+        consecutive_errors = 0
         while True:
+            if attempts >= self.max_poll_attempts:
+                raise TimeoutError(f"Video generation did not complete after {attempts} polls.")
+            attempts += 1
+
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.get(url, headers=headers) as response:
                         response_json = await response.json()
-
+                        http_status = response.status
             except Exception as e:
-                logging.error(f"Error occurred while querying video generation task: {e}. Retrying in 1 seconds...")
-                await asyncio.sleep(1)
+                consecutive_errors += 1
+                if consecutive_errors >= 5:
+                    raise RuntimeError(f"Querying video generation task failed {consecutive_errors} times in a row.") from e
+                logging.error(f"Error occurred while querying video generation task: {e}. Retrying in {self.poll_interval} seconds...")
+                await asyncio.sleep(self.poll_interval)
                 continue
+            consecutive_errors = 0
 
-            status = response_json["status"]
+            if http_status >= 400:
+                raise RuntimeError(f"Querying video generation task failed with HTTP {http_status}: {response_json}")
+
+            status = response_json.get("status")
             if status == "succeeded":
                 video_url = response_json["content"]["video_url"]
                 logging.info(f"Video generation completed successfully. Video URL: {video_url}")
-                break
+                return video_url
             elif status == "failed":
                 logging.error(f"Video generation failed. Response: {response_json}")
                 raise ValueError("Video generation failed.")
             else:
-                logging.info(f"Video generation is still in progress. Checking again in 2 seconds...")
-                await asyncio.sleep(2)
-                continue
-
-        return video_url
+                logging.info(f"Video generation is still in progress. Checking again in {self.poll_interval} seconds...")
+                await asyncio.sleep(self.poll_interval)
 
     async def generate_single_video(
         self,
@@ -175,6 +194,7 @@ class VideoGeneratorDoubaoSeedanceYunwuAPI:
         aspect_ratio: str = "16:9",
         fps: Literal[16, 24] = 16,
         duration: Literal[5, 10] = 5,
+        **kwargs,
     ) -> VideoOutput:
         """
         Generate a single video by creating a task and waiting for completion.

@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SOURCE="${BASH_SOURCE[0]}"
+while [[ -L "$SOURCE" ]]; do
+  DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+ROOT="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+
+usage() {
+  cat <<EOF
+Usage:
+  vimax tui                         Resume the current active session
+  vimax tui new                     Create and activate a new empty session
+  vimax tui resume                  Resume the current active session
+  vimax tui resume <session_id>     Resume a specific existing session
+  vimax tui --new-session           Same as: vimax tui new
+  vimax tui --session <session_id>  Same as: vimax tui resume <session_id>
+  vimax web                         Start the ViMax Web development server
+  vimax web start                   Serve a built ViMax Web app
+EOF
+}
+
+if [[ $# -lt 1 ]]; then
+  usage
+  exit 2
+fi
+
+command="$1"
+shift
+
+case "$command" in
+  web)
+    web_mode="${1:-dev}"
+    if [[ "$web_mode" == "start" ]]; then
+      shift
+    elif [[ "$web_mode" != "dev" ]]; then
+      echo "error: unknown web mode: $web_mode" >&2
+      usage >&2
+      exit 2
+    fi
+    if [[ ! -x "$ROOT/web/node_modules/.bin/vite" ]]; then
+      echo "error: web dependencies are missing. Run: cd $ROOT/web && npm install" >&2
+      exit 2
+    fi
+    if [[ "$web_mode" == "start" ]]; then
+      if [[ ! -f "$ROOT/web/dist/index.html" ]]; then
+        echo "error: web build is missing. Run: cd $ROOT/web && npm run build" >&2
+        exit 2
+      fi
+      exec npm --prefix "$ROOT/web" run start
+    fi
+    exec npm --prefix "$ROOT/web" run dev
+    ;;
+  tui)
+    tui_args=()
+    case "${1:-}" in
+      new)
+        tui_args+=("--new-session")
+        shift
+        ;;
+      resume|old)
+        shift
+        if [[ -n "${1:-}" && "${1:-}" != --* ]]; then
+          tui_args+=("--session" "$1")
+          shift
+        fi
+        ;;
+      --new-session)
+        tui_args+=("--new-session")
+        shift
+        ;;
+      --session)
+        if [[ -z "${2:-}" ]]; then
+          echo "error: --session requires a session id" >&2
+          exit 2
+        fi
+        tui_args+=("--session" "$2")
+        shift 2
+        ;;
+      "")
+        ;;
+      --help|-h|help)
+        usage
+        exit 0
+        ;;
+      *)
+        echo "error: unknown tui mode: $1" >&2
+        usage >&2
+        exit 2
+        ;;
+    esac
+    if [[ $# -gt 0 ]]; then
+      tui_args+=("$@")
+    fi
+    if [[ ! -x "$ROOT/ui/node_modules/.bin/tsx" ]]; then
+      echo "error: ui dependencies are missing. Run: cd $ROOT/ui && npm install" >&2
+      exit 2
+    fi
+    exec "$ROOT/ui/node_modules/.bin/tsx" "$ROOT/ui/src/cli.tsx" ${tui_args[@]+"${tui_args[@]}"}
+    ;;
+  --help|-h|help)
+    usage
+    ;;
+  *)
+    echo "error: unknown command: $command" >&2
+    usage >&2
+    exit 2
+    ;;
+esac

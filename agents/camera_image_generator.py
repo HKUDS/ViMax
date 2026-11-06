@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 from tenacity import retry, stop_after_attempt
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.output_parsers import PydanticOutputParser
+from utils.robust_json_parser import TrailingCommaTolerantPydanticOutputParser as PydanticOutputParser
 from scenedetect import open_video, SceneManager, split_video_ffmpeg
 from scenedetect.detectors import ContentDetector
 
@@ -124,12 +125,16 @@ class CameraImageGenerator:
         shot_descs: List[Union[ShotDescription, ShotBriefDescription]],
     ) -> List[Camera]:
         parser = PydanticOutputParser(pydantic_object=CameraTreeResponse)
+        shot_desc_by_idx = {shot.idx: shot for shot in shot_descs}
 
         camera_seq_str = "<CAMERA_SEQ>\n"
         for cam in cameras:
             camera_seq_str += f"<CAMERA_{cam.idx}>\n"
             for shot_idx in cam.active_shot_idxs:
-                camera_seq_str += f"Shot {shot_idx}: {shot_descs[shot_idx].visual_desc}\n"
+                shot_desc = shot_desc_by_idx.get(shot_idx)
+                if shot_desc is None:
+                    raise ValueError(f"Camera {cam.idx} references missing shot {shot_idx}")
+                camera_seq_str += f"Shot {shot_idx}: {shot_desc.visual_desc}\n"
             camera_seq_str += f"</CAMERA_{cam.idx}>\n"
         camera_seq_str += "</CAMERA_SEQ>"
 
@@ -140,11 +145,37 @@ class CameraImageGenerator:
 
         chain = self.chat_model | parser
         response: CameraTreeResponse = await chain.ainvoke(messages)
-        for cam, parent_cam_item in zip(cameras, response.camera_parent_items):
+        parent_items = response.camera_parent_items
+        if len(parent_items) != len(cameras):
+            raise ValueError(f"Camera tree response length mismatch: expected {len(cameras)}, got {len(parent_items)}")
+
+        valid_camera_idxs = {cam.idx for cam in cameras}
+        valid_shot_idxs = set(shot_desc_by_idx)
+        parent_by_camera = {}
+        for cam, parent_cam_item in zip(cameras, parent_items):
+            parent_cam_idx = parent_cam_item.parent_cam_idx if parent_cam_item is not None else None
+            parent_shot_idx = parent_cam_item.parent_shot_idx if parent_cam_item is not None else None
+            if parent_cam_idx is not None and parent_cam_idx not in valid_camera_idxs:
+                raise ValueError(f"Camera {cam.idx} has invalid parent camera {parent_cam_idx}")
+            if parent_cam_idx == cam.idx:
+                raise ValueError(f"Camera {cam.idx} cannot be its own parent")
+            if parent_shot_idx is not None and parent_shot_idx not in valid_shot_idxs:
+                raise ValueError(f"Camera {cam.idx} has invalid parent shot {parent_shot_idx}")
+            parent_by_camera[cam.idx] = parent_cam_idx
+
+        for cam in cameras:
+            seen = set()
+            current = cam.idx
+            while parent_by_camera.get(current) is not None:
+                current = parent_by_camera[current]
+                if current in seen:
+                    raise ValueError(f"Camera tree contains a cycle involving camera {cam.idx}")
+                seen.add(current)
+
+        for cam, parent_cam_item in zip(cameras, parent_items):
             cam.parent_cam_idx = parent_cam_item.parent_cam_idx if parent_cam_item is not None else None
             cam.parent_shot_idx = parent_cam_item.parent_shot_idx if parent_cam_item is not None else None
             cam.reason = parent_cam_item.reason if parent_cam_item is not None else None
-            cam.parent_shot_idx = parent_cam_item.parent_shot_idx if parent_cam_item is not None else None
             cam.is_parent_fully_covers_child = parent_cam_item.is_parent_fully_covers_child if parent_cam_item is not None else None
             cam.missing_info = parent_cam_item.missing_info if parent_cam_item is not None else None
         return cameras
@@ -155,6 +186,7 @@ class CameraImageGenerator:
         first_shot_visual_desc: str,
         second_shot_visual_desc: str,
         first_shot_ff_path: str,
+        progress=None,
     ) -> VideoOutput:
 
         prompt = f"Two shots. The transition between the shots is a cut to. The style of the two shots should be consistent."
@@ -164,6 +196,7 @@ class CameraImageGenerator:
         video_output = await self.video_generator.generate_single_video(
             prompt=prompt,
             reference_image_paths=reference_image_paths,
+            progress=progress,
         )
         return video_output
 
@@ -217,3 +250,24 @@ class CameraImageGenerator:
             size="1600x900",
         )
         return image_output
+
+
+
+def _validate_camera_tree(cameras: List[Camera]) -> None:
+    """Reject parent assignments that would deadlock frame generation."""
+    by_idx = {cam.idx: cam for cam in cameras}
+    for cam in cameras:
+        if cam.parent_cam_idx is None:
+            continue
+        if cam.parent_cam_idx == cam.idx:
+            raise ValueError(f"Camera {cam.idx} lists itself as its parent.")
+        if cam.parent_cam_idx not in by_idx:
+            raise ValueError(f"Camera {cam.idx} references unknown parent camera {cam.parent_cam_idx}.")
+    for cam in cameras:
+        seen = set()
+        current = cam
+        while current.parent_cam_idx is not None:
+            if current.idx in seen:
+                raise ValueError(f"Cycle detected in camera parent graph involving camera {current.idx}.")
+            seen.add(current.idx)
+            current = by_idx[current.parent_cam_idx]
